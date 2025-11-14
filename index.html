@@ -4,17 +4,28 @@
   <meta charset="UTF-8" />
   <title>Zamaha | CCTV, redes eléctricas y cómputo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Instalación y mantenimiento de cámaras CCTV, redes eléctricas y equipos de cómputo para hogares y negocios." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #050816;
-      --bg-card: #0b1020;
-      --bg-card-soft: #10182a;
-      --accent: #00d084;
-      --accent-soft: #00b36a;
-      --accent-blue: #00b4ff;
+      --bg-main: #050816;
+      --bg-card: #0c1224;
+      --accent: #00c853;
+      --accent-soft: rgba(0, 200, 83, 0.15);
+      --accent-strong: #00e676;
       --text-main: #f5f7ff;
-      --text-muted: #a0aec0;
-      --border-subtle: #1f2937;
+      --text-soft: #c4c9ff;
+      --text-muted: #9aa0c6;
+      --brand-red: #ff4b5c;
+      --brand-blue: #1976d2;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.65);
+      --shadow-pill: 0 10px 30px rgba(0, 0, 0, 0.55);
     }
 
     * {
@@ -24,11 +35,10 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #102a43, #050816 55%);
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #132347, #050816 55%);
       color: var(--text-main);
       min-height: 100vh;
-      line-height: 1.6;
     }
 
     a {
@@ -39,464 +49,579 @@
     .page {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 24px 16px 56px;
+      padding: 20px 18px 60px;
     }
 
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 22px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(14, 22, 51, 0.98), rgba(5, 8, 22, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
       margin-bottom: 32px;
     }
 
     .brand {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
     }
 
     .brand-title {
       font-size: 32px;
-      letter-spacing: 0.35em;
+      letter-spacing: 0.18em;
       font-weight: 800;
       text-transform: uppercase;
-      color: #ff4b5c;
-      text-shadow:
-        0 0 4px rgba(0,0,0,0.7),
-        0 0 12px rgba(255,75,92,0.7);
+      /* blanco con contorno rojo */
+      color: #ffffff;
+      -webkit-text-stroke: 2px var(--brand-red);
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
     }
 
     .brand-tagline {
       font-size: 13px;
-      color: var(--text-muted);
-      font-style: italic;
+      color: var(--text-soft);
     }
 
     .header-contact {
       text-align: right;
       font-size: 13px;
-      color: var(--text-muted);
+      color: var(--text-soft);
     }
 
     .header-contact a {
-      color: var(--accent-blue);
+      color: var(--accent-strong);
+      font-weight: 500;
     }
 
-    /* Pills */
-
-    .pills {
+    main {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
+      flex-direction: column;
+      gap: 40px;
     }
 
-    .pill {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      border-radius: 999px;
-      padding: 6px 12px;
-      border: 1px solid rgba(148,163,184,0.5);
-      background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(15,23,42,0.3));
-      color: #e2e8f0;
-    }
-
-    /* Hero */
+    /* HERO */
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
-      gap: 32px;
-      align-items: flex-start;
-      margin-bottom: 48px;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 30px;
+      align-items: center;
     }
 
-    .hero-title {
-      font-size: 36px;
-      line-height: 1.15;
+    .hero-text h1 {
+      font-size: clamp(28px, 3vw, 34px);
+      line-height: 1.18;
       margin-bottom: 16px;
     }
 
-    .hero-title span {
-      color: var(--accent-blue);
+    .hero-text h1 span {
+      color: #29b6f6;
     }
 
-    .hero-subtitle {
+    .hero-text p {
       font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
+      color: var(--text-soft);
+      max-width: 520px;
+      margin-bottom: 16px;
     }
 
-    .hero-buttons {
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(41, 182, 246, 0.5);
+      background: radial-gradient(circle at 0% 0%, rgba(41, 182, 246, 0.22), transparent 65%);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 12px;
+      margin-top: 6px;
+      margin-bottom: 14px;
     }
 
     .btn {
-      border-radius: 999px;
-      padding: 10px 20px;
-      font-size: 14px;
+      padding: 11px 18px;
+      border-radius: var(--radius-pill);
       border: none;
+      font-size: 14px;
+      font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 7px;
       transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
       white-space: nowrap;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-      color: #022c22;
-      box-shadow: 0 8px 16px rgba(0,208,132,0.3);
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #020308;
+      box-shadow: var(--shadow-pill);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 12px 20px rgba(0,208,132,0.45);
+      box-shadow: 0 14px 30px rgba(0, 200, 83, 0.45);
     }
 
     .btn-secondary {
-      background: transparent;
-      color: var(--text-main);
-      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(11, 20, 49, 0.95);
+      color: var(--text-soft);
+      border: 1px solid rgba(131, 146, 210, 0.6);
     }
 
     .btn-secondary:hover {
-      background: rgba(15,23,42,0.8);
-      transform: translateY(-1px);
+      background: rgba(21, 30, 69, 0.95);
     }
 
     .hero-note {
       font-size: 12px;
       color: var(--text-muted);
+    }
+
+    /* VIDEO */
+
+    .video-section {
+      margin-top: 10px;
+      padding: 20px 22px 24px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, #101a3d, #050816 65%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .video-section h2 {
+      font-size: 20px;
       margin-bottom: 4px;
     }
 
-    .hero-note strong {
-      color: #e5e7eb;
-    }
-
-    .hero-note-badge {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    /* Services card (hero lateral) */
-
-    .services-card {
-      background: radial-gradient(circle at top left, rgba(15,23,42,0.9), rgba(5,8,22,0.98));
-      border-radius: 24px;
-      padding: 20px 20px 18px;
-      border: 1px solid rgba(148,163,184,0.35);
-      box-shadow:
-        0 18px 40px rgba(15,23,42,0.9),
-        0 0 0 1px rgba(15,23,42,0.8);
-    }
-
-    .services-card h3 {
-      font-size: 16px;
-      margin-bottom: 16px;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
-      gap: 12px;
-    }
-
-    .service-item {
-      background: rgba(15,23,42,0.9);
-      border-radius: 16px;
-      padding: 12px 12px 10px;
-      border: 1px solid rgba(55,65,81,0.9);
-    }
-
-    .service-item h4 {
+    .video-section p {
       font-size: 13px;
-      margin-bottom: 4px;
+      color: var(--text-soft);
+      margin-bottom: 14px;
     }
 
-    .service-item p {
-      font-size: 12px;
-      color: var(--text-muted);
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #000;
+      /* 16:9 más pequeño, no pantalla gigante */
+      aspect-ratio: 16 / 9;
     }
 
-    /* HEX SERVICES SECTION */
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* SERVICIOS HEX */
 
     .services-hex {
-      margin-bottom: 40px;
-      text-align: center;
+      padding: 22px 22px 26px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #050816, #07132a);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
     }
 
     .services-hex h2 {
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 6px;
     }
 
     .services-hex p {
-      font-size: 14px;
-      color: var(--text-muted);
-      max-width: 640px;
-      margin: 0 auto 18px;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 16px;
     }
 
     .hex-grid {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 18px;
-      justify-content: center;
+      margin-top: 10px;
     }
 
-    .hex-card {
+    .hex-item {
       position: relative;
-      width: 190px;
-      height: 160px;
-      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0 50%);
-      background: radial-gradient(circle at top, #1f2937, #020617);
-      border: 1px solid rgba(148,163,184,0.7);
-      box-shadow: 0 12px 24px rgba(15,23,42,0.9);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      text-align: center;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      padding: 22px 14px 18px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 0% 0%, rgba(25, 118, 210, 0.3), rgba(7, 15, 39, 0.98));
+      border: 1px solid rgba(121, 134, 203, 0.7);
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border 0.15s ease;
     }
 
-    .hex-card::before {
+    .hex-item::before {
       content: "";
       position: absolute;
-      inset: 2px;
-      clip-path: inherit;
-      background: radial-gradient(circle at top, rgba(56,189,248,0.10), transparent);
-      opacity: 0;
-      transition: opacity 0.15s ease;
+      inset: -35%;
+      background-image:
+        linear-gradient(60deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(120deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 18px 32px;
+      opacity: 0.15;
+      pointer-events: none;
     }
 
-    .hex-card h3 {
-      position: relative;
+    .hex-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.75);
+      border-color: rgba(129, 212, 250, 0.85);
+    }
+
+    .hex-label {
       font-size: 14px;
+      font-weight: 600;
       margin-bottom: 4px;
     }
 
-    .hex-card span {
-      position: relative;
-      font-size: 12px;
+    .hex-mini {
+      font-size: 11px;
       color: var(--text-muted);
     }
 
-    .hex-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 32px rgba(15,23,42,0.95);
-      border-color: var(--accent-blue);
+    /* DETALLE DE SERVICIOS */
+
+    .services-detail {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
     }
 
-    .hex-card:hover::before {
-      opacity: 1;
+    .service-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 18px 16px 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
     }
 
-    /* SERVICE DETAIL SECTIONS */
-
-    .service-detail {
-      background: var(--bg-card-soft);
-      border-radius: 18px;
-      border: 1px solid rgba(148,163,184,0.35);
-      padding: 18px 20px;
-      margin-bottom: 24px;
+    .service-card h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
     }
 
-    .service-detail h3 {
+    .service-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(25, 118, 210, 0.16);
+      border: 1px solid rgba(129, 212, 250, 0.6);
+      font-size: 11px;
+      color: #e3f2fd;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .service-list {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      padding-left: 18px;
+    }
+
+    .service-list li {
+      margin-bottom: 4px;
+    }
+
+    .service-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .btn-small {
+      font-size: 12px;
+      padding: 7px 12px;
+    }
+
+    /* CONTACTO */
+
+    .contact-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr);
+      gap: 26px;
+      margin-top: 10px;
+      padding: 22px 22px 26px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #050816, #07152e);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-info p {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .contact-info strong {
+      font-weight: 600;
+    }
+
+    .contact-info a {
+      color: var(--accent-strong);
+      font-weight: 500;
+    }
+
+    .attach-box {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      background: rgba(18, 32, 63, 0.95);
+      border: 1px dashed rgba(158, 173, 225, 0.7);
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .attach-box button {
+      margin-top: 6px;
+    }
+
+    .contact-form h2 {
       font-size: 18px;
       margin-bottom: 8px;
     }
 
-    .service-detail p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .service-detail ul {
-      margin-left: 18px;
-      margin-bottom: 10px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .service-detail ul li {
-      margin-bottom: 4px;
-    }
-
-    /* Video */
-
-    .section {
-      margin-bottom: 40px;
-    }
-
-    .section h2 {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    .section p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    .video-wrapper {
-      background: var(--bg-card);
-      border-radius: 20px;
-      padding: 16px;
-      border: 1px solid rgba(148,163,184,0.35);
-      max-width: 520px;        /* MÁS PEQUEÑO */
-      margin: 0 auto;          /* CENTRADO */
-    }
-
-    .video-frame {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 16px 32px rgba(15,23,42,0.9);
-    }
-
-    .video-frame iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* Contact section */
-
-    .contact {
-      display: grid;
-      grid-template-columns: minmax(0,1.1fr) minmax(0,1.2fr);
-      gap: 32px;
-      margin-top: 24px;
-    }
-
-    .contact-panel {
-      background: var(--bg-card);
-      border-radius: 20px;
-      padding: 18px 20px;
-      border: 1px solid rgba(148,163,184,0.35);
-    }
-
-    .contact-panel h3 {
-      font-size: 16px;
+    .contact-form p {
+      font-size: 12px;
+      color: var(--text-soft);
       margin-bottom: 10px;
     }
 
-    .contact-panel p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .contact-panel strong {
-      color: #e5e7eb;
-    }
-
-    .contact-panel ul {
-      margin-left: 18px;
-      margin-top: 4px;
-      margin-bottom: 10px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .contact-panel ul li {
-      margin-bottom: 4px;
-    }
-
-    .contact-form {
+    form {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    label {
+      font-size: 12px;
+      color: var(--text-soft);
+      display: block;
+      margin-bottom: 4px;
     }
 
-    .form-group label {
-      font-size: 13px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      border-radius: 10px;
-      border: 1px solid rgba(148,163,184,0.5);
-      background: rgba(15,23,42,0.95);
-      padding: 8px 10px;
-      font-size: 13px;
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(129, 140, 196, 0.7);
+      background: rgba(4, 10, 30, 0.95);
+      padding: 9px 11px;
       color: var(--text-main);
+      font-size: 13px;
       outline: none;
+      transition: border 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
     }
 
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 1px rgba(56,189,248,0.3);
+    input::placeholder,
+    textarea::placeholder {
+      color: #6e7498;
     }
 
-    .form-hint {
-      font-size: 12px;
-      color: var(--text-muted);
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent-strong);
+      box-shadow: 0 0 0 1px rgba(0, 230, 118, 0.45);
+      background: rgba(7, 16, 39, 0.98);
     }
 
-    .form-status {
-      font-size: 12px;
-      color: var(--accent);
-      margin-top: 4px;
+    textarea {
+      min-height: 90px;
+      resize: vertical;
     }
 
-    .btn-row {
+    .service-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
+      gap: 8px;
       margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .service-pill-btn {
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(9, 20, 48, 0.95);
+      border: 1px solid rgba(121, 134, 203, 0.7);
+      color: var(--text-soft);
+      font-size: 11px;
+      cursor: pointer;
+      transition: background 0.12s ease, border 0.12s ease, color 0.12s ease;
+    }
+
+    .service-pill-btn.active {
+      background: rgba(0, 200, 83, 0.2);
+      border-color: var(--accent-strong);
+      color: #e8f5e9;
+    }
+
+    .form-footer-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .form-success {
+      font-size: 12px;
+      color: #b9f6ca;
+      margin-top: 6px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 12px;
+      margin-top: 30px;
+      font-size: 11px;
       color: var(--text-muted);
       text-align: center;
     }
 
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: minmax(0,1fr);
-      }
+    /* BOT FLOTANTE */
 
-      .contact {
-        grid-template-columns: minmax(0,1fr);
-      }
+    .bot-widget {
+      position: fixed;
+      right: 20px;
+      bottom: 88px;
+      z-index: 50;
+      font-size: 13px;
+    }
 
+    .bot-toggle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #29b6f6, #7c4dff);
+      color: #ffffff;
+      box-shadow: var(--shadow-pill);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .bot-window {
+      position: absolute;
+      bottom: 64px;
+      right: 0;
+      width: 280px;
+      background: var(--bg-card);
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      padding: 12px 12px 10px;
+      display: none;
+    }
+
+    .bot-widget.open .bot-window {
+      display: block;
+    }
+
+    .bot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .bot-header strong {
+      font-size: 13px;
+    }
+
+    .bot-status {
+      font-size: 11px;
+      color: #a5d6a7;
+    }
+
+    .bot-window p {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .bot-window ul {
+      list-style: none;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .bot-window li {
+      margin-bottom: 4px;
+    }
+
+    .bot-window a {
+      color: #81d4fa;
+      text-decoration: underline;
+    }
+
+    .bot-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 880px) {
       header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
       }
-
       .header-contact {
         text-align: left;
+      }
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .contact-section {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .bot-widget {
+        right: 16px;
+        bottom: 80px;
       }
     }
   </style>
@@ -515,313 +640,361 @@
       </div>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div>
-        <div class="pills">
-          <span class="pill">Cámaras</span>
-          <span class="pill">Redes</span>
-          <span class="pill">Cómputo</span>
-          <span class="pill">Desarrollo</span>
-        </div>
-
-        <h1 class="hero-title">
-          Soluciones técnicas <span>confiables</span><br />
-          para tu hogar y negocio
-        </h1>
-
-        <p class="hero-subtitle">
-          En Zamaha instalamos cámaras de seguridad CCTV, redes eléctricas y equipos de cómputo,
-          con mantenimientos preventivos y correctivos para que todo funcione siempre al 100%.
-        </p>
-
-        <div class="hero-buttons">
-          <a class="btn btn-primary" href="tel:+50664305227">Llamar ahora</a>
-          <a class="btn btn-secondary" href="#contacto">Solicitar cotización</a>
-        </div>
-
-        <p class="hero-note">
-          Instalaciones limpias, ordenadas y seguras · <strong>Trabajo con garantía</strong>
-        </p>
-        <p class="hero-note-badge">
-          Sin letras pequeñas: sabrás desde el inicio qué incluye el trabajo y cuánto vas a pagar.
-        </p>
-      </div>
-
-      <aside class="services-card">
-        <h3>Servicios principales</h3>
-        <div class="services-grid">
-          <div class="service-item">
-            <h4>Cámaras CCTV</h4>
-            <p>Diseño de sistema, instalación, configuración remota y mantenimiento.</p>
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-text">
+          <div class="hero-tags">
+            <span class="tag">CÁMARAS</span>
+            <span class="tag">REDES</span>
+            <span class="tag">CÓMPUTO</span>
+            <span class="tag">DESARROLLO</span>
           </div>
-          <div class="service-item">
-            <h4>Redes eléctricas</h4>
-            <p>Canalización, tomacorrientes, tableros y puntos para equipos.</p>
-          </div>
-          <div class="service-item">
-            <h4>Equipos de cómputo</h4>
-            <p>Formateos, upgrades, reparación y limpieza profunda.</p>
-          </div>
-          <div class="service-item">
-            <h4>Mantenimiento total</h4>
-            <p>Preventivo y correctivo de todos los sistemas instalados.</p>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <!-- HEX SERVICES -->
-    <section class="services-hex" id="servicios">
-      <h2>Servicios Zamaha</h2>
-      <p>Haz clic en uno de los servicios para ver los detalles y solicitar una cotización específica.</p>
-
-      <div class="hex-grid">
-        <a href="#servicio-cctv" class="hex-card">
-          <h3>Cámaras CCTV</h3>
-          <span>Seguridad y monitoreo 24/7</span>
-        </a>
-        <a href="#servicio-redes" class="hex-card">
-          <h3>Redes eléctricas</h3>
-          <span>Canalización y tableros seguros</span>
-        </a>
-        <a href="#servicio-computo" class="hex-card">
-          <h3>Equipos de cómputo</h3>
-          <span>Optimización y reparación</span>
-        </a>
-        <a href="#servicio-desarrollo" class="hex-card">
-          <h3>Desarrollo web</h3>
-          <span>Páginas y sistemas a medida</span>
-        </a>
-        <a href="#servicio-mantenimiento" class="hex-card">
-          <h3>Mantenimiento integral</h3>
-          <span>Todo funcionando al 100%</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- SERVICE DETAILS -->
-    <section class="service-detail" id="servicio-cctv">
-      <h3>Cámaras CCTV</h3>
-      <p>Diseñamos e instalamos sistemas de videovigilancia adaptados a casas, locales comerciales y bodegas.</p>
-      <ul>
-        <li>Estudio básico del lugar para recomendar puntos de cámara.</li>
-        <li>Instalación ordenada, con tubería y canaleta donde se requiera.</li>
-        <li>Configuración de acceso remoto (celular / computador).</li>
-        <li>Opciones de mantenimiento periódico para limpieza y ajustes.</li>
-      </ul>
-      <div class="btn-row">
-        <a href="#contacto" class="btn btn-primary">Cotizar cámaras CCTV</a>
-        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
-      </div>
-    </section>
-
-    <section class="service-detail" id="servicio-redes">
-      <h3>Redes eléctricas</h3>
-      <p>Instalamos y mejoramos redes eléctricas para uso residencial y comercial, priorizando seguridad y orden.</p>
-      <ul>
-        <li>Canalización nueva o mejora de cableado existente.</li>
-        <li>Instalación de tomacorrientes, puntos para equipos y luminarias.</li>
-        <li>Tableros eléctricos con rotulación clara.</li>
-        <li>Revisión básica de riesgos visibles (sobrecargas, uniones expuestas, etc.).</li>
-      </ul>
-      <div class="btn-row">
-        <a href="#contacto" class="btn btn-primary">Cotizar redes eléctricas</a>
-        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
-      </div>
-    </section>
-
-    <section class="service-detail" id="servicio-computo">
-      <h3>Equipos de cómputo</h3>
-      <p>Hacemos que tus equipos vuelvan a rendir al máximo, tanto para uso personal como para empresas.</p>
-      <ul>
-        <li>Formateo, instalación de sistema operativo y programas básicos.</li>
-        <li>Ampliación de memoria RAM y discos SSD donde aplique.</li>
-        <li>Limpieza física interna (polvo) para mejorar temperatura.</li>
-        <li>Diagnóstico inicial para detectar problemas recurrentes.</li>
-      </ul>
-      <div class="btn-row">
-        <a href="#contacto" class="btn btn-primary">Cotizar servicio de cómputo</a>
-        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
-      </div>
-    </section>
-
-    <section class="service-detail" id="servicio-desarrollo">
-      <h3>Desarrollo web y sistemas</h3>
-      <p>Te ayudamos a dar presencia digital a tu negocio con soluciones simples y claras.</p>
-      <ul>
-        <li>Landing pages informativas como la de Zamaha.</li>
-        <li>Integración básica con formularios y automatizaciones simples.</li>
-        <li>Asesoría para elegir dominio y correo profesional.</li>
-        <li>Enfoque en que el cliente entienda qué se está haciendo y por qué.</li>
-      </ul>
-      <div class="btn-row">
-        <a href="#contacto" class="btn btn-primary">Cotizar desarrollo web</a>
-        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
-      </div>
-    </section>
-
-    <section class="service-detail" id="servicio-mantenimiento">
-      <h3>Mantenimiento integral</h3>
-      <p>Mantenimientos preventivos y correctivos para que tus sistemas sigan funcionando sin sorpresas.</p>
-      <ul>
-        <li>Revisión periódica de cámaras, cableado y conexiones.</li>
-        <li>Chequeo de UPS, reguladores y puntos críticos.</li>
-        <li>Reporte sencillo de hallazgos y recomendaciones.</li>
-        <li>Opción de planes recurrentes según la necesidad del cliente.</li>
-      </ul>
-      <div class="btn-row">
-        <a href="#contacto" class="btn btn-primary">Cotizar mantenimiento integral</a>
-        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
-      </div>
-    </section>
-
-    <!-- VIDEO -->
-    <section class="section" id="video">
-      <h2>Conoce a Zamaha en 40 segundos</h2>
-      <p>Mira este breve anuncio y descubre cómo podemos ayudarte con cámaras CCTV, redes eléctricas y equipos de cómputo.</p>
-      <div class="video-wrapper">
-        <div class="video-frame">
-          <iframe
-            src="https://www.youtube.com/embed/P_FKdC3Vhl0"
-            title="Anuncio Zamaha"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen>
-          </iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACTO / COTIZACIÓN -->
-    <section class="contact" id="contacto">
-      <!-- Lado izquierdo: info y botón para fotos -->
-      <div class="contact-panel">
-        <h3>Datos de contacto</h3>
-        <p><strong>Teléfono:</strong> <a href="tel:+50664305227">+506 6430-5227</a></p>
-        <p><strong>Correo:</strong> <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></p>
-        <p><strong>Horario:</strong> Lunes a sábado · 9:00 a. m. – 5:00 p. m.</p>
-
-        <p style="margin-top:10px;">
-          Queremos darte una cotización clara desde el inicio. Para ayudarte mejor:
-        </p>
-        <ul>
-          <li>Indica si es casa, local comercial u otro tipo de propiedad.</li>
-          <li>Menciona la cantidad de cámaras o equipos aproximados.</li>
-          <li>Si ya tienes instalación previa, indica qué quieres mejorar.</li>
-        </ul>
-
-        <p style="margin-bottom:8px;">
-          Si quieres, puedes adjuntar fotos o un pequeño video de tu instalación actual.
-          Eso nos ayuda a orientarte mejor desde el inicio y a darte una cotización más precisa.
-        </p>
-
-        <a
-          class="btn btn-secondary"
-          href="mailto:zamaha-soluciones@outlook.es?subject=Fotos%20para%20cotizaci%C3%B3n%20-%20Zamaha&body=Hola%20Zamaha,%0D%0A%0D%0AAdjunto%20fotos%20o%20un%20video%20de%20mi%20instalaci%C3%B3n%20para%20que%20puedan%20orientarme%20mejor%20con%20la%20cotizaci%C3%B3n.%0D%0A%0D%0AGracias.">
-          Enviar fotos por correo
-        </a>
-
-        <p class="form-hint" style="margin-top:6px;">
-          El botón abrirá tu aplicación de correo para que puedas adjuntar las fotos o videos de tu instalación.
-        </p>
-      </div>
-
-      <!-- Lado derecho: formulario con FormSubmit -->
-      <div class="contact-panel">
-        <h3>Envíanos un mensaje rápido</h3>
-        <p class="form-hint">
-          Puedes dejar tu teléfono o correo, el medio que prefieras para que te contactemos de vuelta.
-        </p>
-
-        <form
-          action="https://formsubmit.co/zamaha-soluciones@outlook.es"
-          method="POST"
-          class="contact-form"
-        >
-          <!-- Configuración FormSubmit -->
-          <input type="hidden" name="_subject" value="Nueva cotización desde la web de Zamaha" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://elberlord.github.io/Zamaha-Soluciones/?enviado=1" />
-
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" name="Nombre del cliente" type="text" required />
-          </div>
-
-          <div class="form-group">
-            <label for="telefono">Teléfono (opcional si dejas correo)</label>
-            <input id="telefono" name="Teléfono" type="tel" />
-          </div>
-
-          <div class="form-group">
-            <label for="correo">Correo electrónico (opcional si dejas teléfono)</label>
-            <input id="correo" name="Correo electrónico" type="email" />
-          </div>
-
-          <div class="form-group">
-            <label for="servicio">¿Qué servicio te interesa? (puedes listar varios)</label>
-            <input
-              id="servicio"
-              name="Servicio(s) de interés"
-              type="text"
-              placeholder="Cámaras, redes, cómputo, desarrollo web, mantenimiento, etc."
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="preferencia">¿Qué prefieres?</label>
-            <select id="preferencia" name="Forma de contacto preferida">
-              <option value="Solo recibir una cotización por mensaje">
-                Solo recibir una cotización por mensaje
-              </option>
-              <option value="Recibir una llamada para detalles">
-                Recibir una llamada para detalles
-              </option>
-              <option value="Coordinar una visita técnica">
-                Coordinar una visita técnica
-              </option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="detalles">Detalles del proyecto</label>
-            <textarea
-              id="detalles"
-              name="Detalles del proyecto"
-              rows="4"
-              placeholder="Ej: casa de 2 plantas, local comercial, cantidad de equipos, etc."></textarea>
-          </div>
-
-          <div class="btn-row">
-            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-          </div>
-
-          <p id="form-status" class="form-status" style="display:none;">
-            Tu solicitud ha sido enviada. Puedes seguir cotizando si lo deseas.
+          <h1>Soluciones técnicas <span>confiables</span> para tu hogar y negocio</h1>
+          <p>
+            Instalamos cámaras de seguridad CCTV, redes eléctricas y equipos de cómputo,
+            con mantenimientos preventivos y correctivos para que todo funcione siempre al 100%.
           </p>
-        </form>
-      </div>
-    </section>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contacto">Solicitar cotización</a>
+            <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
+          </div>
+          <div class="hero-note">
+            Instalaciones limpias, ordenadas y seguras · Trabajo con garantía
+          </div>
+        </div>
+        <section class="video-section">
+          <h2>Conoce a Zamaha en 40 segundos</h2>
+          <p>Mira este breve anuncio y descubre cómo podemos ayudarte.</p>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/P_FKdC3Vhl0"
+              title="Anuncio Zamaha"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </section>
+      </section>
+
+      <!-- SERVICIOS HEX -->
+      <section class="services-hex" id="servicios">
+        <h2>Servicios Zamaha</h2>
+        <p>Selecciona un servicio para ver el detalle y cotizarlo.</p>
+        <div class="hex-grid">
+          <button class="hex-item" data-target="#servicio-cctv">
+            <div class="hex-label">Cámaras CCTV</div>
+            <div class="hex-mini">Diseño, instalación y configuración remota.</div>
+          </button>
+          <button class="hex-item" data-target="#servicio-redes">
+            <div class="hex-label">Redes eléctricas</div>
+            <div class="hex-mini">Canalización, tomacorrientes, tableros y protecciones.</div>
+          </button>
+          <button class="hex-item" data-target="#servicio-computo">
+            <div class="hex-label">Equipos de cómputo</div>
+            <div class="hex-mini">Formateos, upgrades, limpieza y reparación.</div>
+          </button>
+          <button class="hex-item" data-target="#servicio-desarrollo">
+            <div class="hex-label">Desarrollo web</div>
+            <div class="hex-mini">Páginas web ligeras para tu negocio.</div>
+          </button>
+          <button class="hex-item" data-target="#servicio-mantenimiento">
+            <div class="hex-label">Mantenimiento integral</div>
+            <div class="hex-mini">Paquetes periódicos para todo tu sistema.</div>
+          </button>
+        </div>
+      </section>
+
+      <!-- DETALLE DE SERVICIOS -->
+      <section class="services-detail">
+        <article class="service-card" id="servicio-cctv">
+          <h3>Cámaras CCTV</h3>
+          <div class="service-pill">Vigilancia 24/7</div>
+          <p>
+            Diseñamos e instalamos sistemas de cámaras adaptados a tu hogar, comercio u oficina,
+            con visualización remota desde el celular.
+          </p>
+          <ul class="service-list">
+            <li>Estudio del lugar y puntos críticos.</li>
+            <li>Instalación limpia de cableado y canaletas.</li>
+            <li>Configuración de grabador, monitoreo y acceso remoto.</li>
+          </ul>
+          <div class="service-actions">
+            <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
+              Cotizar cámaras
+            </button>
+            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
+          </div>
+        </article>
+
+        <article class="service-card" id="servicio-redes">
+          <h3>Redes eléctricas</h3>
+          <div class="service-pill">Seguridad eléctrica</div>
+          <p>
+            Instalación de tomacorrientes, tableros, canalización y protecciones
+            para que tu instalación eléctrica sea segura y ordenada.
+          </p>
+          <ul class="service-list">
+            <li>Revisión del estado actual de la red.</li>
+            <li>Diagnóstico de posibles riesgos y sobrecargas.</li>
+            <li>Instalación o mejora de circuitos y protecciones.</li>
+          </ul>
+          <div class="service-actions">
+            <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
+              Cotizar redes
+            </button>
+            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
+          </div>
+        </article>
+
+        <article class="service-card" id="servicio-computo">
+          <h3>Equipos de cómputo</h3>
+          <div class="service-pill">Equipos al 100%</div>
+          <p>
+            Formateos, upgrades de disco y memoria, limpieza interna y reparación básica
+            para que tus equipos trabajen más rápido y por más tiempo.
+          </p>
+          <ul class="service-list">
+            <li>Respaldo de información (si lo solicitas).</li>
+            <li>Limpieza de polvo, cambio de pasta térmica.</li>
+            <li>Instalación de software esencial y configuración básica.</li>
+          </ul>
+          <div class="service-actions">
+            <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
+              Cotizar cómputo
+            </button>
+            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
+          </div>
+        </article>
+
+        <article class="service-card" id="servicio-desarrollo">
+          <h3>Desarrollo web</h3>
+          <div class="service-pill">Presencia digital</div>
+          <p>
+            Páginas web ligeras, claras y funcionales para presentar tus servicios, con enfoque en
+            la información importante sin recargar al usuario.
+          </p>
+          <ul class="service-list">
+            <li>Landing page o sitio básico para tu negocio.</li>
+            <li>Enlaces a WhatsApp, correo y redes sociales.</li>
+            <li>Textos optimizados para explicar tus servicios.</li>
+          </ul>
+          <div class="service-actions">
+            <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
+              Cotizar desarrollo web
+            </button>
+            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
+          </div>
+        </article>
+
+        <article class="service-card" id="servicio-mantenimiento">
+          <h3>Mantenimiento integral</h3>
+          <div class="service-pill">Todo bajo control</div>
+          <p>
+            Planes periódicos para revisar cámaras, red eléctrica y equipos de cómputo,
+            de modo que evites sorpresas y gastos imprevistos.
+          </p>
+          <ul class="service-list">
+            <li>Visitas programadas de revisión.</li>
+            <li>Limpieza, ajustes y pequeños correctivos.</li>
+            <li>Reporte de estado y recomendaciones.</li>
+          </ul>
+          <div class="service-actions">
+            <button class="btn btn-primary btn-small js-cotizar" data-service="Mantenimiento integral">
+              Cotizar mantenimiento
+            </button>
+            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
+          </div>
+        </article>
+      </section>
+
+      <!-- CONTACTO -->
+      <section class="contact-section" id="contacto">
+        <div class="contact-info">
+          <h2>Contacto directo</h2>
+          <p><strong>Teléfono:</strong> <a href="tel:+50664305227">+506 6430-5227</a></p>
+          <p><strong>Correo:</strong> <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></p>
+          <p><strong>Horario:</strong> Lunes a sábado · 9:00 a.m. – 5:00 p.m.</p>
+
+          <div class="attach-box">
+            Si quieres, puedes adjuntar fotos o un pequeño video de tu instalación actual.
+            Eso nos ayuda a orientarte mejor desde el inicio y a darte una cotización más precisa.
+            <br />
+            <button class="btn btn-secondary btn-small" type="button"
+              onclick="window.open('mailto:zamaha-soluciones@outlook.es?subject=Fotos%20para%20cotizaci%C3%B3n%20-%20Zamaha','_blank')">
+              Enviar fotos por correo
+            </button>
+            <div class="form-footer-note">
+              El botón abrirá tu aplicación de correo para que puedas adjuntar las fotos o videos de tu instalación.
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h2>Solicita una cotización rápida</h2>
+          <p>Déjanos tus datos y te responderemos lo antes posible.</p>
+
+          <form id="contactForm"
+                action="https://formsubmit.co/zamaha-soluciones@outlook.es"
+                method="POST">
+            <!-- Configuración FormSubmit -->
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_subject" value="Nueva cotización desde la web de Zamaha" />
+            <input type="hidden" name="_next" value="https://elberlord.github.io/Zamaha-Soluciones/?success=1" />
+
+            <div>
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="Nombre" placeholder="Tu nombre completo" required />
+            </div>
+
+            <div>
+              <label for="telefono">Teléfono (opcional si dejas correo)</label>
+              <input type="tel" id="telefono" name="Teléfono" placeholder="Ej: +506 6430-5227" />
+            </div>
+
+            <div>
+              <label for="correo">Correo electrónico (opcional si dejas teléfono)</label>
+              <input type="email" id="correo" name="Correo" placeholder="tu-correo@ejemplo.com" />
+            </div>
+
+            <div>
+              <label>¿Qué servicio te interesa? (puedes elegir varios)</label>
+              <div class="service-pills" id="servicePills">
+                <button type="button" class="service-pill-btn" data-service="Cámaras CCTV">Cámaras CCTV</button>
+                <button type="button" class="service-pill-btn" data-service="Redes eléctricas">Redes eléctricas</button>
+                <button type="button" class="service-pill-btn" data-service="Equipos de cómputo">Equipos de cómputo</button>
+                <button type="button" class="service-pill-btn" data-service="Desarrollo web">Desarrollo web</button>
+                <button type="button" class="service-pill-btn" data-service="Mantenimiento integral">Mantenimiento integral</button>
+              </div>
+              <input type="hidden" id="servicesField" name="Servicios seleccionados" />
+            </div>
+
+            <div>
+              <label for="preferencia">¿Qué prefieres?</label>
+              <select id="preferencia" name="Preferencia de contacto">
+                <option value="Solo recibir una cotización por mensaje" selected>
+                  Solo recibir una cotización por mensaje
+                </option>
+                <option value="Que me llamen para hablar del proyecto">
+                  Que me llamen para hablar del proyecto
+                </option>
+                <option value="Agendar una visita técnica">
+                  Agendar una visita técnica
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <label for="detalles">Detalles del proyecto</label>
+              <textarea id="detalles" name="Detalles del proyecto"
+                placeholder="Ej: casa de 2 plantas, local comercial, cantidad de equipos, etc."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+            <div class="form-footer-note">
+              No compartiremos tus datos con nadie. Usaremos esta información solo para responder tu solicitud.
+            </div>
+            <div id="formSuccess" class="form-success">
+              Tu solicitud ha sido enviada. Puedes seguir cotizando si lo deseas.
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
 
     <footer>
-      © <span id="year"></span> Zamaha · Instalaciones técnicas y mantenimiento integral.
+      © <span id="year"></span> Zamaha · Tecnología que protege lo que más importa.
     </footer>
   </div>
 
-  <script>
-    // Año automático
-    document.getElementById("year").textContent = new Date().getFullYear();
+  <!-- BOT FLOTANTE -->
+  <div class="bot-widget" id="botWidget">
+    <button class="bot-toggle" id="botToggle" aria-label="Abrir asistente Zamaha">💬</button>
+    <div class="bot-window">
+      <div class="bot-header">
+        <strong>Asistente Zamaha</strong>
+        <span class="bot-status">Activo 24/7</span>
+      </div>
+      <p>Hola 👋, soy el asistente virtual de Zamaha. Te dejo algunas opciones rápidas:</p>
+      <ul>
+        <li><a href="#contacto">Quiero dejar una cotización</a></li>
+        <li><a href="tel:+50664305227">Llamar ahora a Zamaha</a></li>
+        <li><a href="mailto:zamaha-soluciones@outlook.es?subject=Consulta%20general%20-%20Zamaha">Enviar un correo</a></li>
+        <li><a href="#servicios">Ver todos los servicios</a></li>
+      </ul>
+      <p class="bot-note">Responderemos lo antes posible dentro del horario: 9:00 a.m. – 5:00 p.m.</p>
+    </div>
+  </div>
 
-    // Mostrar mensaje "enviado" al volver desde FormSubmit
-    (function () {
+  <script>
+    // Año en el footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll desde los hexágonos
+    document.querySelectorAll('.hex-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.querySelector(btn.dataset.target);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Botones "Cotizar ..." que preseleccionan el servicio
+    const serviceButtons = document.querySelectorAll('.js-cotizar');
+    const servicePills = document.querySelectorAll('.service-pill-btn');
+    const servicesField = document.getElementById('servicesField');
+
+    function updateServicesField() {
+      const selected = Array.from(servicePills)
+        .filter(p => p.classList.contains('active'))
+        .map(p => p.dataset.service);
+      servicesField.value = selected.join(', ');
+    }
+
+    servicePills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pill.classList.toggle('active');
+        updateServicesField();
+      });
+    });
+
+    serviceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const service = btn.dataset.service;
+        // activar la pastilla correspondiente
+        servicePills.forEach(pill => {
+          if (pill.dataset.service === service) {
+            pill.classList.add('active');
+          }
+        });
+        updateServicesField();
+        // bajar al formulario
+        document.getElementById('contacto').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
+    function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
-      if (params.get("enviado") === "1") {
-        const status = document.getElementById("form-status");
-        if (status) status.style.display = "block";
-      }
-    })();
+      return params.get(name);
+    }
+
+    if (getQueryParam('success') === '1') {
+      const msg = document.getElementById('formSuccess');
+      if (msg) msg.style.opacity = 1;
+    }
+
+    // Bot flotante
+    const botWidget = document.getElementById('botWidget');
+    const botToggle = document.getElementById('botToggle');
+
+    if (botWidget && botToggle) {
+      botToggle.addEventListener('click', () => {
+        botWidget.classList.toggle('open');
+      });
+    }
   </script>
 </body>
 </html>
