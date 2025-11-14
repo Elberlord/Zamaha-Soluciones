@@ -56,6 +56,9 @@
     }
 
     header {
+      position: sticky;
+      top: 12px;
+      z-index: 999;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -510,6 +513,24 @@
       color: var(--text-muted);
       margin-top: 4px;
     }
+    .schedule-grid {
+      display: none;
+      margin-top: 6px;
+      margin-bottom: 6px;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .schedule-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .schedule-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
 
     .form-success {
       font-size: 12px;
@@ -944,6 +965,7 @@
               <input type="hidden" id="servicesField" name="Servicios seleccionados" />
             </div>
 
+            
             <div>
               <label for="preferencia">¿Qué prefieres?</label>
               <select id="preferencia" name="Preferencia de contacto">
@@ -956,8 +978,44 @@
                 <option value="Agendar una visita técnica">
                   Agendar una visita técnica
                 </option>
+                <option value="Agendar una asesoría (virtual o presencial)">
+                  Agendar una asesoría (virtual o presencial)
+                </option>
               </select>
             </div>
+
+            <!-- Campos que se muestran solo cuando el cliente quiere agendar -->
+            <div id="scheduleFields" class="schedule-grid">
+              <div>
+                <label for="tipoAtencion">Tipo de atención para agendar</label>
+                <select id="tipoAtencion" name="Tipo de atención (agenda)">
+                  <option value="Visita técnica en sitio" selected>Visita técnica en sitio</option>
+                  <option value="Asesoría virtual">Asesoría virtual</option>
+                  <option value="Asesoría presencial">Asesoría presencial</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="fecha">Fecha preferida</label>
+                <input type="date" id="fecha" name="Fecha preferida" />
+              </div>
+
+              <div>
+                <label for="hora">Hora preferida</label>
+                <input type="time" id="hora" name="Hora preferida" />
+              </div>
+
+              <div class="full">
+                <label for="ubicacion">Ubicación / dirección</label>
+                <textarea id="ubicacion" name="Ubicación o referencia de la zona"
+                  placeholder="Ej: dirección exacta, barrio, punto de referencia. Para asesoría virtual, indica tu ciudad y país."></textarea>
+              </div>
+
+              <div class="full schedule-note">
+                * La fecha y hora quedan como <strong>horario preferido</strong>. Te confirmaremos por mensaje o llamada si hay espacio disponible en ese horario.
+              </div>
+            </div>
+
 
             <div>
               <label for="detalles">Detalles del proyecto</label>
@@ -1073,7 +1131,31 @@
       });
     });
 
-    // Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
+    
+    // Mostrar/ocultar campos de agenda según preferencia
+    const preferencia = document.getElementById('preferencia');
+    const scheduleFields = document.getElementById('scheduleFields');
+
+    function toggleScheduleFields() {
+      if (!preferencia || !scheduleFields) return;
+      const v = preferencia.value;
+      if (
+        v === 'Agendar una visita técnica' ||
+        v === 'Agendar una asesoría (virtual o presencial)'
+      ) {
+        scheduleFields.style.display = 'grid';
+      } else {
+        scheduleFields.style.display = 'none';
+      }
+    }
+
+    if (preferencia && scheduleFields) {
+      preferencia.addEventListener('change', toggleScheduleFields);
+      // Estado inicial por si viene con un valor preseleccionado
+      toggleScheduleFields();
+    }
+
+// Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
