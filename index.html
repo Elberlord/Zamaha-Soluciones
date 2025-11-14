@@ -15,7 +15,6 @@
       --text-main: #f5f7ff;
       --text-muted: #a0aec0;
       --border-subtle: #1f2937;
-      --error: #f56565;
     }
 
     * {
@@ -187,7 +186,7 @@
       color: #9ca3af;
     }
 
-    /* Services card */
+    /* Services card (hero lateral) */
 
     .services-card {
       background: radial-gradient(circle at top left, rgba(15,23,42,0.9), rgba(5,8,22,0.98));
@@ -227,6 +226,113 @@
       color: var(--text-muted);
     }
 
+    /* HEX SERVICES SECTION */
+
+    .services-hex {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .services-hex h2 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .services-hex p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 18px;
+    }
+
+    .hex-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+    }
+
+    .hex-card {
+      position: relative;
+      width: 190px;
+      height: 160px;
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+      background: radial-gradient(circle at top, #1f2937, #020617);
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: 0 12px 24px rgba(15,23,42,0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      text-align: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .hex-card::before {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      clip-path: inherit;
+      background: radial-gradient(circle at top, rgba(56,189,248,0.10), transparent);
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .hex-card h3 {
+      position: relative;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .hex-card span {
+      position: relative;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hex-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 32px rgba(15,23,42,0.95);
+      border-color: var(--accent-blue);
+    }
+
+    .hex-card:hover::before {
+      opacity: 1;
+    }
+
+    /* SERVICE DETAIL SECTIONS */
+
+    .service-detail {
+      background: var(--bg-card-soft);
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+
+    .service-detail h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .service-detail p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .service-detail ul {
+      margin-left: 18px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .service-detail ul li {
+      margin-bottom: 4px;
+    }
+
     /* Video */
 
     .section {
@@ -249,7 +355,8 @@
       border-radius: 20px;
       padding: 16px;
       border: 1px solid rgba(148,163,184,0.35);
-      max-width: 720px;
+      max-width: 520px;        /* MÁS PEQUEÑO */
+      margin: 0 auto;          /* CENTRADO */
     }
 
     .video-frame {
@@ -408,6 +515,7 @@
       </div>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
       <div>
         <div class="pills">
@@ -463,7 +571,112 @@
       </aside>
     </section>
 
-    <!-- Video -->
+    <!-- HEX SERVICES -->
+    <section class="services-hex" id="servicios">
+      <h2>Servicios Zamaha</h2>
+      <p>Haz clic en uno de los servicios para ver los detalles y solicitar una cotización específica.</p>
+
+      <div class="hex-grid">
+        <a href="#servicio-cctv" class="hex-card">
+          <h3>Cámaras CCTV</h3>
+          <span>Seguridad y monitoreo 24/7</span>
+        </a>
+        <a href="#servicio-redes" class="hex-card">
+          <h3>Redes eléctricas</h3>
+          <span>Canalización y tableros seguros</span>
+        </a>
+        <a href="#servicio-computo" class="hex-card">
+          <h3>Equipos de cómputo</h3>
+          <span>Optimización y reparación</span>
+        </a>
+        <a href="#servicio-desarrollo" class="hex-card">
+          <h3>Desarrollo web</h3>
+          <span>Páginas y sistemas a medida</span>
+        </a>
+        <a href="#servicio-mantenimiento" class="hex-card">
+          <h3>Mantenimiento integral</h3>
+          <span>Todo funcionando al 100%</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SERVICE DETAILS -->
+    <section class="service-detail" id="servicio-cctv">
+      <h3>Cámaras CCTV</h3>
+      <p>Diseñamos e instalamos sistemas de videovigilancia adaptados a casas, locales comerciales y bodegas.</p>
+      <ul>
+        <li>Estudio básico del lugar para recomendar puntos de cámara.</li>
+        <li>Instalación ordenada, con tubería y canaleta donde se requiera.</li>
+        <li>Configuración de acceso remoto (celular / computador).</li>
+        <li>Opciones de mantenimiento periódico para limpieza y ajustes.</li>
+      </ul>
+      <div class="btn-row">
+        <a href="#contacto" class="btn btn-primary">Cotizar cámaras CCTV</a>
+        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
+      </div>
+    </section>
+
+    <section class="service-detail" id="servicio-redes">
+      <h3>Redes eléctricas</h3>
+      <p>Instalamos y mejoramos redes eléctricas para uso residencial y comercial, priorizando seguridad y orden.</p>
+      <ul>
+        <li>Canalización nueva o mejora de cableado existente.</li>
+        <li>Instalación de tomacorrientes, puntos para equipos y luminarias.</li>
+        <li>Tableros eléctricos con rotulación clara.</li>
+        <li>Revisión básica de riesgos visibles (sobrecargas, uniones expuestas, etc.).</li>
+      </ul>
+      <div class="btn-row">
+        <a href="#contacto" class="btn btn-primary">Cotizar redes eléctricas</a>
+        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
+      </div>
+    </section>
+
+    <section class="service-detail" id="servicio-computo">
+      <h3>Equipos de cómputo</h3>
+      <p>Hacemos que tus equipos vuelvan a rendir al máximo, tanto para uso personal como para empresas.</p>
+      <ul>
+        <li>Formateo, instalación de sistema operativo y programas básicos.</li>
+        <li>Ampliación de memoria RAM y discos SSD donde aplique.</li>
+        <li>Limpieza física interna (polvo) para mejorar temperatura.</li>
+        <li>Diagnóstico inicial para detectar problemas recurrentes.</li>
+      </ul>
+      <div class="btn-row">
+        <a href="#contacto" class="btn btn-primary">Cotizar servicio de cómputo</a>
+        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
+      </div>
+    </section>
+
+    <section class="service-detail" id="servicio-desarrollo">
+      <h3>Desarrollo web y sistemas</h3>
+      <p>Te ayudamos a dar presencia digital a tu negocio con soluciones simples y claras.</p>
+      <ul>
+        <li>Landing pages informativas como la de Zamaha.</li>
+        <li>Integración básica con formularios y automatizaciones simples.</li>
+        <li>Asesoría para elegir dominio y correo profesional.</li>
+        <li>Enfoque en que el cliente entienda qué se está haciendo y por qué.</li>
+      </ul>
+      <div class="btn-row">
+        <a href="#contacto" class="btn btn-primary">Cotizar desarrollo web</a>
+        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
+      </div>
+    </section>
+
+    <section class="service-detail" id="servicio-mantenimiento">
+      <h3>Mantenimiento integral</h3>
+      <p>Mantenimientos preventivos y correctivos para que tus sistemas sigan funcionando sin sorpresas.</p>
+      <ul>
+        <li>Revisión periódica de cámaras, cableado y conexiones.</li>
+        <li>Chequeo de UPS, reguladores y puntos críticos.</li>
+        <li>Reporte sencillo de hallazgos y recomendaciones.</li>
+        <li>Opción de planes recurrentes según la necesidad del cliente.</li>
+      </ul>
+      <div class="btn-row">
+        <a href="#contacto" class="btn btn-primary">Cotizar mantenimiento integral</a>
+        <a href="#servicios" class="btn btn-secondary">Volver a servicios</a>
+      </div>
+    </section>
+
+    <!-- VIDEO -->
     <section class="section" id="video">
       <h2>Conoce a Zamaha en 40 segundos</h2>
       <p>Mira este breve anuncio y descubre cómo podemos ayudarte con cámaras CCTV, redes eléctricas y equipos de cómputo.</p>
@@ -480,7 +693,7 @@
       </div>
     </section>
 
-    <!-- Contact / Cotización -->
+    <!-- CONTACTO / COTIZACIÓN -->
     <section class="contact" id="contacto">
       <!-- Lado izquierdo: info y botón para fotos -->
       <div class="contact-panel">
@@ -530,7 +743,6 @@
           <input type="hidden" name="_subject" value="Nueva cotización desde la web de Zamaha" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
-          <!-- URL final de GitHub Pages -->
           <input type="hidden" name="_next" value="https://elberlord.github.io/Zamaha-Soluciones/?enviado=1" />
 
           <div class="form-group">
@@ -599,17 +811,15 @@
   </div>
 
   <script>
-    // Año automático en el footer
+    // Año automático
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Mostrar mensaje "enviado" cuando volvemos desde FormSubmit
+    // Mostrar mensaje "enviado" al volver desde FormSubmit
     (function () {
       const params = new URLSearchParams(window.location.search);
       if (params.get("enviado") === "1") {
         const status = document.getElementById("form-status");
-        if (status) {
-          status.style.display = "block";
-        }
+        if (status) status.style.display = "block";
       }
     })();
   </script>
