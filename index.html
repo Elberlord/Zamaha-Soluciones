@@ -11,6 +11,10 @@
   <!-- Favicon de la empresa -->
   <link rel="icon" href="zamaha-logo.png" type="image/png" />
 
+  <!-- Calendly embed -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
   <style>
     :root {
       --bg-main: #050816;
@@ -70,7 +74,6 @@
       top: 10px;
       z-index: 1200;
     }
-
 
     .brand {
       display: flex;
@@ -383,7 +386,6 @@
       padding: 7px 12px;
     }
 
-
     /* TOOLTIP DE SERVICIOS */
 
     .service-card {
@@ -447,6 +449,7 @@
         transform: translate(-50%, 10px);
       }
     }
+
     /* CONTACTO */
 
     .contact-section {
@@ -579,7 +582,6 @@
       margin-top: 4px;
     }
 
-    
     .schedule-grid {
       display: none;
       margin-top: 6px;
@@ -598,7 +600,19 @@
       margin-top: 2px;
     }
 
-.form-success {
+    /* Calendly wrapper */
+    .calendly-wrapper {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .calendly-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .form-success {
       font-size: 12px;
       color: #b9f6ca;
       margin-top: 6px;
@@ -856,16 +870,16 @@
         <article class="service-card" id="servicio-cctv">
           <h3>Cámaras CCTV</h3>
           <div class="service-pill">Vigilancia 24/7</div>
-                    <div class="service-tooltip">
-<p>
-            Diseñamos e instalamos sistemas de cámaras adaptados a tu hogar, comercio u oficina,
-            con visualización remota desde el celular.
-          </p>
-          <ul class="service-list">
-            <li>Estudio del lugar y puntos críticos.</li>
-            <li>Instalación limpia de cableado y canaletas.</li>
-            <li>Configuración de grabador, monitoreo y acceso remoto.</li>
-          </ul>
+          <div class="service-tooltip">
+            <p>
+              Diseñamos e instalamos sistemas de cámaras adaptados a tu hogar, comercio u oficina,
+              con visualización remota desde el celular.
+            </p>
+            <ul class="service-list">
+              <li>Estudio del lugar y puntos críticos.</li>
+              <li>Instalación limpia de cableado y canaletas.</li>
+              <li>Configuración de grabador, monitoreo y acceso remoto.</li>
+            </ul>
           </div>
 
           <div class="service-actions">
@@ -881,16 +895,16 @@
         <article class="service-card" id="servicio-redes">
           <h3>Redes eléctricas</h3>
           <div class="service-pill">Seguridad eléctrica</div>
-                    <div class="service-tooltip">
-<p>
-            Instalación de tomacorrientes, tableros, canalización y protecciones
-            para que tu instalación eléctrica sea segura y ordenada.
-          </p>
-          <ul class="service-list">
-            <li>Revisión del estado actual de la red.</li>
-            <li>Diagnóstico de posibles riesgos y sobrecargas.</li>
-            <li>Instalación o mejora de circuitos y protecciones.</li>
-          </ul>
+          <div class="service-tooltip">
+            <p>
+              Instalación de tomacorrientes, tableros, canalización y protecciones
+              para que tu instalación eléctrica sea segura y ordenada.
+            </p>
+            <ul class="service-list">
+              <li>Revisión del estado actual de la red.</li>
+              <li>Diagnóstico de posibles riesgos y sobrecargas.</li>
+              <li>Instalación o mejora de circuitos y protecciones.</li>
+            </ul>
           </div>
 
           <div class="service-actions">
@@ -906,16 +920,16 @@
         <article class="service-card" id="servicio-computo">
           <h3>Equipos de cómputo</h3>
           <div class="service-pill">Equipos al 100%</div>
-                    <div class="service-tooltip">
-<p>
-            Formateos, upgrades de disco y memoria, limpieza interna y reparación básica
-            para que tus equipos trabajen más rápido y por más tiempo.
-          </p>
-          <ul class="service-list">
-            <li>Respaldo de información (si lo solicitas).</li>
-            <li>Limpieza de polvo, cambio de pasta térmica.</li>
-            <li>Instalación de software esencial y configuración básica.</li>
-          </ul>
+          <div class="service-tooltip">
+            <p>
+              Formateos, upgrades de disco y memoria, limpieza interna y reparación básica
+              para que tus equipos trabajen más rápido y por más tiempo.
+            </p>
+            <ul class="service-list">
+              <li>Respaldo de información (si lo solicitas).</li>
+              <li>Limpieza de polvo, cambio de pasta térmica.</li>
+              <li>Instalación de software esencial y configuración básica.</li>
+            </ul>
           </div>
 
           <div class="service-actions">
@@ -931,16 +945,16 @@
         <article class="service-card" id="servicio-desarrollo">
           <h3>Desarrollo web</h3>
           <div class="service-pill">Presencia digital</div>
-                    <div class="service-tooltip">
-<p>
-            Páginas web ligeras, claras y funcionales para presentar tus servicios, con enfoque en
-            la información importante sin recargar al usuario.
-          </p>
-          <ul class="service-list">
-            <li>Landing page o sitio básico para tu negocio.</li>
-            <li>Enlaces a WhatsApp, correo y redes sociales.</li>
-            <li>Textos optimizados para explicar tus servicios.</li>
-          </ul>
+          <div class="service-tooltip">
+            <p>
+              Páginas web ligeras, claras y funcionales para presentar tus servicios, con enfoque en
+              la información importante sin recargar al usuario.
+            </p>
+            <ul class="service-list">
+              <li>Landing page o sitio básico para tu negocio.</li>
+              <li>Enlaces a WhatsApp, correo y redes sociales.</li>
+              <li>Textos optimizados para explicar tus servicios.</li>
+            </ul>
           </div>
 
           <div class="service-actions">
@@ -956,16 +970,16 @@
         <article class="service-card" id="servicio-mantenimiento">
           <h3>Mantenimiento integral</h3>
           <div class="service-pill">Todo bajo control</div>
-                    <div class="service-tooltip">
-<p>
-            Planes periódicos para revisar cámaras, red eléctrica y equipos de cómputo,
-            de modo que evites sorpresas y gastos imprevistos.
-          </p>
-          <ul class="service-list">
-            <li>Visitas programadas de revisión.</li>
-            <li>Limpieza, ajustes y pequeños correctivos.</li>
-            <li>Reporte de estado y recomendaciones.</li>
-          </ul>
+          <div class="service-tooltip">
+            <p>
+              Planes periódicos para revisar cámaras, red eléctrica y equipos de cómputo,
+              de modo que evites sorpresas y gastos imprevistos.
+            </p>
+            <ul class="service-list">
+              <li>Visitas programadas de revisión.</li>
+              <li>Limpieza, ajustes y pequeños correctivos.</li>
+              <li>Reporte de estado y recomendaciones.</li>
+            </ul>
           </div>
 
           <div class="service-actions">
@@ -1091,6 +1105,18 @@
               </div>
             </div>
 
+            <!-- Calendly embed (solo se muestra cuando se agenda) -->
+            <div id="calendlyContainer" class="calendly-wrapper">
+              <div class="calendly-note">
+                Puedes confirmar tu cita directamente en este calendario. Solo se mostrarán horarios realmente disponibles según tu agenda.
+              </div>
+              <div
+                class="calendly-inline-widget"
+                data-url="https://calendly.com/zamaha-soluciones/asesoria-visita-tecnica-zamaha"
+                style="min-width: 320px; height: 580px;">
+              </div>
+            </div>
+
             <div>
               <label for="detalles">Detalles del proyecto</label>
               <textarea id="detalles" name="Detalles del proyecto"
@@ -1157,7 +1183,6 @@
       });
     });
 
-    
     // Tooltip de servicios (detalle en hover / toque prolongado)
     const serviceCards = document.querySelectorAll('.service-card');
 
@@ -1184,7 +1209,7 @@
       serviceCards.forEach(c => c.classList.remove('show-info'));
     });
 
-// Botones "Cotizar ..." y "Añadir a cotización"
+    // Botones "Cotizar ..." y "Añadir a cotización"
     const serviceButtons = document.querySelectorAll('.js-cotizar');
     const addButtons = document.querySelectorAll('.js-agregar');
     const servicePills = document.querySelectorAll('.service-pill-btn');
@@ -1232,13 +1257,13 @@
       });
     });
 
-    
     // Lógica de agenda para visitas / asesorías (mínimo 3 días de anticipación)
     const preferencia = document.getElementById('preferencia');
     const scheduleFields = document.getElementById('scheduleFields');
     const fechaInput = document.getElementById('fecha');
     const horaInput = document.getElementById('hora');
     const ubicacionInput = document.getElementById('ubicacion');
+    const calendlyContainer = document.getElementById('calendlyContainer');
 
     function setMinDate3DaysAhead() {
       if (!fechaInput) return;
@@ -1260,14 +1285,27 @@
       if (!preferencia || !scheduleFields) return;
       const seleccion = preferencia.value;
       const show = isAgendaOption(seleccion);
+
+      // mostrar / ocultar campos de agenda
       scheduleFields.style.display = show ? 'grid' : 'none';
 
+      // mostrar / ocultar Calendly
+      if (calendlyContainer) {
+        calendlyContainer.style.display = show ? 'block' : 'none';
+      }
+
+      // marcar campos como obligatorios solo cuando se agenda
       if (fechaInput && horaInput && ubicacionInput) {
         fechaInput.required = show;
         horaInput.required = show;
         ubicacionInput.required = show;
         if (show) {
           setMinDate3DaysAhead();
+        } else {
+          // limpiar valores si se deja de agendar
+          fechaInput.value = '';
+          horaInput.value = '';
+          ubicacionInput.value = '';
         }
       }
     }
@@ -1281,7 +1319,7 @@
     // Ajustar fecha mínima al cargar la página
     setMinDate3DaysAhead();
 
-// Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
+    // Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
