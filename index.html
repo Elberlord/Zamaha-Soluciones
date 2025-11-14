@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zamaha | CCTV, redes eléctricas y cómputo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-dark: #050816;
+      --bg-card: #0b1020;
+      --bg-card-soft: #10182a;
+      --accent: #00d084;
+      --accent-soft: #00b36a;
+      --accent-blue: #00b4ff;
+      --text-main: #f5f7ff;
+      --text-muted: #a0aec0;
+      --border-subtle: #1f2937;
+      --error: #f56565;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #102a43, #050816 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      font-size: 32px;
+      letter-spacing: 0.35em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #ff4b5c;
+      text-shadow:
+        0 0 4px rgba(0,0,0,0.7),
+        0 0 12px rgba(255,75,92,0.7);
+    }
+
+    .brand-tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .header-contact {
+      text-align: right;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-contact a {
+      color: var(--accent-blue);
+    }
+
+    /* Pills */
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .pill {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(15,23,42,0.3));
+      color: #e2e8f0;
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+      gap: 32px;
+      align-items: flex-start;
+      margin-bottom: 48px;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      color: var(--accent-blue);
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #022c22;
+      box-shadow: 0 8px 16px rgba(0,208,132,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 20px rgba(0,208,132,0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid rgba(148,163,184,0.7);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15,23,42,0.8);
+      transform: translateY(-1px);
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .hero-note strong {
+      color: #e5e7eb;
+    }
+
+    .hero-note-badge {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    /* Services card */
+
+    .services-card {
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.9), rgba(5,8,22,0.98));
+      border-radius: 24px;
+      padding: 20px 20px 18px;
+      border: 1px solid rgba(148,163,184,0.35);
+      box-shadow:
+        0 18px 40px rgba(15,23,42,0.9),
+        0 0 0 1px rgba(15,23,42,0.8);
+    }
+
+    .services-card h3 {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      gap: 12px;
+    }
+
+    .service-item {
+      background: rgba(15,23,42,0.9);
+      border-radius: 16px;
+      padding: 12px 12px 10px;
+      border: 1px solid rgba(55,65,81,0.9);
+    }
+
+    .service-item h4 {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .service-item p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Video */
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .section p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .video-wrapper {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 16px;
+      border: 1px solid rgba(148,163,184,0.35);
+      max-width: 720px;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 16px 32px rgba(15,23,42,0.9);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Contact section */
+
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(0,1.1fr) minmax(0,1.2fr);
+      gap: 32px;
+      margin-top: 24px;
+    }
+
+    .contact-panel {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 18px 20px;
+      border: 1px solid rgba(148,163,184,0.35);
+    }
+
+    .contact-panel h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .contact-panel p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .contact-panel strong {
+      color: #e5e7eb;
+    }
+
+    .contact-panel ul {
+      margin-left: 18px;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .contact-panel ul li {
+      margin-bottom: 4px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border-radius: 10px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.95);
+      padding: 8px 10px;
+      font-size: 13px;
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 1px rgba(56,189,248,0.3);
+    }
+
+    .form-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .form-status {
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0,1fr);
+      }
+
+      .contact {
+        grid-template-columns: minmax(0,1fr);
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .header-contact {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-title">ZAMAHA</div>
+        <div class="brand-tagline">Tecnología que protege lo que más importa</div>
+      </div>
+      <div class="header-contact">
+        <div>Atención a empresas y hogares</div>
+        <div>Tel: <a href="tel:+50664305227">+506 6430-5227</a></div>
+        <div>Email: <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="pills">
+          <span class="pill">Cámaras</span>
+          <span class="pill">Redes</span>
+          <span class="pill">Cómputo</span>
+          <span class="pill">Desarrollo</span>
+        </div>
+
+        <h1 class="hero-title">
+          Soluciones técnicas <span>confiables</span><br />
+          para tu hogar y negocio
+        </h1>
+
+        <p class="hero-subtitle">
+          En Zamaha instalamos cámaras de seguridad CCTV, redes eléctricas y equipos de cómputo,
+          con mantenimientos preventivos y correctivos para que todo funcione siempre al 100%.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="tel:+50664305227">Llamar ahora</a>
+          <a class="btn btn-secondary" href="#contacto">Solicitar cotización</a>
+        </div>
+
+        <p class="hero-note">
+          Instalaciones limpias, ordenadas y seguras · <strong>Trabajo con garantía</strong>
+        </p>
+        <p class="hero-note-badge">
+          Sin letras pequeñas: sabrás desde el inicio qué incluye el trabajo y cuánto vas a pagar.
+        </p>
+      </div>
+
+      <aside class="services-card">
+        <h3>Servicios principales</h3>
+        <div class="services-grid">
+          <div class="service-item">
+            <h4>Cámaras CCTV</h4>
+            <p>Diseño de sistema, instalación, configuración remota y mantenimiento.</p>
+          </div>
+          <div class="service-item">
+            <h4>Redes eléctricas</h4>
+            <p>Canalización, tomacorrientes, tableros y puntos para equipos.</p>
+          </div>
+          <div class="service-item">
+            <h4>Equipos de cómputo</h4>
+            <p>Formateos, upgrades, reparación y limpieza profunda.</p>
+          </div>
+          <div class="service-item">
+            <h4>Mantenimiento total</h4>
+            <p>Preventivo y correctivo de todos los sistemas instalados.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Video -->
+    <section class="section" id="video">
+      <h2>Conoce a Zamaha en 40 segundos</h2>
+      <p>Mira este breve anuncio y descubre cómo podemos ayudarte con cámaras CCTV, redes eléctricas y equipos de cómputo.</p>
+      <div class="video-wrapper">
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/P_FKdC3Vhl0"
+            title="Anuncio Zamaha"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Cotización -->
+    <section class="contact" id="contacto">
+      <!-- Lado izquierdo: info y botón para fotos -->
+      <div class="contact-panel">
+        <h3>Datos de contacto</h3>
+        <p><strong>Teléfono:</strong> <a href="tel:+50664305227">+506 6430-5227</a></p>
+        <p><strong>Correo:</strong> <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></p>
+        <p><strong>Horario:</strong> Lunes a sábado · 9:00 a. m. – 5:00 p. m.</p>
+
+        <p style="margin-top:10px;">
+          Queremos darte una cotización clara desde el inicio. Para ayudarte mejor:
+        </p>
+        <ul>
+          <li>Indica si es casa, local comercial u otro tipo de propiedad.</li>
+          <li>Menciona la cantidad de cámaras o equipos aproximados.</li>
+          <li>Si ya tienes instalación previa, indica qué quieres mejorar.</li>
+        </ul>
+
+        <p style="margin-bottom:8px;">
+          Si quieres, puedes adjuntar fotos o un pequeño video de tu instalación actual.
+          Eso nos ayuda a orientarte mejor desde el inicio y a darte una cotización más precisa.
+        </p>
+
+        <a
+          class="btn btn-secondary"
+          href="mailto:zamaha-soluciones@outlook.es?subject=Fotos%20para%20cotizaci%C3%B3n%20-%20Zamaha&body=Hola%20Zamaha,%0D%0A%0D%0AAdjunto%20fotos%20o%20un%20video%20de%20mi%20instalaci%C3%B3n%20para%20que%20puedan%20orientarme%20mejor%20con%20la%20cotizaci%C3%B3n.%0D%0A%0D%0AGracias.">
+          Enviar fotos por correo
+        </a>
+
+        <p class="form-hint" style="margin-top:6px;">
+          El botón abrirá tu aplicación de correo para que puedas adjuntar las fotos o videos de tu instalación.
+        </p>
+      </div>
+
+      <!-- Lado derecho: formulario con FormSubmit -->
+      <div class="contact-panel">
+        <h3>Envíanos un mensaje rápido</h3>
+        <p class="form-hint">
+          Puedes dejar tu teléfono o correo, el medio que prefieras para que te contactemos de vuelta.
+        </p>
+
+        <form
+          action="https://formsubmit.co/zamaha-soluciones@outlook.es"
+          method="POST"
+          class="contact-form"
+        >
+          <!-- Configuración FormSubmit -->
+          <input type="hidden" name="_subject" value="Nueva cotización desde la web de Zamaha" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <!-- URL final de GitHub Pages -->
+          <input type="hidden" name="_next" value="https://elberlord.github.io/Zamaha-Soluciones/?enviado=1" />
+
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="Nombre del cliente" type="text" required />
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono (opcional si dejas correo)</label>
+            <input id="telefono" name="Teléfono" type="tel" />
+          </div>
+
+          <div class="form-group">
+            <label for="correo">Correo electrónico (opcional si dejas teléfono)</label>
+            <input id="correo" name="Correo electrónico" type="email" />
+          </div>
+
+          <div class="form-group">
+            <label for="servicio">¿Qué servicio te interesa? (puedes listar varios)</label>
+            <input
+              id="servicio"
+              name="Servicio(s) de interés"
+              type="text"
+              placeholder="Cámaras, redes, cómputo, desarrollo web, mantenimiento, etc."
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="preferencia">¿Qué prefieres?</label>
+            <select id="preferencia" name="Forma de contacto preferida">
+              <option value="Solo recibir una cotización por mensaje">
+                Solo recibir una cotización por mensaje
+              </option>
+              <option value="Recibir una llamada para detalles">
+                Recibir una llamada para detalles
+              </option>
+              <option value="Coordinar una visita técnica">
+                Coordinar una visita técnica
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="detalles">Detalles del proyecto</label>
+            <textarea
+              id="detalles"
+              name="Detalles del proyecto"
+              rows="4"
+              placeholder="Ej: casa de 2 plantas, local comercial, cantidad de equipos, etc."></textarea>
+          </div>
+
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+          </div>
+
+          <p id="form-status" class="form-status" style="display:none;">
+            Tu solicitud ha sido enviada. Puedes seguir cotizando si lo deseas.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Zamaha · Instalaciones técnicas y mantenimiento integral.
+    </footer>
+  </div>
+
+  <script>
+    // Año automático en el footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mostrar mensaje "enviado" cuando volvemos desde FormSubmit
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("enviado") === "1") {
+        const status = document.getElementById("form-status");
+        if (status) {
+          status.style.display = "block";
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
