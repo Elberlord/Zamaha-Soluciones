@@ -157,50 +157,6 @@
       color: var(--text-soft);
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 6px;
-      margin-bottom: 14px;
-    }
-
-    .btn {
-      padding: 11px 18px;
-      border-radius: var(--radius-pill);
-      border: none;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #020308;
-      box-shadow: var(--shadow-pill);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(0, 200, 83, 0.45);
-    }
-
-    .btn-secondary {
-      background: rgba(11, 20, 49, 0.95);
-      color: var(--text-soft);
-      border: 1px solid rgba(131, 146, 210, 0.6);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(21, 30, 69, 0.95);
-    }
-
     .hero-note {
       font-size: 12px;
       color: var(--text-muted);
@@ -249,6 +205,20 @@
     }
 
     /* DETALLE DE SERVICIOS */
+
+    .services-header {
+      margin-bottom: 14px;
+    }
+
+    .services-header h2 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .services-header p {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
 
     .services-detail {
       display: grid;
@@ -856,13 +826,9 @@
           </div>
           <h1>Soluciones técnicas <span>confiables</span> para tu hogar y negocio</h1>
           <p>
-            Instalamos cámaras de seguridad CCTV, redes eléctricas y equipos de cómputo,
+            Instalamos cámaras de seguridad CCTV, redes eléctricas y equipos de cómputo en Costa Rica,
             con mantenimientos preventivos y correctivos para que todo funcione siempre al 100%.
           </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#contacto">Solicitar cotización</a>
-            <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
-          </div>
           <div class="hero-note">
             Instalaciones limpias, ordenadas y seguras · Trabajo con garantía
           </div>
@@ -882,134 +848,141 @@
       </section>
 
       <!-- DETALLE DE SERVICIOS (PRIMERO) -->
-      <section class="services-detail" id="servicios">
-        <article class="service-card" id="servicio-cctv">
-          <h3>Cámaras CCTV</h3>
-          <div class="service-pill">Vigilancia 24/7</div>
-          <div class="service-tooltip">
-            <p>
-              Diseñamos e instalamos sistemas de cámaras adaptados a tu hogar, comercio u oficina,
-              con visualización remota desde el celular.
-            </p>
-            <ul class="service-list">
-              <li>Estudio del lugar y puntos críticos.</li>
-              <li>Instalación limpia de cableado y canaletas.</li>
-              <li>Configuración de grabador, monitoreo y acceso remoto.</li>
-            </ul>
-          </div>
+      <section id="servicios">
+        <div class="services-header">
+          <h2>Servicios Zamaha</h2>
+          <p>Disponibles para hogares y negocios dentro de Costa Rica.</p>
+        </div>
 
-          <div class="service-actions">
-            <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
-              Cotizar cámaras
-            </button>
-            <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
-              Añadir a cotización
-            </button>
-          </div>
-        </article>
+        <div class="services-detail">
+          <article class="service-card" id="servicio-cctv">
+            <h3>Cámaras CCTV</h3>
+            <div class="service-pill">Vigilancia 24/7</div>
+            <div class="service-tooltip">
+              <p>
+                Diseñamos e instalamos sistemas de cámaras adaptados a tu hogar, comercio u oficina,
+                con visualización remota desde el celular.
+              </p>
+              <ul class="service-list">
+                <li>Estudio del lugar y puntos críticos.</li>
+                <li>Instalación limpia de cableado y canaletas.</li>
+                <li>Configuración de grabador, monitoreo y acceso remoto.</li>
+              </ul>
+            </div>
 
-        <article class="service-card" id="servicio-redes">
-          <h3>Redes eléctricas</h3>
-          <div class="service-pill">Seguridad eléctrica</div>
-          <div class="service-tooltip">
-            <p>
-              Instalación de tomacorrientes, tableros, canalización y protecciones
-              para que tu instalación eléctrica sea segura y ordenada.
-            </p>
-            <ul class="service-list">
-              <li>Revisión del estado actual de la red.</li>
-              <li>Diagnóstico de posibles riesgos y sobrecargas.</li>
-              <li>Instalación o mejora de circuitos y protecciones.</li>
-            </ul>
-          </div>
+            <div class="service-actions">
+              <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
+                Cotizar cámaras
+              </button>
+              <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
+                Añadir a cotización
+              </button>
+            </div>
+          </article>
 
-          <div class="service-actions">
-            <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
-              Cotizar redes
-            </button>
-            <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
-              Añadir a cotización
-            </button>
-          </div>
-        </article>
+          <article class="service-card" id="servicio-redes">
+            <h3>Redes eléctricas</h3>
+            <div class="service-pill">Seguridad eléctrica</div>
+            <div class="service-tooltip">
+              <p>
+                Instalación de tomacorrientes, tableros, canalización y protecciones
+                para que tu instalación eléctrica sea segura y ordenada.
+              </p>
+              <ul class="service-list">
+                <li>Revisión del estado actual de la red.</li>
+                <li>Diagnóstico de posibles riesgos y sobrecargas.</li>
+                <li>Instalación o mejora de circuitos y protecciones.</li>
+              </ul>
+            </div>
 
-        <article class="service-card" id="servicio-computo">
-          <h3>Equipos de cómputo</h3>
-          <div class="service-pill">Equipos al 100%</div>
-          <div class="service-tooltip">
-            <p>
-              Formateos, upgrades de disco y memoria, limpieza interna y reparación básica
-              para que tus equipos trabajen más rápido y por más tiempo.
-            </p>
-            <ul class="service-list">
-              <li>Respaldo de información (si lo solicitas).</li>
-              <li>Limpieza de polvo, cambio de pasta térmica.</li>
-              <li>Instalación de software esencial y configuración básica.</li>
-            </ul>
-          </div>
+            <div class="service-actions">
+              <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
+                Cotizar redes
+              </button>
+              <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
+                Añadir a cotización
+              </button>
+            </div>
+          </article>
 
-          <div class="service-actions">
-            <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
-              Cotizar cómputo
-            </button>
-            <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
-              Añadir a cotización
-            </button>
-          </div>
-        </article>
+          <article class="service-card" id="servicio-computo">
+            <h3>Equipos de cómputo</h3>
+            <div class="service-pill">Equipos al 100%</div>
+            <div class="service-tooltip">
+              <p>
+                Formateos, upgrades de disco y memoria, limpieza interna y reparación básica
+                para que tus equipos trabajen más rápido y por más tiempo.
+              </p>
+              <ul class="service-list">
+                <li>Respaldo de información (si lo solicitas).</li>
+                <li>Limpieza de polvo, cambio de pasta térmica.</li>
+                <li>Instalación de software esencial y configuración básica.</li>
+              </ul>
+            </div>
 
-        <article class="service-card" id="servicio-desarrollo">
-          <h3>Desarrollo web</h3>
-          <div class="service-pill">Presencia digital</div>
-          <div class="service-tooltip">
-            <p>
-              Páginas web ligeras, claras y funcionales para presentar tus servicios, con enfoque en
-              la información importante sin recargar al usuario.
-            </p>
-            <ul class="service-list">
-              <li>Landing page o sitio básico para tu negocio.</li>
-              <li>Enlaces a WhatsApp, correo y redes sociales.</li>
-              <li>Textos optimizados para explicar tus servicios.</li>
-            </ul>
-          </div>
+            <div class="service-actions">
+              <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
+                Cotizar cómputo
+              </button>
+              <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
+                Añadir a cotización
+              </button>
+            </div>
+          </article>
 
-          <div class="service-actions">
-            <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
-              Cotizar desarrollo web
-            </button>
-            <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
-              Añadir a cotización
-            </button>
-          </div>
-        </article>
+          <article class="service-card" id="servicio-desarrollo">
+            <h3>Desarrollo web</h3>
+            <div class="service-pill">Presencia digital</div>
+            <div class="service-tooltip">
+              <p>
+                Páginas web ligeras, claras y funcionales para presentar tus servicios, con enfoque en
+                la información importante sin recargar al usuario.
+              </p>
+              <ul class="service-list">
+                <li>Landing page o sitio básico para tu negocio.</li>
+                <li>Enlaces a WhatsApp, correo y redes sociales.</li>
+                <li>Textos optimizados para explicar tus servicios.</li>
+              </ul>
+            </div>
 
-        <article class="service-card" id="servicio-mantenimiento">
-          <h3>Mantenimiento integral</h3>
-          <div class="service-pill">Todo bajo control</div>
-          <div class="service-tooltip">
-            <p>
-              Planes periódicos para revisar cámaras, red eléctrica y equipos de cómputo,
-              de modo que evites sorpresas y gastos imprevistos.
-            </p>
-            <ul class="service-list">
-              <li>Visitas programadas de revisión.</li>
-              <li>Limpieza, ajustes y pequeños correctivos.</li>
-              <li>Reporte de estado y recomendaciones.</li>
-            </ul>
-          </div>
+            <div class="service-actions">
+              <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
+                Cotizar desarrollo web
+              </button>
+              <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
+                Añadir a cotización
+              </button>
+            </div>
+          </article>
 
-          <div class="service-actions">
-            <button class="btn btn-primary btn-small js-cotizar" data-service="Mantenimiento integral">
-              Cotizar mantenimiento
-            </button>
-            <button class="btn btn-secondary btn-small js-agregar" data-service="Mantenimiento integral">
-              Añadir a cotización
-            </button>
-          </div>
-        </article>
+          <article class="service-card" id="servicio-mantenimiento">
+            <h3>Mantenimiento integral</h3>
+            <div class="service-pill">Todo bajo control</div>
+            <div class="service-tooltip">
+              <p>
+                Planes periódicos para revisar cámaras, red eléctrica y equipos de cómputo,
+                de modo que evites sorpresas y gastos imprevistos.
+              </p>
+              <ul class="service-list">
+                <li>Visitas programadas de revisión.</li>
+                <li>Limpieza, ajustes y pequeños correctivos.</li>
+                <li>Reporte de estado y recomendaciones.</li>
+              </ul>
+            </div>
+
+            <div class="service-actions">
+              <button class="btn btn-primary btn-small js-cotizar" data-service="Mantenimiento integral">
+                Cotizar mantenimiento
+              </button>
+              <button class="btn btn-secondary btn-small js-agregar" data-service="Mantenimiento integral">
+                Añadir a cotización
+              </button>
+            </div>
+          </article>
+        </div>
       </section>
 
-      <!-- CARRUSEL DE IMÁGENES (AHORA DEBAJO) -->
+      <!-- CARRUSEL DE IMÁGENES (DEBAJO) -->
       <section class="services-hex">
         <h2>Galería Zamaha</h2>
         <p>Desliza para ver ejemplos de nuestros trabajos y soluciones en cámaras, redes y cómputo.</p>
