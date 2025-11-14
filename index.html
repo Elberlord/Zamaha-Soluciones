@@ -248,104 +248,6 @@
       display: block;
     }
 
-    /* SERVICIOS / CARRUSEL */
-
-    .services-hex {
-      padding: 22px 22px 26px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, #050816, #07132a);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .services-hex h2 {
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
-
-    .services-hex p {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 16px;
-    }
-
-    .services-carousel {
-      position: relative;
-      margin-top: 8px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid var(--border-soft);
-      background: radial-gradient(circle at top, #07152e, #02040b 65%);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.45s ease;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      flex: 0 0 100%;
-    }
-
-    .carousel-slide img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-
-    .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      background: rgba(5, 10, 30, 0.75);
-      color: var(--text-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      box-shadow: var(--shadow-pill);
-    }
-
-    .carousel-arrow.prev {
-      left: 10px;
-    }
-
-    .carousel-arrow.next {
-      right: 10px;
-    }
-
-    .carousel-dots {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-    }
-
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      border: none;
-      background: rgba(255, 255, 255, 0.25);
-      cursor: pointer;
-      transition: background 0.15s ease, transform 0.15s ease;
-    }
-
-    .carousel-dot.active {
-      background: var(--accent-strong);
-      transform: scale(1.2);
-    }
-
     /* DETALLE DE SERVICIOS */
 
     .services-detail {
@@ -456,6 +358,105 @@
       margin-bottom: 3px;
     }
 
+    /* SERVICIOS / CARRUSEL */
+
+    .services-hex {
+      padding: 22px 22px 26px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #050816, #07132a);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .services-hex h2 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .services-hex p {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+
+    .services-carousel {
+      position: relative;
+      margin-top: 8px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: radial-gradient(circle at top, #07152e, #02040b 65%);
+      box-shadow: var(--shadow-soft);
+      max-height: 280px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      flex: 0 0 100%;
+    }
+
+    .carousel-slide img {
+      display: block;
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: rgba(5, 10, 30, 0.75);
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: var(--shadow-pill);
+    }
+
+    .carousel-arrow.prev {
+      left: 10px;
+    }
+
+    .carousel-arrow.next {
+      right: 10px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--accent-strong);
+      transform: scale(1.2);
+    }
+
     @media (max-width: 768px) {
       .service-tooltip {
         left: 50%;
@@ -472,6 +473,14 @@
         width: 28px;
         height: 28px;
         font-size: 16px;
+      }
+
+      .services-carousel {
+        max-height: 220px;
+      }
+
+      .carousel-slide img {
+        height: 220px;
       }
     }
 
@@ -872,57 +881,8 @@
         </section>
       </section>
 
-      <!-- SERVICIOS / CARRUSEL -->
-      <section class="services-hex" id="servicios">
-        <h2>Servicios Zamaha</h2>
-        <p>Desliza para ver ejemplos de nuestros trabajos y soluciones.</p>
-
-        <div class="services-carousel">
-          <button class="carousel-arrow prev" type="button" aria-label="Imagen anterior">‹</button>
-          <button class="carousel-arrow next" type="button" aria-label="Imagen siguiente">›</button>
-
-          <div class="carousel-track">
-            <div class="carousel-slide"><img src="zamaha-1.jpg" alt="Trabajo Zamaha 1" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-2.jpg" alt="Trabajo Zamaha 2" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-3.jpg" alt="Trabajo Zamaha 3" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-4.jpg" alt="Trabajo Zamaha 4" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-5.jpg" alt="Trabajo Zamaha 5" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-6.jpg" alt="Trabajo Zamaha 6" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-7.jpg" alt="Trabajo Zamaha 7" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-8.jpg" alt="Trabajo Zamaha 8" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-9.jpg" alt="Trabajo Zamaha 9" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-10.jpg" alt="Trabajo Zamaha 10" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-11.jpg" alt="Trabajo Zamaha 11" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-12.jpg" alt="Trabajo Zamaha 12" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-13.jpg" alt="Trabajo Zamaha 13" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-14.jpg" alt="Trabajo Zamaha 14" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-15.jpg" alt="Trabajo Zamaha 15" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-16.jpg" alt="Trabajo Zamaha 16" loading="lazy"></div>
-          </div>
-
-          <div class="carousel-dots">
-            <button class="carousel-dot active" type="button" data-index="0"></button>
-            <button class="carousel-dot" type="button" data-index="1"></button>
-            <button class="carousel-dot" type="button" data-index="2"></button>
-            <button class="carousel-dot" type="button" data-index="3"></button>
-            <button class="carousel-dot" type="button" data-index="4"></button>
-            <button class="carousel-dot" type="button" data-index="5"></button>
-            <button class="carousel-dot" type="button" data-index="6"></button>
-            <button class="carousel-dot" type="button" data-index="7"></button>
-            <button class="carousel-dot" type="button" data-index="8"></button>
-            <button class="carousel-dot" type="button" data-index="9"></button>
-            <button class="carousel-dot" type="button" data-index="10"></button>
-            <button class="carousel-dot" type="button" data-index="11"></button>
-            <button class="carousel-dot" type="button" data-index="12"></button>
-            <button class="carousel-dot" type="button" data-index="13"></button>
-            <button class="carousel-dot" type="button" data-index="14"></button>
-            <button class="carousel-dot" type="button" data-index="15"></button>
-          </div>
-        </div>
-      </section>
-
-      <!-- DETALLE DE SERVICIOS -->
-      <section class="services-detail">
+      <!-- DETALLE DE SERVICIOS (PRIMERO) -->
+      <section class="services-detail" id="servicios">
         <article class="service-card" id="servicio-cctv">
           <h3>Cámaras CCTV</h3>
           <div class="service-pill">Vigilancia 24/7</div>
@@ -1047,6 +1007,55 @@
             </button>
           </div>
         </article>
+      </section>
+
+      <!-- CARRUSEL DE IMÁGENES (AHORA DEBAJO) -->
+      <section class="services-hex">
+        <h2>Galería Zamaha</h2>
+        <p>Desliza para ver ejemplos de nuestros trabajos y soluciones en cámaras, redes y cómputo.</p>
+
+        <div class="services-carousel">
+          <button class="carousel-arrow prev" type="button" aria-label="Imagen anterior">‹</button>
+          <button class="carousel-arrow next" type="button" aria-label="Imagen siguiente">›</button>
+
+          <div class="carousel-track">
+            <div class="carousel-slide"><img src="zamaha-1.jpg" alt="Trabajo Zamaha 1" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-2.jpg" alt="Trabajo Zamaha 2" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-3.jpg" alt="Trabajo Zamaha 3" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-4.jpg" alt="Trabajo Zamaha 4" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-5.jpg" alt="Trabajo Zamaha 5" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-6.jpg" alt="Trabajo Zamaha 6" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-7.jpg" alt="Trabajo Zamaha 7" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-8.jpg" alt="Trabajo Zamaha 8" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-9.jpg" alt="Trabajo Zamaha 9" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-10.jpg" alt="Trabajo Zamaha 10" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-11.jpg" alt="Trabajo Zamaha 11" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-12.jpg" alt="Trabajo Zamaha 12" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-13.jpg" alt="Trabajo Zamaha 13" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-14.jpg" alt="Trabajo Zamaha 14" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-15.jpg" alt="Trabajo Zamaha 15" loading="lazy"></div>
+            <div class="carousel-slide"><img src="zamaha-16.jpg" alt="Trabajo Zamaha 16" loading="lazy"></div>
+          </div>
+
+          <div class="carousel-dots">
+            <button class="carousel-dot active" type="button" data-index="0"></button>
+            <button class="carousel-dot" type="button" data-index="1"></button>
+            <button class="carousel-dot" type="button" data-index="2"></button>
+            <button class="carousel-dot" type="button" data-index="3"></button>
+            <button class="carousel-dot" type="button" data-index="4"></button>
+            <button class="carousel-dot" type="button" data-index="5"></button>
+            <button class="carousel-dot" type="button" data-index="6"></button>
+            <button class="carousel-dot" type="button" data-index="7"></button>
+            <button class="carousel-dot" type="button" data-index="8"></button>
+            <button class="carousel-dot" type="button" data-index="9"></button>
+            <button class="carousel-dot" type="button" data-index="10"></button>
+            <button class="carousel-dot" type="button" data-index="11"></button>
+            <button class="carousel-dot" type="button" data-index="12"></button>
+            <button class="carousel-dot" type="button" data-index="13"></button>
+            <button class="carousel-dot" type="button" data-index="14"></button>
+            <button class="carousel-dot" type="button" data-index="15"></button>
+          </div>
+        </div>
       </section>
 
       <!-- CONTACTO -->
