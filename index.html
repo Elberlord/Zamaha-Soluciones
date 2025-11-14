@@ -66,7 +66,11 @@
       border: 1px solid rgba(255, 255, 255, 0.06);
       box-shadow: var(--shadow-soft);
       margin-bottom: 32px;
+      position: sticky;
+      top: 10px;
+      z-index: 1200;
     }
+
 
     .brand {
       display: flex;
@@ -575,7 +579,26 @@
       margin-top: 4px;
     }
 
-    .form-success {
+    
+    .schedule-grid {
+      display: none;
+      margin-top: 6px;
+      margin-bottom: 6px;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .schedule-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .schedule-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+.form-success {
       font-size: 12px;
       color: #b9f6ca;
       margin-top: 6px;
@@ -1030,7 +1053,42 @@
                 <option value="Agendar una visita técnica">
                   Agendar una visita técnica
                 </option>
+                <option value="Agendar una asesoría (virtual o presencial)">
+                  Agendar una asesoría (virtual o presencial)
+                </option>
               </select>
+            </div>
+
+            <!-- Campos de agenda (solo si elige agendar visita o asesoría) -->
+            <div id="scheduleFields" class="schedule-grid">
+              <div>
+                <label for="tipoAtencion">Tipo de atención para agendar</label>
+                <select id="tipoAtencion" name="Tipo de atención (agenda)">
+                  <option value="Visita técnica en sitio">Visita técnica en sitio</option>
+                  <option value="Asesoría virtual">Asesoría virtual</option>
+                  <option value="Asesoría presencial">Asesoría presencial</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="fecha">Fecha preferida</label>
+                <input type="date" id="fecha" name="Fecha preferida" />
+              </div>
+
+              <div>
+                <label for="hora">Hora preferida</label>
+                <input type="time" id="hora" name="Hora preferida" />
+              </div>
+
+              <div class="full">
+                <label for="ubicacion">Ubicación / dirección</label>
+                <textarea id="ubicacion" name="Ubicación o referencia de la zona"
+                  placeholder="Dirección exacta, barrio y punto de referencia. Para asesoría virtual, indica tu ciudad y país."></textarea>
+              </div>
+
+              <div class="full schedule-note">
+                * Para visitas y asesorías es necesario elegir <strong>fecha y hora</strong>. Solo se puede agendar con mínimo 3 días de anticipación. Te confirmaremos por mensaje o llamada si hay espacio disponible.
+              </div>
             </div>
 
             <div>
@@ -1174,7 +1232,56 @@
       });
     });
 
-    // Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
+    
+    // Lógica de agenda para visitas / asesorías (mínimo 3 días de anticipación)
+    const preferencia = document.getElementById('preferencia');
+    const scheduleFields = document.getElementById('scheduleFields');
+    const fechaInput = document.getElementById('fecha');
+    const horaInput = document.getElementById('hora');
+    const ubicacionInput = document.getElementById('ubicacion');
+
+    function setMinDate3DaysAhead() {
+      if (!fechaInput) return;
+      const today = new Date();
+      today.setDate(today.getDate() + 3);
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const minDate = `${yyyy}-${mm}-${dd}`;
+      fechaInput.min = minDate;
+    }
+
+    function isAgendaOption(value) {
+      return value === 'Agendar una visita técnica' ||
+             value === 'Agendar una asesoría (virtual o presencial)';
+    }
+
+    function toggleScheduleFields() {
+      if (!preferencia || !scheduleFields) return;
+      const seleccion = preferencia.value;
+      const show = isAgendaOption(seleccion);
+      scheduleFields.style.display = show ? 'grid' : 'none';
+
+      if (fechaInput && horaInput && ubicacionInput) {
+        fechaInput.required = show;
+        horaInput.required = show;
+        ubicacionInput.required = show;
+        if (show) {
+          setMinDate3DaysAhead();
+        }
+      }
+    }
+
+    if (preferencia) {
+      preferencia.addEventListener('change', toggleScheduleFields);
+      // Estado inicial
+      toggleScheduleFields();
+    }
+
+    // Ajustar fecha mínima al cargar la página
+    setMinDate3DaysAhead();
+
+// Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
