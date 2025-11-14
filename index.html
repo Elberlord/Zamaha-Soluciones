@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
   <title>Zamaha | CCTV, redes eléctricas y cómputo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Instalación y mantenimiento de cámaras CCTV, redes eléctricas y equipos de cómputo para hogares y negocios." />
+  <meta name="description" content="Instalación y mantenimiento de cámaras CCTV, redes eléctricas y equipos de cómputo para hogares y negocios en Costa Rica." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Favicon de la empresa -->
   <link rel="icon" href="zamaha-logo.png" type="image/png" />
-
-  <!-- Calendly embed -->
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
   <style>
     :root {
@@ -113,6 +108,77 @@
       gap: 40px;
     }
 
+    /* BOTONES NUEVOS */
+
+    .btn {
+      position: relative;
+      padding: 11px 22px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      background: transparent;
+      color: var(--text-main);
+      transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        box-shadow 0.16s ease,
+        transform 0.12s ease;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.24), transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .btn:hover::before {
+      opacity: 1;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #020308;
+      border-color: rgba(0, 230, 118, 0.8);
+      box-shadow: 0 14px 30px rgba(0, 200, 83, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 200, 83, 0.65);
+    }
+
+    .btn-secondary {
+      background: rgba(12, 18, 36, 0.96);
+      color: var(--text-soft);
+      border-color: rgba(129, 140, 196, 0.85);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(20, 28, 60, 0.98);
+      border-color: rgba(164, 173, 227, 1);
+      transform: translateY(-1px);
+    }
+
+    .btn-small {
+      font-size: 12px;
+      padding: 8px 14px;
+    }
+
     /* HERO */
 
     .hero {
@@ -204,20 +270,21 @@
       display: block;
     }
 
-    /* DETALLE DE SERVICIOS */
+    /* TITULO + SERVICIOS */
 
-    .services-header {
-      margin-bottom: 14px;
+    .services-wrapper {
+      margin-top: 10px;
     }
 
-    .services-header h2 {
+    .services-title {
       font-size: 20px;
       margin-bottom: 4px;
     }
 
-    .services-header p {
-      font-size: 13px;
+    .services-subtitle {
+      font-size: 12px;
       color: var(--text-soft);
+      margin-bottom: 14px;
     }
 
     .services-detail {
@@ -254,33 +321,11 @@
       margin-bottom: 10px;
     }
 
-    .service-card p {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .service-list {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-      padding-left: 18px;
-    }
-
-    .service-list li {
-      margin-bottom: 4px;
-    }
-
     .service-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 6px;
-    }
-
-    .btn-small {
-      font-size: 12px;
-      padding: 7px 12px;
     }
 
     /* TOOLTIP DE SERVICIOS */
@@ -328,105 +373,6 @@
       margin-bottom: 3px;
     }
 
-    /* SERVICIOS / CARRUSEL */
-
-    .services-hex {
-      padding: 22px 22px 26px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, #050816, #07132a);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .services-hex h2 {
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
-
-    .services-hex p {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 16px;
-    }
-
-    .services-carousel {
-      position: relative;
-      margin-top: 8px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid var(--border-soft);
-      background: radial-gradient(circle at top, #07152e, #02040b 65%);
-      box-shadow: var(--shadow-soft);
-      max-height: 280px;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.45s ease;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      flex: 0 0 100%;
-    }
-
-    .carousel-slide img {
-      display: block;
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-    }
-
-    .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      background: rgba(5, 10, 30, 0.75);
-      color: var(--text-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      box-shadow: var(--shadow-pill);
-    }
-
-    .carousel-arrow.prev {
-      left: 10px;
-    }
-
-    .carousel-arrow.next {
-      right: 10px;
-    }
-
-    .carousel-dots {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-    }
-
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      border: none;
-      background: rgba(255, 255, 255, 0.25);
-      cursor: pointer;
-      transition: background 0.15s ease, transform 0.15s ease;
-    }
-
-    .carousel-dot.active {
-      background: var(--accent-strong);
-      transform: scale(1.2);
-    }
-
     @media (max-width: 768px) {
       .service-tooltip {
         left: 50%;
@@ -438,19 +384,167 @@
       .service-card:hover .service-tooltip {
         transform: translate(-50%, 10px);
       }
+    }
 
-      .carousel-arrow {
-        width: 28px;
-        height: 28px;
-        font-size: 16px;
+    /* PASTILLAS DE SERVICIOS (FORMULARIO) */
+
+    .service-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .service-pill-btn {
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      background: rgba(9, 20, 48, 0.95);
+      border: 1px solid rgba(121, 134, 203, 0.7);
+      color: var(--text-soft);
+      font-size: 11px;
+      cursor: pointer;
+      transition:
+        background 0.14s ease,
+        border-color 0.14s ease,
+        color 0.14s ease,
+        transform 0.1s ease;
+    }
+
+    .service-pill-btn:hover:not(.active) {
+      background: rgba(16, 29, 71, 0.98);
+      border-color: rgba(158, 173, 225, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .service-pill-btn.active {
+      background: rgba(0, 200, 83, 0.18);
+      border-color: var(--accent-strong);
+      color: #e8f5e9;
+    }
+
+    /* CARRUSEL + HORA COSTA RICA */
+
+    .carousel-section {
+      margin-top: -10px;
+      padding: 18px 20px 22px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #050816, #07132a);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .carousel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .carousel-header h2 {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+
+    .carousel-header p {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .clock-box {
+      padding: 8px 12px;
+      border-radius: var(--radius-md);
+      background: rgba(4, 10, 30, 0.95);
+      border: 1px solid rgba(129, 140, 196, 0.6);
+      font-size: 11px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      min-width: 160px;
+    }
+
+    .clock-label {
+      color: var(--text-muted);
+    }
+
+    .clock-time {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .carousel-frame {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .carousel-window {
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      flex: 1;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .carousel-slide {
+      min-width: 260px;
+      max-width: 260px;
+      flex: 0 0 260px;
+      height: 160px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-right: 10px;
+      background: #000;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(129, 140, 196, 0.8);
+      background: rgba(7, 16, 39, 0.96);
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(16, 29, 71, 0.98);
+      border-color: rgba(164, 173, 227, 1);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 880px) {
+      .carousel-header {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .services-carousel {
-        max-height: 220px;
+      .clock-box {
+        align-items: flex-start;
       }
 
-      .carousel-slide img {
-        height: 220px;
+      .carousel-slide {
+        min-width: 220px;
+        max-width: 220px;
+        height: 140px;
       }
     }
 
@@ -481,16 +575,6 @@
     .contact-info a {
       color: var(--accent-strong);
       font-weight: 500;
-    }
-
-    #crClock {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    #crClock span {
-      color: var(--accent-strong);
-      font-weight: 600;
     }
 
     .attach-box {
@@ -565,37 +649,6 @@
       resize: vertical;
     }
 
-    .service-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
-      margin-bottom: 4px;
-    }
-
-    .service-pill-btn {
-      padding: 5px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(9, 20, 48, 0.95);
-      border: 1px solid rgba(121, 134, 203, 0.7);
-      color: var(--text-soft);
-      font-size: 11px;
-      cursor: pointer;
-      transition: background 0.12s ease, border 0.12s ease, color 0.12s ease;
-    }
-
-    .service-pill-btn.active {
-      background: rgba(0, 200, 83, 0.2);
-      border-color: var(--accent-strong);
-      color: #e8f5e9;
-    }
-
-    .form-footer-note {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
     .schedule-grid {
       display: none;
       margin-top: 6px;
@@ -614,16 +667,17 @@
       margin-top: 2px;
     }
 
-    /* Calendly wrapper */
-    .calendly-wrapper {
+    .calendly-container {
       display: none;
-      margin-top: 8px;
+      margin-top: 10px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: rgba(4, 10, 30, 0.96);
+      overflow: hidden;
     }
 
-    .calendly-note {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
+    .calendly-container.visible {
+      display: block;
     }
 
     .form-success {
@@ -725,7 +779,7 @@
       color: var(--text-muted);
     }
 
-    /* BOTÓN WHATSAPP - AHORA A LA IZQUIERDA */
+    /* BOTÓN WHATSAPP */
 
     .wa-button {
       position: fixed;
@@ -776,24 +830,30 @@
         flex-direction: column;
         align-items: flex-start;
       }
+
       .header-contact {
         text-align: left;
       }
+
       .hero {
         grid-template-columns: minmax(0, 1fr);
       }
+
       .contact-section {
         grid-template-columns: minmax(0, 1fr);
       }
+
       .bot-widget {
         right: 14px;
         bottom: 78px;
       }
+
       .wa-button {
         left: 12px;
         bottom: 16px;
         padding: 7px 14px;
       }
+
       .wa-text {
         font-size: 12px;
       }
@@ -808,7 +868,7 @@
         <div class="brand-tagline">Tecnología que protege lo que más importa</div>
       </div>
       <div class="header-contact">
-        <div>Atención a empresas y hogares</div>
+        <div>Atención a empresas y hogares (Costa Rica)</div>
         <div>Tel: <a href="tel:+50664305227">+506 6430-5227</a></div>
         <div>Email: <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></div>
       </div>
@@ -847,14 +907,14 @@
         </section>
       </section>
 
-      <!-- DETALLE DE SERVICIOS (PRIMERO) -->
-      <section id="servicios">
-        <div class="services-header">
-          <h2>Servicios Zamaha</h2>
-          <p>Disponibles para hogares y negocios dentro de Costa Rica.</p>
-        </div>
+      <!-- SERVICIOS -->
+      <section class="services-wrapper" id="servicios">
+        <h2 class="services-title">Servicios técnicos en Costa Rica</h2>
+        <p class="services-subtitle">
+          Atendemos hogares y negocios dentro de Costa Rica. Consulta disponibilidad para tu zona.
+        </p>
 
-        <div class="services-detail">
+        <section class="services-detail">
           <article class="service-card" id="servicio-cctv">
             <h3>Cámaras CCTV</h3>
             <div class="service-pill">Vigilancia 24/7</div>
@@ -979,55 +1039,45 @@
               </button>
             </div>
           </article>
-        </div>
+        </section>
       </section>
 
-      <!-- CARRUSEL DE IMÁGENES (DEBAJO) -->
-      <section class="services-hex">
-        <h2>Galería Zamaha</h2>
-        <p>Desliza para ver ejemplos de nuestros trabajos y soluciones en cámaras, redes y cómputo.</p>
-
-        <div class="services-carousel">
-          <button class="carousel-arrow prev" type="button" aria-label="Imagen anterior">‹</button>
-          <button class="carousel-arrow next" type="button" aria-label="Imagen siguiente">›</button>
-
-          <div class="carousel-track">
-            <div class="carousel-slide"><img src="zamaha-1.jpg" alt="Trabajo Zamaha 1" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-2.jpg" alt="Trabajo Zamaha 2" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-3.jpg" alt="Trabajo Zamaha 3" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-4.jpg" alt="Trabajo Zamaha 4" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-5.jpg" alt="Trabajo Zamaha 5" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-6.jpg" alt="Trabajo Zamaha 6" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-7.jpg" alt="Trabajo Zamaha 7" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-8.jpg" alt="Trabajo Zamaha 8" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-9.jpg" alt="Trabajo Zamaha 9" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-10.jpg" alt="Trabajo Zamaha 10" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-11.jpg" alt="Trabajo Zamaha 11" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-12.jpg" alt="Trabajo Zamaha 12" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-13.jpg" alt="Trabajo Zamaha 13" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-14.jpg" alt="Trabajo Zamaha 14" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-15.jpg" alt="Trabajo Zamaha 15" loading="lazy"></div>
-            <div class="carousel-slide"><img src="zamaha-16.jpg" alt="Trabajo Zamaha 16" loading="lazy"></div>
+      <!-- CARRUSEL + HORA COSTA RICA -->
+      <section class="carousel-section">
+        <div class="carousel-header">
+          <div>
+            <h2>Algunos trabajos recientes</h2>
+            <p>Imágenes ilustrativas de instalaciones y servicios Zamaha.</p>
           </div>
-
-          <div class="carousel-dots">
-            <button class="carousel-dot active" type="button" data-index="0"></button>
-            <button class="carousel-dot" type="button" data-index="1"></button>
-            <button class="carousel-dot" type="button" data-index="2"></button>
-            <button class="carousel-dot" type="button" data-index="3"></button>
-            <button class="carousel-dot" type="button" data-index="4"></button>
-            <button class="carousel-dot" type="button" data-index="5"></button>
-            <button class="carousel-dot" type="button" data-index="6"></button>
-            <button class="carousel-dot" type="button" data-index="7"></button>
-            <button class="carousel-dot" type="button" data-index="8"></button>
-            <button class="carousel-dot" type="button" data-index="9"></button>
-            <button class="carousel-dot" type="button" data-index="10"></button>
-            <button class="carousel-dot" type="button" data-index="11"></button>
-            <button class="carousel-dot" type="button" data-index="12"></button>
-            <button class="carousel-dot" type="button" data-index="13"></button>
-            <button class="carousel-dot" type="button" data-index="14"></button>
-            <button class="carousel-dot" type="button" data-index="15"></button>
+          <div class="clock-box">
+            <span class="clock-label">Hora actual en Costa Rica</span>
+            <span class="clock-time" id="crClock">--:--:--</span>
           </div>
+        </div>
+
+        <div class="carousel-frame">
+          <button class="carousel-arrow" id="carouselPrev" type="button" aria-label="Imagen anterior">‹</button>
+          <div class="carousel-window">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide"><img src="zamaha-1.jpg" alt="Trabajo Zamaha 1"></div>
+              <div class="carousel-slide"><img src="zamaha-2.jpg" alt="Trabajo Zamaha 2"></div>
+              <div class="carousel-slide"><img src="zamaha-3.jpg" alt="Trabajo Zamaha 3"></div>
+              <div class="carousel-slide"><img src="zamaha-4.jpg" alt="Trabajo Zamaha 4"></div>
+              <div class="carousel-slide"><img src="zamaha-5.jpg" alt="Trabajo Zamaha 5"></div>
+              <div class="carousel-slide"><img src="zamaha-6.jpg" alt="Trabajo Zamaha 6"></div>
+              <div class="carousel-slide"><img src="zamaha-7.jpg" alt="Trabajo Zamaha 7"></div>
+              <div class="carousel-slide"><img src="zamaha-8.jpg" alt="Trabajo Zamaha 8"></div>
+              <div class="carousel-slide"><img src="zamaha-9.jpg" alt="Trabajo Zamaha 9"></div>
+              <div class="carousel-slide"><img src="zamaha-10.jpg" alt="Trabajo Zamaha 10"></div>
+              <div class="carousel-slide"><img src="zamaha-11.jpg" alt="Trabajo Zamaha 11"></div>
+              <div class="carousel-slide"><img src="zamaha-12.jpg" alt="Trabajo Zamaha 12"></div>
+              <div class="carousel-slide"><img src="zamaha-13.jpg" alt="Trabajo Zamaha 13"></div>
+              <div class="carousel-slide"><img src="zamaha-14.jpg" alt="Trabajo Zamaha 14"></div>
+              <div class="carousel-slide"><img src="zamaha-15.jpg" alt="Trabajo Zamaha 15"></div>
+              <div class="carousel-slide"><img src="zamaha-16.jpg" alt="Trabajo Zamaha 16"></div>
+            </div>
+          </div>
+          <button class="carousel-arrow" id="carouselNext" type="button" aria-label="Imagen siguiente">›</button>
         </div>
       </section>
 
@@ -1037,8 +1087,7 @@
           <h2>Contacto directo</h2>
           <p><strong>Teléfono:</strong> <a href="tel:+50664305227">+506 6430-5227</a></p>
           <p><strong>Correo:</strong> <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></p>
-          <p><strong>Horario:</strong> Lunes a sábado · 9:00 a.m. – 5:00 p.m.</p>
-          <p id="crClock"><strong>Hora actual en Costa Rica:</strong> <span>--:--</span></p>
+          <p><strong>Horario:</strong> Lunes a sábado · 9:00 a.m. – 5:00 p.m. (hora de Costa Rica)</p>
 
           <div class="attach-box">
             Si quieres, puedes adjuntar fotos o un pequeño video de tu instalación actual.
@@ -1144,15 +1193,12 @@
               </div>
             </div>
 
-            <!-- Calendly embed (solo se muestra cuando se agenda) -->
-            <div id="calendlyContainer" class="calendly-wrapper">
-              <div class="calendly-note">
-                Puedes confirmar tu cita directamente en este calendario. Solo se mostrarán horarios realmente disponibles según tu agenda.
-              </div>
+            <!-- Calendly (se muestra solo al elegir agendar) -->
+            <div id="calendlyContainer" class="calendly-container">
               <div
                 class="calendly-inline-widget"
-                data-url="https://calendly.com/zamaha-soluciones/asesoria-visita-tecnica-zamaha"
-                style="min-width: 320px; height: 580px;">
+                data-url="https://calendly.com/zamaha-soluciones/asesoria-visita-tecnica-zamaha?hide_event_type_details=1&hide_gdpr_banner=1"
+                style="min-width:280px;height:600px;">
               </div>
             </div>
 
@@ -1175,7 +1221,7 @@
     </main>
 
     <footer>
-      © <span id="year"></span> Zamaha · Tecnología que protege lo que más importa.
+      © <span id="year"></span> Zamaha · Servicios técnicos en Costa Rica.
     </footer>
   </div>
 
@@ -1194,11 +1240,11 @@
         <li><a href="mailto:zamaha-soluciones@outlook.es?subject=Consulta%20general%20-%20Zamaha">Enviar un correo</a></li>
         <li><a href="#servicios">Ver todos los servicios</a></li>
       </ul>
-      <p class="bot-note">Responderemos lo antes posible dentro del horario: 9:00 a.m. – 5:00 p.m.</p>
+      <p class="bot-note">Responderemos lo antes posible dentro del horario: 9:00 a.m. – 5:00 p.m. (hora de Costa Rica).</p>
     </div>
   </div>
 
-  <!-- BOTÓN WHATSAPP (izquierda, mensaje personalizado) -->
+  <!-- BOTÓN WHATSAPP -->
   <a href="https://wa.me/50664305227?text=Hola%20Zamaha,%20vi%20su%20p%C3%A1gina%20web%20y%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n%20para%20mis%20servicios."
      class="wa-button"
      target="_blank"
@@ -1208,104 +1254,23 @@
     <span class="wa-text">WhatsApp</span>
   </a>
 
+  <!-- Script Calendly -->
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
   <script>
     // Año en el footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Reloj hora Costa Rica
-    function updateCostaRicaTime() {
-      const clock = document.getElementById('crClock');
-      if (!clock) return;
-      const now = new Date();
-      const timeFormatter = new Intl.DateTimeFormat('es-CR', {
-        timeZone: 'America/Costa_Rica',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      });
-      const dateFormatter = new Intl.DateTimeFormat('es-CR', {
-        timeZone: 'America/Costa_Rica',
-        weekday: 'short',
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      });
-      const span = clock.querySelector('span');
-      if (span) {
-        span.textContent = dateFormatter.format(now) + ' · ' + timeFormatter.format(now);
-      }
-    }
-    updateCostaRicaTime();
-    setInterval(updateCostaRicaTime, 1000);
-
-    // Carrusel de imágenes
-    const carouselTrack = document.querySelector('.carousel-track');
-    const carouselSlides = document.querySelectorAll('.carousel-slide');
-    const prevArrow = document.querySelector('.carousel-arrow.prev');
-    const nextArrow = document.querySelector('.carousel-arrow.next');
-    const carouselDots = document.querySelectorAll('.carousel-dot');
-    let carouselIndex = 0;
-    let carouselTimer = null;
-
-    function goToSlide(index) {
-      if (!carouselTrack || !carouselSlides.length) return;
-      const total = carouselSlides.length;
-      if (index < 0) index = total - 1;
-      if (index >= total) index = 0;
-      carouselIndex = index;
-      carouselTrack.style.transform = 'translateX(' + (-carouselIndex * 100) + '%)';
-      carouselDots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === carouselIndex);
-      });
-    }
-
-    function startCarouselAutoPlay() {
-      if (carouselTimer || !carouselSlides.length) return;
-      carouselTimer = setInterval(() => {
-        goToSlide(carouselIndex + 1);
-      }, 7000);
-    }
-
-    function resetCarouselAutoPlay() {
-      if (carouselTimer) {
-        clearInterval(carouselTimer);
-        carouselTimer = null;
-      }
-      startCarouselAutoPlay();
-    }
-
-    if (prevArrow && nextArrow && carouselSlides.length) {
-      prevArrow.addEventListener('click', () => {
-        goToSlide(carouselIndex - 1);
-        resetCarouselAutoPlay();
-      });
-      nextArrow.addEventListener('click', () => {
-        goToSlide(carouselIndex + 1);
-        resetCarouselAutoPlay();
-      });
-      carouselDots.forEach(dot => {
-        dot.addEventListener('click', () => {
-          const idx = parseInt(dot.dataset.index, 10);
-          goToSlide(idx);
-          resetCarouselAutoPlay();
-        });
-      });
-      goToSlide(0);
-      startCarouselAutoPlay();
-    }
-
-    // Tooltip de servicios (detalle en hover / toque prolongado)
+    // Tooltip de servicios (detalle en hover / toque en móvil)
     const serviceCards = document.querySelectorAll('.service-card');
 
     serviceCards.forEach(card => {
       card.addEventListener('click', (e) => {
-        // No interferir con botones de acción
         if (e.target.closest('.service-actions')) return;
 
         const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
         if (!isSmallScreen) return;
 
-        // Cerrar otros tooltips
         serviceCards.forEach(c => {
           if (c !== card) c.classList.remove('show-info');
         });
@@ -1313,7 +1278,6 @@
       });
     });
 
-    // Cerrar tooltip en móvil al hacer scroll
     window.addEventListener('scroll', () => {
       const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
       if (!isSmallScreen) return;
@@ -1333,7 +1297,6 @@
       servicesField.value = selected.join(', ');
     }
 
-    // Pastillas clicables
     servicePills.forEach(pill => {
       pill.addEventListener('click', () => {
         pill.classList.toggle('active');
@@ -1341,7 +1304,6 @@
       });
     });
 
-    // "Cotizar ..." = activa servicio y baja al formulario
     serviceButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
@@ -1355,7 +1317,6 @@
       });
     });
 
-    // "Añadir a cotización" = solo activa servicio, sin scroll
     addButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
@@ -1368,7 +1329,7 @@
       });
     });
 
-    // Lógica de agenda para visitas / asesorías (mínimo 3 días de anticipación)
+    // Lógica de agenda + Calendly
     const preferencia = document.getElementById('preferencia');
     const scheduleFields = document.getElementById('scheduleFields');
     const fechaInput = document.getElementById('fecha');
@@ -1396,41 +1357,30 @@
       if (!preferencia || !scheduleFields) return;
       const seleccion = preferencia.value;
       const show = isAgendaOption(seleccion);
-
-      // mostrar / ocultar campos de agenda
       scheduleFields.style.display = show ? 'grid' : 'none';
 
-      // mostrar / ocultar Calendly
-      if (calendlyContainer) {
-        calendlyContainer.style.display = show ? 'block' : 'none';
-      }
-
-      // marcar campos como obligatorios solo cuando se agenda
       if (fechaInput && horaInput && ubicacionInput) {
         fechaInput.required = show;
         horaInput.required = show;
         ubicacionInput.required = show;
         if (show) {
           setMinDate3DaysAhead();
-        } else {
-          // limpiar valores si se deja de agendar
-          fechaInput.value = '';
-          horaInput.value = '';
-          ubicacionInput.value = '';
         }
+      }
+
+      if (calendlyContainer) {
+        calendlyContainer.classList.toggle('visible', show);
       }
     }
 
     if (preferencia) {
       preferencia.addEventListener('change', toggleScheduleFields);
-      // Estado inicial
       toggleScheduleFields();
     }
 
-    // Ajustar fecha mínima al cargar la página
     setMinDate3DaysAhead();
 
-    // Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
+    // Mensaje de éxito si venimos de FormSubmit con ?success=1
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
@@ -1449,6 +1399,54 @@
       botToggle.addEventListener('click', () => {
         botWidget.classList.toggle('open');
       });
+    }
+
+    // Reloj hora Costa Rica
+    const crClockEl = document.getElementById('crClock');
+    function updateCrClock() {
+      if (!crClockEl) return;
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('es-CR', {
+        timeZone: 'America/Costa_Rica',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      crClockEl.textContent = timeString;
+    }
+    updateCrClock();
+    setInterval(updateCrClock, 1000);
+
+    // Carrusel simple
+    const track = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+
+    if (track && prevBtn && nextBtn) {
+      const slides = Array.from(track.children);
+      let currentIndex = 0;
+      const gap = 10;
+
+      function updateCarousel() {
+        if (!slides.length) return;
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transform = `translateX(${-currentIndex * (slideWidth + gap)}px)`;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        if (!slides.length) return;
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateCarousel();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (!slides.length) return;
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateCarousel();
+      });
+
+      window.addEventListener('resize', updateCarousel);
+      updateCarousel();
     }
   </script>
 </body>
