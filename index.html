@@ -76,7 +76,6 @@
       letter-spacing: 0.18em;
       font-weight: 800;
       text-transform: uppercase;
-      /* blanco con contorno rojo */
       color: #ffffff;
       -webkit-text-stroke: 2px var(--brand-red);
       text-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
@@ -229,7 +228,6 @@
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: #000;
-      /* 16:9 más pequeño, no pantalla gigante */
       aspect-ratio: 16 / 9;
     }
 
@@ -603,6 +601,50 @@
       color: var(--text-muted);
     }
 
+    /* BOTÓN WHATSAPP */
+
+    .wa-button {
+      position: fixed;
+      right: 18px;
+      bottom: 20px;
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: #25d366;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-pill);
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .wa-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+      background: #1ebe5b;
+    }
+
+    .wa-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .wa-text {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
     /* RESPONSIVE */
 
     @media (max-width: 880px) {
@@ -620,8 +662,16 @@
         grid-template-columns: minmax(0, 1fr);
       }
       .bot-widget {
-        right: 16px;
-        bottom: 80px;
+        right: 14px;
+        bottom: 78px;
+      }
+      .wa-button {
+        right: 12px;
+        bottom: 16px;
+        padding: 7px 14px;
+      }
+      .wa-text {
+        font-size: 12px;
       }
     }
   </style>
@@ -723,6 +773,9 @@
             <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
               Cotizar cámaras
             </button>
+            <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
+              Añadir a cotización
+            </button>
             <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
         </article>
@@ -742,6 +795,9 @@
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
               Cotizar redes
+            </button>
+            <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
+              Añadir a cotización
             </button>
             <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
@@ -763,6 +819,9 @@
             <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
               Cotizar cómputo
             </button>
+            <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
+              Añadir a cotización
+            </button>
             <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
         </article>
@@ -783,6 +842,9 @@
             <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
               Cotizar desarrollo web
             </button>
+            <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
+              Añadir a cotización
+            </button>
             <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
         </article>
@@ -802,6 +864,9 @@
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Mantenimiento integral">
               Cotizar mantenimiento
+            </button>
+            <button class="btn btn-secondary btn-small js-agregar" data-service="Mantenimiento integral">
+              Añadir a cotización
             </button>
             <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
@@ -927,6 +992,16 @@
     </div>
   </div>
 
+  <!-- BOTÓN WHATSAPP (mensaje personalizado) -->
+  <a href="https://wa.me/50664305227?text=Hola%20Zamaha,%20vi%20su%20p%C3%A1gina%20web%20y%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n%20para%20mis%20servicios."
+     class="wa-button"
+     target="_blank"
+     rel="noopener"
+     aria-label="Escríbenos por WhatsApp">
+    <span class="wa-icon">WA</span>
+    <span class="wa-text">WhatsApp</span>
+  </a>
+
   <script>
     // Año en el footer
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -941,8 +1016,9 @@
       });
     });
 
-    // Botones "Cotizar ..." que preseleccionan el servicio
+    // Botones "Cotizar ..." y "Añadir a cotización"
     const serviceButtons = document.querySelectorAll('.js-cotizar');
+    const addButtons = document.querySelectorAll('.js-agregar');
     const servicePills = document.querySelectorAll('.service-pill-btn');
     const servicesField = document.getElementById('servicesField');
 
@@ -953,6 +1029,7 @@
       servicesField.value = selected.join(', ');
     }
 
+    // Pastillas clicables
     servicePills.forEach(pill => {
       pill.addEventListener('click', () => {
         pill.classList.toggle('active');
@@ -960,18 +1037,30 @@
       });
     });
 
+    // "Cotizar ..." = activa servicio y baja al formulario
     serviceButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
-        // activar la pastilla correspondiente
         servicePills.forEach(pill => {
           if (pill.dataset.service === service) {
             pill.classList.add('active');
           }
         });
         updateServicesField();
-        // bajar al formulario
         document.getElementById('contacto').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // "Añadir a cotización" = solo activa servicio, sin scroll
+    addButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const service = btn.dataset.service;
+        servicePills.forEach(pill => {
+          if (pill.dataset.service === service) {
+            pill.classList.add('active');
+          }
+        });
+        updateServicesField();
       });
     });
 
