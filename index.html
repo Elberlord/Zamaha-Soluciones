@@ -9,11 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Favicon de la empresa -->
-    <link rel="icon" href="zamaha-logo.png" type="image/png" />
-
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-
+  <link rel="icon" href="zamaha-logo.png" type="image/png" />
 
   <style>
     :root {
@@ -60,9 +56,6 @@
     }
 
     header {
-      position: sticky;
-      top: 10px;
-      z-index: 40;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -73,7 +66,11 @@
       border: 1px solid rgba(255, 255, 255, 0.06);
       box-shadow: var(--shadow-soft);
       margin-bottom: 32px;
+      position: sticky;
+      top: 10px;
+      z-index: 1200;
     }
+
 
     .brand {
       display: flex;
@@ -338,31 +335,6 @@
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
     }
-    .service-card.compact {
-      cursor: pointer;
-    }
-
-    .service-card.compact p,
-    .service-card.compact .service-list {
-      display: none;
-    }
-
-    .service-card.compact.show-detail p,
-    .service-card.compact.show-detail .service-list {
-      display: block;
-    }
-
-    @media (hover:hover) {
-      .service-card.compact:hover p,
-      .service-card.compact:hover .service-list {
-        display: block;
-      }
-
-      .service-card.compact:hover {
-        box-shadow: var(--shadow-pill);
-      }
-    }
-
 
     .service-card h3 {
       font-size: 16px;
@@ -411,6 +383,70 @@
       padding: 7px 12px;
     }
 
+
+    /* TOOLTIP DE SERVICIOS */
+
+    .service-card {
+      position: relative;
+      overflow: visible;
+    }
+
+    .service-tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: 100%;
+      transform: translate(-50%, -10px);
+      background: #050816;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      padding: 12px 14px;
+      width: min(280px, 90vw);
+      box-shadow: var(--shadow-soft);
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+      z-index: 20;
+    }
+
+    .service-card:hover .service-tooltip,
+    .service-card.show-info .service-tooltip {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate(-50%, -16px);
+    }
+
+    .service-tooltip p {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .service-tooltip .service-list {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+      padding-left: 18px;
+    }
+
+    .service-tooltip .service-list li {
+      margin-bottom: 3px;
+    }
+
+    @media (max-width: 768px) {
+      .service-tooltip {
+        left: 50%;
+        bottom: auto;
+        top: 100%;
+        transform: translate(-50%, 10px);
+      }
+
+      .service-card:hover .service-tooltip {
+        /* En móvil dependeremos de la clase .show-info, no del hover */
+        transform: translate(-50%, 10px);
+      }
+    }
     /* CONTACTO */
 
     .contact-section {
@@ -542,12 +578,14 @@
       color: var(--text-muted);
       margin-top: 4px;
     }
+
+    
     .schedule-grid {
       display: none;
       margin-top: 6px;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       gap: 10px;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
 
     .schedule-grid .full {
@@ -557,37 +595,10 @@
     .schedule-note {
       font-size: 11px;
       color: var(--text-muted);
+      margin-top: 2px;
     }
 
-    .calendly-wrapper {
-      display: none;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding: 10px 12px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(129, 140, 196, 0.6);
-      background: rgba(5, 8, 22, 0.85);
-    }
-
-    .calendly-note {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-
-    .calendly-inline-widget {
-      width: 100%;
-      min-height: 520px;
-    }
-
-    @media (max-width: 600px) {
-      .calendly-inline-widget {
-        min-height: 600px;
-      }
-    }
-
-
-    .form-success {
+.form-success {
       font-size: 12px;
       color: #b9f6ca;
       margin-top: 6px;
@@ -842,10 +853,11 @@
 
       <!-- DETALLE DE SERVICIOS -->
       <section class="services-detail">
-        <article class="service-card compact" id="servicio-cctv">
+        <article class="service-card" id="servicio-cctv">
           <h3>Cámaras CCTV</h3>
           <div class="service-pill">Vigilancia 24/7</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Diseñamos e instalamos sistemas de cámaras adaptados a tu hogar, comercio u oficina,
             con visualización remota desde el celular.
           </p>
@@ -854,6 +866,8 @@
             <li>Instalación limpia de cableado y canaletas.</li>
             <li>Configuración de grabador, monitoreo y acceso remoto.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
               Cotizar cámaras
@@ -861,14 +875,14 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
               Añadir a cotización
             </button>
-            
           </div>
         </article>
 
-        <article class="service-card compact" id="servicio-redes">
+        <article class="service-card" id="servicio-redes">
           <h3>Redes eléctricas</h3>
           <div class="service-pill">Seguridad eléctrica</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Instalación de tomacorrientes, tableros, canalización y protecciones
             para que tu instalación eléctrica sea segura y ordenada.
           </p>
@@ -877,6 +891,8 @@
             <li>Diagnóstico de posibles riesgos y sobrecargas.</li>
             <li>Instalación o mejora de circuitos y protecciones.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
               Cotizar redes
@@ -884,14 +900,14 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
               Añadir a cotización
             </button>
-            
           </div>
         </article>
 
-        <article class="service-card compact" id="servicio-computo">
+        <article class="service-card" id="servicio-computo">
           <h3>Equipos de cómputo</h3>
           <div class="service-pill">Equipos al 100%</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Formateos, upgrades de disco y memoria, limpieza interna y reparación básica
             para que tus equipos trabajen más rápido y por más tiempo.
           </p>
@@ -900,6 +916,8 @@
             <li>Limpieza de polvo, cambio de pasta térmica.</li>
             <li>Instalación de software esencial y configuración básica.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
               Cotizar cómputo
@@ -907,14 +925,14 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
               Añadir a cotización
             </button>
-            
           </div>
         </article>
 
-        <article class="service-card compact" id="servicio-desarrollo">
+        <article class="service-card" id="servicio-desarrollo">
           <h3>Desarrollo web</h3>
           <div class="service-pill">Presencia digital</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Páginas web ligeras, claras y funcionales para presentar tus servicios, con enfoque en
             la información importante sin recargar al usuario.
           </p>
@@ -923,6 +941,8 @@
             <li>Enlaces a WhatsApp, correo y redes sociales.</li>
             <li>Textos optimizados para explicar tus servicios.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
               Cotizar desarrollo web
@@ -930,14 +950,14 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
               Añadir a cotización
             </button>
-            
           </div>
         </article>
 
-        <article class="service-card compact" id="servicio-mantenimiento">
+        <article class="service-card" id="servicio-mantenimiento">
           <h3>Mantenimiento integral</h3>
           <div class="service-pill">Todo bajo control</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Planes periódicos para revisar cámaras, red eléctrica y equipos de cómputo,
             de modo que evites sorpresas y gastos imprevistos.
           </p>
@@ -946,6 +966,8 @@
             <li>Limpieza, ajustes y pequeños correctivos.</li>
             <li>Reporte de estado y recomendaciones.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Mantenimiento integral">
               Cotizar mantenimiento
@@ -953,7 +975,6 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Mantenimiento integral">
               Añadir a cotización
             </button>
-            
           </div>
         </article>
       </section>
@@ -1038,44 +1059,36 @@
               </select>
             </div>
 
+            <!-- Campos de agenda (solo si elige agendar visita o asesoría) -->
             <div id="scheduleFields" class="schedule-grid">
               <div>
                 <label for="tipoAtencion">Tipo de atención para agendar</label>
                 <select id="tipoAtencion" name="Tipo de atención (agenda)">
-                  <option value="Visita técnica en sitio" selected>Visita técnica en sitio</option>
+                  <option value="Visita técnica en sitio">Visita técnica en sitio</option>
                   <option value="Asesoría virtual">Asesoría virtual</option>
                   <option value="Asesoría presencial">Asesoría presencial</option>
                 </select>
               </div>
 
               <div>
-                <label for="fechaAgenda">Fecha preferida</label>
-                <input type="date" id="fechaAgenda" name="Fecha preferida" />
+                <label for="fecha">Fecha preferida</label>
+                <input type="date" id="fecha" name="Fecha preferida" />
               </div>
 
               <div>
-                <label for="horaAgenda">Hora preferida</label>
-                <input type="time" id="horaAgenda" name="Hora preferida" />
+                <label for="hora">Hora preferida</label>
+                <input type="time" id="hora" name="Hora preferida" />
               </div>
 
               <div class="full">
-                <label for="ubicacionAgenda">Ubicación / dirección</label>
-                <textarea id="ubicacionAgenda" name="Ubicación o referencia de la zona"
-                  placeholder="Ej: dirección exacta, barrio, punto de referencia. Para asesoría virtual, indica tu ciudad y país."></textarea>
+                <label for="ubicacion">Ubicación / dirección</label>
+                <textarea id="ubicacion" name="Ubicación o referencia de la zona"
+                  placeholder="Dirección exacta, barrio y punto de referencia. Para asesoría virtual, indica tu ciudad y país."></textarea>
               </div>
 
               <div class="full schedule-note">
-                * La fecha y hora quedan como <strong>horario preferido</strong>. Confirmaremos por mensaje o llamada según disponibilidad real.
+                * Para visitas y asesorías es necesario elegir <strong>fecha y hora</strong>. Solo se puede agendar con mínimo 3 días de anticipación. Te confirmaremos por mensaje o llamada si hay espacio disponible.
               </div>
-            </div>
-
-            <div id="calendlyContainer" class="calendly-wrapper">
-              <div class="calendly-note">
-                Puedes confirmar tu cita directamente en este calendario. Solo se muestran horarios realmente disponibles.
-              </div>
-              <div class="calendly-inline-widget"
-                   data-url="https://calendly.com/zamaha-soluciones/asesoria-visita-tecnica-zamaha"
-                   style="min-width: 320px; height: 580px;"></div>
             </div>
 
             <div>
@@ -1144,7 +1157,34 @@
       });
     });
 
-    // Botones "Cotizar ..." y "Añadir a cotización"
+    
+    // Tooltip de servicios (detalle en hover / toque prolongado)
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    serviceCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // No interferir con botones de acción
+        if (e.target.closest('.service-actions')) return;
+
+        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+        if (!isSmallScreen) return;
+
+        // Cerrar otros tooltips
+        serviceCards.forEach(c => {
+          if (c !== card) c.classList.remove('show-info');
+        });
+        card.classList.toggle('show-info');
+      });
+    });
+
+    // Cerrar tooltip en móvil al hacer scroll
+    window.addEventListener('scroll', () => {
+      const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+      if (!isSmallScreen) return;
+      serviceCards.forEach(c => c.classList.remove('show-info'));
+    });
+
+// Botones "Cotizar ..." y "Añadir a cotización"
     const serviceButtons = document.querySelectorAll('.js-cotizar');
     const addButtons = document.querySelectorAll('.js-agregar');
     const servicePills = document.querySelectorAll('.service-pill-btn');
@@ -1192,7 +1232,56 @@
       });
     });
 
-    // Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
+    
+    // Lógica de agenda para visitas / asesorías (mínimo 3 días de anticipación)
+    const preferencia = document.getElementById('preferencia');
+    const scheduleFields = document.getElementById('scheduleFields');
+    const fechaInput = document.getElementById('fecha');
+    const horaInput = document.getElementById('hora');
+    const ubicacionInput = document.getElementById('ubicacion');
+
+    function setMinDate3DaysAhead() {
+      if (!fechaInput) return;
+      const today = new Date();
+      today.setDate(today.getDate() + 3);
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const minDate = `${yyyy}-${mm}-${dd}`;
+      fechaInput.min = minDate;
+    }
+
+    function isAgendaOption(value) {
+      return value === 'Agendar una visita técnica' ||
+             value === 'Agendar una asesoría (virtual o presencial)';
+    }
+
+    function toggleScheduleFields() {
+      if (!preferencia || !scheduleFields) return;
+      const seleccion = preferencia.value;
+      const show = isAgendaOption(seleccion);
+      scheduleFields.style.display = show ? 'grid' : 'none';
+
+      if (fechaInput && horaInput && ubicacionInput) {
+        fechaInput.required = show;
+        horaInput.required = show;
+        ubicacionInput.required = show;
+        if (show) {
+          setMinDate3DaysAhead();
+        }
+      }
+    }
+
+    if (preferencia) {
+      preferencia.addEventListener('change', toggleScheduleFields);
+      // Estado inicial
+      toggleScheduleFields();
+    }
+
+    // Ajustar fecha mínima al cargar la página
+    setMinDate3DaysAhead();
+
+// Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
@@ -1202,71 +1291,6 @@
       const msg = document.getElementById('formSuccess');
       if (msg) msg.style.opacity = 1;
     }
-
-    
-    // Agenda: mostrar campos y Calendly según preferencia
-    const preferencia = document.getElementById('preferencia');
-    const scheduleFields = document.getElementById('scheduleFields');
-    const calendlyContainer = document.getElementById('calendlyContainer');
-    const fechaAgenda = document.getElementById('fechaAgenda');
-
-    function setMinAgendaDate() {
-      if (!fechaAgenda) return;
-      const d = new Date();
-      d.setDate(d.getDate() + 3);
-      const yyyy = d.getFullYear();
-      const mm = String(d.getMonth() + 1).padStart(2, '0');
-      const dd = String(d.getDate()).padStart(2, '0');
-      const min = `${yyyy}-${mm}-${dd}`;
-      fechaAgenda.min = min;
-    }
-
-    function toggleScheduleFields() {
-      if (!preferencia || !scheduleFields || !calendlyContainer) return;
-      const v = preferencia.value;
-      const requiresAgenda =
-        v === 'Agendar una visita técnica' ||
-        v === 'Agendar una asesoría (virtual o presencial)';
-
-      scheduleFields.style.display = requiresAgenda ? 'grid' : 'none';
-      calendlyContainer.style.display = requiresAgenda ? 'block' : 'none';
-
-      const horaAgenda = document.getElementById('horaAgenda');
-      const ubicacionAgenda = document.getElementById('ubicacionAgenda');
-
-      if (fechaAgenda) fechaAgenda.required = requiresAgenda;
-      if (horaAgenda) horaAgenda.required = requiresAgenda;
-      if (ubicacionAgenda) ubicacionAgenda.required = requiresAgenda;
-    }
-
-    if (preferencia) {
-      setMinAgendaDate();
-      toggleScheduleFields();
-      preferencia.addEventListener('change', toggleScheduleFields);
-    }
-
-    // Detalle compacto de servicios (tooltip/expansión)
-    const compactCards = document.querySelectorAll('.service-card.compact');
-
-    compactCards.forEach(card => {
-      card.addEventListener('click', (e) => {
-        const isInteractive = e.target.closest('button') || e.target.closest('a');
-        if (isInteractive) return;
-
-        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        if (!isTouch) return;
-
-        const already = card.classList.contains('show-detail');
-        compactCards.forEach(c => c.classList.remove('show-detail'));
-        if (!already) card.classList.add('show-detail');
-      });
-    });
-
-    window.addEventListener('scroll', () => {
-      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      if (!isTouch) return;
-      compactCards.forEach(c => c.classList.remove('show-detail'));
-    });
 
     // Bot flotante
     const botWidget = document.getElementById('botWidget');
