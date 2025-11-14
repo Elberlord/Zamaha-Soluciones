@@ -56,9 +56,6 @@
     }
 
     header {
-      position: sticky;
-      top: 12px;
-      z-index: 999;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -382,6 +379,70 @@
       padding: 7px 12px;
     }
 
+
+    /* TOOLTIP DE SERVICIOS */
+
+    .service-card {
+      position: relative;
+      overflow: visible;
+    }
+
+    .service-tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: 100%;
+      transform: translate(-50%, -10px);
+      background: #050816;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      padding: 12px 14px;
+      width: min(280px, 90vw);
+      box-shadow: var(--shadow-soft);
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+      z-index: 20;
+    }
+
+    .service-card:hover .service-tooltip,
+    .service-card.show-info .service-tooltip {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate(-50%, -16px);
+    }
+
+    .service-tooltip p {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .service-tooltip .service-list {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+      padding-left: 18px;
+    }
+
+    .service-tooltip .service-list li {
+      margin-bottom: 3px;
+    }
+
+    @media (max-width: 768px) {
+      .service-tooltip {
+        left: 50%;
+        bottom: auto;
+        top: 100%;
+        transform: translate(-50%, 10px);
+      }
+
+      .service-card:hover .service-tooltip {
+        /* En móvil dependeremos de la clase .show-info, no del hover */
+        transform: translate(-50%, 10px);
+      }
+    }
     /* CONTACTO */
 
     .contact-section {
@@ -513,24 +574,6 @@
       color: var(--text-muted);
       margin-top: 4px;
     }
-    .schedule-grid {
-      display: none;
-      margin-top: 6px;
-      margin-bottom: 6px;
-      gap: 10px;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    }
-
-    .schedule-grid .full {
-      grid-column: 1 / -1;
-    }
-
-    .schedule-note {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
 
     .form-success {
       font-size: 12px;
@@ -790,7 +833,8 @@
         <article class="service-card" id="servicio-cctv">
           <h3>Cámaras CCTV</h3>
           <div class="service-pill">Vigilancia 24/7</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Diseñamos e instalamos sistemas de cámaras adaptados a tu hogar, comercio u oficina,
             con visualización remota desde el celular.
           </p>
@@ -799,6 +843,8 @@
             <li>Instalación limpia de cableado y canaletas.</li>
             <li>Configuración de grabador, monitoreo y acceso remoto.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
               Cotizar cámaras
@@ -806,14 +852,14 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
               Añadir a cotización
             </button>
-            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
         </article>
 
         <article class="service-card" id="servicio-redes">
           <h3>Redes eléctricas</h3>
           <div class="service-pill">Seguridad eléctrica</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Instalación de tomacorrientes, tableros, canalización y protecciones
             para que tu instalación eléctrica sea segura y ordenada.
           </p>
@@ -822,6 +868,8 @@
             <li>Diagnóstico de posibles riesgos y sobrecargas.</li>
             <li>Instalación o mejora de circuitos y protecciones.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
               Cotizar redes
@@ -829,14 +877,14 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
               Añadir a cotización
             </button>
-            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
         </article>
 
         <article class="service-card" id="servicio-computo">
           <h3>Equipos de cómputo</h3>
           <div class="service-pill">Equipos al 100%</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Formateos, upgrades de disco y memoria, limpieza interna y reparación básica
             para que tus equipos trabajen más rápido y por más tiempo.
           </p>
@@ -845,6 +893,8 @@
             <li>Limpieza de polvo, cambio de pasta térmica.</li>
             <li>Instalación de software esencial y configuración básica.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
               Cotizar cómputo
@@ -852,14 +902,14 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
               Añadir a cotización
             </button>
-            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
         </article>
 
         <article class="service-card" id="servicio-desarrollo">
           <h3>Desarrollo web</h3>
           <div class="service-pill">Presencia digital</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Páginas web ligeras, claras y funcionales para presentar tus servicios, con enfoque en
             la información importante sin recargar al usuario.
           </p>
@@ -868,6 +918,8 @@
             <li>Enlaces a WhatsApp, correo y redes sociales.</li>
             <li>Textos optimizados para explicar tus servicios.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
               Cotizar desarrollo web
@@ -875,14 +927,14 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
               Añadir a cotización
             </button>
-            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
         </article>
 
         <article class="service-card" id="servicio-mantenimiento">
           <h3>Mantenimiento integral</h3>
           <div class="service-pill">Todo bajo control</div>
-          <p>
+                    <div class="service-tooltip">
+<p>
             Planes periódicos para revisar cámaras, red eléctrica y equipos de cómputo,
             de modo que evites sorpresas y gastos imprevistos.
           </p>
@@ -891,6 +943,8 @@
             <li>Limpieza, ajustes y pequeños correctivos.</li>
             <li>Reporte de estado y recomendaciones.</li>
           </ul>
+          </div>
+
           <div class="service-actions">
             <button class="btn btn-primary btn-small js-cotizar" data-service="Mantenimiento integral">
               Cotizar mantenimiento
@@ -898,7 +952,6 @@
             <button class="btn btn-secondary btn-small js-agregar" data-service="Mantenimiento integral">
               Añadir a cotización
             </button>
-            <a class="btn btn-secondary btn-small" href="#servicios">Volver a servicios</a>
           </div>
         </article>
       </section>
@@ -965,7 +1018,6 @@
               <input type="hidden" id="servicesField" name="Servicios seleccionados" />
             </div>
 
-            
             <div>
               <label for="preferencia">¿Qué prefieres?</label>
               <select id="preferencia" name="Preferencia de contacto">
@@ -978,44 +1030,8 @@
                 <option value="Agendar una visita técnica">
                   Agendar una visita técnica
                 </option>
-                <option value="Agendar una asesoría (virtual o presencial)">
-                  Agendar una asesoría (virtual o presencial)
-                </option>
               </select>
             </div>
-
-            <!-- Campos que se muestran solo cuando el cliente quiere agendar -->
-            <div id="scheduleFields" class="schedule-grid">
-              <div>
-                <label for="tipoAtencion">Tipo de atención para agendar</label>
-                <select id="tipoAtencion" name="Tipo de atención (agenda)">
-                  <option value="Visita técnica en sitio" selected>Visita técnica en sitio</option>
-                  <option value="Asesoría virtual">Asesoría virtual</option>
-                  <option value="Asesoría presencial">Asesoría presencial</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="fecha">Fecha preferida</label>
-                <input type="date" id="fecha" name="Fecha preferida" />
-              </div>
-
-              <div>
-                <label for="hora">Hora preferida</label>
-                <input type="time" id="hora" name="Hora preferida" />
-              </div>
-
-              <div class="full">
-                <label for="ubicacion">Ubicación / dirección</label>
-                <textarea id="ubicacion" name="Ubicación o referencia de la zona"
-                  placeholder="Ej: dirección exacta, barrio, punto de referencia. Para asesoría virtual, indica tu ciudad y país."></textarea>
-              </div>
-
-              <div class="full schedule-note">
-                * La fecha y hora quedan como <strong>horario preferido</strong>. Te confirmaremos por mensaje o llamada si hay espacio disponible en ese horario.
-              </div>
-            </div>
-
 
             <div>
               <label for="detalles">Detalles del proyecto</label>
@@ -1083,7 +1099,34 @@
       });
     });
 
-    // Botones "Cotizar ..." y "Añadir a cotización"
+    
+    // Tooltip de servicios (detalle en hover / toque prolongado)
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    serviceCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // No interferir con botones de acción
+        if (e.target.closest('.service-actions')) return;
+
+        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+        if (!isSmallScreen) return;
+
+        // Cerrar otros tooltips
+        serviceCards.forEach(c => {
+          if (c !== card) c.classList.remove('show-info');
+        });
+        card.classList.toggle('show-info');
+      });
+    });
+
+    // Cerrar tooltip en móvil al hacer scroll
+    window.addEventListener('scroll', () => {
+      const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+      if (!isSmallScreen) return;
+      serviceCards.forEach(c => c.classList.remove('show-info'));
+    });
+
+// Botones "Cotizar ..." y "Añadir a cotización"
     const serviceButtons = document.querySelectorAll('.js-cotizar');
     const addButtons = document.querySelectorAll('.js-agregar');
     const servicePills = document.querySelectorAll('.service-pill-btn');
@@ -1131,31 +1174,7 @@
       });
     });
 
-    
-    // Mostrar/ocultar campos de agenda según preferencia
-    const preferencia = document.getElementById('preferencia');
-    const scheduleFields = document.getElementById('scheduleFields');
-
-    function toggleScheduleFields() {
-      if (!preferencia || !scheduleFields) return;
-      const v = preferencia.value;
-      if (
-        v === 'Agendar una visita técnica' ||
-        v === 'Agendar una asesoría (virtual o presencial)'
-      ) {
-        scheduleFields.style.display = 'grid';
-      } else {
-        scheduleFields.style.display = 'none';
-      }
-    }
-
-    if (preferencia && scheduleFields) {
-      preferencia.addEventListener('change', toggleScheduleFields);
-      // Estado inicial por si viene con un valor preseleccionado
-      toggleScheduleFields();
-    }
-
-// Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
+    // Mostrar mensaje de éxito si venimos de FormSubmit con ?success=1
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
