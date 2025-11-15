@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Café Monte Azul | Ejemplo Zamaha</title>
+  <title>Cafetería Monte Azul | Ejemplo Zamaha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Ejemplo de página web sencilla para una cafetería acogedora, diseñada por Zamaha.">
+  <meta name="description" content="Ejemplo de página web sencilla para una cafetería, diseñada por Zamaha.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -34,9 +34,15 @@
 
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #0a0714, #020308);
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
       color: var(--text-main);
       min-height: 100vh;
+      padding: 18px 12px 40px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
     }
 
     a {
@@ -45,22 +51,31 @@
     }
 
     .page {
-      max-width: 980px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 20px 18px 60px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top left, rgba(161, 136, 127, 0.24), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(239, 235, 233, 0.06), transparent 55%),
+        linear-gradient(135deg, #111827, #020617 70%, #020617 100%);
+      border: 1px solid rgba(215, 204, 200, 0.3);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+      position: relative;
+      overflow: hidden;
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      padding: 14px 18px;
+      padding: 14px 22px;
       border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(30, 18, 12, 0.96), rgba(8, 5, 3, 0.96));
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(135deg, rgba(78, 52, 46, 0.96), rgba(27, 17, 13, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.16);
       box-shadow: var(--shadow-soft);
       margin-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
     }
 
     .brand {
@@ -69,152 +84,301 @@
       gap: 3px;
     }
 
-    .brand-name {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .brand-name span {
-      color: var(--accent-strong);
-    }
-
-    .brand-tagline {
-      font-size: 13px;
+    .brand span {
+      font-size: 11px;
       color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .brand strong {
+      font-size: 18px;
+      letter-spacing: 0.08em;
     }
 
     nav {
       display: flex;
-      gap: 12px;
       align-items: center;
-      font-size: 13px;
+      gap: 14px;
+      font-size: 12px;
     }
 
     nav a {
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: var(--radius-pill);
       border: 1px solid transparent;
       color: var(--text-soft);
-      cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+      opacity: 0.9;
+      transition: all 0.14s ease-out;
     }
 
     nav a:hover {
-      background: rgba(141, 110, 99, 0.28);
-      border-color: rgba(255, 224, 178, 0.8);
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #6d4c41, #8d6e63);
-      border-radius: var(--radius-pill);
-      padding: 7px 14px;
+      border-color: rgba(239, 235, 233, 0.5);
+      background: rgba(27, 17, 13, 0.9);
       color: #fff;
-      font-weight: 600;
+    }
+
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
       border: none;
-      box-shadow: 0 10px 20px rgba(109, 76, 65, 0.55);
-      white-space: nowrap;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .btn-primary:hover {
-      filter: brightness(1.05);
-      transform: translateY(-1px);
-    }
-
-    main {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
+    /* HERO */
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 24px;
-      align-items: center;
-      padding: 20px 22px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.05fr);
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .hero-left {
+      background: radial-gradient(circle at top left, rgba(161, 136, 127, 0.26), transparent 60%),
+                  linear-gradient(135deg, rgba(27, 17, 13, 0.96), rgba(27, 17, 13, 0.9));
       border-radius: var(--radius-lg);
-      background:
-        linear-gradient(135deg, rgba(38, 23, 16, 0.96), rgba(8, 4, 4, 0.98)),
-        url('cafeteria-hero-1.jpg') center/cover no-repeat;
-      border: 1px solid var(--border-soft);
+      padding: 16px 16px 14px;
+      border: 1px solid rgba(215, 204, 200, 0.35);
       box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(215, 204, 200, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .hero-pill span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffcc80, #ffb74d 65%);
+      box-shadow: 0 0 0 4px rgba(215, 204, 200, 0.4);
     }
 
     .hero-title {
       font-size: 26px;
+      line-height: 1.15;
       margin-bottom: 8px;
     }
 
     .hero-title span {
-      color: var(--accent-strong);
+      background: linear-gradient(120deg, #ffcc80, #ffab91);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .hero-sub {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      border-radius: var(--radius-pill);
+      padding: 2px 9px;
+      border: 1px solid rgba(215, 204, 200, 0.6);
+      background: rgba(27, 17, 13, 0.96);
+      color: var(--text-soft);
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-bottom: 10px;
     }
 
-    .hero-badge {
+    .hero-cta-main {
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.85);
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 4px 11px;
+    }
+
+    .hero-cta-secondary {
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 224, 178, 0.9);
-      background: rgba(62, 39, 35, 0.96);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      margin-bottom: 10px;
-    }
-
-    .hero-list {
+      padding: 7px 14px;
+      border: 1px dashed rgba(215, 204, 200, 0.6);
+      background: rgba(27, 17, 13, 0.9);
+      color: var(--text-soft);
       font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      padding-left: 16px;
+      cursor: pointer;
     }
 
-    .hero-list li {
-      margin-bottom: 3px;
-    }
-
-    .hero-actions {
+    .hero-footer {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .hero-note {
+      gap: 12px;
       font-size: 11px;
       color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .hero-highlight {
+      font-size: 11px;
+      border-radius: var(--radius-pill);
+      padding: 4px 9px;
+      border: 1px solid rgba(200, 230, 201, 0.8);
+      background: rgba(67, 160, 71, 0.18);
+      color: #c8e6c9;
     }
 
     .hero-right {
-      border-radius: var(--radius-md);
-      background: linear-gradient(145deg, rgba(121, 85, 72, 0.45), rgba(62, 39, 35, 0.95));
-      padding: 14px 14px 16px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255, 224, 178, 0.9);
+      position: relative;
     }
 
-    .hero-right h2 {
-      font-size: 15px;
+    .hero-card {
+      border-radius: var(--radius-lg);
+      padding: 10px 10px 12px;
+      background: radial-gradient(circle at top, rgba(239, 235, 233, 0.18), transparent 65%),
+                  radial-gradient(circle at bottom, rgba(27, 17, 13, 0.95), rgba(27, 17, 13, 1));
+      border: 1px solid rgba(215, 204, 200, 0.5);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-soft);
       margin-bottom: 6px;
+    }
+
+    .hero-card-header strong {
+      font-size: 13px;
+    }
+
+    .hero-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(239, 235, 233, 0.8);
+      background: rgba(27, 17, 13, 0.96);
+    }
+
+    .hero-card-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+    }
+
+    .hero-photo {
+      border-radius: 18px;
+      background: radial-gradient(circle at center, #a1887f, #4e342e);
+      padding: 4px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-photo-inner {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .hero-card-info {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .hero-card-info h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .hero-prices {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .hero-prices .main {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffe0b2;
+    }
+
+    .hero-prices .note {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .hero-tags-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .hero-tag-mini {
+      font-size: 10px;
+      border-radius: var(--radius-pill);
+      padding: 2px 6px;
+      background: rgba(27, 17, 13, 0.96);
+      border: 1px solid rgba(215, 204, 200, 0.6);
+      color: var(--text-soft);
+    }
+
+    .hero-card-footer {
+      margin-top: 6px;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* SECCIONES GENERALES */
+
+    main {
+      margin-top: 4px;
     }
 
     .section-card {
       border-radius: var(--radius-lg);
-      background: var(--bg-card);
-      padding: 16px 18px 18px;
-      border: 1px solid var(--border-soft);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 14px 16px 14px;
+      margin-bottom: 18px;
       box-shadow: var(--shadow-soft);
     }
 
@@ -224,190 +388,346 @@
     }
 
     .section-sub {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-soft);
       margin-bottom: 10px;
     }
 
     .two-cols {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: flex-start;
     }
 
-    .menu-block {
-      border-radius: var(--radius-md);
-      background: rgba(38, 24, 20, 0.95);
-      padding: 12px 14px;
-      border: 1px solid rgba(255, 224, 178, 0.85);
+    /* AMBIENTE */
+
+    .ambiente-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 14px;
       font-size: 12px;
+      color: var(--text-soft);
     }
+
+    .ambiente-text {
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      background: rgba(27, 17, 13, 0.96);
+      border: 1px solid rgba(215, 204, 200, 0.4);
+    }
+
+    .ambiente-text p + p {
+      margin-top: 6px;
+    }
+
+    .ambiente-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .ambiente-badge {
+      font-size: 11px;
+      border-radius: var(--radius-pill);
+      padding: 2px 8px;
+      border: 1px solid rgba(215, 204, 200, 0.6);
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text-soft);
+    }
+
+    .ambiente-photos {
+      border-radius: var(--radius-md);
+      padding: 8px;
+      background: radial-gradient(circle at top, rgba(239, 235, 233, 0.12), transparent 60%),
+                  rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .ambiente-photos img {
+      border-radius: 16px;
+    }
+
+    /* MENÚ */
 
     .menu-block h3 {
-      font-size: 14px;
-      margin-bottom: 4px;
+      font-size: 15px;
+      margin-bottom: 6px;
     }
 
     .menu-cols {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 12px;
-      margin-top: 6px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
     .menu-list {
       list-style: none;
+      margin: 0;
+      padding: 8px 10px;
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.35);
       font-size: 12px;
+    }
+
+    .menu-list li + li {
+      margin-top: 4px;
     }
 
     .menu-list li {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 3px;
+      gap: 8px;
+      align-items: center;
     }
 
     .menu-list span.price {
-      margin-left: 10px;
+      font-weight: 600;
+      color: #ffe0b2;
+    }
+
+    .menu-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* UBICACIÓN / HORARIO */
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.05fr);
+      gap: 14px;
+      font-size: 12px;
+      color: var(--text-soft);
     }
 
     .info-block {
       border-radius: var(--radius-md);
-      background: rgba(22, 14, 11, 0.96);
-      padding: 12px 14px;
-      border: 1px solid rgba(255, 224, 178, 0.7);
-      font-size: 12px;
+      padding: 10px 12px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.4);
     }
 
     .info-block h3 {
       font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .info-list {
-      margin-left: 14px;
-      margin-top: 4px;
-      margin-bottom: 4px;
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .highlight {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
+      margin-bottom: 6px;
       color: #ffe0b2;
-      margin-top: 6px;
-    }
-
-    .contact-note {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .contact-whatsapp {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-      padding: 7px 12px;
-      border-radius: var(--radius-pill);
-      background: rgba(7, 94, 84, 0.9);
-      color: #e0f2f1;
-      font-size: 12px;
-    }
-
-    .contact-whatsapp span {
-      font-weight: 600;
-    }
-
-    .map-fake {
-      border-radius: var(--radius-md);
-      background: radial-gradient(circle at top, rgba(161, 136, 127, 0.35), rgba(22, 14, 11, 0.96));
-      padding: 12px 14px;
-      border: 1px solid rgba(188, 170, 164, 0.75);
-      font-size: 12px;
-      color: #efebe9;
-    }
-
-    .map-fake div {
-      margin-bottom: 2px;
     }
 
     footer {
-      margin-top: 26px;
+      margin-top: 20px;
       font-size: 11px;
       color: var(--text-muted);
       text-align: center;
     }
 
     footer a {
-      color: var(--accent-strong);
+      color: #ffccbc;
       text-decoration: underline;
+      text-decoration-style: dotted;
     }
 
-    /* GALERÍA DE FOTOS DE PRODUCTO (MARKETING) */
-    .marketing-gallery {
-      margin-top: 14px;
-      border-radius: var(--radius-md);
-      background: rgba(33, 22, 17, 0.95);
-      padding: 12px 14px 14px;
-      border: 1px solid rgba(255, 224, 178, 0.7);
-      font-size: 12px;
-    }
+    /* RESPONSIVE */
 
-    .marketing-gallery h3 {
-      font-size: 14px;
-      margin-bottom: 4px;
-      color: var(--text-main);
-    }
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
 
-    .marketing-gallery p {
-      margin-bottom: 6px;
-      color: var(--text-soft);
-    }
+      .two-cols,
+      .info-grid,
+      .ambiente-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
 
-    .marketing-gallery-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .marketing-photo {
-      flex: 1 1 160px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: #000;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .marketing-photo img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      display: block;
-    }
-
-    @media (max-width: 880px) {
       header {
         flex-direction: column;
         align-items: flex-start;
       }
 
       nav {
-        flex-wrap: wrap;
-        justify-content: flex-start;
+        align-self: stretch;
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px 10px 36px;
       }
 
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
+      header {
+        padding: 12px 14px;
       }
+    }
 
-      .two-cols {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    /* DEMO: CARRITO SIMPLE DE PEDIDOS */
+    .order-card {
+      margin-top: 14px;
+      border-radius: var(--radius-md);
+      background: rgba(4, 10, 24, 0.95);
+      padding: 12px 14px 14px;
+      border: 1px solid var(--border-soft);
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .order-header h3 {
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .order-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .order-note-small {
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    .order-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 6px;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.03);
+      margin-bottom: 4px;
+    }
+
+    .order-item-name {
+      flex: 1 1 auto;
+      font-size: 12px;
+      color: var(--text-main);
+    }
+
+    .order-item-price {
+      font-size: 12px;
+    }
+
+    .order-empty {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 4px 0;
+    }
+
+    .order-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      padding-top: 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    .order-total-row span:last-child {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .order-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 4px;
+    }
+
+    .order-finish-btn {
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.65);
+      transition: transform 0.1s ease, filter 0.12s ease;
+    }
+
+    .order-finish-btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .order-thankyou {
+      font-size: 11px;
+      color: var(--text-soft);
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: var(--radius-md);
+      padding: 8px 10px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      margin-top: 4px;
+      display: none;
+    }
+
+    .order-thankyou.is-visible {
+      display: block;
+    }
+
+    .menu-item {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      transition: background 0.14s ease, transform 0.1s ease;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .menu-item:active {
+      transform: translateY(0);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .menu-item-name {
+      flex: 1 1 auto;
+    }
+
+    .menu-item-price,
+    .menu-item .price {
+      font-weight: 600;
+    }
+
+    .menu-item::after {
+      content: "+";
+      font-size: 14px;
+      opacity: 0.7;
+      margin-left: 4px;
     }
   </style>
 </head>
@@ -415,47 +735,132 @@
   <div class="page">
     <header>
       <div class="brand">
-        <div class="brand-name">CAFÉ <span>MONTE AZUL</span></div>
-        <div class="brand-tagline">Café de especialidad, repostería casera y ambiente tranquilo.</div>
+        <span>Ejemplo Zamaha</span>
+        <strong>Cafetería Monte Azul</strong>
       </div>
+
       <nav>
-        <a href="#ambiente">Ambiente</a>
+        <a href="index.html">Volver a Zamaha</a>
         <a href="#menu">Menú</a>
         <a href="#ubicacion">Ubicación</a>
-        <a href="#contacto">Contacto</a>
-        <a href="index.html" class="btn-primary">Sitio creado por Zamaha</a>
+        <button class="nav-cta">
+          <span>☕</span> Quiero una web así
+        </button>
       </nav>
     </header>
 
     <main>
       <!-- HERO -->
-      <section class="hero" id="ambiente">
-        <div>
-          <div class="hero-badge">Café de especialidad · Espacio tranquilo</div>
-          <h1 class="hero-title">Un café para <span>conversar, trabajar</span> o simplemente pausar el día</h1>
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-pill">
+            <span class="dot"></span>
+            Demo de sitio web para cafetería
+          </div>
+          <h1 class="hero-title">
+            Haz que el <span>aroma de tu café</span> también se sienta en internet.
+          </h1>
           <p class="hero-sub">
-            Cafés calientes y fríos, repostería casera y un ambiente acogedor con buena música,
-            ideal para leer, trabajar o reunirse con amigos.
+            Esta página es un ejemplo visual de cómo se podría ver tu cafetería en línea:
+            fotos cálidas, menú claro y un botón para que tus clientes reserven o pidan para llevar.
           </p>
-          <ul class="hero-list">
-            <li>✅ Café de grano nacional y de especialidad.</li>
-            <li>✅ Opciones frías: frappés y cold brew.</li>
-            <li>✅ Postres caseros y snacks salados.</li>
-          </ul>
-          <div class="hero-actions">
-            <a class="btn-primary" href="https://wa.me/50660000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Caf%C3%A9%20Monte%20Azul" target="_blank" rel="noopener">
-              Escribir por WhatsApp
-            </a>
-            <span class="hero-note">Ejemplo de botón para reservas, pedidos o consultas.</span>
+
+          <div class="hero-tags">
+            <span class="hero-tag">Pensado para móvil</span>
+            <span class="hero-tag">Carta de cafés y postres</span>
+            <span class="hero-tag">Reservas para grupos</span>
+            <span class="hero-tag">Ambiente acogedor</span>
+          </div>
+
+          <div class="hero-ctas">
+            <button class="hero-cta-main">
+              Ver menú de ejemplo
+              <span>👇</span>
+            </button>
+            <button class="hero-cta-secondary">
+              Ver cómo lucirían tus fotos reales
+            </button>
+          </div>
+
+          <div class="hero-footer">
+            <div>
+              Puedes mostrar tus métodos de preparación, granos especiales y postres caseros de forma clara.
+            </div>
+            <div class="hero-highlight">
+              Tu logo, tus colores y tu historia se adaptan sobre este diseño.
+            </div>
           </div>
         </div>
+
         <div class="hero-right">
-          <h2>Ambiente (ejemplo)</h2>
-          <p>Mesas de dos y cuatro personas, barra con enchufes y Wi-Fi gratuito.</p>
-          <p>Iluminación cálida, música suave y decoración en madera y plantas.</p>
-          <p style="font-size:11px; margin-top:6px;">
-            Aquí podríamos colocar un pequeño carrusel de fotos reales del local.
-          </p>
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div>
+                <strong>Latte Monte Azul</strong>
+                <div>Ejemplo de tarjeta con foto + precio</div>
+              </div>
+              <span class="hero-badge">Recomendado</span>
+            </div>
+
+            <div class="hero-card-main">
+              <div class="hero-photo">
+                <div class="hero-photo-inner">
+                  <img src="cafe-hero.png" alt="Taza de café latte con arte en la espuma">
+                </div>
+              </div>
+              <div class="hero-card-info">
+                <h3>Latte con leche entera o deslactosada</h3>
+                <p>
+                  Shot de espresso, leche vaporizada cremosa y un toque de arte en la espuma.
+                </p>
+                <div class="hero-prices">
+                  <span class="main">₡1,900</span>
+                  <span class="note">ejemplo tamaño mediano</span>
+                </div>
+                <div class="hero-tags-mini">
+                  <span class="hero-tag-mini">Opción leche vegetal</span>
+                  <span class="hero-tag-mini">Sabor vainilla / caramelo</span>
+                  <span class="hero-tag-mini">Perfecto para media tarde</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-card-footer">
+              Esta tarjeta podría mostrar tu bebida más vendida o la especialidad de la casa.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AMBIENTE -->
+      <section class="section-card">
+        <h2 class="section-title">Ambiente y estilo</h2>
+        <p class="section-sub">
+          Aquí mostramos el tipo de ambiente de tu cafetería: tranquila para trabajar, para leer o para conversar.
+        </p>
+
+        <div class="ambiente-grid">
+          <div class="ambiente-text">
+            <p>
+              Podemos describir el ambiente: música suave, mesas cómodas, enchufes disponibles y Wi-Fi para quienes
+              necesitan trabajar o estudiar.
+            </p>
+            <p>
+              También se pueden mencionar detalles como plantas, decoración, iluminación cálida y atención personalizada.
+            </p>
+            <div class="ambiente-badges">
+              <span class="ambiente-badge">Wi-Fi gratis</span>
+              <span class="ambiente-badge">Enchufes para laptop</span>
+              <span class="ambiente-badge">Opciones veganas</span>
+              <span class="ambiente-badge">Espacio para leer</span>
+            </div>
+          </div>
+          <div class="ambiente-photos">
+            <img src="cafe-ambiente.png" alt="Interior cálido de una cafetería, con mesas de madera y plantas.">
+            <p style="font-size:11px; margin-top:6px;">
+              Aquí podríamos colocar un pequeño carrusel de fotos reales del local.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -471,14 +876,15 @@
             <h3>Cafés calientes</h3>
             <div class="menu-cols">
               <ul class="menu-list">
-                <li><span>Espresso</span><span class="price">₡1,200</span></li>
-                <li><span>Americano</span><span class="price">₡1,500</span></li>
-                <li><span>Cappuccino</span><span class="price">₡1,800</span></li>
-                <li><span>Latte</span><span class="price">₡1,800</span></li>
+                <li class="menu-item"><span>Espresso</span><span class="price">₡1,200</span></li>
+                <li class="menu-item"><span>Americano</span><span class="price">₡1,500</span></li>
+                <li class="menu-item"><span>Cappuccino</span><span class="price">₡1,800</span></li>
+                <li class="menu-item"><span>Latte</span><span class="price">₡1,800</span></li>
               </ul>
               <ul class="menu-list">
-                <li><span>Mocha</span><span class="price">₡2,000</span></li>
-                <li><span>Chocolate caliente</span><span class="price">₡1,800</span></li>
+                <li class="menu-item"><span>Mocha</span><span class="price">₡2,000</span></li>
+                <li class="menu-item"><span>Macchiato</span><span class="price">₡1,700</span></li>
+                <li class="menu-item"><span>Chocolate caliente</span><span class="price">₡1,800</span></li>
               </ul>
             </div>
           </div>
@@ -487,45 +893,48 @@
             <h3>Bebidas frías y postres</h3>
             <div class="menu-cols">
               <ul class="menu-list">
-                <li><span>Cold brew</span><span class="price">₡2,200</span></li>
-                <li><span>Frappé de café</span><span class="price">₡2,500</span></li>
-                <li><span>Frappé de chocolate</span><span class="price">₡2,500</span></li>
+                <li class="menu-item"><span>Cold brew</span><span class="price">₡2,200</span></li>
+                <li class="menu-item"><span>Frappé de café</span><span class="price">₡2,500</span></li>
+                <li class="menu-item"><span>Frappé de chocolate</span><span class="price">₡2,500</span></li>
               </ul>
               <ul class="menu-list">
-                <li><span>Cheesecake</span><span class="price">₡2,200</span></li>
-                <li><span>Queque de zanahoria</span><span class="price">₡2,000</span></li>
-                <li><span>Brownie con helado</span><span class="price">₡2,300</span></li>
+                <li class="menu-item"><span>Cheesecake</span><span class="price">₡2,200</span></li>
+                <li class="menu-item"><span>Queque de zanahoria</span><span class="price">₡2,000</span></li>
+                <li class="menu-item"><span>Brownie con helado</span><span class="price">₡2,300</span></li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- FOTOS DE CAFÉS Y POSTRES / MARKETING -->
-      <section class="section-card" id="fotos">
-        <h2 class="section-title">Fotos que antojan al primer vistazo</h2>
+      <!-- DEMO: CARRITO SIMPLE -->
+      <section class="section-card">
+        <h2 class="section-title">Simulador de pedido (demo)</h2>
         <p class="section-sub">
-          Mostrar de cerca el café, la espuma perfecta y los postres hace que el visitante sienta ganas
-          de pasar al local o pedir para llevar.
+          Haz clic en los cafés, bebidas frías o postres del menú de arriba y se irán sumando aquí como si fuera una orden rápida.
         </p>
-
-        <div class="marketing-gallery">
-          <h3>Fotos de producto estilo mercadeo (ejemplo)</h3>
-          <p>
-            Estas imágenes combinan primeros planos del café, la repostería y la mesa servida, con fondos
-            limpios y cálidos.
-          </p>
-          <div class="marketing-gallery-grid">
-            <div class="marketing-photo">
-              <img src="coffee-latte-art-1.jpg" alt="Taza de café latte con arte de leche en forma de corazón, sobre mesa de madera.">
-            </div>
-            <div class="marketing-photo">
-              <img src="coffee-pastry-1.jpg" alt="Café caliente junto a un croissant dorado y crujiente en un plato blanco.">
-            </div>
-            <div class="marketing-photo">
-              <img src="coffee-table-1.jpg" alt="Mesa con dos tazas de café, postres variados y manos compartiendo la merienda.">
-            </div>
+        <div class="order-card">
+          <div class="order-header">
+            <h3>Tu orden (demo)</h3>
+            <span class="order-tag">Haz clic en un producto</span>
           </div>
+          <p class="order-note-small">
+            Este carrito es una demostración para mostrar cómo se vería un sistema de pedidos sencillo dentro de tu web.
+          </p>
+          <ul class="order-list" id="order-list">
+            <li class="order-empty" id="order-empty">Aún no has añadido ningún café, bebida o postre.</li>
+          </ul>
+          <div class="order-total-row">
+            <span>Total aproximado</span>
+            <span id="order-total">₡0</span>
+          </div>
+          <div class="order-actions">
+            <button type="button" class="order-finish-btn" id="order-finish">Simular compra</button>
+          </div>
+          <p class="order-note-small">
+            En una página real, esta orden podría llegar directo a tu WhatsApp, correo o sistema de facturación.
+          </p>
+          <div class="order-thankyou" id="order-thankyou" aria-live="polite"></div>
         </div>
       </section>
 
@@ -533,88 +942,71 @@
       <section class="section-card" id="ubicacion">
         <h2 class="section-title">Ubicación y horario</h2>
         <p class="section-sub">
-          Información básica para que tus clientes sepan dónde está el café y cuándo abrir.
+          Información básica para que tus clientes sepan dónde estás y cuándo pueden visitarte.
         </p>
 
-        <div class="two-cols">
+        <div class="info-grid">
           <div class="info-block">
             <h3>Horario (ejemplo)</h3>
-            <ul class="info-list">
-              <li>Lunes a viernes: 8:00 a.m. – 7:00 p.m.</li>
-              <li>Sábados: 9:00 a.m. – 7:00 p.m.</li>
-              <li>Domingos: 2:00 p.m. – 6:00 p.m.</li>
-            </ul>
+            <p><strong>Lunes a viernes:</strong> 7:00 a. m. a 8:00 p. m.</p>
+            <p><strong>Sábado:</strong> 8:00 a. m. a 8:00 p. m.</p>
+            <p><strong>Domingo:</strong> 8:00 a. m. a 6:00 p. m.</p>
             <p style="margin-top:6px;">
-              Se puede agregar un pequeño mensaje de eventos especiales: noches de música en vivo,
-              catas de café, etc.
+              Se puede agregar una nota sobre feriados o eventos especiales.
             </p>
           </div>
-
-          <div>
-            <div class="info-block">
-              <h3>Ubicación (ejemplo)</h3>
-              <p>En una esquina tranquila del centro, cerca del parque principal.</p>
-              <p>A pocos minutos caminando de las oficinas y comercios de la zona.</p>
-            </div>
-            <div class="map-fake" style="margin-top:8px;">
-              <div><strong>Mapa (referencia)</strong></div>
-              <div>200 m norte del parque central.</div>
-              <div>Contiguo a la librería del barrio.</div>
-              <div style="margin-top:6px; font-size:11px;">
-                Aquí se podría incrustar un mapa real de Google Maps con la dirección exacta.
-              </div>
-            </div>
+          <div class="info-block">
+            <h3>Ubicación (ejemplo)</h3>
+            <p>
+              Se puede describir la ubicación con puntos de referencia fáciles:
+            </p>
+            <p style="margin-top:4px;">
+              • 200 m norte del parque del barrio.<br>
+              • Frente a la parada de buses.<br>
+              • A un costado de la tienda de abarrotes.
+            </p>
+            <p style="margin-top:6px;">
+              También se puede incrustar un mapa de Google Maps para que el cliente llegue con un solo clic.
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- CONTACTO -->
-      <section class="section-card" id="contacto">
-        <h2 class="section-title">Contacto y reservas</h2>
+      <!-- CONTACTO / CIERRE -->
+      <section class="section-card">
+        <h2 class="section-title">Contacto y encargo de tu sitio</h2>
         <p class="section-sub">
-          Usa esta sección para que los clientes puedan escribir, llamar o hacer reservas.
+          Esta sección se usa para mostrar tus datos reales y explicar cómo Zamaha puede ayudarte a tener tu web.
         </p>
 
-        <div class="two-cols">
-          <div>
-            <p class="contact-note">
-              Aquí se puede colocar el número de teléfono, WhatsApp y enlaces a redes sociales.
-            </p>
-            <div class="contact-whatsapp">
-              <span>WhatsApp:</span> <span>+506 6000-0000</span>
-            </div>
-            <p class="contact-note" style="margin-top:8px;">
-              También puedes añadir enlaces a <strong>Instagram</strong> para mostrar fotos del café,
-              postres y eventos especiales.
+        <div class="info-grid">
+          <div class="info-block">
+            <p><strong>Teléfono (ejemplo):</strong> 6000-0000</p>
+            <p><strong>WhatsApp (ejemplo):</strong> 6000-0000</p>
+            <p><strong>Correo (ejemplo):</strong> cafe@monteazul.cr</p>
+            <p style="margin-top:8px;">
+              También se puede integrar un pequeño formulario de reservación para grupos o eventos.
             </p>
           </div>
-
-          <div>
-            <p class="contact-note">
-              También podrías incluir un formulario de contacto sencillo con:
+          <div class="info-block">
+            <p>
+              Esta página es un <strong>ejemplo</strong> creado por Zamaha para mostrar cómo 
+              podría verse el sitio de tu cafetería.
             </p>
-            <ul class="info-list">
-              <li>Nombre</li>
-              <li>Correo electrónico</li>
-              <li>Mensaje o solicitud de reserva</li>
-            </ul>
-            <p class="contact-note" style="margin-top:4px;">
-              Este formulario se puede configurar para que llegue directamente a tu correo.
+            <p style="margin-top:6px;">
+              Si quieres un sitio similar, adaptado a tu carta, fotos y estilo:
+            </p>
+            <p style="margin-top:4px;">
+              • Se usan tus fotos reales de bebidas, postres y del local.<br>
+              • Se configuran enlaces directos a tu WhatsApp.<br>
+              • Se adaptan los textos para tu público específico.
+            </p>
+            <p style="margin-top:6px;">
+              Toda la parte técnica (dominio, hosting, configuración inicial) la resuelve Zamaha,
+              para que tú te enfoques en preparar buen café.
             </p>
           </div>
         </div>
-
-        <p class="contact-note" style="margin-top:10px;">
-          Esta página es un <strong>ejemplo</strong> creado por Zamaha para mostrar cómo 
-          podría verse el sitio de tu cafetería.
-        </p>
-        <p class="contact-note" style="margin-top:6px;">
-          Si quieres un sitio similar, adaptado a tu carta, fotos y estilo:
-        </p>
-        <p class="contact-note" style="margin-top:6px;">
-          👉 Visita <a href="index.html">la página principal de Zamaha</a> y solicita una cotización 
-          en la sección de contacto.
-        </p>
       </section>
     </main>
 
@@ -623,5 +1015,130 @@
       <a href="index.html">Volver a Zamaha</a>
     </footer>
   </div>
+
+  <script>
+    (function () {
+      var yearEl = document.getElementById('year');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+
+      var orderList = document.getElementById('order-list');
+      var totalEl = document.getElementById('order-total');
+      var emptyEl = document.getElementById('order-empty');
+      var finishBtn = document.getElementById('order-finish');
+      var thankEl = document.getElementById('order-thankyou');
+
+      if (!orderList || !totalEl || !finishBtn) return;
+
+      var items = [];
+
+      function parsePrice(text) {
+        if (!text) return 0;
+        var digits = text.replace(/[^\d]/g, '');
+        return digits ? parseInt(digits, 10) : 0;
+      }
+
+      function formatPrice(value) {
+        return '₡' + (value || 0).toLocaleString('es-CR');
+      }
+
+      function clearRenderedItems() {
+        var existing = orderList.querySelectorAll('.order-item');
+        Array.prototype.forEach.call(existing, function (el) {
+          el.parentNode.removeChild(el);
+        });
+      }
+
+      function renderOrder() {
+        clearRenderedItems();
+
+        if (!items.length) {
+          if (emptyEl) emptyEl.style.display = 'block';
+          totalEl.textContent = formatPrice(0);
+          return;
+        }
+
+        if (emptyEl) {
+          emptyEl.style.display = 'none';
+        }
+
+        var total = 0;
+
+        items.forEach(function (item) {
+          total += item.price;
+          var li = document.createElement('li');
+          li.className = 'order-item';
+
+          var nameSpan = document.createElement('span');
+          nameSpan.className = 'order-item-name';
+          nameSpan.textContent = item.name;
+
+          var priceSpan = document.createElement('span');
+          priceSpan.className = 'order-item-price';
+          priceSpan.textContent = formatPrice(item.price);
+
+          li.appendChild(nameSpan);
+          li.appendChild(priceSpan);
+          orderList.appendChild(li);
+        });
+
+        totalEl.textContent = formatPrice(total);
+      }
+
+      function addItemFromElement(el) {
+        if (!el) return;
+
+        var nameEl = el.querySelector('.menu-item-name') || el.querySelector('span');
+        var priceEl = el.querySelector('.menu-item-price') || el.querySelector('.price');
+        if (!priceEl) {
+          var spans = el.querySelectorAll('span');
+          if (spans.length > 1) priceEl = spans[spans.length - 1];
+        }
+
+        if (!nameEl || !priceEl) return;
+
+        var name = (nameEl.textContent || '').trim();
+        var price = parsePrice(priceEl.textContent);
+
+        if (!name || !price) return;
+
+        items.push({ name: name, price: price });
+
+        if (thankEl) {
+          thankEl.classList.remove('is-visible');
+          thankEl.textContent = '';
+        }
+
+        renderOrder();
+      }
+
+      var menuItems = document.querySelectorAll('.menu-item');
+      Array.prototype.forEach.call(menuItems, function (el) {
+        el.addEventListener('click', function () {
+          addItemFromElement(el);
+        });
+      });
+
+      finishBtn.addEventListener('click', function () {
+        if (!items.length) {
+          if (thankEl) {
+            thankEl.textContent = 'Primero selecciona al menos un platillo del menú para simular el pedido.';
+            thankEl.classList.add('is-visible');
+          } else {
+            alert('Primero selecciona al menos un platillo del menú.');
+          }
+          return;
+        }
+
+        if (thankEl) {
+          thankEl.textContent = '¡Gracias por tu compra! Este es un mensaje de ejemplo que verán tus clientes cuando completen su pedido en la página.';
+          thankEl.classList.add('is-visible');
+        } else {
+          alert('¡Gracias por tu compra! (mensaje de demostración)');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

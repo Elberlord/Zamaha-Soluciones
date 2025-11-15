@@ -14,18 +14,18 @@
     :root {
       --bg-main: #050816;
       --bg-card: #0c1224;
-      --accent: #00c853;
-      --accent-soft: rgba(0, 200, 83, 0.15);
-      --accent-strong: #00e676;
-      --text-main: #f5f7ff;
-      --text-soft: #c4c9ff;
-      --text-muted: #9aa0c6;
-      --brand-red: #ff4b5c;
-      --border-soft: rgba(255, 255, 255, 0.08);
-      --radius-lg: 22px;
-      --radius-md: 16px;
+      --bg-soft: #080d1b;
+      --accent: #ff9800;
+      --accent-soft: #ffe0b2;
+      --accent-strong: #ffb300;
+      --text-main: #ffffff;
+      --text-soft: #e0e7ff;
+      --text-muted: #9ca3af;
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --radius-lg: 24px;
+      --radius-md: 18px;
       --radius-pill: 999px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.65);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.88);
     }
 
     * {
@@ -36,9 +36,15 @@
 
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #3a2410, #1c0f07 40%, #050816 80%);
+      background: radial-gradient(circle at top, #111827 0, #020617 52%, #000 100%);
       color: var(--text-main);
       min-height: 100vh;
+      padding: 18px 10px 40px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
     }
 
     a {
@@ -49,109 +55,251 @@
     .page {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 20px 18px 60px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.14), transparent 55%),
+                  linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
+      border-radius: 32px;
+      padding: 18px 18px 32px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: -120px;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.16), transparent 60%);
+      opacity: 0.85;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: -1;
     }
 
     header {
       display: flex;
       justify-content: space-between;
+      gap: 14px;
       align-items: center;
-      gap: 24px;
-      padding: 16px 22px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(41, 18, 6, 0.98), rgba(5, 8, 22, 0.95));
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 32px;
-      position: sticky;
-      top: 10px;
-      z-index: 1200;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.85));
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      backdrop-filter: blur(16px);
+      margin-bottom: 20px;
     }
 
-    .brand {
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #facc15, #ea580c 52%, #7c2d12 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.03em;
+      color: #0b0f19;
+      box-shadow:
+        0 0 0 2px rgba(15, 23, 42, 0.9),
+        0 0 0 4px rgba(249, 115, 22, 0.7),
+        0 18px 35px rgba(15, 23, 42, 0.9);
+    }
+
+    .logo-text {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    .brand-title {
-      font-size: 30px;
-      letter-spacing: 0.18em;
-      font-weight: 800;
+    .logo-text strong {
+      font-size: 15px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #ffffff;
-      -webkit-text-stroke: 2px var(--brand-red);
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
     }
 
-    .brand-tagline {
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
-    .header-contact {
-      text-align: right;
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .header-contact a {
-      color: #ffcc80;
-      font-weight: 500;
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    /* HERO / BANNER */
-
-    .hero {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      background: linear-gradient(135deg, #3e2723, #1b1b1f);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-soft);
-      padding: 20px 22px 18px;
-    }
-
-    .hero-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 20px;
-    }
-
-    .hero-copy h1 {
-      font-size: clamp(24px, 3.2vw, 30px);
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .hero-copy h1 span {
-      color: #ffcc80;
-    }
-
-    .hero-copy p {
-      font-size: 14px;
-      color: #ffe0b2;
-      max-width: 520px;
-    }
-
-    .hero-badge {
-      text-align: right;
+    .logo-text span {
       font-size: 11px;
       color: var(--text-soft);
     }
 
-    .hero-badge span {
-      display: block;
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    nav a {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--text-soft);
+      opacity: 0.9;
+      transition: all 0.15s ease-out;
+    }
+
+    nav a:hover {
+      border-color: rgba(148, 163, 184, 0.8);
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.12), transparent 60%);
+      color: #e5e7eb;
+    }
+
+    .nav-cta {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #0b0f19;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 16px 32px rgba(249, 115, 22, 0.6);
+    }
+
+    .nav-cta span.icon {
+      font-size: 14px;
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 20px;
+      padding: 18px 16px 18px;
+      border-radius: 26px;
+      background: radial-gradient(circle at top left, rgba(248, 250, 252, 0.12), transparent 60%),
+                  linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.88));
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -120px;
+      background: radial-gradient(circle at 20% 0, rgba(251, 191, 36, 0.4), transparent 55%),
+                  radial-gradient(circle at 90% 100%, rgba(56, 189, 248, 0.3), transparent 50%);
+      opacity: 0.4;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(250, 204, 21, 0.7);
+      background: radial-gradient(circle at top left, rgba(250, 250, 249, 0.12), transparent 60%);
+      font-size: 11px;
+      color: var(--accent-soft);
+      margin-bottom: 8px;
+    }
+
+    .hero-pill span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #facc15, #f97316 60%, #b91c1c 100%);
+      box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.35);
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 span.highlight {
+      background: linear-gradient(120deg, #f97316, #facc15);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .hero-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 2px 9px;
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .hero-cta-main {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
       font-size: 13px;
       font-weight: 600;
-      color: #ffcc80;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 20px 35px rgba(249, 115, 22, 0.8);
+    }
+
+    .hero-cta-secondary {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-soft);
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .hero-bottom {
@@ -171,58 +319,169 @@
     .hero-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 6px;
+      gap: 6px;
     }
 
-    .tag {
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 224, 178, 0.7);
-      background: radial-gradient(circle at 0% 0%, rgba(255, 224, 178, 0.22), transparent 65%);
+    .hero-tag-pill {
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(250, 204, 21, 0.6);
+      background: rgba(15, 23, 42, 0.9);
       font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #ffe0b2;
     }
 
-    .hero-note {
+    .hero-highlight-badge {
       font-size: 11px;
-      color: #ffcc80;
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      color: #bbf7d0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    .hero-bottom-right {
-      text-align: right;
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-board {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      border-radius: 22px;
+      padding: 10px 10px 12px;
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.06), transparent 60%),
+                  linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      box-shadow:
+        0 14px 28px rgba(15, 23, 42, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+    }
+
+    .hero-board-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
       font-size: 11px;
-      color: #ffcc80;
+      color: var(--text-soft);
     }
 
-    .hero-bottom-right strong {
-      display: block;
-      margin-bottom: 2px;
+    .hero-board-header strong {
       font-size: 12px;
+      color: #fef3c7;
     }
 
-    /* SECCIONES GENERALES */
+    .hero-board-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(134, 239, 172, 0.8);
+      color: #bbf7d0;
+    }
+
+    .hero-board-main {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #78350f, #451a03);
+      border: 1px solid rgba(249, 115, 22, 0.6);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .plate-photo {
+      border-radius: 16px;
+      background: radial-gradient(circle at center, #f97316, #7c2d12);
+      padding: 3px;
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.8);
+    }
+
+    .plate-photo-inner {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .hero-board-info {
+      font-size: 11px;
+      color: #ffedd5;
+    }
+
+    .hero-board-info h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .hero-board-info .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-top: 3px;
+    }
+
+    .hero-board-info .price-main {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fef3c7;
+    }
+
+    .hero-board-info .price-note {
+      font-size: 10px;
+      color: #fed7aa;
+    }
+
+    .hero-mini-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .hero-mini-pill {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(251, 191, 36, 0.7);
+      color: #fffbeb;
+    }
+
+    .hero-board-footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #fee2e2;
+    }
+
+    /* SECTIONS GENÉRICAS */
+
+    main {
+      margin-top: 18px;
+    }
 
     .section {
-      padding: 18px 20px 18px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, #1f1306, #050816);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .section + .section {
-      margin-top: 10px;
+      margin-bottom: 22px;
     }
 
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 10px;
       gap: 10px;
+      margin-bottom: 8px;
     }
 
     .section-header h2 {
@@ -231,16 +490,34 @@
 
     .section-header span {
       font-size: 11px;
-      color: var(--text-soft);
-      letter-spacing: 0.14em;
+      color: var(--text-muted);
       text-transform: uppercase;
+      letter-spacing: 0.14em;
     }
 
     .section p {
       font-size: 13px;
       color: var(--text-soft);
-      line-height: 1.6;
       margin-bottom: 8px;
+    }
+
+    .section-card {
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.96));
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 14px 16px 14px;
+      margin-bottom: 18px;
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    .section-card h2 {
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .section-card p {
+      font-size: 12px;
+      color: var(--text-soft);
     }
 
     /* MENÚ DEL DÍA */
@@ -265,42 +542,38 @@
     .menu-block-title {
       font-size: 14px;
       font-weight: 600;
-      color: #ffe0b2;
-      margin-bottom: 4px;
+      color: var(--accent-soft);
+      margin-bottom: 6px;
     }
 
     .menu-items {
       list-style: none;
-      margin: 0 0 6px 0;
+      margin: 0;
       padding: 0;
     }
 
-    .menu-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 2px;
+    .menu-item + .menu-item {
+      margin-top: 4px;
     }
 
     .menu-item-name {
-      color: var(--text-main);
+      font-size: 13px;
     }
 
     .menu-item-price {
-      color: var(--accent-strong);
       font-weight: 600;
-      flex-shrink: 0;
     }
 
     .menu-note {
       font-size: 11px;
       color: var(--text-muted);
+      margin-top: 8px;
     }
 
     .menu-image {
       border-radius: var(--radius-md);
-      overflow: hidden;
+      background: rgba(4, 8, 18, 0.95);
+      padding: 10px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: #000;
       box-shadow: var(--shadow-soft);
@@ -319,10 +592,30 @@
 
     .ambiente-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
       gap: 16px;
       margin-top: 10px;
-      align-items: flex-start;
+    }
+
+    .ambiente-text {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .ambiente-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
     }
 
     .ambiente-gallery {
@@ -332,240 +625,393 @@
     }
 
     .ambiente-photo {
-      border-radius: var(--radius-md);
+      border-radius: 14px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: #000;
-      box-shadow: var(--shadow-soft);
-      height: 120px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: #020617;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.9);
     }
 
-    .ambiente-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    /* CONTACTO / CIERRE */
 
-    .ubicacion-box {
-      margin-top: 8px;
-      padding: 10px 12px;
-      border-radius: var(--radius-md);
-      background: rgba(7, 14, 28, 0.96);
-      border: 1px solid rgba(255, 224, 178, 0.4);
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .ubicacion-box strong {
-      display: block;
-      margin-bottom: 4px;
-      color: #ffe0b2;
-    }
-
-    /* INFO GENERAL & CTA */
-
-    .info-layout {
+    .contacto-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
       gap: 16px;
       margin-top: 8px;
-      align-items: flex-start;
     }
 
-    .info-card {
-      background: rgba(4, 8, 18, 0.9);
+    .contact-card {
       border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.7);
       padding: 12px 14px;
-      border: 1px solid var(--border-soft);
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-soft);
     }
 
-    .info-card h3 {
+    .contact-card h3 {
       font-size: 14px;
+      margin-bottom: 6px;
+      color: var(--accent-soft);
+    }
+
+    .contact-row {
       margin-bottom: 4px;
-      color: #ffe0b2;
     }
 
-    .info-list {
-      list-style: disc;
-      margin: 4px 0 0 18px;
-      padding: 0;
-      font-size: 12px;
+    .contact-row strong {
+      color: var(--accent-soft);
     }
 
-    .info-list li {
-      margin-bottom: 3px;
+    .contact-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
     }
 
-    /* BOTONES */
-
-    .btn-row {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .btn {
-      position: relative;
-      padding: 9px 18px;
-      border-radius: var(--radius-pill);
-      border: 1px solid transparent;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-      background: transparent;
-      color: var(--text-main);
-      transition:
-        background 0.16s ease,
-        border-color 0.16s ease,
-        box-shadow 0.16s ease,
-        transform 0.12s ease;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.24), transparent 60%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.18s ease;
-    }
-
-    .btn:hover::before { opacity: 1; }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #020308;
-      border-color: rgba(0, 230, 118, 0.8);
-      box-shadow: 0 14px 30px rgba(0, 200, 83, 0.55);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(0, 200, 83, 0.65);
-    }
-
-    .btn-secondary {
-      background: rgba(12, 18, 36, 0.96);
-      color: var(--text-soft);
-      border-color: rgba(129, 140, 196, 0.85);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(6px);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(20, 28, 60, 0.98);
-      border-color: rgba(164, 173, 227, 1);
-      transform: translateY(-1px);
-    }
-
-    .btn-small {
-      font-size: 12px;
-      padding: 7px 14px;
+    .contact-highlight {
+      margin-top: 8px;
+      font-size: 11px;
+      border-radius: 12px;
+      padding: 6px 8px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(134, 239, 172, 0.8);
+      color: #bbf7d0;
     }
 
     footer {
-      margin-top: 26px;
+      margin-top: 18px;
       font-size: 11px;
       color: var(--text-muted);
       text-align: center;
     }
 
-    @media (max-width: 880px) {
+    footer a {
+      color: #93c5fd;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .menu-layout,
+      .ambiente-layout,
+      .contacto-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
       header {
         flex-direction: column;
         align-items: flex-start;
       }
 
-      .header-contact {
-        text-align: left;
+      nav {
+        align-self: stretch;
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 14px 10px 24px;
+        border-radius: 24px;
       }
 
-      .hero-top {
-        flex-direction: column;
+      header {
+        border-radius: 18px;
       }
 
-      .hero-bottom {
-        flex-direction: column;
-        align-items: flex-start;
+      .hero {
+        padding: 14px 12px;
       }
+    }
 
-      .menu-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    /* DEMO: CARRITO SIMPLE DE PEDIDOS */
+    .order-card {
+      margin-top: 14px;
+      border-radius: var(--radius-md);
+      background: rgba(4, 10, 24, 0.95);
+      padding: 12px 14px 14px;
+      border: 1px solid var(--border-soft);
+      font-size: 12px;
+      color: var(--text-soft);
+    }
 
-      .ambiente-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
 
-      .info-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    .order-header h3 {
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .order-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .order-note-small {
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    .order-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 6px;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.03);
+      margin-bottom: 4px;
+    }
+
+    .order-item-name {
+      flex: 1 1 auto;
+      font-size: 12px;
+      color: var(--text-main);
+    }
+
+    .order-item-price {
+      font-size: 12px;
+    }
+
+    .order-empty {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 4px 0;
+    }
+
+    .order-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      padding-top: 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    .order-total-row span:last-child {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .order-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 4px;
+    }
+
+    .order-finish-btn {
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.65);
+      transition: transform 0.1s ease, filter 0.12s ease;
+    }
+
+    .order-finish-btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .order-thankyou {
+      font-size: 11px;
+      color: var(--text-soft);
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: var(--radius-md);
+      padding: 8px 10px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      margin-top: 4px;
+      display: none;
+    }
+
+    .order-thankyou.is-visible {
+      display: block;
+    }
+
+    .menu-item {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      transition: background 0.14s ease, transform 0.1s ease;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .menu-item:active {
+      transform: translateY(0);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .menu-item-name {
+      flex: 1 1 auto;
+    }
+
+    .menu-item-price,
+    .menu-item .price {
+      font-weight: 600;
+    }
+
+    .menu-item::after {
+      content: "+";
+      font-size: 14px;
+      opacity: 0.7;
+      margin-left: 4px;
     }
   </style>
 </head>
 <body>
   <div class="page">
     <header>
-      <div class="brand">
-        <div class="brand-title">ZAMAHA</div>
-        <div class="brand-tagline">Tecnología que protege lo que más importa</div>
+      <div class="logo-area">
+        <div class="logo-circle">Z</div>
+        <div class="logo-text">
+          <strong>Zamaha</strong>
+          <span>Demo web para soda típica</span>
+        </div>
       </div>
-      <div class="header-contact">
-        <div>Ejemplo de página web para soda</div>
-        <div>Tel: <a href="tel:+50664305227">+506 6430-5227</a></div>
-        <div>Email: <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></div>
-      </div>
+
+      <nav>
+        <a href="index.html">Volver a Zamaha</a>
+        <a href="#menu">Menú del día</a>
+        <a href="#ubicacion">Ubicación</a>
+        <button class="nav-cta">
+          <span class="icon">⚡</span>
+          <span>Quiero una web así</span>
+        </button>
+      </nav>
     </header>
 
     <main>
       <!-- HERO -->
       <section class="hero">
-        <div class="hero-top">
-          <div class="hero-copy">
-            <h1>Soda <span>"El Sabor Tico"</span></h1>
-            <p>
-              Esta es una página de demostración. No corresponde a una soda real (a menos que tú la quieras usar 😄).
-              La idea es mostrar cómo podría verse una web sencilla para una soda o comedor de barrio.
-            </p>
+        <div class="hero-left">
+          <div class="hero-pill">
+            <span class="dot"></span>
+            Ejemplo de página para soda de barrio
           </div>
-          <div class="hero-badge">
-            <span>Demo web para soda</span>
-            Ejemplo de estructura simple centrada en el menú del día.
+          <h1>
+            Haz que tu soda se vea <span class="highlight">tan rica</span>
+            como sus casados.
+          </h1>
+          <p class="hero-sub">
+            Este es un demo visual. Aquí podríamos mostrar tus platos del día, precios claros,
+            ubicación exacta y un botón para pedir por WhatsApp o para reservar.
+          </p>
+
+          <div class="hero-tags-row">
+            <div class="hero-tag">Diseño pensado para móvil</div>
+            <div class="hero-tag">Fácil de actualizar menú</div>
+            <div class="hero-tag">Ideal para clientes del barrio</div>
+          </div>
+
+          <div class="hero-cta-row">
+            <button class="hero-cta-main">
+              Ver menú de ejemplo
+              <span class="icon">👇</span>
+            </button>
+            <button class="hero-cta-secondary">
+              Ver más demos de Zamaha
+            </button>
+          </div>
+
+          <div class="hero-bottom">
+            <div class="hero-bottom-left">
+              <div class="hero-tags">
+                <div class="hero-tag-pill">Casados · Guisos · Sopas</div>
+                <div class="hero-tag-pill">Refrescos naturales</div>
+                <div class="hero-tag-pill">Café chorreado</div>
+              </div>
+            </div>
+            <div class="hero-highlight-badge">
+              <span>✨</span> Ejemplo listo para adaptar a tu negocio
+            </div>
           </div>
         </div>
-        <div class="hero-bottom">
-          <div class="hero-bottom-left">
-            <div class="hero-tags">
-              <span class="tag">MENÚ DEL DÍA</span>
-              <span class="tag">HORARIO</span>
-              <span class="tag">UBICACIÓN</span>
-              <span class="tag">WHATSAPP</span>
+
+        <div class="hero-right">
+          <div class="hero-board">
+            <div class="hero-board-header">
+              <div>
+                <strong>Menú del mediodía</strong>
+                <div>Ejemplo de casado completo</div>
+              </div>
+              <div class="hero-board-tag">Soda "El Sabor Tico"</div>
             </div>
-            <div class="hero-note">
-              Esta demo está pensada para sodas en Costa Rica que quieren algo claro y rápido de entender.
+
+            <div class="hero-board-main">
+              <div class="plate-photo">
+                <div class="plate-photo-inner">
+                  <img src="soda-hero-plate.png" alt="Casado típico con carne, arroz, frijoles y ensalada">
+                </div>
+              </div>
+              <div class="hero-board-info">
+                <h3>Casado de bistec a la plancha</h3>
+                <p>Arroz, frijoles, bistec en salsa, ensalada fresca y picadillo.</p>
+                <div class="price-row">
+                  <span class="price-main">₡3,500</span>
+                  <span class="price-note">ejemplo · incluye refresco natural</span>
+                </div>
+                <div class="hero-mini-pills">
+                  <span class="hero-mini-pill">Listo en 10 min</span>
+                  <span class="hero-mini-pill">Opción para llevar</span>
+                  <span class="hero-mini-pill">Se puede mostrar foto real</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="hero-bottom-right">
-            <strong>Zamaha · Diseño simple</strong>
-            Imágenes, colores y textos se pueden adaptar al estilo real de tu soda.
+
+            <div class="hero-board-footer">
+              <span>Esta tarjeta podría mostrar tu plato estrella cada día.</span>
+              <span>Actualizable por WhatsApp con Zamaha.</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- MENÚ DEL DÍA -->
-      <section class="section">
+      <!-- SECCIÓN MENÚ DEL DÍA -->
+      <section class="section" id="menu">
         <div class="section-header">
           <h2>Menú del día</h2>
           <span>ejemplo</span>
@@ -600,12 +1046,34 @@
               </ul>
             </div>
 
-            <div class="menu-block">
-              <div class="menu-block-title">Bebidas</div>
+            <div class="menu-block" style="margin-top: 10px;">
+              <div class="menu-block-title">Refrescos naturales</div>
               <ul class="menu-items">
                 <li class="menu-item">
-                  <span class="menu-item-name">Refresco natural</span>
+                  <span class="menu-item-name">Cas de fruta</span>
                   <span class="menu-item-price">₡800</span>
+                </li>
+                <li class="menu-item">
+                  <span class="menu-item-name">Tamarindo</span>
+                  <span class="menu-item-price">₡800</span>
+                </li>
+                <li class="menu-item">
+                  <span class="menu-item-name">Naranja</span>
+                  <span class="menu-item-price">₡900</span>
+                </li>
+                <li class="menu-item">
+                  <span class="menu-item-name">Piña con hierbabuena</span>
+                  <span class="menu-item-price">₡900</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-block" style="margin-top: 10px;">
+              <div class="menu-block-title">Extras y café</div>
+              <ul class="menu-items">
+                <li class="menu-item">
+                  <span class="menu-item-name">Postre del día</span>
+                  <span class="menu-item-price">₡1,200</span>
                 </li>
                 <li class="menu-item">
                   <span class="menu-item-name">Café chorreado</span>
@@ -622,12 +1090,35 @@
 
           <div class="menu-image">
             <img src="soda-menu-1.png" alt="Ejemplo del menú de la soda">
+            <div class="order-card">
+              <div class="order-header">
+                <h3>Tu orden (demo)</h3>
+                <span class="order-tag">Haz clic en un plato</span>
+              </div>
+              <p class="order-note-small">
+                Cada vez que des clic en un plato del menú, se añadirá aquí como si fuera un pedido rápido.
+              </p>
+              <ul class="order-list" id="order-list">
+                <li class="order-empty" id="order-empty">Aún no has añadido ningún plato.</li>
+              </ul>
+              <div class="order-total-row">
+                <span>Total aproximado</span>
+                <span id="order-total">₡0</span>
+              </div>
+              <div class="order-actions">
+                <button type="button" class="order-finish-btn" id="order-finish">Simular compra</button>
+              </div>
+              <p class="order-note-small">
+                En una web real, este resumen podría enviarse a WhatsApp, correo o a un sistema de pedidos.
+              </p>
+              <div class="order-thankyou" id="order-thankyou" aria-live="polite"></div>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- AMBIENTE Y UBICACIÓN -->
-      <section class="section">
+      <section class="section" id="ubicacion">
         <div class="section-header">
           <h2>Ambiente y ubicación</h2>
           <span>presentación del local</span>
@@ -641,19 +1132,19 @@
         <div class="ambiente-layout">
           <div class="ambiente-text">
             <p>
-              La "Soda El Sabor Tico" está pensada como un lugar sencillo, limpio y acogedor, con
-              mesas tipo comedor y un ambiente familiar. En la web se pueden mostrar 2 o 3 fotos
-              claves del interior del local para que el cliente se haga una idea del espacio.
+              Tu soda puede ser pequeña, pero con buenas fotos y un texto claro, se ve profesional.
+              Podemos indicar el barrio, puntos de referencia y si tienes parqueo disponible.
             </p>
-            <p>
-              También se puede añadir un pequeño mapa o texto con puntos de referencia, por ejemplo:
-              "200 m norte de la escuela del barrio, frente a la cancha de fútbol".
+            <p style="margin-top: 6px;">
+              También se puede incluir un mapa embebido de Google Maps y un botón para abrir
+              la ruta directamente en el celular.
             </p>
 
-            <div class="ubicacion-box">
-              <strong>Ejemplo de texto de ubicación</strong>
-              De la parada de buses principal de Siquirres, 150 m oeste y 50 m sur, contiguo a la
-              ferretería del barrio. Parqueo al frente y entregas a domicilio dentro del centro de Siquirres.
+            <div class="ambiente-badges">
+              <span class="badge">Ambiente familiar</span>
+              <span class="badge">Comida casera</span>
+              <span class="badge">Desayunos y almuerzos</span>
+              <span class="badge">Pedidos para llevar</span>
             </div>
           </div>
 
@@ -668,52 +1159,47 @@
               <img src="soda-exterior-1.png" alt="Vista exterior de la soda desde la calle">
             </div>
             <div class="ambiente-photo">
-              <img src="soda-exterior-2.png" alt="Entrada de la soda con rótulo visible">
+              <img src="soda-exterior-2.png" alt="Otra vista del frente de la soda">
             </div>
           </div>
         </div>
       </section>
 
-      <!-- INFO GENERAL Y CTA -->
+      <!-- CONTACTO / MÁS INFORMACIÓN -->
       <section class="section">
         <div class="section-header">
-          <h2>Información general y contacto</h2>
-          <span>detalle editable</span>
+          <h2>¿Cómo te ayuda esta web?</h2>
+          <span>ejemplo Zamaha</span>
         </div>
 
-        <p>
-          En una web real, aquí se mostrarían los datos específicos de la soda: horario, teléfono,
-          método principal para pedidos (WhatsApp, llamada, redes sociales) y algunas notas adicionales.
-        </p>
-
-        <div class="info-layout">
-          <div class="info-card">
-            <h3>Ejemplo de horario</h3>
-            <ul class="info-list">
-              <li>Lunes a viernes · 10:00 a. m. – 7:00 p. m.</li>
-              <li>Sábado · 10:00 a. m. – 5:00 p. m.</li>
-              <li>Domingo cerrado (o solo mediodía, según la soda).</li>
-            </ul>
+        <div class="contacto-grid">
+          <div class="contact-card">
+            <h3>Datos básicos de contacto</h3>
+            <p class="contact-row"><strong>Teléfono (ejemplo):</strong> 6000-0000</p>
+            <p class="contact-row"><strong>WhatsApp para pedidos:</strong> 6000-0000</p>
+            <p class="contact-row"><strong>Dirección:</strong> 100 m norte de la pulpería del barrio.</p>
+            <p class="contact-note">
+              Estos datos se pueden ajustar para tu soda real: horarios, días de atención, opciones de pago, etc.
+            </p>
           </div>
 
-          <div class="info-card">
-            <h3>Ejemplo de formas de contacto</h3>
-            <ul class="info-list">
-              <li>WhatsApp para pedidos y consultas rápidas.</li>
-              <li>Llamadas para pedidos grandes o eventos.</li>
-              <li>Opcional: Facebook o Instagram para fotos de platos y promos.</li>
-            </ul>
-          </div>
-        </div>
+          <div class="contact-card">
+            <h3>¿Qué ve tu cliente?</h3>
+            <p>
+              • Menú del día claro y atractivo. <br>
+              • Fotos del lugar y de los platos. <br>
+              • Botón directo para pedir por WhatsApp. <br>
+              • Información suficiente para llegar sin perderse.
+            </p>
+            <p class="contact-note">
+              Y tú puedes actualizar el contenido periódicamente con ayuda de Zamaha.
+            </p>
 
-        <div class="btn-row">
-          <a href="https://wa.me/50664305227?text=Hola%20Zamaha,%20me%20gustar%C3%ADa%20una%20web%20para%20mi%20soda."
-             class="btn btn-primary btn-small" target="_blank" rel="noopener">
-            Quiero una web como esta
-          </a>
-          <a href="index.html#ejemplos-web" class="btn btn-secondary btn-small">
-            Volver al catálogo de ejemplos
-          </a>
+            <div class="contact-highlight">
+              Esta página es solo una demo. Tu versión final llevaría tu logo, tus colores,
+              tus fotos y tus precios reales.
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -724,7 +1210,128 @@
   </div>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      var yearEl = document.getElementById('year');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+
+      var orderList = document.getElementById('order-list');
+      var totalEl = document.getElementById('order-total');
+      var emptyEl = document.getElementById('order-empty');
+      var finishBtn = document.getElementById('order-finish');
+      var thankEl = document.getElementById('order-thankyou');
+
+      if (!orderList || !totalEl || !finishBtn) return;
+
+      var items = [];
+
+      function parsePrice(text) {
+        if (!text) return 0;
+        var digits = text.replace(/[^\d]/g, '');
+        return digits ? parseInt(digits, 10) : 0;
+      }
+
+      function formatPrice(value) {
+        return '₡' + (value || 0).toLocaleString('es-CR');
+      }
+
+      function clearRenderedItems() {
+        var existing = orderList.querySelectorAll('.order-item');
+        Array.prototype.forEach.call(existing, function (el) {
+          el.parentNode.removeChild(el);
+        });
+      }
+
+      function renderOrder() {
+        clearRenderedItems();
+
+        if (!items.length) {
+          if (emptyEl) emptyEl.style.display = 'block';
+          totalEl.textContent = formatPrice(0);
+          return;
+        }
+
+        if (emptyEl) {
+          emptyEl.style.display = 'none';
+        }
+
+        var total = 0;
+
+        items.forEach(function (item) {
+          total += item.price;
+          var li = document.createElement('li');
+          li.className = 'order-item';
+
+          var nameSpan = document.createElement('span');
+          nameSpan.className = 'order-item-name';
+          nameSpan.textContent = item.name;
+
+          var priceSpan = document.createElement('span');
+          priceSpan.className = 'order-item-price';
+          priceSpan.textContent = formatPrice(item.price);
+
+          li.appendChild(nameSpan);
+          li.appendChild(priceSpan);
+          orderList.appendChild(li);
+        });
+
+        totalEl.textContent = formatPrice(total);
+      }
+
+      function addItemFromElement(el) {
+        if (!el) return;
+
+        var nameEl = el.querySelector('.menu-item-name') || el.querySelector('span');
+        var priceEl = el.querySelector('.menu-item-price') || el.querySelector('.price');
+        if (!priceEl) {
+          var spans = el.querySelectorAll('span');
+          if (spans.length > 1) priceEl = spans[spans.length - 1];
+        }
+
+        if (!nameEl || !priceEl) return;
+
+        var name = (nameEl.textContent || '').trim();
+        var price = parsePrice(priceEl.textContent);
+
+        if (!name || !price) return;
+
+        items.push({ name: name, price: price });
+
+        if (thankEl) {
+          thankEl.classList.remove('is-visible');
+          thankEl.textContent = '';
+        }
+
+        renderOrder();
+      }
+
+      var menuItems = document.querySelectorAll('.menu-item');
+      Array.prototype.forEach.call(menuItems, function (el) {
+        el.addEventListener('click', function () {
+          addItemFromElement(el);
+        });
+      });
+
+      finishBtn.addEventListener('click', function () {
+        if (!items.length) {
+          if (thankEl) {
+            thankEl.textContent = 'Primero selecciona al menos un platillo del menú para simular el pedido.';
+            thankEl.classList.add('is-visible');
+          } else {
+            alert('Primero selecciona al menos un platillo del menú.');
+          }
+          return;
+        }
+
+        if (thankEl) {
+          thankEl.textContent = '¡Gracias por tu compra! Este es un mensaje de ejemplo que verán tus clientes cuando completen su pedido en la página.';
+          thankEl.classList.add('is-visible');
+        } else {
+          alert('¡Gracias por tu compra! (mensaje de demostración)');
+        }
+      });
+    })();
   </script>
 </body>
 </html>
