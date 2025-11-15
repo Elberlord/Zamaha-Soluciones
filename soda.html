@@ -2,6 +2,602 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <title>Demo web · Soda "El Sabor Tico"</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ejemplo de página web simple para una soda de barrio: menú del día, precios y ubicación. Demo creada por Zamaha.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="zamaha-logo.png" type="image/png" />
+
+  <style>
+    :root {
+      --bg-main: #050816;
+      --bg-card: #0c1224;
+      --accent: #00c853;
+      --accent-soft: rgba(0, 200, 83, 0.15);
+      --accent-strong: #00e676;
+      --text-main: #f5f7ff;
+      --text-soft: #c4c9ff;
+      --text-muted: #9aa0c6;
+      --brand-red: #ff4b5c;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.65);
+      --shadow-pill: 0 10px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #132347, #050816 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 18px 60px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 22px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(14, 22, 51, 0.98), rgba(5, 8, 22, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 28px;
+      position: sticky;
+      top: 10px;
+      z-index: 1200;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 28px;
+      letter-spacing: 0.18em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #ffffff;
+      -webkit-text-stroke: 2px var(--brand-red);
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
+    }
+
+    .brand-tagline {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .header-contact {
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .header-contact a {
+      color: var(--accent-strong);
+      font-weight: 500;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .btn {
+      position: relative;
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      background: transparent;
+      color: var(--text-main);
+      transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        box-shadow 0.16s ease,
+        transform 0.12s ease;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.24), transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .btn:hover::before { opacity: 1; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #020308;
+      border-color: rgba(0, 230, 118, 0.8);
+      box-shadow: 0 14px 30px rgba(0, 200, 83, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 200, 83, 0.65);
+    }
+
+    .btn-secondary {
+      background: rgba(12, 18, 36, 0.96);
+      color: var(--text-soft);
+      border-color: rgba(129, 140, 196, 0.85);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(20, 28, 60, 0.98);
+      border-color: rgba(164, 173, 227, 1);
+      transform: translateY(-1px);
+    }
+
+    .btn-small {
+      font-size: 12px;
+      padding: 7px 14px;
+    }
+
+    /* HERO SODA */
+
+    .hero-soda {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr);
+      gap: 20px;
+      padding: 20px 22px 22px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #050816, #07132a);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-soda-image {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #000;
+      box-shadow: var(--shadow-soft);
+      max-height: 280px;
+    }
+
+    .hero-soda-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-soda-body h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .hero-soda-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .hero-soda-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .hero-tag {
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(124, 179, 66, 0.6);
+      background: rgba(129, 199, 132, 0.15);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #e8f5e9;
+    }
+
+    .hero-soda-body p {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .hero-soda-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* SECCIONES */
+
+    .section {
+      padding: 18px 20px 20px;
+      border-radius: var(--radius-lg);
+      background: rgba(7, 16, 39, 0.96);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section + .section { margin-top: 10px; }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-header h2 {
+      font-size: 18px;
+    }
+
+    .section-header span {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section p {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    /* MENÚ DEL DÍA */
+
+    .menu-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 16px;
+      margin-top: 8px;
+      align-items: flex-start;
+    }
+
+    .menu-list {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .menu-list h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .menu-items {
+      list-style: none;
+      margin-bottom: 8px;
+    }
+
+    .menu-items li {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .menu-item-name {
+      color: var(--text-main);
+    }
+
+    .menu-item-price {
+      color: var(--accent-strong);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .menu-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .menu-image {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #000;
+      box-shadow: var(--shadow-soft);
+      max-height: 220px;
+    }
+
+    .menu-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* AMBIENTE & UBICACIÓN */
+
+    .ambiente-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 16px;
+      margin-top: 8px;
+      align-items: stretch;
+    }
+
+    .ambiente-text {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .ambiente-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .ambiente-img {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #000;
+      max-height: 120px;
+    }
+
+    .ambiente-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mapa-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(5, 8, 22, 0.95);
+      border: 1px dashed rgba(129, 140, 196, 0.7);
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .mapa-box strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    footer {
+      margin-top: 28px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 880px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-contact { text-align: left; }
+
+      .hero-soda {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-soda-image {
+        max-height: 230px;
+      }
+
+      .menu-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .ambiente-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-title">ZAMAHA</div>
+        <div class="brand-tagline">Tecnología que protege lo que más importa</div>
+      </div>
+      <div class="header-contact">
+        <div>Ejemplo de página web para soda</div>
+        <div>Tel: <a href="tel:+50664305227">+506 6430-5227</a></div>
+        <div>Email: <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO SODA -->
+      <section class="hero-soda">
+        <div class="hero-soda-image">
+          <!-- Usa la imagen exterior de la soda -->
+          <img src="soda-exterior-1.png" alt="Fachada de la soda El Sabor Tico">
+        </div>
+        <div class="hero-soda-body">
+          <h1>Soda “El Sabor Tico”</h1>
+          <p class="hero-soda-subtitle">
+            Página de ejemplo para una soda de barrio con menú del día, precios visibles y botón directo a WhatsApp.
+          </p>
+
+          <div class="hero-soda-tags">
+            <span class="hero-tag">menú del día</span>
+            <span class="hero-tag">comida casera</span>
+            <span class="hero-tag">whatsapp directo</span>
+          </div>
+
+          <p>
+            Este demo muestra cómo se vería una web sencilla: el cliente ve rápidamente el menú del día,
+            el horario y dónde está ubicada la soda. Ideal para sodas cerca de colegios, zonas industriales
+            o barrios residenciales.
+          </p>
+
+          <div class="hero-soda-cta">
+            <a href="https://wa.me/50664305227?text=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20como%20la%20de%20la%20Soda%20El%20Sabor%20Tico."
+               target="_blank"
+               rel="noopener"
+               class="btn btn-primary">
+              Quiero una web así
+            </a>
+            <a href="index.html#contacto" class="btn btn-secondary">
+              Volver a Zamaha
+            </a>
+          </div>
+
+          <p class="hero-note">
+            * Esta es una página de demostración. No corresponde a una soda real (a menos que la quieras usar tú 😄).
+          </p>
+        </div>
+      </section>
+
+      <!-- MENÚ DEL DÍA -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Menú del día</h2>
+          <span>ejemplo</span>
+        </div>
+
+        <p>
+          La idea es que el cliente vea rápido qué hay para hoy, cuánto cuesta y si el precio incluye refresco.
+          El menú se puede actualizar a diario o por semana.
+        </p>
+
+        <div class="menu-layout">
+          <div class="menu-list">
+            <h3>Platos de hoy</h3>
+            <ul class="menu-items">
+              <li>
+                <span class="menu-item-name">Casado de bistec</span>
+                <span class="menu-item-price">₡3,500</span>
+              </li>
+              <li>
+                <span class="menu-item-name">Pollo en salsa + puré</span>
+                <span class="menu-item-price">₡3,200</span>
+              </li>
+              <li>
+                <span class="menu-item-name">Olla de carne</span>
+                <span class="menu-item-price">₡3,800</span>
+              </li>
+              <li>
+                <span class="menu-item-name">Gallo de salchichón (2 und.)</span>
+                <span class="menu-item-price">₡1,200</span>
+              </li>
+            </ul>
+
+            <h3>Bebidas</h3>
+            <ul class="menu-items">
+              <li>
+                <span class="menu-item-name">Refresco natural</span>
+                <span class="menu-item-price">₡800</span>
+              </li>
+              <li>
+                <span class="menu-item-name">Café chorreado</span>
+                <span class="menu-item-price">₡700</span>
+              </li>
+            </ul>
+
+            <p class="menu-note">
+              * Los precios son de ejemplo. En una web real tú podrías actualizar este bloque
+              cuando suba el costo de los insumos o cambie el menú.
+            </p>
+          </div>
+
+          <div class="menu-image">
+            <!-- Imagen del menú o de los platos -->
+            <img src="soda-menu-1.png" alt="Ejemplo del menú de la soda">
+          </div>
+        </div>
+      </section>
+
+      <!-- AMBIENTE Y UBICACIÓN -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Ambiente y ubicación</h2>
+          <span>presentación del local</span>
+        </div>
+
+        <p>
+          Aquí mostramos el ambiente del lugar y explicamos dónde está la soda. La idea es que el cliente sienta
+          confianza para llegar a comer o pedir para llevar.
+        </p>
+
+        <div class="ambiente-layout">
+          <div class="ambiente-text">
+            <p>
+              La “Soda El Sabor Tico” está pensada como un lugar sencillo, limpio y acogedor, con mesas tipo comedor
+              y un ambiente familiar. En la web se pueden mostrar 2 o 3 fotos claves del interior del local para que
+              el cliente se haga una idea del espacio.
+            </p>
+            <p>
+              También se puede añadir un pequeño mapa o texto con puntos de referencia, por ejemplo:
+              “200 m norte de la escuela del barrio, frente a la cancha de fútbol”.
+            </p>
+
+            <div class="mapa-box">
+              <strong>Ejemplo de texto de ubicación</strong>
+              De la parada de buses principal de Siquirres, 150 m oeste y 50 m sur, contiguo a la ferretería del
+              barrio. Parqueo al frente y entregas a domicilio dentro del centro de Siquirres.
+            </div>
+          </div>
+
+          <div class="ambiente-grid">
+            <!-- Dos vistas del interior / detalles -->
+            <div class="ambiente-img">
+              <img src="soda-interior-1.png" alt="Interior de la soda con mesas y barra de servicio">
+            </div>
+            <div class="ambiente-img">
+              <img src="soda-exterior-1.png" alt="Vista exterior de la soda desde la calle">
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Demo creada por Zamaha · Ejemplo de página web para una soda de barrio.
+    </footer>
+  </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
   <title>Soda El Sabor Tico | Ejemplo Zamaha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Ejemplo de página web sencilla para una soda típica en Costa Rica, diseñada por Zamaha.">
