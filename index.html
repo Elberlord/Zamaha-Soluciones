@@ -931,7 +931,8 @@
       font-weight: 500;
     }
 
-    /* Lightbox para ver imágenes a pantalla completa (desktop y móvil) */
+    /* Lightbox para ver imágenes a pantalla completa */
+
     .image-lightbox {
       position: fixed;
       inset: 0;
@@ -1176,6 +1177,9 @@
               <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
                 Añadir a cotización
               </button>
+              <a href="ejemplos-web.html" class="btn btn-secondary btn-small">
+                Ver ejemplos de páginas
+              </a>
             </div>
           </article>
 
@@ -1603,12 +1607,13 @@
 
     setMinDate3DaysAhead();
 
-    // Mensaje de éxito si venimos de FormSubmit con ?success=1
+    // Query params helper
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
     }
 
+    // Mensaje de éxito si venimos de FormSubmit con ?success=1
     if (getQueryParam('success') === '1') {
       const msg = document.getElementById('formSuccess');
       if (msg) msg.style.opacity = 1;
@@ -1634,6 +1639,24 @@
         }
       }
 
+      const contactoSection = document.getElementById('contacto');
+      if (contactoSection) {
+        contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Rellenar datos si venimos desde un ejemplo de sitio web (ejemplos-web.html)
+    const ejemploFromUrl = getQueryParam('ejemplo');
+    if (ejemploFromUrl) {
+      const detallesField = document.getElementById('detalles');
+      if (detallesField) {
+        const texto = `Me interesa el ejemplo de sitio web: ${ejemploFromUrl}`;
+        if (!detallesField.value) {
+          detallesField.value = texto;
+        } else if (!detallesField.value.includes(ejemploFromUrl)) {
+          detallesField.value = texto + "\n\n" + detallesField.value;
+        }
+      }
       const contactoSection = document.getElementById('contacto');
       if (contactoSection) {
         contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1727,7 +1750,7 @@
       updateCarousel();
     }
 
-    // Lightbox para imagen del equipo (PC y celular)
+    // Lightbox para imagen del equipo
     (function () {
       const lightbox = document.getElementById('imageLightbox');
       const lightboxImg = document.getElementById('imageLightboxImage');

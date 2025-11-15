@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zamaha | Ejemplos de páginas web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ejemplos de diseños de páginas web simples para sodas, pizzerías y pequeños negocios en Costa Rica." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="zamaha-logo.png" type="image/png" />
+
+  <style>
+    :root {
+      --bg-main: #050816;
+      --bg-card: #0c1224;
+      --accent: #00c853;
+      --accent-strong: #00e676;
+      --text-main: #f5f7ff;
+      --text-soft: #c4c9ff;
+      --text-muted: #9aa0c6;
+      --brand-red: #ff4b5c;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #132347, #050816 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 18px 60px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 22px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(14, 22, 51, 0.98), rgba(5, 8, 22, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 28px;
+      position: sticky;
+      top: 10px;
+      z-index: 1200;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 28px;
+      letter-spacing: 0.18em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #ffffff;
+      -webkit-text-stroke: 2px var(--brand-red);
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
+    }
+
+    .brand-tagline {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .header-contact {
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .header-contact a {
+      color: var(--accent-strong);
+      font-weight: 500;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .btn {
+      position: relative;
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      background: transparent;
+      color: var(--text-main);
+      transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        box-shadow 0.16s ease,
+        transform 0.12s ease;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #020308;
+      border-color: rgba(0, 230, 118, 0.8);
+      box-shadow: 0 14px 30px rgba(0, 200, 83, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 200, 83, 0.65);
+    }
+
+    .btn-secondary {
+      background: rgba(12, 18, 36, 0.96);
+      color: var(--text-soft);
+      border-color: rgba(129, 140, 196, 0.85);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(20, 28, 60, 0.98);
+      border-color: rgba(164, 173, 227, 1);
+      transform: translateY(-1px);
+    }
+
+    .btn-small {
+      font-size: 12px;
+      padding: 7px 13px;
+    }
+
+    /* HERO EJEMPLOS */
+
+    .examples-hero {
+      padding: 20px 22px 18px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, #1a274a, #050816 70%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .examples-hero h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .examples-hero p {
+      font-size: 13px;
+      color: var(--text-soft);
+      max-width: 680px;
+      margin-bottom: 14px;
+    }
+
+    .examples-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* GRID DE EJEMPLOS */
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .example-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 16px 14px 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .example-headline {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .example-card h2 {
+      font-size: 16px;
+      margin-top: 2px;
+    }
+
+    .example-type-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 3px;
+    }
+
+    .example-preview {
+      margin-top: 8px;
+      margin-bottom: 6px;
+      border-radius: 14px;
+      padding: 10px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .preview-header,
+    .preview-strip,
+    .preview-cta {
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.22);
+    }
+
+    .preview-header {
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #fffde7;
+    }
+
+    .preview-strip {
+      height: 14px;
+    }
+
+    .preview-cta {
+      height: 28px;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .example-preview.soda {
+      background: radial-gradient(circle at top left, #ffb74d, #d84315);
+    }
+
+    .example-preview.pizzeria {
+      background: radial-gradient(circle at top left, #ff7043, #c62828);
+    }
+
+    .example-preview.cafe {
+      background: radial-gradient(circle at top left, #8d6e63, #4e342e);
+    }
+
+    .example-preview.fastfood {
+      background: radial-gradient(circle at top left, #ffca28, #f57c00);
+    }
+
+    .example-body-text {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .example-list {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-left: 16px;
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    .example-list li {
+      margin-bottom: 3px;
+    }
+
+    .example-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .example-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* CTA FINAL */
+
+    .examples-cta {
+      margin-top: 6px;
+      padding: 18px 20px 18px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      background: linear-gradient(135deg, #050816, #07152e);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .examples-cta-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      max-width: 560px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 880px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-contact {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-title">ZAMAHA</div>
+        <div class="brand-tagline">Tecnología que protege lo que más importa</div>
+      </div>
+      <div class="header-contact">
+        <div>Ejemplos de páginas · Servicio de desarrollo web</div>
+        <div><a href="index.html#contacto">Volver al sitio principal</a></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="examples-hero">
+        <h1>Ejemplos de páginas web para pequeños negocios</h1>
+        <p>
+          Estas son maquetas simples pensadas para sodas, pizzerías y negocios similares.
+          La idea es mostrarte un estilo limpio, directo y fácil de navegar que podemos adaptar
+          a tu menú y a tu marca.
+        </p>
+        <div class="examples-actions">
+          <a href="index.html#contacto" class="btn btn-secondary">
+            Volver a Zamaha y solicitar una cotización
+          </a>
+        </div>
+      </section>
+
+      <section class="examples-grid">
+        <!-- SODA -->
+        <article class="example-card">
+          <div class="example-headline">Ejemplo 1</div>
+          <h2>Soda típica · Menú diario sencillo</h2>
+          <div class="example-type-pill">Ideal para sodas de barrio o comedor en casa</div>
+
+          <div class="example-preview soda">
+            <div class="preview-header">
+              <span>SODA “EL SABOR TICO”</span>
+              <span>WHATSAPP</span>
+            </div>
+            <div class="preview-strip"></div>
+            <div class="preview-strip"></div>
+            <div class="preview-cta">VER MENÚ DEL DÍA</div>
+          </div>
+
+          <p class="example-body-text">
+            Página muy simple para mostrar menú del día, combos y bebidas, con botón directo a WhatsApp.
+          </p>
+          <ul class="example-list">
+            <li>Portada con foto del plato principal.</li>
+            <li>Sección de “Menú del día” y “Comidas corridas”.</li>
+            <li>Lista corta de bebidas y postres.</li>
+            <li>Botón fijo para pedir por WhatsApp.</li>
+          </ul>
+
+          <div class="example-actions">
+            <a href="index.html?ejemplo=Sitio%20para%20soda%20t%C3%ADpica%20-%20men%C3%BA%20diario#contacto" class="btn btn-primary btn-small">
+              Quiero un sitio así
+            </a>
+          </div>
+          <div class="example-note">
+            Perfecto si solo quieres algo básico pero ordenado para que te encuentren y vean el menú.
+          </div>
+        </article>
+
+        <!-- PIZZERÍA -->
+        <article class="example-card">
+          <div class="example-headline">Ejemplo 2</div>
+          <h2>Pizzería de barrio · Pizzas y combos</h2>
+          <div class="example-type-pill">Ideal para pizzería pequeña o food truck</div>
+
+          <div class="example-preview pizzeria">
+            <div class="preview-header">
+              <span>PIZZERÍA LA ESQUINA</span>
+              <span>PEDIR AHORA</span>
+            </div>
+            <div class="preview-strip"></div>
+            <div class="preview-strip"></div>
+            <div class="preview-cta">PROMO 2X1 MIÉRCOLES</div>
+          </div>
+
+          <p class="example-body-text">
+            Página centrada en las promociones y combos: fotos de pizzas, precios claros y llamadas a la acción.
+          </p>
+          <ul class="example-list">
+            <li>Portada con banner de la promo principal.</li>
+            <li>Sección de pizzas clásicas, especiales y familiares.</li>
+            <li>Combos con bebida y acompañamientos.</li>
+            <li>Botón para pedir por WhatsApp o llamada rápida.</li>
+          </ul>
+
+          <div class="example-actions">
+            <a href="index.html?ejemplo=Sitio%20para%20pizzer%C3%ADa%20-%20promos%20y%20combos#contacto" class="btn btn-primary btn-small">
+              Quiero un sitio así
+            </a>
+          </div>
+          <div class="example-note">
+            Enfocado en vender: pocas secciones, fotos grandes de pizzas y promociones visibles.
+          </div>
+        </article>
+
+        <!-- CAFETERÍA -->
+        <article class="example-card">
+          <div class="example-headline">Ejemplo 3</div>
+          <h2>Cafetería pequeña · Café y repostería</h2>
+          <div class="example-type-pill">Ideal para café de paso o coffee shop</div>
+
+          <div class="example-preview cafe">
+            <div class="preview-header">
+              <span>CAFÉ MONTE AZUL</span>
+              <span>HORARIO</span>
+            </div>
+            <div class="preview-strip"></div>
+            <div class="preview-strip"></div>
+            <div class="preview-cta">VER MENÚ DE CAFÉS</div>
+          </div>
+
+          <p class="example-body-text">
+            Diseño más calmado, con énfasis en el ambiente del lugar, los cafés especiales y la repostería.
+          </p>
+          <ul class="example-list">
+            <li>Sección con fotos del local y el ambiente.</li>
+            <li>Menú de cafés (calientes y fríos) y repostería.</li>
+            <li>Horarios, ubicación y mapa integrado.</li>
+            <li>Opiniones o reseñas de clientes.</li>
+          </ul>
+
+          <div class="example-actions">
+            <a href="index.html?ejemplo=Sitio%20para%20cafeter%C3%ADa%20-%20caf%C3%A9%20y%20reposter%C3%ADa#contacto" class="btn btn-primary btn-small">
+              Quiero un sitio así
+            </a>
+          </div>
+          <div class="example-note">
+            Bueno para lugares donde importa el ambiente, no solo el menú.
+          </div>
+        </article>
+
+        <!-- COMIDA RÁPIDA -->
+        <article class="example-card">
+          <div class="example-headline">Ejemplo 4</div>
+          <h2>Comida rápida · Hamburguesas y tacos</h2>
+          <div class="example-type-pill">Ideal para servicio express o nocturno</div>
+
+          <div class="example-preview fastfood">
+            <div class="preview-header">
+              <span>BURGER EXPRESS</span>
+              <span>DELIVERY</span>
+            </div>
+            <div class="preview-strip"></div>
+            <div class="preview-strip"></div>
+            <div class="preview-cta">PIDE AHORA</div>
+          </div>
+
+          <p class="example-body-text">
+            Página enfocada en rapidez: combos claros, horarios nocturnos y botones grandes para pedir.
+          </p>
+          <ul class="example-list">
+            <li>Portada con el combo más vendido.</li>
+            <li>Sección de hamburguesas, tacos y papas.</li>
+            <li>Tabla de precios sencilla.</li>
+            <li>Botones para pedir por WhatsApp o el servicio que uses (Uber, Didi, etc.).</li>
+          </ul>
+
+          <div class="example-actions">
+            <a href="index.html?ejemplo=Sitio%20para%20comida%20r%C3%A1pida%20-%20hamburguesas%20y%20tacos#contacto" class="btn btn-primary btn-small">
+              Quiero un sitio así
+            </a>
+          </div>
+          <div class="example-note">
+            Pensado para que el cliente tarde poco en decidir qué pedir y cómo pedirlo.
+          </div>
+        </article>
+      </section>
+
+      <section class="examples-cta">
+        <div class="examples-cta-text">
+          ¿Te gustó alguno de estos estilos? Podemos empezar con algo así de simple y luego
+          irlo mejorando con fotos reales, tu logo y tus promociones.
+        </div>
+        <a href="index.html?ejemplo=Quiero%20una%20p%C3%A1gina%20web%20para%20mi%20negocio#contacto" class="btn btn-primary">
+          Solicitar cotización para mi sitio
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Zamaha · Desarrollo web para pequeños negocios.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
