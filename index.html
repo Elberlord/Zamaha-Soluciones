@@ -423,6 +423,98 @@
       color: #e8f5e9;
     }
 
+    /* EJEMPLOS DE PÁGINAS WEB */
+
+    .web-examples-section {
+      margin-top: 10px;
+      padding: 20px 22px 24px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #050816, #07132a);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .web-examples-header h2 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .web-examples-header p {
+      font-size: 13px;
+      color: var(--text-soft);
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    .examples-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .example-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: rgba(5, 8, 22, 0.96);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .example-label {
+      align-self: flex-start;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(129, 140, 196, 0.8);
+      background: rgba(9, 20, 48, 0.95);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .example-title {
+      font-size: 16px;
+      margin-top: 4px;
+    }
+
+    .example-desc {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .example-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 4px 0 4px;
+    }
+
+    .example-chip {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(121, 134, 203, 0.8);
+      background: rgba(9, 20, 48, 0.96);
+      color: var(--text-soft);
+    }
+
+    .example-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .example-tip {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
     /* EQUIPOS EN VENTA */
 
     .equipos-section {
@@ -458,35 +550,20 @@
       align-items: stretch;
     }
 
-    /* Imagen del equipo: miniatura + zoom en hover */
     .equipo-image {
-      position: relative;
       border-radius: var(--radius-md);
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: #000;
       box-shadow: var(--shadow-soft);
-      max-height: 180px;
-      height: 180px;
+      max-height: 220px;
     }
 
     .equipo-image img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       display: block;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      transform-origin: center center;
-    }
-
-    .equipo-image:hover {
-      overflow: visible;
-      z-index: 30;
-    }
-
-    .equipo-image:hover img {
-      transform: scale(1.7);
-      box-shadow: var(--shadow-soft);
     }
 
     .equipo-body h3 {
@@ -931,64 +1008,7 @@
       font-weight: 500;
     }
 
-    /* Lightbox para ver imágenes a pantalla completa */
-
-    .image-lightbox {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-
-    .image-lightbox.visible {
-      display: flex;
-    }
-
-    .image-lightbox-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.78);
-    }
-
-    .image-lightbox-content {
-      position: relative;
-      max-width: min(90vw, 900px);
-      max-height: min(90vh, 600px);
-      padding: 10px;
-      border-radius: 18px;
-      background: rgba(5, 8, 22, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: var(--shadow-soft);
-      z-index: 1;
-    }
-
-    .image-lightbox-content img {
-      max-width: 100%;
-      max-height: 100%;
-      display: block;
-      object-fit: contain;
-    }
-
-    .image-lightbox-close {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      border: none;
-      background: rgba(12, 18, 36, 0.98);
-      color: var(--text-soft);
-      cursor: pointer;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* RESPONSIVE */
+    /* RESPONSIVE GENERAL */
 
     @media (max-width: 880px) {
       header {
@@ -1177,9 +1197,6 @@
               <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
                 Añadir a cotización
               </button>
-              <a href="ejemplos-web.html" class="btn btn-secondary btn-small">
-                Ver ejemplos de páginas
-              </a>
             </div>
           </article>
 
@@ -1208,6 +1225,111 @@
             </div>
           </article>
         </section>
+      </section>
+
+      <!-- EJEMPLOS DE PÁGINAS WEB -->
+      <section id="ejemplos-web" class="web-examples-section">
+        <div class="web-examples-header">
+          <h2>Catálogo de ejemplos</h2>
+          <p>
+            Cada demo muestra una estructura pensada para negocios pequeños que necesitan algo claro y directo,
+            sin complicarse con menús enormes o funciones innecesarias.
+          </p>
+        </div>
+
+        <div class="examples-grid">
+          <!-- EJEMPLO SODA -->
+          <article class="example-card">
+            <div class="example-label">EJEMPLO · SODA</div>
+            <h3 class="example-title">Soda "El Sabor Tico"</h3>
+            <p class="example-desc">
+              Página sencilla para una soda o comedor con menú del día, precios y ubicación.
+            </p>
+
+            <div class="example-chips">
+              <span class="example-chip">Menú del día</span>
+              <span class="example-chip">Botón WhatsApp</span>
+              <span class="example-chip">Horario y mapa</span>
+            </div>
+
+            <p class="example-desc">
+              Pensada para sodas de barrio, comedores en zona industrial o estudiantil.
+              Muestra el menú del día, algunos platos fijos, el horario y una breve
+              descripción del lugar. Ideal para que los clientes revisen qué hay de
+              comer y pidan por WhatsApp.
+            </p>
+
+            <div class="example-actions">
+              <a href="soda.html" class="btn btn-primary btn-small">Ver demo de soda</a>
+              <a href="#contacto" class="btn btn-secondary btn-small">Quiero una web como esta</a>
+            </div>
+
+            <p class="example-tip">
+              Tip: este diseño funciona muy bien para lugares con menú sencillo y rotativo.
+            </p>
+          </article>
+
+          <!-- EJEMPLO PIZZERÍA -->
+          <article class="example-card">
+            <div class="example-label">EJEMPLO · PIZZERÍA</div>
+            <h3 class="example-title">Pizzería "La Esquina"</h3>
+            <p class="example-desc">
+              Ideal para pizzerías de barrio con promos, combos y servicio a domicilio.
+            </p>
+
+            <div class="example-chips">
+              <span class="example-chip">Promos 2x1</span>
+              <span class="example-chip">Menú de pizzas</span>
+              <span class="example-chip">Zona de delivery</span>
+            </div>
+
+            <p class="example-desc">
+              Muestra una sección de promociones, menú básico de pizzas y combos,
+              horario de delivery y zonas de cobertura. Pensada para que el cliente
+              entre, vea rápido las promos principales y pida su pizza por WhatsApp
+              o llamada.
+            </p>
+
+            <div class="example-actions">
+              <a href="pizzeria.html" class="btn btn-primary btn-small">Ver demo de pizzería</a>
+              <a href="#contacto" class="btn btn-secondary btn-small">Quiero una web como esta</a>
+            </div>
+
+            <p class="example-tip">
+              Puedes adaptar este diseño también para hamburgueserías o comidas rápidas.
+            </p>
+          </article>
+
+          <!-- EJEMPLO CAFETERÍA -->
+          <article class="example-card">
+            <div class="example-label">EJEMPLO · CAFETERÍA</div>
+            <h3 class="example-title">Café "Monte Azul"</h3>
+            <p class="example-desc">
+              Pensado para cafeterías con ambiente tranquilo, café de especialidad y repostería.
+            </p>
+
+            <div class="example-chips">
+              <span class="example-chip">Carta de café</span>
+              <span class="example-chip">Postres</span>
+              <span class="example-chip">Ambiente del local</span>
+            </div>
+
+            <p class="example-desc">
+              Muestra el menú de cafés calientes, bebidas frías y postres, además de la descripción
+              del ambiente y el horario. Sirve para cafés pequeños que quieren tener presencia
+              online sin necesidad de una tienda en línea completa.
+            </p>
+
+            <div class="example-actions">
+              <a href="cafeteria.html" class="btn btn-primary btn-small">Ver demo de cafetería</a>
+              <a href="#contacto" class="btn btn-secondary btn-small">Quiero una web como esta</a>
+            </div>
+
+            <p class="example-tip">
+              Este estilo se puede adaptar a panaderías, heladerías o pequeñas pastelerías.
+            </p>
+          </article>
+        </div>
       </section>
 
       <!-- EQUIPOS EN VENTA -->
@@ -1443,15 +1565,6 @@
     </footer>
   </div>
 
-  <!-- Lightbox para imagen del equipo -->
-  <div class="image-lightbox" id="imageLightbox">
-    <div class="image-lightbox-backdrop" id="imageLightboxBackdrop"></div>
-    <div class="image-lightbox-content">
-      <button class="image-lightbox-close" id="imageLightboxClose" aria-label="Cerrar imagen">✕</button>
-      <img src="" alt="" id="imageLightboxImage">
-    </div>
-  </div>
-
   <!-- BOT FLOTANTE -->
   <div class="bot-widget" id="botWidget">
     <button class="bot-toggle" id="botToggle" aria-label="Abrir asistente Zamaha">💬</button>
@@ -1607,7 +1720,7 @@
 
     setMinDate3DaysAhead();
 
-    // Query params helper
+    // Función para leer parámetros de la URL
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
@@ -1639,24 +1752,6 @@
         }
       }
 
-      const contactoSection = document.getElementById('contacto');
-      if (contactoSection) {
-        contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-
-    // Rellenar datos si venimos desde un ejemplo de sitio web (ejemplos-web.html)
-    const ejemploFromUrl = getQueryParam('ejemplo');
-    if (ejemploFromUrl) {
-      const detallesField = document.getElementById('detalles');
-      if (detallesField) {
-        const texto = `Me interesa el ejemplo de sitio web: ${ejemploFromUrl}`;
-        if (!detallesField.value) {
-          detallesField.value = texto;
-        } else if (!detallesField.value.includes(ejemploFromUrl)) {
-          detallesField.value = texto + "\n\n" + detallesField.value;
-        }
-      }
       const contactoSection = document.getElementById('contacto');
       if (contactoSection) {
         contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1749,45 +1844,6 @@
       window.addEventListener('resize', updateCarousel);
       updateCarousel();
     }
-
-    // Lightbox para imagen del equipo
-    (function () {
-      const lightbox = document.getElementById('imageLightbox');
-      const lightboxImg = document.getElementById('imageLightboxImage');
-      const lightboxClose = document.getElementById('imageLightboxClose');
-      const lightboxBackdrop = document.getElementById('imageLightboxBackdrop');
-
-      if (!lightbox || !lightboxImg) return;
-
-      function openLightbox(src, alt) {
-        lightboxImg.src = src;
-        lightboxImg.alt = alt || '';
-        lightbox.classList.add('visible');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('visible');
-        lightboxImg.src = '';
-        document.body.style.overflow = '';
-      }
-
-      [lightboxClose, lightboxBackdrop].forEach(el => {
-        if (el) el.addEventListener('click', closeLightbox);
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeLightbox();
-      });
-
-      const img = document.querySelector('.equipo-image img');
-      if (img) {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', () => {
-          openLightbox(img.src, img.alt);
-        });
-      }
-    })();
   </script>
 </body>
 </html>
