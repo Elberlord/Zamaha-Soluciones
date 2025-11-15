@@ -448,6 +448,30 @@
       margin-top: 6px;
     }
 
+    /* GALERÍA DE PIZZAS */
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .gallery-card {
+      border-radius: var(--radius-md);
+      padding: 8px;
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.12), transparent 60%),
+                  rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: var(--shadow-soft);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .gallery-card img {
+      border-radius: 14px;
+      margin-bottom: 6px;
+    }
+
     /* MENÚ */
 
     .menu-block h3 {
@@ -560,6 +584,10 @@
 
       .two-cols,
       .info-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .gallery-grid {
         grid-template-columns: minmax(0, 1fr);
       }
 
@@ -824,7 +852,7 @@
             <div class="hero-card-main">
               <div class="hero-photo">
                 <div class="hero-photo-inner">
-                  <img src="pizza-hero.png" alt="Pizza con queso, pepperoni y vegetales">
+                  <img src="pizzeria-hero-1.jpg" alt="Pizza con queso, pepperoni y vegetales">
                 </div>
               </div>
               <div class="hero-card-info">
@@ -883,6 +911,38 @@
         </p>
       </section>
 
+      <!-- GALERÍA DE PIZZAS (MERCADO) -->
+      <section class="section-card">
+        <h2 class="section-title">Pizzas que se antojan a primera vista</h2>
+        <p class="section-sub">
+          Estas fotos estilo mercadeo muestran tu producto como lo verá el cliente en la web:
+          caliente, con queso derritiéndose y listo para compartir.
+        </p>
+
+        <div class="gallery-grid">
+          <figure class="gallery-card">
+            <img src="pizza-close-1.jpg" alt="Rebanada de pizza con queso derretido saliendo de la pizza">
+            <figcaption>
+              Primer plano de pizza recién salida del horno, ideal para la sección principal o promos del día.
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="pizza-slice-1.jpg" alt="Mano levantando una porción de pizza con mucho queso">
+            <figcaption>
+              Detalle de porción servida, perfecta para mostrar combos individuales o para llevar.
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <img src="pizza-table-1.jpg" alt="Mesa con varias pizzas y bebidas listas para compartir">
+            <figcaption>
+              Escena de mesa compartida, ideal para comunicar ambiente familiar y promociones para grupos.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
       <!-- MENÚ -->
       <section class="section-card" id="menu">
         <h2 class="section-title">Menú de pizzas (ejemplo)</h2>
@@ -895,16 +955,16 @@
             <h3>Pizzas clásicas</h3>
             <div class="menu-cols">
               <ul class="menu-list">
-                <li class="menu-item"><span>Margarita</span><span class="price">₡5,000</span></li>
-                <li class="menu-item"><span>Jamón y queso</span><span class="price">₡5,500</span></li>
-                <li class="menu-item"><span>Hawaiana</span><span class="price">₡5,800</span></li>
-                <li class="menu-item"><span>Pepperoni</span><span class="price">₡5,800</span></li>
+                <li class="menu-item"><span class="menu-item-name">Margarita</span><span class="price">₡5,000</span></li>
+                <li class="menu-item"><span class="menu-item-name">Jamón y queso</span><span class="price">₡5,500</span></li>
+                <li class="menu-item"><span class="menu-item-name">Hawaiana</span><span class="price">₡5,800</span></li>
+                <li class="menu-item"><span class="menu-item-name">Pepperoni</span><span class="price">₡5,800</span></li>
               </ul>
               <ul class="menu-list">
-                <li class="menu-item"><span>Suprema</span><span class="price">₡6,200</span></li>
-                <li class="menu-item"><span>Vegetariana</span><span class="price">₡5,900</span></li>
-                <li class="menu-item"><span>Cuatro quesos</span><span class="price">₡6,000</span></li>
-                <li class="menu-item"><span>BBQ pollo</span><span class="price">₡6,200</span></li>
+                <li class="menu-item"><span class="menu-item-name">Suprema</span><span class="price">₡6,200</span></li>
+                <li class="menu-item"><span class="menu-item-name">Vegetariana</span><span class="price">₡5,900</span></li>
+                <li class="menu-item"><span class="menu-item-name">Cuatro quesos</span><span class="price">₡6,000</span></li>
+                <li class="menu-item"><span class="menu-item-name">BBQ pollo</span><span class="price">₡6,200</span></li>
               </ul>
             </div>
           </div>
@@ -913,14 +973,14 @@
             <h3>Combos y extras</h3>
             <div class="menu-cols">
               <ul class="menu-list">
-                <li class="menu-item"><span>Pizza + gaseosa 1.5L</span><span class="price">₡7,200</span></li>
-                <li class="menu-item"><span>Pizza + alitas (6 und.)</span><span class="price">₡8,900</span></li>
-                <li class="menu-item"><span>Pizza + pan de ajo</span><span class="price">₡7,800</span></li>
+                <li class="menu-item"><span class="menu-item-name">Pizza + gaseosa 1.5L</span><span class="price">₡7,200</span></li>
+                <li class="menu-item"><span class="menu-item-name">Pizza + alitas (6 und.)</span><span class="price">₡8,900</span></li>
+                <li class="menu-item"><span class="menu-item-name">Pizza + pan de ajo</span><span class="price">₡7,800</span></li>
               </ul>
               <ul class="menu-list">
-                <li class="menu-item"><span>Pan de ajo (8 und.)</span><span class="price">₡2,200</span></li>
-                <li class="menu-item"><span>Alitas BBQ (10 und.)</span><span class="price">₡3,500</span></li>
-                <li class="menu-item"><span>Postre del día</span><span class="price">₡1,800</span></li>
+                <li class="menu-item"><span class="menu-item-name">Pan de ajo (8 und.)</span><span class="price">₡2,200</span></li>
+                <li class="menu-item"><span class="menu-item-name">Alitas BBQ (10 und.)</span><span class="price">₡3,500</span></li>
+                <li class="menu-item"><span class="menu-item-name">Postre del día</span><span class="price">₡1,800</span></li>
               </ul>
             </div>
           </div>
@@ -1037,11 +1097,6 @@
 
   <script>
     (function () {
-      var yearEl = document.getElementById('year');
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-      }
-
       var orderList = document.getElementById('order-list');
       var totalEl = document.getElementById('order-total');
       var emptyEl = document.getElementById('order-empty');
