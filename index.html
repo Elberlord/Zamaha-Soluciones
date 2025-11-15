@@ -797,6 +797,138 @@
       font-weight: 500;
     }
 
+    /* ====== EQUIPOS EN VENTA ====== */
+
+    #equipos-venta {
+      max-width: 1000px;
+      margin: -10px auto 0;
+      padding: 0 1.5rem;
+    }
+
+    #equipos-venta h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-size: 20px;
+    }
+
+    #equipos-venta > p {
+      text-align: center;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .producto-equipo {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      background-color: var(--bg-card);
+      box-shadow: var(--shadow-soft);
+    }
+
+    @media (min-width: 780px) {
+      .producto-equipo {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+
+    .equipo-imagen {
+      flex: 0 0 260px;
+    }
+
+    .equipo-imagen img {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-soft);
+      object-fit: cover;
+    }
+
+    .equipo-info {
+      flex: 1;
+    }
+
+    .equipo-info h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 16px;
+    }
+
+    .equipo-estado {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      margin: 0.25rem 0 0.75rem;
+    }
+
+    .equipo-estado span {
+      font-weight: 600;
+    }
+
+    .equipo-specs {
+      margin: 0 0 0.75rem;
+      padding-left: 1.2rem;
+    }
+
+    .equipo-specs li {
+      font-size: 0.95rem;
+    }
+
+    .equipo-precio {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    .equipo-precio strong {
+      font-size: 1.4rem;
+      color: var(--accent-strong);
+    }
+
+    .equipo-impuestos {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-left: 0.25rem;
+    }
+
+    .equipo-detalle {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      color: var(--text-soft);
+    }
+
+    .btn-equipo {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--brand-blue), #42a5f5);
+      color: #fff;
+      box-shadow: var(--shadow-pill);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+    }
+
+    .btn-equipo:hover {
+      background: linear-gradient(135deg, #1565c0, #1e88e5);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .equipo-nota {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
     /* RESPONSIVE */
 
     @media (max-width: 880px) {
@@ -1014,6 +1146,52 @@
             </div>
           </article>
         </section>
+      </section>
+
+      <!-- EQUIPOS EN VENTA -->
+      <section id="equipos-venta" class="section-block">
+        <h2>Equipos de cómputo en venta</h2>
+        <p>Equipos usados reacondicionados listos para trabajar, con configuración básica incluida en Siquirres y alrededores.</p>
+
+        <article class="producto-equipo">
+          <div class="equipo-imagen">
+            <img src="dell-latitude-5480.jpg"
+                 alt="Laptop Dell Latitude 5480 i5 6300U 16GB DDR4 256GB SSD 14 pulgadas">
+          </div>
+
+          <div class="equipo-info">
+            <h3>Dell Latitude 5480 · i5 6300U · 16GB · 256GB SSD · 14"</h3>
+
+            <p class="equipo-estado">
+              Estado: <span>Usado reacondicionado</span>
+            </p>
+
+            <ul class="equipo-specs">
+              <li>Pantalla: 14"</li>
+              <li>Procesador: Intel Core i5 6300U</li>
+              <li>Memoria: 16 GB DDR4</li>
+              <li>Almacenamiento: SSD 256 GB</li>
+              <li>Gráficos: Intel HD Graphics</li>
+              <li>Conectividad: WiFi y Bluetooth</li>
+            </ul>
+
+            <p class="equipo-precio">
+              Precio: <strong>₡150,000</strong> <span class="equipo-impuestos">i.v.i.</span>
+            </p>
+
+            <p class="equipo-detalle">
+              Ideal para oficina, estudio y trabajo remoto. Entrega con cargador y sistema operativo listo para usar.
+            </p>
+
+            <a class="btn-equipo" href="#contacto">
+              Quiero este equipo
+            </a>
+
+            <small class="equipo-nota">
+              * En el mensaje de cotización, indícanos: “Laptop Dell Latitude 5480 – ₡150,000”.
+            </small>
+          </div>
+        </article>
       </section>
 
       <!-- CARRUSEL (SIN TEXTO) -->
