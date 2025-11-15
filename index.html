@@ -803,6 +803,7 @@
     input[type="text"],
     input[type="tel"],
     input[type="email"],
+    input[type="file"],
     select,
     textarea {
       width: 100%;
@@ -1446,7 +1447,8 @@
 
           <form id="contactForm"
                 action="https://formsubmit.co/zamaha-soluciones@outlook.es"
-                method="POST">
+                method="POST"
+                enctype="multipart/form-data">
             <!-- Configuración FormSubmit -->
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
@@ -1546,6 +1548,17 @@
               <label for="detalles">Detalles del proyecto</label>
               <textarea id="detalles" name="Detalles del proyecto"
                 placeholder="Ej: casa de 2 plantas, local comercial, cantidad de equipos, etc."></textarea>
+            </div>
+
+            <div>
+              <label for="comprobante">Comprobante de pago (opcional)</label>
+              <input type="file"
+                     id="comprobante"
+                     name="Comprobante de pago"
+                     accept="image/*,.pdf" />
+              <div class="schedule-note">
+                Si ya realizaste un pago por SINPE u otro método, adjunta aquí la captura o el comprobante.
+              </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Enviar mensaje</button>
