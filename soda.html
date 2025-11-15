@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Demo web · Soda "El Sabor Tico"</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Ejemplo de página web simple para una soda de barrio: menú del día, precios y ubicación. Demo creada por Zamaha.">
+  <meta name="description" content="Ejemplo de página web simple...io: menú del día, precios y ubicación. Demo creada por Zamaha.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,19 +26,25 @@
       --radius-md: 16px;
       --radius-pill: 999px;
       --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.65);
-      --shadow-pill: 0 10px 30px rgba(0, 0, 0, 0.55);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #132347, #050816 55%);
+      background: radial-gradient(circle at top left, #3a2410, #1c0f07 40%, #050816 80%);
       color: var(--text-main);
       min-height: 100vh;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     .page {
       max-width: 1120px;
@@ -53,10 +59,10 @@
       gap: 24px;
       padding: 16px 22px;
       border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(14, 22, 51, 0.98), rgba(5, 8, 22, 0.95));
+      background: linear-gradient(135deg, rgba(41, 18, 6, 0.98), rgba(5, 8, 22, 0.95));
       border: 1px solid rgba(255, 255, 255, 0.06);
       box-shadow: var(--shadow-soft);
-      margin-bottom: 28px;
+      margin-bottom: 32px;
       position: sticky;
       top: 10px;
       z-index: 1200;
@@ -69,7 +75,7 @@
     }
 
     .brand-title {
-      font-size: 28px;
+      font-size: 30px;
       letter-spacing: 0.18em;
       font-weight: 800;
       text-transform: uppercase;
@@ -90,14 +96,316 @@
     }
 
     .header-contact a {
-      color: var(--accent-strong);
+      color: #ffcc80;
       font-weight: 500;
     }
 
     main {
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 30px;
+    }
+
+    /* HERO / BANNER */
+
+    .hero {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: linear-gradient(135deg, #3e2723, #1b1b1f);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 22px 18px;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(24px, 3.2vw, 30px);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .hero-copy h1 span {
+      color: #ffcc80;
+    }
+
+    .hero-copy p {
+      font-size: 14px;
+      color: #ffe0b2;
+      max-width: 520px;
+    }
+
+    .hero-badge {
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .hero-badge span {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ffcc80;
+    }
+
+    .hero-bottom {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      color: #ffe0b2;
+    }
+
+    .hero-bottom-left {
+      max-width: 520px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .tag {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 224, 178, 0.7);
+      background: radial-gradient(circle at 0% 0%, rgba(255, 224, 178, 0.22), transparent 65%);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffe0b2;
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: #ffcc80;
+    }
+
+    .hero-bottom-right {
+      text-align: right;
+      font-size: 11px;
+      color: #ffcc80;
+    }
+
+    .hero-bottom-right strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 12px;
+    }
+
+    /* SECCIONES GENERALES */
+
+    .section {
+      padding: 18px 20px 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #1f1306, #050816);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section + .section {
+      margin-top: 10px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .section-header h2 {
+      font-size: 18px;
+    }
+
+    .section-header span {
+      font-size: 11px;
+      color: var(--text-soft);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section p {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    /* MENÚ DEL DÍA */
+
+    .menu-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 16px;
+      margin-top: 8px;
+      align-items: flex-start;
+    }
+
+    .menu-list {
+      font-size: 13px;
+      color: var(--text-soft);
+      background: rgba(4, 8, 18, 0.9);
+      border-radius: var(--radius-md);
+      padding: 14px 14px 12px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .menu-block-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffe0b2;
+      margin-bottom: 4px;
+    }
+
+    .menu-items {
+      list-style: none;
+      margin: 0 0 6px 0;
+      padding: 0;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 2px;
+    }
+
+    .menu-item-name {
+      color: var(--text-main);
+    }
+
+    .menu-item-price {
+      color: var(--accent-strong);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .menu-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .menu-image {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #000;
+      box-shadow: var(--shadow-soft);
+      /* Hacemos que la imagen pueda mostrarse completa */
+      max-height: none;
+    }
+
+    .menu-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* AMBIENTE & UBICACIÓN */
+
+    .ambiente-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 10px;
+      align-items: flex-start;
+    }
+
+    .ambiente-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .ambiente-photo {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #000;
+      box-shadow: var(--shadow-soft);
+      height: 120px;
+    }
+
+    .ambiente-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ubicacion-box {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      background: rgba(7, 14, 28, 0.96);
+      border: 1px solid rgba(255, 224, 178, 0.4);
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .ubicacion-box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #ffe0b2;
+    }
+
+    /* INFO GENERAL & CTA */
+
+    .info-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 16px;
+      margin-top: 8px;
+      align-items: flex-start;
+    }
+
+    .info-card {
+      background: rgba(4, 8, 18, 0.9);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      border: 1px solid var(--border-soft);
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .info-card h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: #ffe0b2;
+    }
+
+    .info-list {
+      list-style: disc;
+      margin: 4px 0 0 18px;
+      padding: 0;
+      font-size: 12px;
+    }
+
+    .info-list li {
+      margin-bottom: 3px;
+    }
+
+    /* BOTONES */
+
+    .btn-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .btn {
@@ -167,236 +475,8 @@
       padding: 7px 14px;
     }
 
-    /* HERO SODA */
-
-    .hero-soda {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr);
-      gap: 20px;
-      padding: 20px 22px 22px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, #050816, #07132a);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .hero-soda-image {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: #000;
-      box-shadow: var(--shadow-soft);
-      max-height: 280px;
-    }
-
-    .hero-soda-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-soda-body h1 {
-      font-size: 22px;
-      margin-bottom: 4px;
-    }
-
-    .hero-soda-subtitle {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .hero-soda-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .hero-tag {
-      padding: 3px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(124, 179, 66, 0.6);
-      background: rgba(129, 199, 132, 0.15);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #e8f5e9;
-    }
-
-    .hero-soda-body p {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .hero-soda-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
-      margin-bottom: 6px;
-    }
-
-    .hero-note {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    /* SECCIONES */
-
-    .section {
-      padding: 18px 20px 20px;
-      border-radius: var(--radius-lg);
-      background: rgba(7, 16, 39, 0.96);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .section + .section { margin-top: 10px; }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .section-header h2 {
-      font-size: 18px;
-    }
-
-    .section-header span {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .section p {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-
-    /* MENÚ DEL DÍA */
-
-    .menu-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
-      gap: 16px;
-      margin-top: 8px;
-      align-items: flex-start;
-    }
-
-    .menu-list {
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
-    .menu-list h3 {
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-
-    .menu-items {
-      list-style: none;
-      margin-bottom: 8px;
-    }
-
-    .menu-items li {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-
-    .menu-item-name {
-      color: var(--text-main);
-    }
-
-    .menu-item-price {
-      color: var(--accent-strong);
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-
-    .menu-note {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .menu-image {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: #000;
-      box-shadow: var(--shadow-soft);
-      max-height: 220px;
-    }
-
-    .menu-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* AMBIENTE & UBICACIÓN */
-
-    .ambiente-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-      gap: 16px;
-      margin-top: 8px;
-      align-items: stretch;
-    }
-
-    .ambiente-text {
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
-    .ambiente-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .ambiente-img {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: #000;
-      max-height: 120px;
-    }
-
-    .ambiente-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .mapa-box {
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(5, 8, 22, 0.95);
-      border: 1px dashed rgba(129, 140, 196, 0.7);
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .mapa-box strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-
     footer {
-      margin-top: 28px;
+      margin-top: 26px;
       font-size: 11px;
       color: var(--text-muted);
       text-align: center;
@@ -408,14 +488,17 @@
         align-items: flex-start;
       }
 
-      .header-contact { text-align: left; }
-
-      .hero-soda {
-        grid-template-columns: minmax(0, 1fr);
+      .header-contact {
+        text-align: left;
       }
 
-      .hero-soda-image {
-        max-height: 230px;
+      .hero-top {
+        flex-direction: column;
+      }
+
+      .hero-bottom {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .menu-layout {
@@ -423,6 +506,10 @@
       }
 
       .ambiente-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .info-layout {
         grid-template-columns: minmax(0, 1fr);
       }
     }
@@ -443,45 +530,37 @@
     </header>
 
     <main>
-      <!-- HERO SODA -->
-      <section class="hero-soda">
-        <div class="hero-soda-image">
-          <!-- Usa la imagen exterior de la soda -->
-          <img src="soda-exterior-1.png" alt="Fachada de la soda El Sabor Tico">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-top">
+          <div class="hero-copy">
+            <h1>Soda <span>"El Sabor Tico"</span></h1>
+            <p>
+              Esta es una página de demostración. No corresponde a una soda real (a menos que tú la quieras usar 😄).
+              La idea es mostrar cómo podría verse una web sencilla para una soda o comedor de barrio.
+            </p>
+          </div>
+          <div class="hero-badge">
+            <span>Demo web para soda</span>
+            Ejemplo de estructura simple centrada en el menú del día.
+          </div>
         </div>
-        <div class="hero-soda-body">
-          <h1>Soda “El Sabor Tico”</h1>
-          <p class="hero-soda-subtitle">
-            Página de ejemplo para una soda de barrio con menú del día, precios visibles y botón directo a WhatsApp.
-          </p>
-
-          <div class="hero-soda-tags">
-            <span class="hero-tag">menú del día</span>
-            <span class="hero-tag">comida casera</span>
-            <span class="hero-tag">whatsapp directo</span>
+        <div class="hero-bottom">
+          <div class="hero-bottom-left">
+            <div class="hero-tags">
+              <span class="tag">MENÚ DEL DÍA</span>
+              <span class="tag">HORARIO</span>
+              <span class="tag">UBICACIÓN</span>
+              <span class="tag">WHATSAPP</span>
+            </div>
+            <div class="hero-note">
+              Esta demo está pensada para sodas en Costa Rica que quieren algo claro y rápido de entender.
+            </div>
           </div>
-
-          <p>
-            Este demo muestra cómo se vería una web sencilla: el cliente ve rápidamente el menú del día,
-            el horario y dónde está ubicada la soda. Ideal para sodas cerca de colegios, zonas industriales
-            o barrios residenciales.
-          </p>
-
-          <div class="hero-soda-cta">
-            <a href="https://wa.me/50664305227?text=Hola%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20como%20la%20de%20la%20Soda%20El%20Sabor%20Tico."
-               target="_blank"
-               rel="noopener"
-               class="btn btn-primary">
-              Quiero una web así
-            </a>
-            <a href="index.html#contacto" class="btn btn-secondary">
-              Volver a Zamaha
-            </a>
+          <div class="hero-bottom-right">
+            <strong>Zamaha · Diseño simple</strong>
+            Imágenes, colores y textos se pueden adaptar al estilo real de tu soda.
           </div>
-
-          <p class="hero-note">
-            * Esta es una página de demostración. No corresponde a una soda real (a menos que la quieras usar tú 😄).
-          </p>
         </div>
       </section>
 
@@ -499,37 +578,41 @@
 
         <div class="menu-layout">
           <div class="menu-list">
-            <h3>Platos de hoy</h3>
-            <ul class="menu-items">
-              <li>
-                <span class="menu-item-name">Casado de bistec</span>
-                <span class="menu-item-price">₡3,500</span>
-              </li>
-              <li>
-                <span class="menu-item-name">Pollo en salsa + puré</span>
-                <span class="menu-item-price">₡3,200</span>
-              </li>
-              <li>
-                <span class="menu-item-name">Olla de carne</span>
-                <span class="menu-item-price">₡3,800</span>
-              </li>
-              <li>
-                <span class="menu-item-name">Gallo de salchichón (2 und.)</span>
-                <span class="menu-item-price">₡1,200</span>
-              </li>
-            </ul>
+            <div class="menu-block">
+              <div class="menu-block-title">Platos de hoy</div>
+              <ul class="menu-items">
+                <li class="menu-item">
+                  <span class="menu-item-name">Casado de bistec</span>
+                  <span class="menu-item-price">₡3,500</span>
+                </li>
+                <li class="menu-item">
+                  <span class="menu-item-name">Pollo en salsa + puré</span>
+                  <span class="menu-item-price">₡3,200</span>
+                </li>
+                <li class="menu-item">
+                  <span class="menu-item-name">Olla de carne</span>
+                  <span class="menu-item-price">₡3,800</span>
+                </li>
+                <li class="menu-item">
+                  <span class="menu-item-name">Gallo de salchichón (2 und.)</span>
+                  <span class="menu-item-price">₡1,200</span>
+                </li>
+              </ul>
+            </div>
 
-            <h3>Bebidas</h3>
-            <ul class="menu-items">
-              <li>
-                <span class="menu-item-name">Refresco natural</span>
-                <span class="menu-item-price">₡800</span>
-              </li>
-              <li>
-                <span class="menu-item-name">Café chorreado</span>
-                <span class="menu-item-price">₡700</span>
-              </li>
-            </ul>
+            <div class="menu-block">
+              <div class="menu-block-title">Bebidas</div>
+              <ul class="menu-items">
+                <li class="menu-item">
+                  <span class="menu-item-name">Refresco natural</span>
+                  <span class="menu-item-price">₡800</span>
+                </li>
+                <li class="menu-item">
+                  <span class="menu-item-name">Café chorreado</span>
+                  <span class="menu-item-price">₡700</span>
+                </li>
+              </ul>
+            </div>
 
             <p class="menu-note">
               * Los precios son de ejemplo. En una web real tú podrías actualizar este bloque
@@ -538,7 +621,6 @@
           </div>
 
           <div class="menu-image">
-            <!-- Imagen del menú o de los platos -->
             <img src="soda-menu-1.png" alt="Ejemplo del menú de la soda">
           </div>
         </div>
@@ -559,590 +641,90 @@
         <div class="ambiente-layout">
           <div class="ambiente-text">
             <p>
-              La “Soda El Sabor Tico” está pensada como un lugar sencillo, limpio y acogedor, con mesas tipo comedor
-              y un ambiente familiar. En la web se pueden mostrar 2 o 3 fotos claves del interior del local para que
-              el cliente se haga una idea del espacio.
+              La "Soda El Sabor Tico" está pensada como un lugar sencillo, limpio y acogedor, con
+              mesas tipo comedor y un ambiente familiar. En la web se pueden mostrar 2 o 3 fotos
+              claves del interior del local para que el cliente se haga una idea del espacio.
             </p>
             <p>
               También se puede añadir un pequeño mapa o texto con puntos de referencia, por ejemplo:
-              “200 m norte de la escuela del barrio, frente a la cancha de fútbol”.
+              "200 m norte de la escuela del barrio, frente a la cancha de fútbol".
             </p>
 
-            <div class="mapa-box">
+            <div class="ubicacion-box">
               <strong>Ejemplo de texto de ubicación</strong>
-              De la parada de buses principal de Siquirres, 150 m oeste y 50 m sur, contiguo a la ferretería del
-              barrio. Parqueo al frente y entregas a domicilio dentro del centro de Siquirres.
+              De la parada de buses principal de Siquirres, 150 m oeste y 50 m sur, contiguo a la
+              ferretería del barrio. Parqueo al frente y entregas a domicilio dentro del centro de Siquirres.
             </div>
           </div>
 
-          <div class="ambiente-grid">
-            <!-- Dos vistas del interior / detalles -->
-            <div class="ambiente-img">
-              <img src="soda-interior-1.png" alt="Interior de la soda con mesas y barra de servicio">
+          <div class="ambiente-gallery">
+            <div class="ambiente-photo">
+              <img src="soda-interior-1.png" alt="Interior de la soda con mesas y barra">
             </div>
-            <div class="ambiente-img">
+            <div class="ambiente-photo">
+              <img src="soda-interior-2.png" alt="Detalle de la barra de servicio de la soda">
+            </div>
+            <div class="ambiente-photo">
               <img src="soda-exterior-1.png" alt="Vista exterior de la soda desde la calle">
             </div>
+            <div class="ambiente-photo">
+              <img src="soda-exterior-2.png" alt="Entrada de la soda con rótulo visible">
+            </div>
           </div>
+        </div>
+      </section>
+
+      <!-- INFO GENERAL Y CTA -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Información general y contacto</h2>
+          <span>detalle editable</span>
+        </div>
+
+        <p>
+          En una web real, aquí se mostrarían los datos específicos de la soda: horario, teléfono,
+          método principal para pedidos (WhatsApp, llamada, redes sociales) y algunas notas adicionales.
+        </p>
+
+        <div class="info-layout">
+          <div class="info-card">
+            <h3>Ejemplo de horario</h3>
+            <ul class="info-list">
+              <li>Lunes a viernes · 10:00 a. m. – 7:00 p. m.</li>
+              <li>Sábado · 10:00 a. m. – 5:00 p. m.</li>
+              <li>Domingo cerrado (o solo mediodía, según la soda).</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3>Ejemplo de formas de contacto</h3>
+            <ul class="info-list">
+              <li>WhatsApp para pedidos y consultas rápidas.</li>
+              <li>Llamadas para pedidos grandes o eventos.</li>
+              <li>Opcional: Facebook o Instagram para fotos de platos y promos.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a href="https://wa.me/50664305227?text=Hola%20Zamaha,%20me%20gustar%C3%ADa%20una%20web%20para%20mi%20soda."
+             class="btn btn-primary btn-small" target="_blank" rel="noopener">
+            Quiero una web como esta
+          </a>
+          <a href="index.html#ejemplos-web" class="btn btn-secondary btn-small">
+            Volver al catálogo de ejemplos
+          </a>
         </div>
       </section>
     </main>
 
     <footer>
-      Demo creada por Zamaha · Ejemplo de página web para una soda de barrio.
+      © <span id="year"></span> Zamaha · Demo de sitio web para soda.
     </footer>
   </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Soda El Sabor Tico | Ejemplo Zamaha</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Ejemplo de página web sencilla para una soda típica en Costa Rica, diseñada por Zamaha.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="zamaha-logo.png" type="image/png" />
 
-  <style>
-    :root {
-      --bg-main: #050816;
-      --bg-card: #0c1224;
-      --accent: #ffb74d;
-      --accent-strong: #ff9800;
-      --text-main: #fefaf5;
-      --text-soft: #fbe0b9;
-      --text-muted: #e0c9a8;
-      --border-soft: rgba(255, 255, 255, 0.12);
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --radius-pill: 999px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.65);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #3b2816, #050816 60%);
-      color: var(--text-main);
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 20px 18px 60px;
-    }
-
-    header {
-      padding: 14px 22px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(63, 38, 13, 0.96), rgba(10, 7, 3, 0.98));
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 22px;
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: center;
-    }
-
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .brand-name {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .brand-name span {
-      color: var(--accent-strong);
-    }
-
-    .brand-tagline {
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
-    nav {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      font-size: 13px;
-    }
-
-    nav a {
-      padding: 6px 12px;
-      border-radius: var(--radius-pill);
-      border: 1px solid transparent;
-      color: var(--text-soft);
-      cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
-    }
-
-    nav a:hover {
-      background: rgba(255, 152, 0, 0.18);
-      border-color: rgba(255, 224, 178, 0.7);
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      border-radius: var(--radius-pill);
-      padding: 7px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #3b2006;
-      border: 1px solid rgba(255, 224, 178, 0.85);
-      box-shadow: 0 14px 30px rgba(255, 152, 0, 0.6);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    /* HERO */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 24px;
-      align-items: center;
-      padding: 20px 22px;
-      border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top left, rgba(255, 183, 77, 0.26), rgba(5, 8, 22, 0.98));
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .hero-title {
-      font-size: 26px;
-      margin-bottom: 8px;
-    }
-
-    .hero-title span {
-      color: var(--accent-strong);
-    }
-
-    .hero-sub {
-      font-size: 14px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 11px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 224, 178, 0.85);
-      background: rgba(63, 38, 13, 0.9);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      margin-bottom: 10px;
-    }
-
-    .hero-list {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      padding-left: 16px;
-    }
-
-    .hero-list li {
-      margin-bottom: 3px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-top: 4px;
-    }
-
-    .hero-note {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .hero-right {
-      border-radius: var(--radius-md);
-      background: linear-gradient(145deg, rgba(255, 171, 64, 0.4), rgba(121, 85, 72, 0.9));
-      padding: 14px 14px 16px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255, 224, 178, 0.75);
-    }
-
-    .hero-right h2 {
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-
-    .menu-day {
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .menu-items {
-      font-size: 12px;
-      color: #fff8e1;
-      margin-bottom: 6px;
-      padding-left: 16px;
-    }
-
-    .menu-items li {
-      margin-bottom: 3px;
-    }
-
-    .menu-price {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .menu-note {
-      font-size: 11px;
-      opacity: 0.9;
-    }
-
-    /* SECCIONES */
-
-    section {
-      scroll-margin-top: 80px;
-    }
-
-    .section-card {
-      padding: 18px 20px 18px;
-      border-radius: var(--radius-lg);
-      background: rgba(6, 7, 20, 0.98);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .section-title {
-      font-size: 18px;
-      margin-bottom: 4px;
-    }
-
-    .section-sub {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .two-cols {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 18px;
-    }
-
-    .menu-block {
-      border-radius: var(--radius-md);
-      background: rgba(63, 38, 13, 0.85);
-      padding: 12px 14px;
-      border: 1px solid rgba(255, 224, 178, 0.8);
-      font-size: 12px;
-    }
-
-    .menu-block h3 {
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .menu-cols {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 12px;
-      margin-top: 6px;
-    }
-
-    .menu-list {
-      list-style: none;
-      font-size: 12px;
-    }
-
-    .menu-list li {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 3px;
-    }
-
-    .menu-list span.price {
-      margin-left: 10px;
-    }
-
-    .info-block {
-      border-radius: var(--radius-md);
-      background: rgba(10, 7, 3, 0.9);
-      padding: 12px 14px;
-      border: 1px solid rgba(255, 224, 178, 0.6);
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .info-block strong {
-      color: var(--accent-strong);
-    }
-
-    .info-list {
-      font-size: 12px;
-      margin-top: 4px;
-      padding-left: 16px;
-      color: var(--text-muted);
-    }
-
-    .info-list li {
-      margin-bottom: 3px;
-    }
-
-    /* UBICACIÓN */
-
-    .map-fake {
-      margin-top: 8px;
-      border-radius: var(--radius-md);
-      background: linear-gradient(135deg, #4e342e, #3e2723);
-      padding: 10px 12px;
-      font-size: 11px;
-      color: #ffccbc;
-      border: 1px solid rgba(255, 224, 178, 0.8);
-    }
-
-    .map-fake div {
-      margin-bottom: 2px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      margin-top: 26px;
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    footer a {
-      color: var(--accent-strong);
-      text-decoration: underline;
-    }
-
-    @media (max-width: 880px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-      }
-
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .two-cols {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <header>
-      <div class="brand">
-        <div class="brand-name">SODA <span>EL SABOR TICO</span></div>
-        <div class="brand-tagline">Comidas caseras, menú del día y sabor de casa.</div>
-      </div>
-      <nav>
-        <a href="#menu">Menú</a>
-        <a href="#horario">Horario</a>
-        <a href="#ubicacion">Ubicación</a>
-        <a href="#contacto">Contacto</a>
-        <a href="index.html" class="btn-primary">Sitio creado por Zamaha</a>
-      </nav>
-    </header>
-
-    <main>
-      <!-- HERO -->
-      <section class="hero" id="inicio">
-        <div>
-          <div class="hero-badge">Menú del día · Para llevar y comer aquí</div>
-          <h1 class="hero-title">Comida casera con <span>sabor tico</span> todos los días</h1>
-          <p class="hero-sub">
-            Platos corridos, casados, sopas y desayunos al estilo de soda de barrio. 
-            Para trabajadores, estudiantes y vecinos que quieren comer rico sin complicarse.
-          </p>
-          <ul class="hero-list">
-            <li>✅ Menú del día de lunes a sábado.</li>
-            <li>✅ Opciones con y sin carne.</li>
-            <li>✅ Jugos naturales, café y postres caseros.</li>
-          </ul>
-          <div class="hero-actions">
-            <a class="btn-primary" href="https://wa.me/50660000000?text=Hola%2C%20quiero%20ver%20el%20men%C3%BA%20del%20d%C3%ADa%20de%20la%20soda%20El%20Sabor%20Tico" target="_blank" rel="noopener">
-              Pedir por WhatsApp
-            </a>
-            <span class="hero-note">Ejemplo de botón directo a WhatsApp para hacer pedidos.</span>
-          </div>
-        </div>
-        <div class="hero-right">
-          <h2>Menú del día (ejemplo)</h2>
-          <p class="menu-day">👩‍🍳 Hoy servimos:</p>
-          <ul class="menu-items">
-            <li>• Casado con bistec encebollado</li>
-            <li>• Casado con pollo en salsa</li>
-            <li>• Opción vegetariana con ensalada y torta de vegetales</li>
-          </ul>
-          <p class="menu-price">Desde ₡3,000 · incluye fresco natural.</p>
-          <p class="menu-note">
-            Nota: este contenido es solo un ejemplo visual de cómo se vería el menú en tu página.
-          </p>
-        </div>
-      </section>
-
-      <!-- MENÚ -->
-      <section class="section-card" id="menu">
-        <h2 class="section-title">Menú principal (ejemplo)</h2>
-        <p class="section-sub">
-          Sección pensada para mostrar de forma clara los platos más comunes de la soda.
-        </p>
-
-        <div class="two-cols">
-          <div class="menu-block">
-            <h3>Comidas corridas</h3>
-            <div class="menu-cols">
-              <ul class="menu-list">
-                <li><span>Casado con carne en salsa</span><span class="price">₡3,000</span></li>
-                <li><span>Casado con pollo</span><span class="price">₡3,000</span></li>
-                <li><span>Casado con pescado empanizado</span><span class="price">₡3,200</span></li>
-                <li><span>Arroz con pollo</span><span class="price">₡2,800</span></li>
-              </ul>
-              <ul class="menu-list">
-                <li><span>Opciones vegetarianas</span><span class="price">₡2,800</span></li>
-                <li><span>Sopas (según día)</span><span class="price">₡2,500</span></li>
-                <li><span>Desayunos típicos</span><span class="price">₡2,000</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="info-block">
-            <strong>Cómo se vería tu menú aquí</strong>
-            <p>
-              En esta sección podemos mostrar tus platos fijos, el rango de precios
-              y un texto corto explicando qué incluye cada opción.
-            </p>
-            <ul class="info-list">
-              <li>• Texto editable para cambiar precios y platos cuando quieras.</li>
-              <li>• Se puede agregar un PDF de menú o una foto del menú impreso.</li>
-              <li>• También se puede dividir por: desayunos, almuerzos y bebidas.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- HORARIO Y UBICACIÓN -->
-      <section class="section-card" id="horario">
-        <h2 class="section-title">Horario y ubicación</h2>
-        <p class="section-sub">
-          Información básica para que tus clientes sepan cuándo y dónde encontrarte.
-        </p>
-
-        <div class="two-cols">
-          <div class="info-block">
-            <h3>Horario (ejemplo)</h3>
-            <ul class="info-list">
-              <li>Lunes a viernes: 7:00 a.m. – 4:00 p.m.</li>
-              <li>Sábados: 7:00 a.m. – 2:00 p.m.</li>
-              <li>Domingos: cerrado.</li>
-            </ul>
-            <p style="margin-top:6px;">
-              También podemos agregar un mensaje fijo de: <br>
-              <em>“Si quieres reservar almuerzos para un grupo, escríbenos por WhatsApp.”</em>
-            </p>
-          </div>
-
-          <div id="ubicacion">
-            <div class="info-block">
-              <h3>Ubicación (ejemplo)</h3>
-              <p>Soda ubicada en el centro de Siquirres, 50 m norte de la iglesia.</p>
-            </div>
-            <div class="map-fake">
-              <div>🗺️ Aquí se podría integrar un mapa de Google con la ubicación exacta.</div>
-              <div style="font-size:10px; margin-top:4px;">
-                En tu página real, Zamaha puede enlazar la ubicación directa a Google Maps para que tus clientes lleguen fácilmente.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACTO -->
-      <section class="section-card" id="contacto">
-        <h2 class="section-title">Contacto y pedidos</h2>
-        <p class="section-sub">
-          En esta sección podemos colocar todas las formas de contacto que uses para pedidos.
-        </p>
-
-        <div class="two-cols">
-          <div class="info-block">
-            <p><strong>Teléfono (ejemplo):</strong> 6000-0000</p>
-            <p><strong>WhatsApp (ejemplo):</strong> 6000-0000</p>
-            <p><strong>Redes sociales:</strong> Facebook e Instagram (opcional).</p>
-            <p style="margin-top:8px;">
-              También se puede agregar un pequeño formulario de contacto si lo deseas, 
-              pero para negocios pequeños, WhatsApp suele ser lo más práctico.
-            </p>
-          </div>
-          <div class="info-block">
-            <p>
-              Esta es una página de <strong>ejemplo</strong> diseñada por Zamaha para mostrar
-              cómo podría verse tu sitio.
-            </p>
-            <p style="margin-top:6px;">
-              Si quieres un sitio similar para tu soda o comedor:
-            </p>
-            <p style="margin-top:6px;">
-              👉 Visita <a href="index.html">la página principal de Zamaha</a> y solicita una cotización 
-              en la sección de contacto.
-            </p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      Ejemplo de diseño para soda · Creado por Zamaha · 
-      <a href="index.html">Volver a Zamaha</a>
-    </footer>
-  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
