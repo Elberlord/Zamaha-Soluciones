@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Café Monte Azul | Ejemplo Zamaha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Ejemplo de página web sencilla para una cafetería, diseñada por Zamaha.">
+  <meta name="description" content="Ejemplo de página web sencilla para una cafetería acogedora, diseñada por Zamaha.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
 
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #4e342e, #050816 60%);
+      background: radial-gradient(circle at top left, #0a0714, #020308);
       color: var(--text-main);
       min-height: 100vh;
     }
@@ -45,22 +45,22 @@
     }
 
     .page {
-      max-width: 1120px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 20px 18px 60px;
     }
 
     header {
-      padding: 14px 22px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(78, 52, 46, 0.96), rgba(27, 17, 13, 0.98));
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 22px;
       display: flex;
       justify-content: space-between;
-      gap: 18px;
       align-items: center;
+      gap: 18px;
+      padding: 14px 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(30, 18, 12, 0.96), rgba(8, 5, 3, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 22px;
     }
 
     .brand {
@@ -72,12 +72,12 @@
     .brand-name {
       font-size: 26px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     .brand-name span {
-      color: var(--text-soft);
+      color: var(--accent-strong);
     }
 
     .brand-tagline {
@@ -98,42 +98,37 @@
       border: 1px solid transparent;
       color: var(--text-soft);
       cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
     }
 
     nav a:hover {
       background: rgba(141, 110, 99, 0.28);
-      border-color: rgba(215, 204, 200, 0.9);
+      border-color: rgba(255, 224, 178, 0.8);
       transform: translateY(-1px);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      background: linear-gradient(135deg, #6d4c41, #8d6e63);
       border-radius: var(--radius-pill);
-      padding: 7px 16px;
-      font-size: 13px;
+      padding: 7px 14px;
+      color: #fff;
       font-weight: 600;
-      color: #2d1b14;
-      border: 1px solid rgba(215, 204, 200, 0.9);
-      box-shadow: 0 14px 30px rgba(109, 76, 65, 0.7);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
+      border: none;
+      box-shadow: 0 10px 20px rgba(109, 76, 65, 0.55);
+      white-space: nowrap;
     }
 
     .btn-primary:hover {
+      filter: brightness(1.05);
       transform: translateY(-1px);
     }
 
     main {
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 18px;
     }
-
-    /* HERO */
 
     .hero {
       display: grid;
@@ -142,7 +137,9 @@
       align-items: center;
       padding: 20px 22px;
       border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top left, rgba(141, 110, 99, 0.35), rgba(5, 8, 22, 0.98));
+      background:
+        linear-gradient(135deg, rgba(38, 23, 16, 0.96), rgba(8, 4, 4, 0.98)),
+        url('cafeteria-hero-1.jpg') center/cover no-repeat;
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
     }
@@ -153,7 +150,7 @@
     }
 
     .hero-title span {
-      color: var(--text-soft);
+      color: var(--accent-strong);
     }
 
     .hero-sub {
@@ -168,8 +165,8 @@
       gap: 8px;
       padding: 4px 11px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(215, 204, 200, 0.9);
-      background: rgba(62, 39, 35, 0.95);
+      border: 1px solid rgba(255, 224, 178, 0.9);
+      background: rgba(62, 39, 35, 0.96);
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.14em;
@@ -189,9 +186,9 @@
 
     .hero-actions {
       display: flex;
+      align-items: center;
       flex-wrap: wrap;
       gap: 10px;
-      align-items: center;
       margin-top: 4px;
     }
 
@@ -202,10 +199,10 @@
 
     .hero-right {
       border-radius: var(--radius-md);
-      background: linear-gradient(145deg, rgba(121, 85, 72, 0.55), rgba(62, 39, 35, 0.95));
+      background: linear-gradient(145deg, rgba(121, 85, 72, 0.45), rgba(62, 39, 35, 0.95));
       padding: 14px 14px 16px;
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(215, 204, 200, 0.9);
+      border: 1px solid rgba(255, 224, 178, 0.9);
     }
 
     .hero-right h2 {
@@ -213,21 +210,10 @@
       margin-bottom: 6px;
     }
 
-    .hero-right p {
-      font-size: 12px;
-      margin-bottom: 4px;
-    }
-
-    /* SECCIONES */
-
-    section {
-      scroll-margin-top: 80px;
-    }
-
     .section-card {
-      padding: 18px 20px 18px;
       border-radius: var(--radius-lg);
-      background: rgba(6, 7, 20, 0.98);
+      background: var(--bg-card);
+      padding: 16px 18px 18px;
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
     }
@@ -238,7 +224,7 @@
     }
 
     .section-sub {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-soft);
       margin-bottom: 10px;
     }
@@ -251,9 +237,9 @@
 
     .menu-block {
       border-radius: var(--radius-md);
-      background: rgba(62, 39, 35, 0.95);
+      background: rgba(38, 24, 20, 0.95);
       padding: 12px 14px;
-      border: 1px solid rgba(215, 204, 200, 0.9);
+      border: 1px solid rgba(255, 224, 178, 0.85);
       font-size: 12px;
     }
 
@@ -286,36 +272,62 @@
 
     .info-block {
       border-radius: var(--radius-md);
-      background: rgba(27, 17, 13, 0.95);
+      background: rgba(22, 14, 11, 0.96);
       padding: 12px 14px;
-      border: 1px solid rgba(215, 204, 200, 0.7);
+      border: 1px solid rgba(255, 224, 178, 0.7);
       font-size: 12px;
-      color: var(--text-soft);
     }
 
-    .info-block strong {
-      color: var(--text-soft);
+    .info-block h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
     }
 
     .info-list {
-      font-size: 12px;
+      margin-left: 14px;
       margin-top: 4px;
-      padding-left: 16px;
-      color: var(--text-muted);
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: var(--text-soft);
     }
 
-    .info-list li {
-      margin-bottom: 3px;
+    .highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #ffe0b2;
+      margin-top: 6px;
+    }
+
+    .contact-note {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .contact-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 7px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(7, 94, 84, 0.9);
+      color: #e0f2f1;
+      font-size: 12px;
+    }
+
+    .contact-whatsapp span {
+      font-weight: 600;
     }
 
     .map-fake {
-      margin-top: 8px;
       border-radius: var(--radius-md);
-      background: linear-gradient(135deg, #4e342e, #3e2723);
-      padding: 10px 12px;
-      font-size: 11px;
-      color: #ffe0b2;
-      border: 1px solid rgba(215, 204, 200, 0.9);
+      background: radial-gradient(circle at top, rgba(161, 136, 127, 0.35), rgba(22, 14, 11, 0.96));
+      padding: 12px 14px;
+      border: 1px solid rgba(188, 170, 164, 0.75);
+      font-size: 12px;
+      color: #efebe9;
     }
 
     .map-fake div {
@@ -330,8 +342,52 @@
     }
 
     footer a {
-      color: var(--text-soft);
+      color: var(--accent-strong);
       text-decoration: underline;
+    }
+
+    /* GALERÍA DE FOTOS DE PRODUCTO (MARKETING) */
+    .marketing-gallery {
+      margin-top: 14px;
+      border-radius: var(--radius-md);
+      background: rgba(33, 22, 17, 0.95);
+      padding: 12px 14px 14px;
+      border: 1px solid rgba(255, 224, 178, 0.7);
+      font-size: 12px;
+    }
+
+    .marketing-gallery h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .marketing-gallery p {
+      margin-bottom: 6px;
+      color: var(--text-soft);
+    }
+
+    .marketing-gallery-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .marketing-photo {
+      flex: 1 1 160px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #000;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .marketing-photo img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
     }
 
     @media (max-width: 880px) {
@@ -360,7 +416,7 @@
     <header>
       <div class="brand">
         <div class="brand-name">CAFÉ <span>MONTE AZUL</span></div>
-        <div class="brand-tagline">Café de especialidad, repostería y un espacio tranquilo para conversar.</div>
+        <div class="brand-tagline">Café de especialidad, repostería casera y ambiente tranquilo.</div>
       </div>
       <nav>
         <a href="#ambiente">Ambiente</a>
@@ -387,10 +443,10 @@
             <li>✅ Postres caseros y snacks salados.</li>
           </ul>
           <div class="hero-actions">
-            <a class="btn-primary" href="https://wa.me/50660000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20caf%C3%A9%20y%20repositer%C3%ADa%20de%20Caf%C3%A9%20Monte%20Azul" target="_blank" rel="noopener">
-              Consultar por WhatsApp
+            <a class="btn-primary" href="https://wa.me/50660000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Caf%C3%A9%20Monte%20Azul" target="_blank" rel="noopener">
+              Escribir por WhatsApp
             </a>
-            <span class="hero-note">En la página real también se pueden enlazar redes sociales.</span>
+            <span class="hero-note">Ejemplo de botón para reservas, pedidos o consultas.</span>
           </div>
         </div>
         <div class="hero-right">
@@ -445,6 +501,34 @@
         </div>
       </section>
 
+      <!-- FOTOS DE CAFÉS Y POSTRES / MARKETING -->
+      <section class="section-card" id="fotos">
+        <h2 class="section-title">Fotos que antojan al primer vistazo</h2>
+        <p class="section-sub">
+          Mostrar de cerca el café, la espuma perfecta y los postres hace que el visitante sienta ganas
+          de pasar al local o pedir para llevar.
+        </p>
+
+        <div class="marketing-gallery">
+          <h3>Fotos de producto estilo mercadeo (ejemplo)</h3>
+          <p>
+            Estas imágenes combinan primeros planos del café, la repostería y la mesa servida, con fondos
+            limpios y cálidos.
+          </p>
+          <div class="marketing-gallery-grid">
+            <div class="marketing-photo">
+              <img src="coffee-latte-art-1.jpg" alt="Taza de café latte con arte de leche en forma de corazón, sobre mesa de madera.">
+            </div>
+            <div class="marketing-photo">
+              <img src="coffee-pastry-1.jpg" alt="Café caliente junto a un croissant dorado y crujiente en un plato blanco.">
+            </div>
+            <div class="marketing-photo">
+              <img src="coffee-table-1.jpg" alt="Mesa con dos tazas de café, postres variados y manos compartiendo la merienda.">
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- UBICACIÓN Y HORARIO -->
       <section class="section-card" id="ubicacion">
         <h2 class="section-title">Ubicación y horario</h2>
@@ -470,11 +554,14 @@
             <div class="info-block">
               <h3>Ubicación (ejemplo)</h3>
               <p>En una esquina tranquila del centro, cerca del parque principal.</p>
+              <p>A pocos minutos caminando de las oficinas y comercios de la zona.</p>
             </div>
-            <div class="map-fake">
-              <div>🗺️ Aquí podríamos integrar un mapa de Google con la ubicación exacta del café.</div>
-              <div style="font-size:10px; margin-top:4px;">
-                También se puede enlazar un botón: “Cómo llegar” que abra Maps directamente.
+            <div class="map-fake" style="margin-top:8px;">
+              <div><strong>Mapa (referencia)</strong></div>
+              <div>200 m norte del parque central.</div>
+              <div>Contiguo a la librería del barrio.</div>
+              <div style="margin-top:6px; font-size:11px;">
+                Aquí se podría incrustar un mapa real de Google Maps con la dirección exacta.
               </div>
             </div>
           </div>
@@ -483,34 +570,51 @@
 
       <!-- CONTACTO -->
       <section class="section-card" id="contacto">
-        <h2 class="section-title">Contacto y reservaciones</h2>
+        <h2 class="section-title">Contacto y reservas</h2>
         <p class="section-sub">
-          Diferentes formas de contacto para reservas, encargos de repostería o eventos.
+          Usa esta sección para que los clientes puedan escribir, llamar o hacer reservas.
         </p>
 
         <div class="two-cols">
-          <div class="info-block">
-            <p><strong>Teléfono (ejemplo):</strong> 6000-0000</p>
-            <p><strong>WhatsApp (ejemplo):</strong> 6000-0000</p>
-            <p><strong>Correo (ejemplo):</strong> cafe@monteazul.cr</p>
-            <p style="margin-top:8px;">
-              También se puede integrar un pequeño formulario de reservación para grupos o eventos.
+          <div>
+            <p class="contact-note">
+              Aquí se puede colocar el número de teléfono, WhatsApp y enlaces a redes sociales.
+            </p>
+            <div class="contact-whatsapp">
+              <span>WhatsApp:</span> <span>+506 6000-0000</span>
+            </div>
+            <p class="contact-note" style="margin-top:8px;">
+              También puedes añadir enlaces a <strong>Instagram</strong> para mostrar fotos del café,
+              postres y eventos especiales.
             </p>
           </div>
-          <div class="info-block">
-            <p>
-              Esta página es un <strong>ejemplo</strong> creado por Zamaha para mostrar cómo 
-              podría verse el sitio de tu cafetería.
+
+          <div>
+            <p class="contact-note">
+              También podrías incluir un formulario de contacto sencillo con:
             </p>
-            <p style="margin-top:6px;">
-              Si quieres un sitio similar, adaptado a tu carta, fotos y estilo:
-            </p>
-            <p style="margin-top:6px;">
-              👉 Visita <a href="index.html">la página principal de Zamaha</a> y solicita una cotización 
-              en la sección de contacto.
+            <ul class="info-list">
+              <li>Nombre</li>
+              <li>Correo electrónico</li>
+              <li>Mensaje o solicitud de reserva</li>
+            </ul>
+            <p class="contact-note" style="margin-top:4px;">
+              Este formulario se puede configurar para que llegue directamente a tu correo.
             </p>
           </div>
         </div>
+
+        <p class="contact-note" style="margin-top:10px;">
+          Esta página es un <strong>ejemplo</strong> creado por Zamaha para mostrar cómo 
+          podría verse el sitio de tu cafetería.
+        </p>
+        <p class="contact-note" style="margin-top:6px;">
+          Si quieres un sitio similar, adaptado a tu carta, fotos y estilo:
+        </p>
+        <p class="contact-note" style="margin-top:6px;">
+          👉 Visita <a href="index.html">la página principal de Zamaha</a> y solicita una cotización 
+          en la sección de contacto.
+        </p>
       </section>
     </main>
 
