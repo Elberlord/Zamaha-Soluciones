@@ -458,20 +458,35 @@
       align-items: stretch;
     }
 
+    /* Imagen del equipo: miniatura + zoom en hover */
     .equipo-image {
+      position: relative;
       border-radius: var(--radius-md);
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: #000;
       box-shadow: var(--shadow-soft);
-      max-height: 220px;
+      max-height: 180px;
+      height: 180px;
     }
 
     .equipo-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      transform-origin: center center;
+    }
+
+    .equipo-image:hover {
+      overflow: visible;
+      z-index: 30;
+    }
+
+    .equipo-image:hover img {
+      transform: scale(1.7);
+      box-shadow: var(--shadow-soft);
     }
 
     .equipo-body h3 {
@@ -914,6 +929,62 @@
     .wa-text {
       font-size: 13px;
       font-weight: 500;
+    }
+
+    /* Lightbox para ver imágenes a pantalla completa (desktop y móvil) */
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .image-lightbox.visible {
+      display: flex;
+    }
+
+    .image-lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+    }
+
+    .image-lightbox-content {
+      position: relative;
+      max-width: min(90vw, 900px);
+      max-height: min(90vh, 600px);
+      padding: 10px;
+      border-radius: 18px;
+      background: rgba(5, 8, 22, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: var(--shadow-soft);
+      z-index: 1;
+    }
+
+    .image-lightbox-content img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .image-lightbox-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(12, 18, 36, 0.98);
+      color: var(--text-soft);
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* RESPONSIVE */
@@ -1368,6 +1439,15 @@
     </footer>
   </div>
 
+  <!-- Lightbox para imagen del equipo -->
+  <div class="image-lightbox" id="imageLightbox">
+    <div class="image-lightbox-backdrop" id="imageLightboxBackdrop"></div>
+    <div class="image-lightbox-content">
+      <button class="image-lightbox-close" id="imageLightboxClose" aria-label="Cerrar imagen">✕</button>
+      <img src="" alt="" id="imageLightboxImage">
+    </div>
+  </div>
+
   <!-- BOT FLOTANTE -->
   <div class="bot-widget" id="botWidget">
     <button class="bot-toggle" id="botToggle" aria-label="Abrir asistente Zamaha">💬</button>
@@ -1646,6 +1726,45 @@
       window.addEventListener('resize', updateCarousel);
       updateCarousel();
     }
+
+    // Lightbox para imagen del equipo (PC y celular)
+    (function () {
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImg = document.getElementById('imageLightboxImage');
+      const lightboxClose = document.getElementById('imageLightboxClose');
+      const lightboxBackdrop = document.getElementById('imageLightboxBackdrop');
+
+      if (!lightbox || !lightboxImg) return;
+
+      function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('visible');
+        lightboxImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      [lightboxClose, lightboxBackdrop].forEach(el => {
+        if (el) el.addEventListener('click', closeLightbox);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+      });
+
+      const img = document.querySelector('.equipo-image img');
+      if (img) {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', () => {
+          openLightbox(img.src, img.alt);
+        });
+      }
+    })();
   </script>
 </body>
 </html>
