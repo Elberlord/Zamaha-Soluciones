@@ -996,12 +996,17 @@
       width: 26px;
       height: 26px;
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.18);
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
-      font-weight: 600;
+    }
+
+    .wa-icon-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .wa-text {
@@ -1421,7 +1426,7 @@
           <p><strong>Correo:</strong> <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></p>
           <p><strong>Horario:</strong> Lunes a sábado · 9:00 a.m. – 5:00 p.m. (hora de Costa Rica)</p>
 
-          <!-- RELOJ MOVIDO AQUÍ -->
+          <!-- RELOJ -->
           <div class="clock-box">
             <span class="clock-label">Hora actual en Costa Rica</span>
             <span class="clock-time" id="crClock">--:--:--</span>
@@ -1503,7 +1508,7 @@
               </select>
             </div>
 
-            <!-- Campos de agenda (solo si elige agendar visita o asesoría) -->
+            <!-- Campos de agenda -->
             <div id="scheduleFields" class="schedule-grid">
               <div>
                 <label for="tipoAtencion">Tipo de atención para agendar</label>
@@ -1535,7 +1540,7 @@
               </div>
             </div>
 
-            <!-- Calendly (se muestra solo al elegir agendar) -->
+            <!-- Calendly -->
             <div id="calendlyContainer" class="calendly-container">
               <div
                 class="calendly-inline-widget"
@@ -1603,7 +1608,9 @@
      target="_blank"
      rel="noopener"
      aria-label="Escríbenos por WhatsApp">
-    <span class="wa-icon">WA</span>
+    <span class="wa-icon">
+      <img src="icono-whatsapp.png" alt="WhatsApp" class="wa-icon-img">
+    </span>
     <span class="wa-text">WhatsApp</span>
   </a>
 
