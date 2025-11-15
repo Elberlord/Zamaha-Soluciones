@@ -423,7 +423,7 @@
       color: #e8f5e9;
     }
 
-    /* CARRUSEL + HORA COSTA RICA */
+    /* CARRUSEL */
 
     .carousel-section {
       margin-top: -10px;
@@ -432,46 +432,6 @@
       background: linear-gradient(135deg, #050816, #07132a);
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
-    }
-
-    .carousel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-
-    .carousel-header h2 {
-      font-size: 18px;
-      margin-bottom: 2px;
-    }
-
-    .carousel-header p {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .clock-box {
-      padding: 8px 12px;
-      border-radius: var(--radius-md);
-      background: rgba(4, 10, 30, 0.95);
-      border: 1px solid rgba(129, 140, 196, 0.6);
-      font-size: 11px;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 2px;
-      min-width: 160px;
-    }
-
-    .clock-label {
-      color: var(--text-muted);
-    }
-
-    .clock-time {
-      font-weight: 600;
-      letter-spacing: 0.08em;
     }
 
     .carousel-frame {
@@ -532,15 +492,6 @@
     }
 
     @media (max-width: 880px) {
-      .carousel-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .clock-box {
-        align-items: flex-start;
-      }
-
       .carousel-slide {
         min-width: 220px;
         max-width: 220px;
@@ -575,6 +526,29 @@
     .contact-info a {
       color: var(--accent-strong);
       font-weight: 500;
+    }
+
+    .clock-box {
+      margin: 6px 0 10px;
+      padding: 8px 12px;
+      border-radius: var(--radius-md);
+      background: rgba(4, 10, 30, 0.95);
+      border: 1px solid rgba(129, 140, 196, 0.6);
+      font-size: 11px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      min-width: 160px;
+    }
+
+    .clock-label {
+      color: var(--text-muted);
+    }
+
+    .clock-time {
+      font-weight: 600;
+      letter-spacing: 0.08em;
     }
 
     .attach-box {
@@ -1042,19 +1016,8 @@
         </section>
       </section>
 
-      <!-- CARRUSEL + HORA COSTA RICA -->
+      <!-- CARRUSEL (SIN TEXTO) -->
       <section class="carousel-section">
-        <div class="carousel-header">
-          <div>
-            <h2>Algunos trabajos recientes</h2>
-            <p>Imágenes ilustrativas de instalaciones y servicios Zamaha.</p>
-          </div>
-          <div class="clock-box">
-            <span class="clock-label">Hora actual en Costa Rica</span>
-            <span class="clock-time" id="crClock">--:--:--</span>
-          </div>
-        </div>
-
         <div class="carousel-frame">
           <button class="carousel-arrow" id="carouselPrev" type="button" aria-label="Imagen anterior">‹</button>
           <div class="carousel-window">
@@ -1088,6 +1051,12 @@
           <p><strong>Teléfono:</strong> <a href="tel:+50664305227">+506 6430-5227</a></p>
           <p><strong>Correo:</strong> <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></p>
           <p><strong>Horario:</strong> Lunes a sábado · 9:00 a.m. – 5:00 p.m. (hora de Costa Rica)</p>
+
+          <!-- RELOJ MOVIDO AQUÍ -->
+          <div class="clock-box">
+            <span class="clock-label">Hora actual en Costa Rica</span>
+            <span class="clock-time" id="crClock">--:--:--</span>
+          </div>
 
           <div class="attach-box">
             Si quieres, puedes adjuntar fotos o un pequeño video de tu instalación actual.
@@ -1287,17 +1256,17 @@
     // Botones "Cotizar ..." y "Añadir a cotización"
     const serviceButtons = document.querySelectorAll('.js-cotizar');
     const addButtons = document.querySelectorAll('.js-agregar');
-    const servicePills = document.querySelectorAll('.service-pill-btn');
+    const servicePillsBtns = document.querySelectorAll('.service-pill-btn');
     const servicesField = document.getElementById('servicesField');
 
     function updateServicesField() {
-      const selected = Array.from(servicePills)
+      const selected = Array.from(servicePillsBtns)
         .filter(p => p.classList.contains('active'))
         .map(p => p.dataset.service);
       servicesField.value = selected.join(', ');
     }
 
-    servicePills.forEach(pill => {
+    servicePillsBtns.forEach(pill => {
       pill.addEventListener('click', () => {
         pill.classList.toggle('active');
         updateServicesField();
@@ -1307,7 +1276,7 @@
     serviceButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
-        servicePills.forEach(pill => {
+        servicePillsBtns.forEach(pill => {
           if (pill.dataset.service === service) {
             pill.classList.add('active');
           }
@@ -1320,7 +1289,7 @@
     addButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
-        servicePills.forEach(pill => {
+        servicePillsBtns.forEach(pill => {
           if (pill.dataset.service === service) {
             pill.classList.add('active');
           }
