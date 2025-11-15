@@ -34,7 +34,7 @@
 
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #4e1f1b, #050816 60%);
+      background: radial-gradient(circle at top left, #0a0714, #020308);
       color: var(--text-main);
       min-height: 100vh;
     }
@@ -45,22 +45,22 @@
     }
 
     .page {
-      max-width: 1120px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 20px 18px 60px;
     }
 
     header {
-      padding: 14px 22px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(74, 20, 20, 0.96), rgba(10, 6, 4, 0.98));
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 22px;
       display: flex;
       justify-content: space-between;
-      gap: 18px;
       align-items: center;
+      gap: 18px;
+      padding: 14px 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(29, 6, 4, 0.96), rgba(7, 2, 2, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 22px;
     }
 
     .brand {
@@ -98,42 +98,38 @@
       border: 1px solid transparent;
       color: var(--text-soft);
       cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
     }
 
     nav a:hover {
-      background: rgba(229, 57, 53, 0.22);
+      background: rgba(229, 57, 53, 0.2);
       border-color: rgba(255, 205, 210, 0.8);
       transform: translateY(-1px);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      background: linear-gradient(135deg, #e53935, #ff7043);
       border-radius: var(--radius-pill);
-      padding: 7px 16px;
-      font-size: 13px;
+      padding: 7px 14px;
+      color: #fff;
       font-weight: 600;
-      color: #3b0504;
-      border: 1px solid rgba(255, 205, 210, 0.9);
-      box-shadow: 0 14px 30px rgba(229, 57, 53, 0.7);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
+      border: none;
+      box-shadow: 0 10px 20px rgba(229, 57, 53, 0.55);
+      white-space: nowrap;
     }
 
     .btn-primary:hover {
+      filter: brightness(1.05);
       transform: translateY(-1px);
     }
 
     main {
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 18px;
     }
 
-    /* HERO */
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
@@ -141,7 +137,9 @@
       align-items: center;
       padding: 20px 22px;
       border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top left, rgba(255, 112, 67, 0.28), rgba(5, 8, 22, 0.98));
+      background:
+        linear-gradient(135deg, rgba(26, 8, 8, 0.96), rgba(8, 4, 4, 0.98)),
+        url('pizzeria-hero-1.jpg') center/cover no-repeat;
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
     }
@@ -188,9 +186,9 @@
 
     .hero-actions {
       display: flex;
+      align-items: center;
       flex-wrap: wrap;
       gap: 10px;
-      align-items: center;
       margin-top: 4px;
     }
 
@@ -214,35 +212,26 @@
 
     .promo {
       font-size: 13px;
-      margin-bottom: 4px;
+      font-weight: 600;
+      margin-bottom: 6px;
     }
 
     .promo-list {
       font-size: 12px;
-      color: #ffebee;
-      padding-left: 16px;
+      color: var(--text-soft);
+      margin-left: 12px;
       margin-bottom: 6px;
-    }
-
-    .promo-list li {
-      margin-bottom: 3px;
     }
 
     .promo-note {
       font-size: 11px;
-      opacity: 0.9;
-    }
-
-    /* SECCIONES */
-
-    section {
-      scroll-margin-top: 80px;
+      color: var(--text-muted);
     }
 
     .section-card {
-      padding: 18px 20px 18px;
       border-radius: var(--radius-lg);
-      background: rgba(6, 7, 20, 0.98);
+      background: var(--bg-card);
+      padding: 16px 18px 18px;
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
     }
@@ -253,7 +242,7 @@
     }
 
     .section-sub {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-soft);
       margin-bottom: 10px;
     }
@@ -303,34 +292,60 @@
       border-radius: var(--radius-md);
       background: rgba(10, 6, 4, 0.9);
       padding: 12px 14px;
-      border: 1px solid rgba(255, 205, 210, 0.6);
+      border: 1px solid rgba(255, 205, 210, 0.7);
+      font-size: 12px;
+    }
+
+    .info-block h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .info-list {
+      margin-left: 14px;
+      margin-top: 4px;
+      margin-bottom: 4px;
       font-size: 12px;
       color: var(--text-soft);
     }
 
-    .info-block strong {
-      color: var(--accent-strong);
-    }
-
-    .info-list {
+    .highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 12px;
-      margin-top: 4px;
-      padding-left: 16px;
-      color: var(--text-muted);
+      color: #ffccbc;
+      margin-top: 6px;
     }
 
-    .info-list li {
-      margin-bottom: 3px;
+    .contact-note {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .contact-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 7px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(7, 94, 84, 0.9);
+      color: #e0f2f1;
+      font-size: 12px;
+    }
+
+    .contact-whatsapp span {
+      font-weight: 600;
     }
 
     .map-fake {
-      margin-top: 8px;
       border-radius: var(--radius-md);
-      background: linear-gradient(135deg, #2e7d32, #1b5e20);
-      padding: 10px 12px;
-      font-size: 11px;
+      background: radial-gradient(circle at top, rgba(76, 175, 80, 0.35), rgba(1, 5, 1, 0.96));
+      padding: 12px 14px;
+      border: 1px solid rgba(200, 230, 201, 0.75);
+      font-size: 12px;
       color: #e8f5e9;
-      border: 1px solid rgba(200, 230, 201, 0.9);
     }
 
     .map-fake div {
@@ -347,6 +362,50 @@
     footer a {
       color: var(--accent-strong);
       text-decoration: underline;
+    }
+
+    /* GALERÍA DE FOTOS DE PRODUCTO (MARKETING) */
+    .marketing-gallery {
+      margin-top: 14px;
+      border-radius: var(--radius-md);
+      background: rgba(26, 8, 8, 0.94);
+      padding: 12px 14px 14px;
+      border: 1px solid rgba(255, 205, 210, 0.85);
+      font-size: 12px;
+    }
+
+    .marketing-gallery h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .marketing-gallery p {
+      margin-bottom: 6px;
+      color: var(--text-soft);
+    }
+
+    .marketing-gallery-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .marketing-photo {
+      flex: 1 1 160px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #000;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .marketing-photo img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
     }
 
     @media (max-width: 880px) {
@@ -402,7 +461,7 @@
             <li>✅ Servicio a domicilio en la zona.</li>
           </ul>
           <div class="hero-actions">
-            <a class="btn-primary" href="https://wa.me/50660000000?text=Hola%2C%20quiero%20aprovechar%20la%20promo%20de%20pizzas%20de%20Pizzer%C3%ADa%20La%20Esquina" target="_blank" rel="noopener">
+            <a class="btn-primary" href="https://wa.me/50660000000?text=Hola%2C%20quiero%20hacer%20un%20pedido%20a%20Pizzer%C3%ADa%20La%20Esquina" target="_blank" rel="noopener">
               Pedir por WhatsApp
             </a>
             <span class="hero-note">Ejemplo de botón directo a WhatsApp para pedidos de pizza.</span>
@@ -464,6 +523,34 @@
         </div>
       </section>
 
+      <!-- FOTOS DE PIZZAS / MARKETING -->
+      <section class="section-card" id="fotos">
+        <h2 class="section-title">Haz que las fotos vendan la pizza</h2>
+        <p class="section-sub">
+          Imágenes grandes, con buen contraste y primeros planos del queso derretido ayudan a que el cliente
+          quiera ordenar apenas abre la página.
+        </p>
+
+        <div class="marketing-gallery">
+          <h3>Fotos de producto estilo mercadeo (ejemplo)</h3>
+          <p>
+            Aquí usamos tomas cercanas de las pizzas, con fondos oscuros o de madera, para resaltar el color
+            del queso, la salsa y los ingredientes.
+          </p>
+          <div class="marketing-gallery-grid">
+            <div class="marketing-photo">
+              <img src="pizza-close-1.jpg" alt="Pizza de pepperoni recién salida del horno, vista cenital, con queso derretido y borde dorado.">
+            </div>
+            <div class="marketing-photo">
+              <img src="pizza-slice-1.jpg" alt="Mano levantando una rebanada de pizza con el queso estirándose en hilos largos.">
+            </div>
+            <div class="marketing-photo">
+              <img src="pizza-table-1.jpg" alt="Mesa de madera con varias pizzas, bebidas y manos compartiendo la comida.">
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- DELIVERY Y ZONA -->
       <section class="section-card" id="delivery">
         <h2 class="section-title">Delivery y zona de cobertura</h2>
@@ -473,29 +560,22 @@
 
         <div class="two-cols">
           <div class="info-block">
-            <h3>Horarios de delivery (ejemplo)</h3>
+            <h3>Horarios de reparto (ejemplo)</h3>
             <ul class="info-list">
               <li>Lunes a jueves: 5:00 p.m. – 9:00 p.m.</li>
-              <li>Viernes y sábado: 5:00 p.m. – 10:00 p.m.</li>
-              <li>Domingos: 5:00 p.m. – 8:00 p.m.</li>
+              <li>Viernes y sábado: 5:00 p.m. – 10:30 p.m.</li>
+              <li>Domingos: 4:00 p.m. – 9:00 p.m.</li>
             </ul>
-            <p style="margin-top:6px;">
-              Se puede indicar un monto mínimo para pedidos a domicilio y recargos
-              por zonas más lejanas.
+            <p>
+              Se puede aclarar si el delivery tiene costo adicional o si a partir de cierto monto es gratis.
             </p>
           </div>
 
-          <div>
-            <div class="info-block">
-              <h3>Zonas de entrega (ejemplo)</h3>
-              <p>Centro de la ciudad y barrios cercanos en un radio de 5 km.</p>
-            </div>
-            <div class="map-fake">
-              <div>🗺️ Aquí se puede integrar un mapa con marcadores de la zona de reparto.</div>
-              <div style="font-size:10px; margin-top:4px;">
-                También es posible enlazar con apps de delivery externas si las usas (Uber, Didi, etc.).
-              </div>
-            </div>
+          <div class="info-block">
+            <h3>Zonas de entrega (ejemplo)</h3>
+            <p>• Centro de la ciudad y barrios cercanos.</p>
+            <p>• Urbanizaciones a menos de 10 minutos del local.</p>
+            <p>• Para zonas más alejadas se puede cobrar un pequeño recargo.</p>
           </div>
         </div>
       </section>
@@ -504,33 +584,47 @@
       <section class="section-card" id="contacto">
         <h2 class="section-title">Contacto y pedidos</h2>
         <p class="section-sub">
-          Diferentes opciones para que tus clientes pidan su pizza favorita.
+          Aquí iría la información para que los clientes puedan hacer pedidos o reservas.
         </p>
 
         <div class="two-cols">
-          <div class="info-block">
-            <p><strong>Teléfono (ejemplo):</strong> 6000-0000</p>
-            <p><strong>WhatsApp (ejemplo):</strong> 6000-0000</p>
-            <p><strong>Dirección (ejemplo):</strong> 100 m norte de la esquina principal del barrio.</p>
-            <p style="margin-top:8px;">
-              Se puede agregar un botón grande tipo “Pedir ahora” fijo en la parte inferior
-              para que el cliente siempre lo tenga a mano.
+          <div>
+            <p class="contact-note">
+              Puedes usar esta sección para poner el número de teléfono, WhatsApp, redes sociales
+              o un pequeño formulario de contacto.
+            </p>
+            <div class="contact-whatsapp">
+              <span>WhatsApp:</span> <span>+506 6000-0000</span>
+            </div>
+            <p class="contact-note" style="margin-top:8px;">
+              También puedes añadir enlaces a <strong>Facebook</strong> e <strong>Instagram</strong>
+              para que la gente vea fotos de las pizzas, combos y promociones.
             </p>
           </div>
-          <div class="info-block">
-            <p>
-              Esta página es un <strong>ejemplo</strong> creado por Zamaha para mostrar cómo 
-              podría verse el sitio de tu pizzería.
-            </p>
-            <p style="margin-top:6px;">
-              Si quieres un sitio similar adaptado a tu menú, precios y promociones:
-            </p>
-            <p style="margin-top:6px;">
-              👉 Visita <a href="index.html">la página principal de Zamaha</a> y solicita una cotización 
-              en la sección de contacto.
-            </p>
+
+          <div>
+            <div class="map-fake">
+              <div><strong>Ubicación (ejemplo)</strong></div>
+              <div>Barrio La Esquina, 200 m norte de la pulpería.</div>
+              <div>Frente a la parada de buses.</div>
+              <div style="margin-top:6px; font-size:11px;">
+                Aquí se podría incrustar un mapa real de Google Maps con la dirección exacta.
+              </div>
+            </div>
           </div>
         </div>
+
+        <p class="contact-note" style="margin-top:10px;">
+          Esta página es un <strong>ejemplo</strong> creado por Zamaha para mostrar cómo 
+          podría verse el sitio de tu pizzería.
+        </p>
+        <p class="contact-note" style="margin-top:6px;">
+          Si quieres un sitio similar adaptado a tu menú, precios y promociones:
+        </p>
+        <p class="contact-note" style="margin-top:6px;">
+          👉 Visita <a href="index.html">la página principal de Zamaha</a> y solicita una cotización 
+          en la sección de contacto.
+        </p>
       </section>
     </main>
 
