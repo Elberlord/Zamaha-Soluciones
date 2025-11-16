@@ -336,15 +336,11 @@
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
-      gap: 20px;
-    }
-
     .services-intro {
       font-size: 13px;
       color: var(--text-soft);
+      max-width: 640px;
+      margin-bottom: 12px;
     }
 
     .services-intro p {
@@ -483,6 +479,12 @@
 
       .service-card:hover .service-tooltip {
         transform: translate(-50%, 10px);
+      }
+    }
+
+    @media (min-width: 960px) {
+      .services-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -758,6 +760,7 @@
       color: var(--text-muted);
     }
 
+    /* CÁMARAS WIFI */
 
     .camaras-section {
       margin-top: 10px;
@@ -783,14 +786,19 @@
     .camaras-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 16px;
+      gap: 14px;
     }
 
     .camara-card {
+      position: relative;
+      padding: 10px 11px 12px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, #020617, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.42);
+      box-shadow: var(--shadow-soft);
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
-      gap: 16px;
-      align-items: stretch;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
     }
 
     .camara-image {
@@ -799,7 +807,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: #000;
       box-shadow: var(--shadow-soft);
-      max-height: 220px;
+      max-height: 190px;
     }
 
     .camara-image img {
@@ -811,7 +819,13 @@
 
     .camara-body h3 {
       font-size: 16px;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
+    }
+
+    .camara-subtitle {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin: 0 0 6px;
     }
 
     .camara-tag {
@@ -828,9 +842,9 @@
     }
 
     .camara-specs {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-soft);
-      margin: 6px 0;
+      margin: 4px 0 6px;
       padding-left: 18px;
     }
 
@@ -857,7 +871,18 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 6px;
+    }
+
+    @media (min-width: 900px) {
+      .camara-card {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
+        align-items: center;
+      }
+
+      .camaras-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     /* CARRUSEL */
@@ -1207,19 +1232,11 @@
         margin-top: 6px;
       }
 
-      .services-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
       .contact-grid {
         grid-template-columns: minmax(0, 1fr);
       }
 
       .equipo-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .camara-card {
         grid-template-columns: minmax(0, 1fr);
       }
     }
@@ -1342,162 +1359,168 @@
       <!-- SERVICIOS PRINCIPALES -->
       <section class="services-section" id="servicios">
         <div class="section-label">Servicios</div>
-        <div class="services-grid">
-          <div class="services-intro">
-            <h2 class="section-title">¿En qué te puedo ayudar?</h2>
-            <p>
-              Estos son los servicios que ofrezco actualmente en Siquirres y alrededores,
-              pensados para pequeños negocios, casas de habitación y comercios que necesitan
-              soluciones claras, sin letras pequeñas.
-            </p>
-            <p>
-              Puedes combinar varios servicios en una misma visita. Si tienes algo más
-              específico en mente, también lo podemos conversar por WhatsApp.
-            </p>
-          </div>
+        <div class="services-intro">
+          <h2 class="section-title">¿En qué te puedo ayudar?</h2>
+          <p>
+            Estos son los servicios que ofrezco actualmente en Siquirres y alrededores,
+            pensados para pequeños negocios, casas de habitación y comercios que necesitan
+            soluciones claras, sin letras pequeñas.
+          </p>
+          <p>
+            Puedes combinar varios servicios en una misma visita. Si tienes algo más
+            específico en mente, también lo podemos conversar por WhatsApp.
+          </p>
+        </div>
 
-          <div class="services-list">
-            <!-- Cámaras CCTV -->
-            <article class="service-card">
-              <div class="service-header">
-                <h3 class="service-title">Instalación de cámaras CCTV</h3>
-                <span class="service-tag">Seguridad</span>
+        <div class="services-list">
+          <!-- Cámaras CCTV -->
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-title">Instalación de cámaras CCTV</h3>
+              <span class="service-tag">Seguridad</span>
+            </div>
+            <div class="service-highlight">Kits pequeños para casas y negocios de barrio.</div>
+            <ul class="service-bullets">
+              <li>Instalación de 1 a 4 cámaras según el espacio.</li>
+              <li>Equipos económicos pero confiables, según tu presupuesto.</li>
+              <li>Configuración básica de visualización en el celular.</li>
+            </ul>
+            <div class="service-footer">
+              <div class="service-price">
+                Mano de obra desde <strong>₡22,500 por cámara</strong>.
               </div>
-              <div class="service-highlight">Kits pequeños para casas y negocios de barrio.</div>
-              <ul class="service-bullets">
-                <li>Instalación de 1 a 4 cámaras según el espacio.</li>
-                <li>Equipos económicos pero confiables, según tu presupuesto.</li>
-                <li>Configuración básica de visualización en el celular.</li>
+              <div class="service-actions">
+                <button class="btn btn-primary btn-small js-cotizar"
+                        data-service="Cámaras CCTV">
+                  Cotizar cámaras
+                </button>
+                <button class="btn btn-secondary btn-small js-agregar"
+                        data-service="Cámaras CCTV">
+                  Añadir al formulario
+                </button>
+              </div>
+            </div>
+            <div class="service-tooltip">
+              <div class="service-tooltip-title">Detalle del servicio de cámaras</div>
+              <ul class="service-list">
+                <li>Revisión del lugar para recomendar la mejor ubicación.</li>
+                <li>Instalación de cámaras, cableado y conectores básicos.</li>
+                <li>Conexión al grabador, configuración de red y app básica.</li>
+                <li>Explicación simple de cómo revisar grabaciones.</li>
               </ul>
-              <div class="service-footer">
-                <div class="service-price">
-                  Mano de obra desde <strong>₡22,500 por cámara</strong>.
-                </div>
-                <div class="service-actions">
-                  <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
-                    Cotizar cámaras
-                  </button>
-                  <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
-                    Añadir al formulario
-                  </button>
-                </div>
-              </div>
-              <div class="service-tooltip">
-                <div class="service-tooltip-title">Detalle del servicio de cámaras</div>
-                <ul class="service-list">
-                  <li>Revisión del lugar para recomendar la mejor ubicación.</li>
-                  <li>Instalación de cámaras, cableado y conectores básicos.</li>
-                  <li>Conexión al grabador, configuración de red y app básica.</li>
-                  <li>Explicación simple de cómo revisar grabaciones.</li>
-                </ul>
-              </div>
-            </article>
+            </div>
+          </article>
 
-            <!-- Redes eléctricas ligeras -->
-            <article class="service-card">
-              <div class="service-header">
-                <h3 class="service-title">Redes eléctricas ligeras</h3>
-                <span class="service-tag">Infraestructura</span>
+          <!-- Redes eléctricas ligeras -->
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-title">Redes eléctricas ligeras</h3>
+              <span class="service-tag">Infraestructura</span>
+            </div>
+            <div class="service-highlight">Puntos eléctricos y orden básico para tus equipos.</div>
+            <ul class="service-bullets">
+              <li>Instalación de tomacorrientes adicionales para equipos.</li>
+              <li>Canaletas básicas para que los cables queden ordenados.</li>
+              <li>Revisión visual de conexiones y recomendaciones.</li>
+            </ul>
+            <div class="service-footer">
+              <div class="service-price">
+                Mano de obra según alcance del trabajo.
               </div>
-              <div class="service-highlight">Puntos eléctricos y orden básico para tus equipos.</div>
-              <ul class="service-bullets">
-                <li>Instalación de tomacorrientes adicionales para equipos.</li>
-                <li>Canaletas básicas para que los cables queden ordenados.</li>
-                <li>Revisión visual de conexiones y recomendaciones.</li>
+              <div class="service-actions">
+                <button class="btn btn-primary btn-small js-cotizar"
+                        data-service="Redes eléctricas">
+                  Cotizar redes eléctricas
+                </button>
+                <button class="btn btn-secondary btn-small js-agregar"
+                        data-service="Redes eléctricas">
+                  Añadir al formulario
+                </button>
+              </div>
+            </div>
+            <div class="service-tooltip">
+              <div class="service-tooltip-title">Detalle de redes eléctricas ligeras</div>
+              <ul class="service-list">
+                <li>Puntos para computadoras, cámaras, routers, etc.</li>
+                <li>Canaletas plásticas para mejorar el orden.</li>
+                <li>Enfoque en pequeñas ampliaciones, no en obras mayores.</li>
               </ul>
-              <div class="service-footer">
-                <div class="service-price">
-                  Mano de obra según alcance del trabajo.
-                </div>
-                <div class="service-actions">
-                  <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
-                    Cotizar redes eléctricas
-                  </button>
-                  <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
-                    Añadir al formulario
-                  </button>
-                </div>
-              </div>
-              <div class="service-tooltip">
-                <div class="service-tooltip-title">Detalle de redes eléctricas ligeras</div>
-                <ul class="service-list">
-                  <li>Puntos para computadoras, cámaras, routers, etc.</li>
-                  <li>Canaletas plásticas para mejorar el orden.</li>
-                  <li>Enfoque en pequeñas ampliaciones, no en obras mayores.</li>
-                </ul>
-              </div>
-            </article>
+            </div>
+          </article>
 
-            <!-- Equipos de cómputo -->
-            <article class="service-card">
-              <div class="service-header">
-                <h3 class="service-title">Mantenimiento de equipos de cómputo</h3>
-                <span class="service-tag">Tecnología</span>
+          <!-- Equipos de cómputo -->
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-title">Mantenimiento de equipos de cómputo</h3>
+              <span class="service-tag">Tecnología</span>
+            </div>
+            <div class="service-highlight">Computadoras funcionando más rápido y con menos enredos.</div>
+            <ul class="service-bullets">
+              <li>Formateos y reinstalación de sistema operativo.</li>
+              <li>Cambio a disco SSD y aumento de memoria RAM.</li>
+              <li>Limpieza interna básica y revisión general.</li>
+            </ul>
+            <div class="service-footer">
+              <div class="service-price">
+                Mano de obra según diagnóstico, con explicación previa.
               </div>
-              <div class="service-highlight">Computadoras funcionando más rápido y con menos enredos.</div>
-              <ul class="service-bullets">
-                <li>Formateos y reinstalación de sistema operativo.</li>
-                <li>Cambio a disco SSD y aumento de memoria RAM.</li>
-                <li>Limpieza interna básica y revisión general.</li>
+              <div class="service-actions">
+                <button class="btn btn-primary btn-small js-cotizar"
+                        data-service="Equipos de cómputo">
+                  Cotizar mantenimiento
+                </button>
+                <button class="btn btn-secondary btn-small js-agregar"
+                        data-service="Equipos de cómputo">
+                  Añadir al formulario
+                </button>
+              </div>
+            </div>
+            <div class="service-tooltip">
+              <div class="service-tooltip-title">Detalle del mantenimiento</div>
+              <ul class="service-list">
+                <li>Revisión inicial y explicación de opciones.</li>
+                <li>Respaldo de información (si lo solicitas).</li>
+                <li>Instalación de software básico y probado.</li>
               </ul>
-              <div class="service-footer">
-                <div class="service-price">
-                  Mano de obra según diagnóstico, con explicación previa.
-                </div>
-                <div class="service-actions">
-                  <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
-                    Cotizar mantenimiento
-                  </button>
-                  <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
-                    Añadir al formulario
-                  </button>
-                </div>
-              </div>
-              <div class="service-tooltip">
-                <div class="service-tooltip-title">Detalle del mantenimiento</div>
-                <ul class="service-list">
-                  <li>Revisión inicial y explicación de opciones.</li>
-                  <li>Respaldo de información (si lo solicitas).</li>
-                  <li>Instalación de software básico y probado.</li>
-                </ul>
-              </div>
-            </article>
+            </div>
+          </article>
 
-            <!-- Desarrollo web -->
-            <article class="service-card">
-              <div class="service-header">
-                <h3 class="service-title">Páginas web sencillas</h3>
-                <span class="service-tag">Presencia digital</span>
+          <!-- Desarrollo web -->
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-title">Páginas web sencillas</h3>
+              <span class="service-tag">Presencia digital</span>
+            </div>
+            <div class="service-highlight">Ideal para sodas, pizzerías, cafeterías y pequeños negocios.</div>
+            <ul class="service-bullets">
+              <li>Landing page o sitio básico con información clara.</li>
+              <li>Enlaces a WhatsApp, ubicación y redes sociales.</li>
+              <li>Plantillas ligeras y fáciles de mantener.</li>
+            </ul>
+            <div class="service-footer">
+              <div class="service-price">
+                Propuestas según lo que necesites mostrar.
               </div>
-              <div class="service-highlight">Ideal para sodas, pizzerías, cafeterías y pequeños negocios.</div>
-              <ul class="service-bullets">
-                <li>Landing page o sitio básico con información clara.</li>
-                <li>Enlaces a WhatsApp, ubicación y redes sociales.</li>
-                <li>Plantillas ligeras y fáciles de mantener.</li>
+              <div class="service-actions">
+                <button class="btn btn-primary btn-small js-cotizar"
+                        data-service="Desarrollo web">
+                  Cotizar sitio web
+                </button>
+                <button class="btn btn-secondary btn-small js-agregar"
+                        data-service="Desarrollo web">
+                  Añadir al formulario
+                </button>
+              </div>
+            </div>
+            <div class="service-tooltip">
+              <div class="service-tooltip-title">Detalle del desarrollo web</div>
+              <ul class="service-list">
+                <li>Diseño pensado para verse bien en celular.</li>
+                <li>Textos claros para explicar tus servicios y menú.</li>
+                <li>Botones directos para fomentar el contacto por WhatsApp.</li>
               </ul>
-              <div class="service-footer">
-                <div class="service-price">
-                  Propuestas según lo que necesites mostrar.
-                </div>
-                <div class="service-actions">
-                  <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
-                    Cotizar sitio web
-                  </button>
-                  <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
-                    Añadir al formulario
-                  </button>
-                </div>
-              </div>
-              <div class="service-tooltip">
-                <div class="service-tooltip-title">Detalle del desarrollo web</div>
-                <ul class="service-list">
-                  <li>Diseño pensado para verse bien en celular.</li>
-                  <li>Textos claros para explicar tus servicios y menú.</li>
-                  <li>Botones directos para fomentar el contacto por WhatsApp.</li>
-                </ul>
-              </div>
-            </article>
-          </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -1657,9 +1680,11 @@
                 <a href="equipos.html" class="btn btn-secondary btn-small">
                   Ver catálogo completo de equipos
                 </a>
-                <button type="button"
-                        class="btn btn-primary btn-small"
-                        id="btnCotizar5480">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-small js-cotizar"
+                  data-service="Equipos de cómputo"
+                  data-message="Me interesa la laptop Dell Latitude 5480 (i5, 16GB RAM, 256GB SSD).">
                   Quiero este equipo
                 </button>
               </div>
@@ -1676,18 +1701,20 @@
         <div class="camaras-header">
           <h2>Cámaras WiFi para hogar y negocio</h2>
           <p>
-            Opciones rápidas y accesibles para empezar a proteger tu casa o local en Siquirres,
-            con instalación y configuración básica incluidas.
+            Dos opciones cómodas y de fácil instalación para empezar a proteger tu casa o local en Siquirres.
+            Las instalamos y dejamos configuradas en tu celular, sin enredos técnicos.
           </p>
         </div>
 
         <div class="camaras-grid">
+          <!-- Tapo C210 -->
           <article class="camara-card">
             <div class="camara-image">
               <img src="tapo-c210.jpg" alt="Cámara WiFi Tapo C210 instalada en una sala de estar">
             </div>
             <div class="camara-body">
               <h3>Cámara WiFi Tapo C210 – 2K con giro 360°</h3>
+              <p class="camara-subtitle">Perfecta para salas, oficinas, dormitorios y locales pequeños.</p>
               <div class="camara-tag">
                 <span>Incluye instalación en Siquirres</span>
               </div>
@@ -1706,22 +1733,30 @@
                 y la configuración básica en tu celular (si ya cuentas con red WiFi activa).
               </p>
               <div class="camara-actions">
-                <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
-                  Quiero esta cámara
+                <button
+                  class="btn btn-primary btn-small js-cotizar"
+                  data-service="Cámaras CCTV"
+                  data-message="Me interesa la cámara WiFi Tapo C210 (2K, giro 360°).">
+                  Cotizar esta cámara
                 </button>
-                <a href="#contacto" class="btn btn-secondary btn-small">
-                  Consultar más detalles
-                </a>
+                <button
+                  class="btn btn-secondary btn-small js-agregar"
+                  data-service="Cámaras CCTV"
+                  data-message="Agregar cámara WiFi Tapo C210 a la cotización.">
+                  Añadir a la cotización
+                </button>
               </div>
             </div>
           </article>
 
+          <!-- Cámara bombillo -->
           <article class="camara-card">
             <div class="camara-image">
               <img src="camara-bombillo-e27.jpg" alt="Cámara bombillo WiFi E27 instalada en portalámpara">
             </div>
             <div class="camara-body">
               <h3>Cámara tipo bombillo E27 – 360° con audio</h3>
+              <p class="camara-subtitle">Ideal para cocheras, pasillos y entradas de casas o locales.</p>
               <div class="camara-tag">
                 <span>Instalación rápida en portalámpara</span>
               </div>
@@ -1737,15 +1772,21 @@
               </p>
               <p class="camara-note">
                 Incluye instalación sencilla en un portalámpara existente dentro de Siquirres y
-                configuración básica de la app. Ideal para cocheras, pasillos y cuartos de entrada.
+                configuración básica de la app. Excelente opción cuando no quieres hacer perforaciones.
               </p>
               <div class="camara-actions">
-                <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
-                  Quiero esta cámara
+                <button
+                  class="btn btn-primary btn-small js-cotizar"
+                  data-service="Cámaras CCTV"
+                  data-message="Me interesa la cámara tipo bombillo WiFi E27 (vista 360°).">
+                  Cotizar esta cámara
                 </button>
-                <a href="#contacto" class="btn btn-secondary btn-small">
-                  Consultar disponibilidad
-                </a>
+                <button
+                  class="btn btn-secondary btn-small js-agregar"
+                  data-service="Cámaras CCTV"
+                  data-message="Agregar cámara bombillo WiFi E27 a la cotización.">
+                  Añadir a la cotización
+                </button>
               </div>
             </div>
           </article>
@@ -1971,20 +2012,34 @@
       });
     });
 
-    // Botones de "Cotizar" en servicios
+    // Botones de "Cotizar" y "Añadir" (servicios, cámaras, equipo)
     const serviceButtons = document.querySelectorAll('.js-cotizar');
     const addButtons = document.querySelectorAll('.js-agregar');
     const mensajeField = document.getElementById('mensaje');
 
+    function activarServicioEnPills(service) {
+      if (!service) return;
+      servicePillsBtns.forEach(pill => {
+        if (pill.dataset.service === service) {
+          pill.classList.add('active');
+        }
+      });
+      updateServicesField();
+    }
+
+    function agregarMensajeExtra(btn) {
+      if (!mensajeField) return;
+      const extra = btn.dataset.message;
+      if (extra && !mensajeField.value.includes(extra)) {
+        mensajeField.value = extra + ' ' + (mensajeField.value || '');
+      }
+    }
+
     serviceButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
-        servicePillsBtns.forEach(pill => {
-          if (pill.dataset.service === service) {
-            pill.classList.add('active');
-          }
-        });
-        updateServicesField();
+        activarServicioEnPills(service);
+        agregarMensajeExtra(btn);
         const contactoSection = document.getElementById('contacto');
         if (contactoSection) {
           contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1995,29 +2050,10 @@
     addButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
-        servicePillsBtns.forEach(pill => {
-          if (pill.dataset.service === service) {
-            pill.classList.add('active');
-          }
-        });
-        updateServicesField();
+        activarServicioEnPills(service);
+        agregarMensajeExtra(btn);
       });
     });
-
-    // Botón "Quiero este equipo" (prellenar mensaje)
-    const btnCotizar5480 = document.getElementById('btnCotizar5480');
-    if (btnCotizar5480 && mensajeField) {
-      btnCotizar5480.addEventListener('click', () => {
-        const texto = 'Me interesa la laptop Dell Latitude 5480 (i5, 16GB RAM, 256GB SSD). ';
-        if (!mensajeField.value.includes('Dell Latitude 5480')) {
-          mensajeField.value = texto + (mensajeField.value || '');
-        }
-        const contactoSection = document.getElementById('contacto');
-        if (contactoSection) {
-          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    }
 
     // Preferencias de fecha y contacto
     const tieneFechaSelect = document.getElementById('tieneFecha');
