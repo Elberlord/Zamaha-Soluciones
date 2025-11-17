@@ -70,53 +70,6 @@
       align-items: center;
     }
 
-    .brand-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 11px 5px 5px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(129, 140, 248, 0.6);
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.9);
-      margin-bottom: 8px;
-    }
-
-    .brand-badge-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #4ade80, #22c55e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.5),
-        0 0 18px rgba(34, 197, 94, 0.6);
-      color: #020617;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      font-size: 15px;
-    }
-
-    .brand-badge-text {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    .brand-badge-title {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #e5e7eb;
-    }
-
-    .brand-badge-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
     /* Título grande ZAMAHA */
     .brand-title-display {
       font-size: 30px;
@@ -235,40 +188,6 @@
 
     .hero-aside {
       position: relative;
-    }
-
-    .hero-chip {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(129, 140, 248, 0.8);
-      font-size: 11px;
-      color: var(--text-soft);
-      backdrop-filter: blur(12px);
-    }
-
-    .hero-status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(52, 211, 153, 0.7);
-      background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.25), #022c22);
-      color: #a7f3d0;
-      font-size: 11px;
-      margin-bottom: 6px;
-    }
-
-    .hero-status-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
     }
 
     .hero-aside-card {
@@ -1327,14 +1246,6 @@
         <div class="hero-gradient-orbit"></div>
         <div class="header-grid">
           <div>
-            <div class="brand-badge">
-              <div class="brand-badge-logo">Z</div>
-              <div class="brand-badge-text">
-                <div class="brand-badge-title">Zamaha Servicios</div>
-                <div class="brand-badge-sub">Instalaciones, tecnología y web en Siquirres</div>
-              </div>
-            </div>
-
             <!-- Título grande de marca -->
             <div class="brand-title-display">ZAMAHA SERVICIOS</div>
 
@@ -1376,12 +1287,7 @@
           </div>
 
           <aside class="hero-aside">
-            <div class="hero-chip">Zamaha • Servicios y soluciones</div>
             <div class="hero-aside-card">
-              <div class="hero-status-pill">
-                <span class="hero-status-dot"></span>
-                Agenda abierta para nuevos proyectos
-              </div>
               <div class="hero-aside-title">
                 Un solo contacto para varias soluciones
               </div>
@@ -2005,7 +1911,7 @@
     // Año en el footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Reloj de hora en Costa Rica (junto al formulario)
+    // Reloj de hora en Costa Rica
     const crTimeEl = document.getElementById('crTime');
 
     function updateCRTime() {
@@ -2024,7 +1930,7 @@
     updateCRTime();
     setInterval(updateCRTime, 1000);
 
-    // Tooltip de servicios (detalle en hover / toque en móvil)
+    // Tooltip de servicios en móvil
     const serviceCards = document.querySelectorAll('.service-card');
 
     serviceCards.forEach(card => {
@@ -2096,7 +2002,7 @@
       });
     });
 
-    // Botón "Quiero este equipo" (prellenar mensaje)
+    // Botón "Quiero este equipo"
     const btnCotizar5480 = document.getElementById('btnCotizar5480');
     if (btnCotizar5480 && mensajeField) {
       btnCotizar5480.addEventListener('click', () => {
@@ -2111,7 +2017,7 @@
       });
     }
 
-    // Preferencias de fecha y contacto
+    // Preferencias de fecha
     const tieneFechaSelect = document.getElementById('tieneFecha');
     const fechaWrapper = document.getElementById('fechaWrapper');
     const fechaInput = document.getElementById('fechaEstimada');
@@ -2162,16 +2068,6 @@
 
     if (quiereLlamadaCheckbox) {
       quiereLlamadaCheckbox.addEventListener('change', toggleCalendlyVisibility);
-    }
-
-    function handlePreferenciaChange() {
-      if (preferencia) {
-        // Aquí podrías adaptar algo según la preferencia seleccionada si lo necesitas
-      }
-    }
-
-    if (preferencia) {
-      preferencia.addEventListener('change', handlePreferenciaChange);
     }
 
     // Carrusel simple
