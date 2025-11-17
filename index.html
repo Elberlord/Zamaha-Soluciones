@@ -38,6 +38,7 @@
       background: radial-gradient(circle at top, #0b1022 0, #020617 45%, #000 100%);
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
+      color-scheme: dark;
     }
 
     .page {
@@ -758,8 +759,6 @@
       color: var(--text-muted);
     }
 
-    /* CÁMARAS WIFI */
-
     .camaras-section {
       margin-top: 10px;
       padding: 20px 22px 22px;
@@ -792,32 +791,26 @@
       grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
       gap: 16px;
       align-items: stretch;
-      border-radius: var(--radius-md);
-      padding: 12px 14px;
-      background: radial-gradient(circle at top left, #020617, #020617);
-      border: 1px solid rgba(148, 163, 231, 0.42);
-      box-shadow: var(--shadow-soft);
     }
 
-    /* 🔧 Ajuste para que la cámara se vea completa */
     .camara-image {
       border-radius: var(--radius-md);
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background: #000;
-      height: 220px;
+      background: #020617;
+      box-shadow: var(--shadow-soft);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px;
+      max-height: 260px;
     }
 
     .camara-image img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
+      width: 100%;
       height: auto;
+      max-height: 260px;
       object-fit: contain;
+      object-position: center;
       display: block;
     }
 
@@ -984,10 +977,16 @@
       border-radius: 12px;
       border: 1px solid rgba(148, 163, 231, 0.5);
       background: radial-gradient(circle at top left, #020617, #020617);
+      background-color: #020617;
       color: var(--text-main);
       font-size: 13px;
       outline: none;
       box-shadow: inset 0 0 12px rgba(15, 23, 42, 0.9);
+    }
+
+    select option {
+      background-color: #020617;
+      color: var(--text-main);
     }
 
     textarea {
@@ -1125,7 +1124,7 @@
       font-size: 13px;
     }
 
-    /* BOTONES */
+    /* BOTONES NUEVOS */
 
     .btn {
       position: relative;
@@ -1269,14 +1268,858 @@
 </head>
 <body>
   <div class="page">
-    <!-- ... TODO EL CONTENIDO ES EL MISMO QUE TE ENVIÉ ANTES ... -->
-    <!-- Para no repetir 1000 líneas: pega aquí el HTML y JS iguales al archivo anterior,
-         solo cambiamos el CSS de .camara-image y .camara-image img. -->
+    <header>
+      <div class="header-card">
+        <div class="hero-gradient-orbit"></div>
+        <div class="header-grid">
+          <div>
+            <div class="brand-badge">
+              <div class="brand-badge-logo">Z</div>
+              <div class="brand-badge-text">
+                <div class="brand-badge-title">Zamaha Servicios</div>
+                <div class="brand-badge-sub">Instalaciones, tecnología y web en Siquirres</div>
+              </div>
+            </div>
+
+            <h1 class="hero-title">
+              Soluciones prácticas para tu
+              <span>negocio y tu casa</span> en Siquirres
+            </h1>
+
+            <p class="hero-subtitle">
+              Instalación de cámaras, redes eléctricas básicas, equipos de cómputo
+              y páginas web ligeras para pequeños negocios, sodas, pizzerías,
+              cafeterías y comercios de barrio.
+            </p>
+
+            <div class="hero-tags">
+              <span class="hero-tag">Instalación de cámaras CCTV</span>
+              <span class="hero-tag">Redes y electricidad ligera</span>
+              <span class="hero-tag">Equipos de cómputo usados</span>
+              <span class="hero-tag">Sitios web para negocios</span>
+            </div>
+
+            <div class="hero-contact-row">
+              <div class="hero-contact-main">
+                <a class="hero-whatsapp"
+                   href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
+                   target="_blank" rel="noopener noreferrer">
+                  <span class="hero-whatsapp-icon">✆</span>
+                  <span>Escríbeme por WhatsApp</span>
+                </a>
+
+                <a class="hero-secondary-link" href="#contacto">
+                  O llena el formulario de contacto
+                </a>
+              </div>
+              <div class="hero-contact-note">
+                Atención en Siquirres y alrededores, con enfoque en soluciones claras y sin enredos.
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-aside">
+            <div class="hero-chip">Zamaha • Servicios y soluciones</div>
+            <div class="hero-aside-card">
+              <div class="hero-status-pill">
+                <span class="hero-status-dot"></span>
+                Agenda abierta para nuevos proyectos
+              </div>
+              <div class="hero-aside-title">
+                Un solo contacto para varias soluciones
+              </div>
+              <div class="hero-aside-text">
+                Te ayudo a resolver desde la instalación de tus cámaras de seguridad
+                hasta la publicación de la página web de tu negocio, con comunicación directa
+                y en un lenguaje claro.
+              </div>
+              <div class="hero-aside-tags">
+                <span class="hero-aside-tag">Cámaras y monitoreo</span>
+                <span class="hero-aside-tag">Redes básicas</span>
+                <span class="hero-aside-tag">Computadoras</span>
+                <span class="hero-aside-tag">Sitios web</span>
+              </div>
+              <div class="hero-aside-note">
+                Ideal para pequeños negocios, sodas, locales en zonas industriales
+                y comercios que necesitan estar mejor organizados.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- SERVICIOS PRINCIPALES -->
+      <section class="services-section" id="servicios">
+        <div class="section-label">Servicios</div>
+        <div class="services-grid">
+          <div class="services-intro">
+            <h2 class="section-title">¿En qué te puedo ayudar?</h2>
+            <p>
+              Estos son los servicios que ofrezco actualmente en Siquirres y alrededores,
+              pensados para pequeños negocios, casas de habitación y comercios que necesitan
+              soluciones claras, sin letras pequeñas.
+            </p>
+            <p>
+              Puedes combinar varios servicios en una misma visita. Si tienes algo más
+              específico en mente, también lo podemos conversar por WhatsApp.
+            </p>
+          </div>
+
+          <div class="services-list">
+            <!-- Cámaras CCTV -->
+            <article class="service-card">
+              <div class="service-header">
+                <h3 class="service-title">Instalación de cámaras CCTV</h3>
+                <span class="service-tag">Seguridad</span>
+              </div>
+              <div class="service-highlight">Kits pequeños para casas y negocios de barrio.</div>
+              <ul class="service-bullets">
+                <li>Instalación de 1 a 4 cámaras según el espacio.</li>
+                <li>Equipos económicos pero confiables, según tu presupuesto.</li>
+                <li>Configuración básica de visualización en el celular.</li>
+              </ul>
+              <div class="service-footer">
+                <div class="service-price">
+                  Mano de obra desde <strong>₡22,500 por cámara</strong>.
+                </div>
+                <div class="service-actions">
+                  <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
+                    Cotizar cámaras
+                  </button>
+                  <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
+                    Añadir al formulario
+                  </button>
+                </div>
+              </div>
+              <div class="service-tooltip">
+                <div class="service-tooltip-title">Detalle del servicio de cámaras</div>
+                <ul class="service-list">
+                  <li>Revisión del lugar para recomendar la mejor ubicación.</li>
+                  <li>Instalación de cámaras, cableado y conectores básicos.</li>
+                  <li>Conexión al grabador, configuración de red y app básica.</li>
+                  <li>Explicación simple de cómo revisar grabaciones.</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Redes eléctricas ligeras -->
+            <article class="service-card">
+              <div class="service-header">
+                <h3 class="service-title">Redes eléctricas ligeras</h3>
+                <span class="service-tag">Infraestructura</span>
+              </div>
+              <div class="service-highlight">Puntos eléctricos y orden básico para tus equipos.</div>
+              <ul class="service-bullets">
+                <li>Instalación de tomacorrientes adicionales para equipos.</li>
+                <li>Canaletas básicas para que los cables queden ordenados.</li>
+                <li>Revisión visual de conexiones y recomendaciones.</li>
+              </ul>
+              <div class="service-footer">
+                <div class="service-price">
+                  Mano de obra según alcance del trabajo.
+                </div>
+                <div class="service-actions">
+                  <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
+                    Cotizar redes eléctricas
+                  </button>
+                  <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
+                    Añadir al formulario
+                  </button>
+                </div>
+              </div>
+              <div class="service-tooltip">
+                <div class="service-tooltip-title">Detalle de redes eléctricas ligeras</div>
+                <ul class="service-list">
+                  <li>Puntos para computadoras, cámaras, routers, etc.</li>
+                  <li>Canaletas plásticas para mejorar el orden.</li>
+                  <li>Enfoque en pequeñas ampliaciones, no en obras mayores.</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Equipos de cómputo -->
+            <article class="service-card">
+              <div class="service-header">
+                <h3 class="service-title">Mantenimiento de equipos de cómputo</h3>
+                <span class="service-tag">Tecnología</span>
+              </div>
+              <div class="service-highlight">Computadoras funcionando más rápido y con menos enredos.</div>
+              <ul class="service-bullets">
+                <li>Formateos y reinstalación de sistema operativo.</li>
+                <li>Cambio a disco SSD y aumento de memoria RAM.</li>
+                <li>Limpieza interna básica y revisión general.</li>
+              </ul>
+              <div class="service-footer">
+                <div class="service-price">
+                  Mano de obra según diagnóstico, con explicación previa.
+                </div>
+                <div class="service-actions">
+                  <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
+                    Cotizar mantenimiento
+                  </button>
+                  <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
+                    Añadir al formulario
+                  </button>
+                </div>
+              </div>
+              <div class="service-tooltip">
+                <div class="service-tooltip-title">Detalle del mantenimiento</div>
+                <ul class="service-list">
+                  <li>Revisión inicial y explicación de opciones.</li>
+                  <li>Respaldo de información (si lo solicitas).</li>
+                  <li>Instalación de software básico y probado.</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Desarrollo web -->
+            <article class="service-card">
+              <div class="service-header">
+                <h3 class="service-title">Páginas web para tu negocio</h3>
+                <span class="service-tag">Presencia digital</span>
+              </div>
+              <div class="service-highlight">Ideal para sodas, pizzerías, cafeterías y pequeños negocios.</div>
+              <ul class="service-bullets">
+                <li>Landing page o sitio profesional para tu negocio, con información clara.</li>
+                <li>Enlaces a WhatsApp, ubicación y redes sociales.</li>
+                <li>Plantillas ligeras y fáciles de mantener.</li>
+              </ul>
+              <div class="service-footer">
+                <div class="service-price">
+                  Propuestas según lo que necesites mostrar.
+                </div>
+                <div class="service-actions">
+                  <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
+                    Cotizar sitio web
+                  </button>
+                  <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
+                    Añadir al formulario
+                  </button>
+                </div>
+              </div>
+              <div class="service-tooltip">
+                <div class="service-tooltip-title">Detalle del desarrollo web</div>
+                <ul class="service-list">
+                  <li>Diseño pensado para verse bien en celular.</li>
+                  <li>Textos claros para explicar tus servicios y menú.</li>
+                  <li>Botones directos para fomentar el contacto por WhatsApp.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- EJEMPLOS DE PÁGINA WEB -->
+      <section class="web-examples-section" id="demos-web">
+        <div class="section-label">Demos web</div>
+        <div class="web-examples-header">
+          <h2 class="section-title">Ejemplos de páginas para tu negocio</h2>
+          <p>
+            Estos son ejemplos reales de páginas para una soda, una pizzería
+            y una cafetería. Puedes verlos para darte una idea de cómo se verían tus menús
+            y tu información básica en línea.
+          </p>
+        </div>
+
+        <div class="web-examples-grid">
+          <!-- Demo Soda -->
+          <article class="example-card">
+            <div class="example-header">
+              <h3 class="example-title">Soda "El Sabor Tico"</h3>
+              <span class="example-label">Demo web</span>
+            </div>
+            <p class="example-desc">
+              Página enfocada en mostrar el menú del día, precios y ubicación de una soda o comedor.
+            </p>
+            <div class="example-chip-row">
+              <span class="example-chip">Menú del día</span>
+              <span class="example-chip">Botón WhatsApp</span>
+              <span class="example-chip">Horario y mapa</span>
+            </div>
+            <p class="example-desc">
+              Pensada para sodas de barrio, comedores en zona industrial o estudiantil.
+              Muestra el menú del día, algunos platos fijos, el horario y una breve
+              descripción del lugar. Ideal para que los clientes revisen qué hay de
+              comer y pidan por WhatsApp.
+            </p>
+            <ul class="example-list">
+              <li>Sección de menú del día con precios claros.</li>
+              <li>Botón directo para hacer el pedido por WhatsApp.</li>
+              <li>Ubicación básica y horarios de atención.</li>
+            </ul>
+            <div class="example-actions">
+              <a href="soda.html" class="btn btn-primary btn-small">Ver demo de soda</a>
+              <a href="#contacto" class="btn btn-secondary btn-small">Quiero una web como esta</a>
+            </div>
+            <p class="example-tip">
+              Esta estructura también se adapta a comedores en fincas, zonas francas o
+              cercanos a colegios.
+            </p>
+          </article>
+
+          <!-- Demo Pizzería -->
+          <article class="example-card">
+            <div class="example-header">
+              <h3 class="example-title">Pizzería "La Esquina"</h3>
+              <span class="example-label">Demo web</span>
+            </div>
+            <p class="example-desc">
+              Página para una pizzería pequeña con su menú de pizzas, combos y datos de contacto.
+            </p>
+            <div class="example-chip-row">
+              <span class="example-chip">Menú de pizzas</span>
+              <span class="example-chip">Combos</span>
+              <span class="example-chip">Pedidos por WhatsApp</span>
+            </div>
+            <p class="example-desc">
+              Ideal para pizzerías de barrio que quieren mostrar sus especialidades,
+              tamaños, precios y promociones, con un botón claro para pedir por WhatsApp
+              o llamar directamente.
+            </p>
+            <ul class="example-list">
+              <li>Listado de pizzas con tamaños y precios.</li>
+              <li>Sección de combos y promociones.</li>
+              <li>Información básica de reparto y zona de cobertura.</li>
+            </ul>
+            <div class="example-actions">
+              <a href="pizzeria.html" class="btn btn-primary btn-small">Ver demo de pizzería</a>
+              <a href="#contacto" class="btn btn-secondary btn-small">Quiero una web como esta</a>
+            </div>
+            <p class="example-tip">
+              Puede adaptarse a ventas de hamburguesas, patys, hot dogs y otros
+              negocios de comida rápida.
+            </p>
+          </article>
+
+          <!-- Demo Cafetería -->
+          <article class="example-card">
+            <div class="example-header">
+              <h3 class="example-title">Cafetería "Café & Charla"</h3>
+              <span class="example-label">Demo web</span>
+            </div>
+            <p class="example-desc">
+              Página para una cafetería con fotos de las bebidas, repostería y combos.
+            </p>
+            <div class="example-chip-row">
+              <span class="example-chip">Bebidas calientes y frías</span>
+              <span class="example-chip">Repostería</span>
+              <span class="example-chip">Ambiente acogedor</span>
+            </div>
+            <p class="example-desc">
+              Pensada para cafeterías pequeñas, panaderías o heladerías que quieren
+              mostrar sus productos principales y animar a la gente a visitarlas o
+              hacer pedidos.
+            </p>
+            <ul class="example-list">
+              <li>Galería de bebidas y postres.</li>
+              <li>Sección de combos y promociones.</li>
+              <li>Ubicación, horarios y contacto rápido.</li>
+            </ul>
+            <div class="example-actions">
+              <a href="cafeteria.html" class="btn btn-primary btn-small">Ver demo de cafetería</a>
+              <a href="#contacto" class="btn btn-secondary btn-small">Quiero una web como esta</a>
+            </div>
+            <p class="example-tip">
+              Este estilo se puede adaptar a panaderías, heladerías o pequeñas pastelerías.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- EQUIPOS EN VENTA -->
+      <section id="equipos-venta" class="equipos-section">
+        <div class="equipos-header">
+          <h2>Equipos de cómputo en venta</h2>
+          <p>
+            Equipos usados reacondicionados, listos para trabajar, con configuración básica incluida
+            en Siquirres y alrededores.
+          </p>
+        </div>
+
+        <div class="equipos-layout">
+          <article class="equipo-card">
+            <div class="equipo-image">
+              <img src="dell-latitude-5480.jpg"
+                   alt="Laptop Dell Latitude 5480 i5 6300U 16GB DDR4 256GB SSD 14 pulgadas">
+            </div>
+            <div class="equipo-body">
+              <h3>Laptop Dell Latitude 5480</h3>
+              <div class="equipo-state">
+                <span></span>
+                Equipo usado reacondicionado
+              </div>
+              <ul class="equipo-specs">
+                <li>Procesador Intel Core i5 6300U.</li>
+                <li>16 GB DDR4 de memoria RAM.</li>
+                <li>Disco de estado sólido (SSD) de 256 GB.</li>
+                <li>Pantalla de 14 pulgadas.</li>
+                <li>Windows 10 Pro instalado.</li>
+              </ul>
+              <p class="equipo-price">
+                Precio: <strong>₡150,000</strong><span class="equipo-tax">i.v.i.</span>
+              </p>
+              <p class="equipo-note">
+                Ideal para trabajo de oficina, estudio, navegación web y tareas de productividad.
+              </p>
+              <div class="equipo-actions">
+                <a href="equipos.html" class="btn btn-secondary btn-small">
+                  Ver catálogo completo de equipos
+                </a>
+                <button type="button"
+                        class="btn btn-primary btn-small"
+                        id="btnCotizar5480">
+                  Quiero este equipo
+                </button>
+              </div>
+              <div class="equipo-hint">
+                * Al hacer clic en “Quiero este equipo”, la cotización se rellenará con los datos de este modelo.
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CÁMARAS WIFI Y SEGURIDAD -->
+      <section id="camaras" class="camaras-section">
+        <div class="camaras-header">
+          <h2>Cámaras WiFi para hogar y negocio</h2>
+          <p>
+            Opciones rápidas y accesibles para empezar a proteger tu casa o local en Siquirres,
+            con instalación y configuración básica incluidas.
+          </p>
+        </div>
+
+        <div class="camaras-grid">
+          <article class="camara-card">
+            <div class="camara-image">
+              <img src="tapo-c210.jpg" alt="Cámara WiFi Tapo C210 instalada en una sala de estar">
+            </div>
+            <div class="camara-body">
+              <h3>Cámara WiFi Tapo C210 – 2K con giro 360°</h3>
+              <div class="camara-tag">
+                <span>Incluye instalación en Siquirres</span>
+              </div>
+              <ul class="camara-specs">
+                <li>Resolución 2K (3MP) para ver rostros y detalles con claridad.</li>
+                <li>Giro horizontal y vertical desde la app para cubrir toda la habitación.</li>
+                <li>Audio bidireccional: micrófono y parlante integrados.</li>
+                <li>Visión nocturna y detección de movimiento con alertas al celular.</li>
+                <li>Grabación en microSD (se vende por separado) y acceso remoto desde la app Tapo.</li>
+              </ul>
+              <p class="camara-price">
+                Precio: <strong>₡24,000</strong><span class="equipo-tax"> i.v.i.</span>
+              </p>
+              <p class="camara-note">
+                El precio incluye la cámara, la instalación en un solo punto dentro de Siquirres
+                y la configuración inicial en tu celular (si ya cuentas con red WiFi activa).
+              </p>
+              <div class="camara-actions">
+                <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
+                  Quiero esta cámara
+                </button>
+                <a href="#contacto" class="btn btn-secondary btn-small">
+                  Consultar más detalles
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="camara-card">
+            <div class="camara-image">
+              <img src="camara-bombillo-e27.jpg" alt="Cámara bombillo WiFi E27 instalada en portalámpara">
+            </div>
+            <div class="camara-body">
+              <h3>Cámara tipo bombillo E27 – 360° con audio</h3>
+              <div class="camara-tag">
+                <span>Instalación rápida en portalámpara</span>
+              </div>
+              <ul class="camara-specs">
+                <li>Se instala en un socket E27 como un bombillo normal.</li>
+                <li>Vista 360° para cubrir toda la zona sin puntos ciegos.</li>
+                <li>Audio bidireccional para escuchar y hablar desde la app.</li>
+                <li>Visión nocturna y detección de movimiento.</li>
+                <li>Grabación en microSD (no incluida) y monitoreo remoto desde el celular.</li>
+              </ul>
+              <p class="camara-price">
+                Precio: <strong>₡19,500</strong><span class="equipo-tax"> i.v.i.</span>
+              </p>
+              <p class="camara-note">
+                Incluye instalación en un portalámpara existente dentro de Siquirres y
+                configuración inicial de la app. Ideal para cocheras, pasillos y cuartos de entrada.
+              </p>
+              <div class="camara-actions">
+                <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
+                  Quiero esta cámara
+                </button>
+                <a href="#contacto" class="btn btn-secondary btn-small">
+                  Consultar disponibilidad
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CARRUSEL (SIN TEXTO) -->
+      <section class="carousel-section">
+        <div class="carousel-frame">
+          <button class="carousel-arrow" id="carouselPrev" type="button" aria-label="Imagen anterior">‹</button>
+          <div class="carousel-window">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide"><img src="zamaha-1.jpg" alt="Trabajo Zamaha 1"></div>
+              <div class="carousel-slide"><img src="zamaha-2.jpg" alt="Trabajo Zamaha 2"></div>
+              <div class="carousel-slide"><img src="zamaha-3.jpg" alt="Trabajo Zamaha 3"></div>
+              <div class="carousel-slide"><img src="zamaha-4.jpg" alt="Trabajo Zamaha 4"></div>
+              <div class="carousel-slide"><img src="zamaha-5.jpg" alt="Trabajo Zamaha 5"></div>
+              <div class="carousel-slide"><img src="zamaha-6.jpg" alt="Trabajo Zamaha 6"></div>
+              <div class="carousel-slide"><img src="zamaha-7.jpg" alt="Trabajo Zamaha 7"></div>
+              <div class="carousel-slide"><img src="zamaha-8.jpg" alt="Trabajo Zamaha 8"></div>
+              <div class="carousel-slide"><img src="zamaha-9.jpg" alt="Trabajo Zamaha 9"></div>
+              <div class="carousel-slide"><img src="zamaha-10.jpg" alt="Trabajo Zamaha 10"></div>
+              <div class="carousel-slide"><img src="zamaha-11.jpg" alt="Trabajo Zamaha 11"></div>
+              <div class="carousel-slide"><img src="zamaha-12.jpg" alt="Trabajo Zamaha 12"></div>
+              <div class="carousel-slide"><img src="zamaha-13.jpg" alt="Trabajo Zamaha 13"></div>
+              <div class="carousel-slide"><img src="zamaha-14.jpg" alt="Trabajo Zamaha 14"></div>
+              <div class="carousel-slide"><img src="zamaha-15.jpg" alt="Trabajo Zamaha 15"></div>
+              <div class="carousel-slide"><img src="zamaha-16.jpg" alt="Trabajo Zamaha 16"></div>
+            </div>
+          </div>
+          <button class="carousel-arrow" id="carouselNext" type="button" aria-label="Imagen siguiente">›</button>
+        </div>
+      </section>
+
+      <!-- CONTACTO -->
+      <section class="contact-section" id="contacto">
+        <div class="section-label">Contacto</div>
+        <div class="contact-grid">
+          <div class="contact-intro">
+            <h2 class="section-title">Hablemos de tu proyecto</h2>
+            <p>
+              Cuéntame qué necesitas y te respondo con una propuesta clara. Puedes describir
+              tu espacio, tu negocio o la idea que tienes en mente.
+            </p>
+            <p>
+              Trabajo con agenda y por orden de solicitud. Entre más claro dejes tu mensaje,
+              mejor podré orientarte desde la primera respuesta.
+            </p>
+            <div class="contact-extra-info">
+              <p>
+                <strong>Áreas de trabajo:</strong> Siquirres centro y alrededores. Otros lugares,
+                según coordinación.
+              </p>
+              <p>
+                <strong>Horarios de atención:</strong> Según disponibilidad y coordinación previa
+                por WhatsApp.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <form id="contactForm" action="https://formspree.io/f/mjkbldze" method="POST">
+              <div>
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="Nombre" placeholder="Tu nombre" required />
+              </div>
+
+              <div class="contact-row">
+                <div>
+                  <label for="telefono">Teléfono / WhatsApp</label>
+                  <input type="tel" id="telefono" name="Teléfono" placeholder="8888-8888" required />
+                </div>
+                <div>
+                  <label for="correo">Correo electrónico (opcional)</label>
+                  <input type="email" id="correo" name="Correo" placeholder="tu-correo@ejemplo.com" />
+                </div>
+              </div>
+
+              <div>
+                <label>¿Qué servicio te interesa? (puedes elegir varios)</label>
+                <div class="service-pills" id="servicePills">
+                  <button type="button" class="service-pill-btn" data-service="Cámaras CCTV">Cámaras CCTV</button>
+                  <button type="button" class="service-pill-btn" data-service="Redes eléctricas">Redes eléctricas</button>
+                  <button type="button" class="service-pill-btn" data-service="Equipos de cómputo">Equipos de cómputo</button>
+                  <button type="button" class="service-pill-btn" data-service="Desarrollo web">Desarrollo web</button>
+                  <button type="button" class="service-pill-btn" data-service="Mantenimiento integral">Mantenimiento integral</button>
+                </div>
+                <input type="hidden" id="servicesField" name="Servicios seleccionados" />
+              </div>
+
+              <div>
+                <label for="mensaje">Cuéntame un poco más</label>
+                <textarea id="mensaje" name="Mensaje" placeholder="Ejemplo: Tengo una soda pequeña y quiero instalar 3 cámaras y una página con el menú básico."></textarea>
+              </div>
+
+              <div class="preferences-box">
+                <div class="preferences-row">
+                  <div class="preferences-field">
+                    <label for="preferenciaContacto">¿Cómo prefieres que te contacte?</label>
+                    <select id="preferenciaContacto" name="Preferencia de contacto">
+                      <option value="">Selecciona una opción</option>
+                      <option value="WhatsApp">WhatsApp</option>
+                      <option value="Llamada">Llamada telefónica</option>
+                      <option value="Correo">Correo electrónico</option>
+                    </select>
+                    <div class="preferences-note">
+                      Si escoges WhatsApp, trataré de escribirte primero por ahí para coordinar.
+                    </div>
+                  </div>
+                  <div class="preferences-field">
+                    <label for="tieneFecha">¿Tienes una fecha estimada para el trabajo?</label>
+                    <select id="tieneFecha" name="¿Tiene fecha estimada?">
+                      <option value="">No estoy seguro</option>
+                      <option value="Si">Sí, tengo una fecha aproximada</option>
+                      <option value="No">No, solo quiero información por ahora</option>
+                    </select>
+                    <div id="fechaWrapper" style="margin-top: 6px; display: none;">
+                      <div class="contact-row">
+                        <div>
+                          <label for="fechaEstimada">Fecha estimada</label>
+                          <input type="date" id="fechaEstimada" name="Fecha estimada" />
+                        </div>
+                        <div>
+                          <label for="horaEstimada">Hora aproximada</label>
+                          <input type="time" id="horaEstimada" name="Hora estimada" />
+                        </div>
+                      </div>
+                      <div style="margin-top: 4px;">
+                        <label for="ubicacionTrabajo">Ubicación aproximada del trabajo</label>
+                        <input
+                          type="text"
+                          id="ubicacionTrabajo"
+                          name="Ubicación del trabajo"
+                          placeholder="Ejemplo: Siquirres centro, barrio X, cerca de..."
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-checkbox-row">
+                  <input type="checkbox" id="quiereLlamada" name="Quiere llamada exploratoria" />
+                  <label for="quiereLlamada">
+                    Me gustaría coordinar una llamada corta para explicar mejor mi proyecto.
+                  </label>
+                </div>
+
+                <div id="calendlyContainer" class="calendly-container">
+                  <div class="calendly-placeholder">
+                    Si la agenda lo permite, te propondré por WhatsApp algunas horas para una llamada
+                    o videollamada corta y así aclarar dudas antes de enviarte una propuesta.
+                  </div>
+                </div>
+              </div>
+
+              <div class="contact-cta">
+                <button type="submit" class="btn btn-primary btn-small">
+                  Enviar mensaje
+                </button>
+              </div>
+
+              <div class="contact-footer">
+                * Tu mensaje llegará directamente a mi correo. No comparto tus datos con terceros.
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-contact">
+        <span>Zamaha • Servicios y soluciones en Siquirres</span>
+        <span>WhatsApp: <a href="https://wa.me/50664305227" target="_blank" rel="noopener noreferrer">+506 6430-5227</a></span>
+        <span>Correo: <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></span>
+      </div>
+      <div class="footer-right">
+        <span>© <span id="year"></span> Zamaha. Hecho en Siquirres.</span>
+      </div>
+    </footer>
   </div>
 
   <script>
-    /* Aquí va el mismo JS que ya tienes en tu index: año del footer,
-       manejo de servicios, carrusel, etc. No cambió nada en esta parte. */
+    // Año en el footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tooltip de servicios (detalle en hover / toque en móvil)
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    serviceCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.service-actions')) return;
+
+        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+        if (!isSmallScreen) return;
+
+        serviceCards.forEach(c => {
+          if (c !== card) c.classList.remove('show-info');
+        });
+
+        card.classList.toggle('show-info');
+      });
+    });
+
+    // Píldoras de servicios en el formulario
+    const servicePillsBtns = document.querySelectorAll('.service-pill-btn');
+    const servicesField = document.getElementById('servicesField');
+
+    function updateServicesField() {
+      const active = [];
+      servicePillsBtns.forEach(btn => {
+        if (btn.classList.contains('active')) {
+          active.push(btn.dataset.service);
+        }
+      });
+      servicesField.value = active.join(', ');
+    }
+
+    servicePillsBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        updateServicesField();
+      });
+    });
+
+    // Botones de "Cotizar" en servicios
+    const serviceButtons = document.querySelectorAll('.js-cotizar');
+    const addButtons = document.querySelectorAll('.js-agregar');
+    const mensajeField = document.getElementById('mensaje');
+
+    serviceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const service = btn.dataset.service;
+        servicePillsBtns.forEach(pill => {
+          if (pill.dataset.service === service) {
+            pill.classList.add('active');
+          }
+        });
+        updateServicesField();
+        const contactoSection = document.getElementById('contacto');
+        if (contactoSection) {
+          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    addButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const service = btn.dataset.service;
+        servicePillsBtns.forEach(pill => {
+          if (pill.dataset.service === service) {
+            pill.classList.add('active');
+          }
+        });
+        updateServicesField();
+      });
+    });
+
+    // Botón "Quiero este equipo" (prellenar mensaje)
+    const btnCotizar5480 = document.getElementById('btnCotizar5480');
+    if (btnCotizar5480 && mensajeField) {
+      btnCotizar5480.addEventListener('click', () => {
+        const texto = 'Me interesa la laptop Dell Latitude 5480 (i5, 16GB RAM, 256GB SSD). ';
+        if (!mensajeField.value.includes('Dell Latitude 5480')) {
+          mensajeField.value = texto + (mensajeField.value || '');
+        }
+        const contactoSection = document.getElementById('contacto');
+        if (contactoSection) {
+          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // Preferencias de fecha y contacto
+    const tieneFechaSelect = document.getElementById('tieneFecha');
+    const fechaWrapper = document.getElementById('fechaWrapper');
+    const fechaInput = document.getElementById('fechaEstimada');
+    const horaInput = document.getElementById('horaEstimada');
+    const ubicacionInput = document.getElementById('ubicacionTrabajo');
+    const quiereLlamadaCheckbox = document.getElementById('quiereLlamada');
+    const calendlyContainer = document.getElementById('calendlyContainer');
+    const preferencia = document.getElementById('preferenciaContacto');
+
+    function setMinDate3DaysAhead() {
+      const today = new Date();
+      today.setDate(today.getDate() + 3);
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      const minDate = `${year}-${month}-${day}`;
+      if (fechaInput) {
+        fechaInput.min = minDate;
+      }
+    }
+
+    function toggleFechaWrapper() {
+      const value = tieneFechaSelect ? tieneFechaSelect.value : '';
+      const show = value === 'Si';
+      if (fechaWrapper) {
+        fechaWrapper.style.display = show ? 'block' : 'none';
+      }
+      if (fechaInput && horaInput && ubicacionInput) {
+        fechaInput.required = show;
+        horaInput.required = show;
+        ubicacionInput.required = show;
+        if (show) {
+          setMinDate3DaysAhead();
+        }
+      }
+    }
+
+    if (tieneFechaSelect) {
+      tieneFechaSelect.addEventListener('change', toggleFechaWrapper);
+    }
+
+    function toggleCalendlyVisibility() {
+      const wantsCall = quiereLlamadaCheckbox && quiereLlamadaCheckbox.checked;
+      if (calendlyContainer) {
+        calendlyContainer.classList.toggle('visible', wantsCall);
+      }
+    }
+
+    if (quiereLlamadaCheckbox) {
+      quiereLlamadaCheckbox.addEventListener('change', toggleCalendlyVisibility);
+    }
+
+    function handlePreferenciaChange() {
+      if (preferencia) {
+        // Aquí podrías adaptar algo según la preferencia seleccionada si lo necesitas
+      }
+    }
+
+    if (preferencia) {
+      preferencia.addEventListener('change', handlePreferenciaChange);
+    }
+
+    // Carrusel simple
+    const carouselTrack = document.getElementById('carouselTrack');
+    const carouselSlides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    let currentSlide = 0;
+
+    function updateCarousel() {
+      const offset = -currentSlide * 100;
+      if (carouselTrack) {
+        carouselTrack.style.transform = `translateX(${offset}%)`;
+      }
+    }
+
+    if (prevBtn && nextBtn && carouselSlides.length > 0) {
+      prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length;
+        updateCarousel();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % carouselSlides.length;
+        updateCarousel();
+      });
+
+      updateCarousel();
+    }
   </script>
 </body>
 </html>
