@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <title>Zamaha - Servicios y soluciones en Siquirres</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- FAVICON: usa el mismo archivo que en tus demos.
-       Si tu favicon se llama diferente, cambia zamaha-logo.png por el nombre correcto. -->
-  <link rel="icon" type="image/png" href="zamaha-logo.png" />
+  <!-- Icono de la pestaña (ajusta el archivo si tu logo tiene otro nombre) -->
+  <link rel="icon" href="zamaha-logo.png" type="image/png" />
   <style>
     :root {
       --bg-main: #050816;
@@ -71,34 +70,6 @@
       align-items: center;
     }
 
-    /* LOGO DE TEXTO ZAMAHA */
-    .logo-block {
-      margin-bottom: 10px;
-    }
-
-    .logo-title {
-      font-size: 32px;
-      line-height: 1;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #ffffff;
-      -webkit-text-stroke: 1px #ef4444;
-      text-shadow:
-        0 0 10px rgba(0, 0, 0, 0.95),
-        0 0 18px rgba(248, 113, 113, 0.9);
-    }
-
-    .logo-subtitle {
-      margin-top: 4px;
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-    }
-
-    /* (Queda el CSS de brand-badge por si lo quieres usar luego,
-       pero ya no se muestra la Z verde inventada) */
     .brand-badge {
       display: inline-flex;
       align-items: center;
@@ -108,7 +79,7 @@
       background: rgba(15, 23, 42, 0.95);
       border: 1px solid rgba(129, 140, 248, 0.6);
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.9);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .brand-badge-logo {
@@ -144,6 +115,22 @@
     .brand-badge-sub {
       font-size: 11px;
       color: var(--text-muted);
+    }
+
+    /* Título grande ZAMAHA */
+    .brand-title-display {
+      font-size: 30px;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #f9fafb;
+      -webkit-text-stroke: 1px rgba(248, 113, 113, 0.95); /* contorno rojo suave */
+      text-shadow:
+        0 0 12px rgba(0, 0, 0, 0.85),
+        0 4px 18px rgba(0, 0, 0, 0.9);
+      margin: 2px 0 12px;
+      white-space: nowrap;
     }
 
     .hero-title {
@@ -285,7 +272,7 @@
     }
 
     .hero-aside-card {
-      margin-top: 26px; /* baja la tarjeta para que no choque con el chip azul */
+      margin-top: 26px;
       border-radius: 18px;
       padding: 10px 11px 12px;
       background: radial-gradient(circle at top, rgba(15, 23, 42, 0.92), #020617);
@@ -324,32 +311,6 @@
     .hero-aside-note {
       font-size: 11px;
       color: var(--text-muted);
-    }
-
-    /* RELOJ HORA COSTA RICA */
-    .hero-clock {
-      margin-top: 10px;
-      padding-top: 8px;
-      border-top: 1px solid rgba(148, 163, 231, 0.45);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .hero-clock-label {
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .hero-clock-time {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-        "Liberation Mono", "Courier New", monospace;
-      font-size: 14px;
-      font-weight: 600;
-      color: #e5e7eb;
     }
 
     .hero-gradient-orbit {
@@ -1077,9 +1038,38 @@
     .contact-extra-info {
       font-size: 11px;
       color: var(--text-muted);
+      margin-top: 4px;
     }
 
     .contact-extra-info strong {
+      color: #e5e7eb;
+    }
+
+    /* Tarjeta de hora en Costa Rica (junto al formulario) */
+    .time-box {
+      margin-top: 12px;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 8px 11px;
+      border-radius: 14px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), #020617);
+      border: 1px solid rgba(148, 163, 231, 0.75);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.9);
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .time-box-label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .time-box-value {
+      font-size: 16px;
+      font-weight: 600;
       color: #e5e7eb;
     }
 
@@ -1276,6 +1266,12 @@
         margin-top: 6px;
       }
 
+      .brand-title-display {
+        font-size: 24px;
+        letter-spacing: 0.16em;
+        white-space: normal;
+      }
+
       .services-grid {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -1331,11 +1327,16 @@
         <div class="hero-gradient-orbit"></div>
         <div class="header-grid">
           <div>
-            <!-- LOGO ZAMAHA -->
-            <div class="logo-block">
-              <div class="logo-title">ZAMAHA</div>
-              <div class="logo-subtitle">SERVICIOS Y SOLUCIONES EN SIQUIRRES</div>
+            <div class="brand-badge">
+              <div class="brand-badge-logo">Z</div>
+              <div class="brand-badge-text">
+                <div class="brand-badge-title">Zamaha Servicios</div>
+                <div class="brand-badge-sub">Instalaciones, tecnología y web en Siquirres</div>
+              </div>
             </div>
+
+            <!-- Título grande de marca -->
+            <div class="brand-title-display">ZAMAHA SERVICIOS</div>
 
             <h1 class="hero-title">
               Soluciones prácticas para tu
@@ -1398,10 +1399,6 @@
               <div class="hero-aside-note">
                 Ideal para pequeños negocios, sodas, locales en zonas industriales
                 y comercios que necesitan estar mejor organizados.
-              </div>
-              <div class="hero-clock">
-                <div class="hero-clock-label">Hora en Costa Rica</div>
-                <div class="hero-clock-time" id="crTime">--:--:--</div>
               </div>
             </div>
           </aside>
@@ -1874,6 +1871,12 @@
                 <strong>Horarios de atención:</strong> De lunes a sábado, de 9:00 a.m. a 5:00 p.m.
               </p>
             </div>
+
+            <!-- Reloj en Costa Rica, en el espacio vacío junto al formulario -->
+            <div class="time-box">
+              <div class="time-box-label">Hora en Costa Rica</div>
+              <div class="time-box-value" id="crTime">--:--:--</div>
+            </div>
           </div>
 
           <div>
@@ -2002,27 +2005,22 @@
     // Año en el footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Reloj: hora de Costa Rica
+    // Reloj de hora en Costa Rica (junto al formulario)
     const crTimeEl = document.getElementById('crTime');
+
     function updateCRTime() {
       if (!crTimeEl) return;
       const now = new Date();
-      try {
-        crTimeEl.textContent = now.toLocaleTimeString('es-CR', {
-          timeZone: 'America/Costa_Rica',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
-        });
-      } catch (e) {
-        // Fallback si el navegador no soporta timeZone
-        crTimeEl.textContent = now.toLocaleTimeString('es-CR', {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
-        });
-      }
+      const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZone: 'America/Costa_Rica'
+      };
+      crTimeEl.textContent = new Intl.DateTimeFormat('es-CR', options).format(now);
     }
+
     updateCRTime();
     setInterval(updateCRTime, 1000);
 
