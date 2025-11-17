@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Zamaha - Servicios y soluciones en Siquirres</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="zamaha-icon.png" />
   <style>
     :root {
       --bg-main: #050816;
@@ -219,19 +220,6 @@
       position: relative;
     }
 
-    .hero-chip {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(129, 140, 248, 0.8);
-      font-size: 11px;
-      color: var(--text-soft);
-      backdrop-filter: blur(12px);
-    }
-
     .hero-status-pill {
       display: inline-flex;
       align-items: center;
@@ -254,13 +242,13 @@
     }
 
     .hero-aside-card {
-  margin-top: 26px; /* baja la tarjeta para que no choque con el chip azul */
-  border-radius: 18px;
-  padding: 10px 11px 12px;
-  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.92), #020617);
-  border: 1px solid rgba(148, 163, 231, 0.5);
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
-}
+      margin-top: 26px; /* baja la tarjeta para que no choque con el chip azul */
+      border-radius: 18px;
+      padding: 10px 11px 12px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.92), #020617);
+      border: 1px solid rgba(148, 163, 231, 0.5);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+    }
 
     .hero-aside-title {
       font-size: 13px;
@@ -1208,6 +1196,64 @@
       font-size: 14px;
     }
 
+    /* BOTÓN FLOTANTE WHATSAPP */
+
+    .whatsapp-float {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      border: 1px solid rgba(34, 197, 94, 0.9);
+      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .whatsapp-float-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: rgba(2, 44, 34, 0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbf7d0;
+      font-size: 18px;
+    }
+
+    /* RELOJ HORA COSTA RICA */
+
+    .cr-time-box {
+      margin-top: 8px;
+      padding: 6px 9px;
+      border-radius: 14px;
+      background: radial-gradient(circle at top, #020617, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.55);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .cr-time-label {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .cr-time-value {
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
     /* RESPONSIVE */
 
     @media (max-width: 900px) {
@@ -1263,6 +1309,13 @@
       footer {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      .whatsapp-float {
+        right: 14px;
+        bottom: 14px;
+        width: 50px;
+        height: 50px;
       }
     }
   </style>
@@ -1320,7 +1373,6 @@
           </div>
 
           <aside class="hero-aside">
-            <div class="hero-chip">Zamaha • Servicios y soluciones</div>
             <div class="hero-aside-card">
               <div class="hero-status-pill">
                 <span class="hero-status-dot"></span>
@@ -1898,6 +1950,13 @@
                   </div>
                 </div>
 
+                <div class="cr-time-box">
+                  <div>
+                    <div class="cr-time-label">Hora actual en Costa Rica</div>
+                    <div id="crTime" class="cr-time-value">--:--</div>
+                  </div>
+                </div>
+
                 <div class="form-checkbox-row">
                   <input type="checkbox" id="quiereLlamada" name="Quiere llamada exploratoria" />
                   <label for="quiereLlamada">
@@ -1939,6 +1998,17 @@
       </div>
     </footer>
   </div>
+
+  <!-- BOTÓN FLOTANTE WHATSAPP -->
+  <a
+    href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Escríbeme por WhatsApp"
+  >
+    <span class="whatsapp-float-icon">✆</span>
+  </a>
 
   <script>
     // Año en el footer
@@ -2120,6 +2190,25 @@
       });
 
       updateCarousel();
+    }
+
+    // Reloj hora Costa Rica
+    const crTimeEl = document.getElementById('crTime');
+
+    function updateCRTime() {
+      if (!crTimeEl) return;
+      const now = new Date();
+      const formatter = new Intl.DateTimeFormat('es-CR', {
+        timeZone: 'America/Costa_Rica',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      crTimeEl.textContent = formatter.format(now);
+    }
+
+    if (crTimeEl) {
+      updateCRTime();
+      setInterval(updateCRTime, 60000);
     }
   </script>
 </body>
