@@ -70,6 +70,115 @@
       align-items: center;
     }
 
+    .header-top-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 3;
+      gap: 8px;
+    }
+
+    .services-tab-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .services-tab-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.55);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+      color: var(--text-soft);
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease,
+        transform 0.08s ease;
+    }
+
+    .services-tab-button:hover {
+      border-color: var(--accent-strong);
+      color: var(--accent-strong);
+      transform: translateY(-1px);
+    }
+
+    .services-tab-chevron {
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    .services-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 0;
+      min-width: 220px;
+      padding: 8px;
+      border-radius: 14px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 1), #020617);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.85);
+      display: none;
+      z-index: 22;
+    }
+
+    .services-dropdown-menu a {
+      display: block;
+      padding: 7px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--text-soft);
+      text-decoration: none;
+      line-height: 1.3;
+      transition:
+        background 0.14s ease,
+        color 0.14s ease,
+        transform 0.08s ease;
+    }
+
+    .services-dropdown-menu a + a {
+      margin-top: 4px;
+    }
+
+    .services-dropdown-menu a:hover {
+      background: rgba(22, 163, 74, 0.12);
+      color: var(--accent-strong);
+      transform: translateX(2px);
+    }
+
+    .services-tab-wrapper:hover .services-dropdown-menu {
+      display: block;
+    }
+
+    .services-tab-wrapper.dropdown-open .services-dropdown-menu {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .header-top-row {
+        justify-content: flex-start;
+        margin-bottom: 10px;
+      }
+
+      .services-dropdown-menu {
+        right: auto;
+        left: 0;
+        width: min(260px, 80vw);
+      }
+    }
+
+
     /* Título grande ZAMAHA */
     .brand-title-display {
       font-size: 30px;
@@ -1248,6 +1357,25 @@
     <header>
       <div class="header-card">
         <div class="hero-gradient-orbit"></div>
+
+        <div class="header-top-row">
+          <div class="header-top-spacer"></div>
+          <div class="header-top-actions">
+            <div class="services-tab-wrapper" id="servicesTabWrapper">
+              <button class="services-tab-button" type="button" id="servicesTabButton">
+                Servicios
+                <span class="services-tab-chevron">▾</span>
+              </button>
+              <div class="services-dropdown-menu" id="servicesDropdown">
+                <a href="index.html?service=Cámaras CCTV#contacto">Cámaras y monitoreo</a>
+                <a href="index.html?service=Redes eléctricas#contacto">Redes eléctricas</a>
+                <a href="index.html?service=Equipos de cómputo#contacto">Equipos de cómputo</a>
+                <a href="index.html?service=Desarrollo web#contacto">Desarrollo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="header-grid">
           <div>
             <!-- Título grande de marca -->
@@ -1318,166 +1446,10 @@
 
     <main>
       <!-- SERVICIOS PRINCIPALES -->
-      <section class="services-section" id="servicios">
-        <div class="section-label">Servicios</div>
-        <div class="services-grid">
-          <div class="services-intro">
-            <h2 class="section-title">¿En qué te puedo ayudar?</h2>
-            <p>
-              Estos son los servicios que ofrezco actualmente en Siquirres y alrededores,
-              pensados para pequeños negocios, casas de habitación y comercios que necesitan
-              soluciones claras, sin letras pequeñas.
-            </p>
-            <p>
-              Puedes combinar varios servicios en una misma visita. Si tienes algo más
-              específico en mente, también lo podemos conversar por WhatsApp.
-            </p>
-          </div>
+      
+      <!-- Sección de servicios movida a servicios.html -->
 
-          <div class="services-list">
-            <!-- Cámaras CCTV -->
-            <article class="service-card">
-              <div class="service-header">
-                <h3 class="service-title">Instalación de cámaras CCTV</h3>
-                <span class="service-tag">Seguridad</span>
-              </div>
-              <div class="service-highlight">Kits pequeños para casas y negocios de barrio.</div>
-              <ul class="service-bullets">
-                <li>Instalación de 1 a 4 cámaras según el espacio.</li>
-                <li>Equipos económicos pero confiables, según tu presupuesto.</li>
-                <li>Configuración básica de visualización en el celular.</li>
-              </ul>
-              <div class="service-footer">
-                <div class="service-price">
-                  Mano de obra desde <strong>₡22,500 por cámara</strong>.
-                </div>
-                <div class="service-actions">
-                  <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
-                    Cotizar cámaras
-                  </button>
-                  <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
-                    Añadir al formulario
-                  </button>
-                </div>
-              </div>
-              <div class="service-tooltip">
-                <div class="service-tooltip-title">Detalle del servicio de cámaras</div>
-                <ul class="service-list">
-                  <li>Revisión del lugar para recomendar la mejor ubicación.</li>
-                  <li>Instalación de cámaras, cableado y conectores básicos.</li>
-                  <li>Conexión al grabador, configuración de red y app básica.</li>
-                  <li>Explicación simple de cómo revisar grabaciones.</li>
-                </ul>
-              </div>
-            </article>
 
-            <!-- Redes eléctricas ligeras -->
-            <article class="service-card">
-              <div class="service-header">
-                <h3 class="service-title">Redes eléctricas ligeras</h3>
-                <span class="service-tag">Infraestructura</span>
-              </div>
-              <div class="service-highlight">Puntos eléctricos y orden básico para tus equipos.</div>
-              <ul class="service-bullets">
-                <li>Instalación de tomacorrientes adicionales para equipos.</li>
-                <li>Canaletas básicas para que los cables queden ordenados.</li>
-                <li>Revisión visual de conexiones y recomendaciones.</li>
-              </ul>
-              <div class="service-footer">
-                <div class="service-price">
-                  Mano de obra según alcance del trabajo.
-                </div>
-                <div class="service-actions">
-                  <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
-                    Cotizar redes eléctricas
-                  </button>
-                  <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
-                    Añadir al formulario
-                  </button>
-                </div>
-              </div>
-              <div class="service-tooltip">
-                <div class="service-tooltip-title">Detalle de redes eléctricas ligeras</div>
-                <ul class="service-list">
-                  <li>Puntos para computadoras, cámaras, routers, etc.</li>
-                  <li>Canaletas plásticas para mejorar el orden.</li>
-                  <li>Enfoque en pequeñas ampliaciones, no en obras mayores.</li>
-                </ul>
-              </div>
-            </article>
-
-            <!-- Equipos de cómputo -->
-            <article class="service-card">
-              <div class="service-header">
-                <h3 class="service-title">Mantenimiento de equipos de cómputo</h3>
-                <span class="service-tag">Tecnología</span>
-              </div>
-              <div class="service-highlight">Computadoras funcionando más rápido y con menos enredos.</div>
-              <ul class="service-bullets">
-                <li>Formateos y reinstalación de sistema operativo.</li>
-                <li>Cambio a disco SSD y aumento de memoria RAM.</li>
-                <li>Limpieza interna básica y revisión general.</li>
-              </ul>
-              <div class="service-footer">
-                <div class="service-price">
-                  Mano de obra según diagnóstico, con explicación previa.
-                </div>
-                <div class="service-actions">
-                  <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
-                    Cotizar mantenimiento
-                  </button>
-                  <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
-                    Añadir al formulario
-                  </button>
-                </div>
-              </div>
-              <div class="service-tooltip">
-                <div class="service-tooltip-title">Detalle del mantenimiento</div>
-                <ul class="service-list">
-                  <li>Revisión inicial y explicación de opciones.</li>
-                  <li>Respaldo de información (si lo solicitas).</li>
-                  <li>Instalación de software básico y probado.</li>
-                </ul>
-              </div>
-            </article>
-
-            <!-- Desarrollo web -->
-            <article class="service-card">
-              <div class="service-header">
-                <h3 class="service-title">Páginas web para tu negocio</h3>
-                <span class="service-tag">Presencia digital</span>
-              </div>
-              <div class="service-highlight">Ideal para sodas, pizzerías, cafeterías y pequeños negocios.</div>
-              <ul class="service-bullets">
-                <li>Landing page o sitio profesional para tu negocio, con información clara.</li>
-                <li>Enlaces a WhatsApp, ubicación y redes sociales.</li>
-                <li>Plantillas ligeras y fáciles de mantener.</li>
-              </ul>
-              <div class="service-footer">
-                <div class="service-price">
-                  Propuestas según lo que necesites mostrar.
-                </div>
-                <div class="service-actions">
-                  <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
-                    Cotizar sitio web
-                  </button>
-                  <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
-                    Añadir al formulario
-                  </button>
-                </div>
-              </div>
-              <div class="service-tooltip">
-                <div class="service-tooltip-title">Detalle del desarrollo web</div>
-                <ul class="service-list">
-                  <li>Diseño pensado para verse bien en celular.</li>
-                  <li>Textos claros para explicar tus servicios y menú.</li>
-                  <li>Botones directos para fomentar el contacto por WhatsApp.</li>
-                </ul>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
 
       <!-- EJEMPLOS DE PÁGINA WEB -->
       <section class="web-examples-section" id="demos-web">
@@ -1957,6 +1929,7 @@
     const servicesField = document.getElementById('servicesField');
 
     function updateServicesField() {
+      if (!servicesField) return;
       const active = [];
       servicePillsBtns.forEach(btn => {
         if (btn.classList.contains('active')) {
@@ -1964,6 +1937,19 @@
         }
       });
       servicesField.value = active.join(', ');
+    }
+
+    // Preseleccionar servicio desde la URL (?service=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const servicioDesdeURL = urlParams.get('service');
+
+    if (servicioDesdeURL && servicePillsBtns.length > 0) {
+      servicePillsBtns.forEach(btn => {
+        if (btn.dataset.service === servicioDesdeURL) {
+          btn.classList.add('active');
+        }
+      });
+      updateServicesField();
     }
 
     servicePillsBtns.forEach(btn => {
@@ -2017,6 +2003,37 @@
         const contactoSection = document.getElementById('contacto');
         if (contactoSection) {
           contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+
+    // Pestaña de servicios en el header (dropdown)
+    const servicesTabWrapper = document.getElementById('servicesTabWrapper');
+    const servicesTabButton = document.getElementById('servicesTabButton');
+    const servicesDropdown = document.getElementById('servicesDropdown');
+
+    if (servicesTabWrapper && servicesTabButton && servicesDropdown) {
+      // En pantallas pequeñas, abrir/cerrar con click
+      servicesTabButton.addEventListener('click', (e) => {
+        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+        if (!isSmallScreen) return; // en escritorio usamos solo hover
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = servicesTabWrapper.classList.contains('dropdown-open');
+        if (isOpen) {
+          servicesTabWrapper.classList.remove('dropdown-open');
+        } else {
+          servicesTabWrapper.classList.add('dropdown-open');
+        }
+      });
+
+      // Cerrar al hacer click fuera (solo móvil)
+      document.addEventListener('click', (e) => {
+        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+        if (!isSmallScreen) return;
+        if (!servicesTabWrapper.contains(e.target)) {
+          servicesTabWrapper.classList.remove('dropdown-open');
         }
       });
     }
