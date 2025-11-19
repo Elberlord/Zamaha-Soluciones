@@ -22,10 +22,8 @@
       --radius-lg: 22px;
       --radius-md: 16px;
       --radius-pill: 999px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
-      --shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.5);
-      --shadow-inner: inset 0 0 25px rgba(0, 0, 0, 0.45);
-      --gradient-hero: radial-gradient(circle at top, #1e293b, #020617);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.9);
+      --shadow-sm: 0 10px 24px rgba(15, 23, 42, 0.65);
     }
 
     * {
@@ -37,16 +35,19 @@
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #0b1022 0, #020617 45%, #000 100%);
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
       color-scheme: dark;
     }
 
-    .page {
-      max-width: 1040px;
+    .page-shell {
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 16px 14px 40px;
+      padding: 18px 14px 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     header {
@@ -70,11 +71,965 @@
       align-items: center;
     }
 
+    /* Título grande ZAMAHA */
+    .brand-title-display {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 26px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #e5e7eb;
+      margin-bottom: 4px;
+    }
+
+    .brand-pill {
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(148, 163, 231, 0.6);
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.9), rgba(15, 23, 42, 0.9));
+      color: #e5e7eb;
+    }
+
+    .hero-title {
+      font-size: 22px;
+      line-height: 1.25;
+      margin: 0 0 6px;
+      color: #f9fafb;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.6);
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.85), rgba(15, 23, 42, 0.9));
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .hero-badge span {
+      font-size: 12px;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .hero-contact-main {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      color: #022c22;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.5);
+    }
+
+    .hero-whatsapp-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: #022c22;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbf7d0;
+      font-size: 15px;
+    }
+
+    .hero-secondary-link {
+      font-size: 13px;
+      color: var(--text-soft);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px dashed rgba(148, 163, 231, 0.5);
+    }
+
+    .hero-secondary-link span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-strong);
+    }
+
+    .hero-contact-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-contact-meta strong {
+      color: #e5e7eb;
+    }
+
+    .hero-contact-chip {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.45);
+      background: rgba(15, 23, 42, 0.75);
+    }
+
+    .hero-visual {
+      position: relative;
+      padding-left: 4px;
+    }
+
+    .hero-visual-card {
+      position: relative;
+      border-radius: 20px;
+      padding: 12px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), #020617);
+      border: 1px solid rgba(148, 163, 231, 0.5);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+      overflow: hidden;
+    }
+
+    .hero-visual-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .hero-visual-subtitle {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .hero-visual-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+      display: grid;
+      gap: 4px;
+    }
+
+    .hero-visual-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-visual-list li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-visual-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 6px;
+    }
+
+    .hero-visual-badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.5);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .hero-visual-quote {
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    .hero-gradient-orbit {
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top center, rgba(59, 130, 246, 0.35), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .hero-gradient-orbit::after {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 231, 0.4);
+      opacity: 0.5;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .main-column {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      margin: 0 0 2px;
+      color: #e5e7eb;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin: 0 0 8px;
+    }
+
+    .services-section {
+      padding: 16px 18px 18px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #020617, #020617 45%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.3);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .services-intro {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .services-intro p {
+      margin: 0 0 6px;
+    }
+
+    .services-intro strong {
+      color: #e5e7eb;
+    }
+
+    .services-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .service-card {
+      position: relative;
+      padding: 10px 11px 10px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+      overflow: hidden;
+    }
+
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .service-title {
+      margin: 0;
+      font-size: 14px;
+      color: #e5e7eb;
+    }
+
+    .service-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      color: #e0f2fe;
+      white-space: nowrap;
+    }
+
+    .service-highlight {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .service-bullets {
+      margin: 0 0 6px;
+      padding-left: 18px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .service-bullets li + li {
+      margin-top: 2px;
+    }
+
+    .service-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .service-price {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .service-price strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .service-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .service-tooltip {
+      margin-top: 8px;
+      padding: 8px 9px;
+      border-radius: 12px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), #020617);
+      border: 1px dashed rgba(148, 163, 231, 0.4);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .service-tooltip-title {
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 4px;
+      font-size: 11px;
+    }
+
+    .service-list {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .service-list li + li {
+      margin-top: 2px;
+    }
+
+    .risk-zone-warning {
+      margin-top: 8px;
+      padding: 7px 9px;
+      border-radius: 10px;
+      border: 1px dashed rgba(248, 250, 252, 0.18);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .risk-zone-warning strong {
+      color: #fecaca;
+    }
+
+    .risk-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #f97316, #ea580c);
+      box-shadow: 0 0 10px rgba(248, 113, 22, 0.9);
+      margin-right: 4px;
+    }
+
+    .examples-section {
+      padding: 16px 18px 18px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+    }
+
+    .examples-grid {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .examples-card,
+    .example-card {
+      border-radius: 18px;
+      padding: 10px 12px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .example-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .example-title {
+      margin: 0;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .example-label {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      background: rgba(56, 189, 248, 0.12);
+      color: #e0f2fe;
+      white-space: nowrap;
+    }
+
+    .example-desc {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .example-actions {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .example-link {
+      font-size: 12px;
+      color: var(--accent-strong);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.6);
+    }
+
+    .example-link span {
+      font-size: 12px;
+    }
+
+    .example-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .web-examples-grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .contact-card {
+      padding: 16px 18px 18px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .contact-meta {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .contact-meta strong {
+      color: #e5e7eb;
+    }
+
+    .contact-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .contact-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 231, 0.45);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    form {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+    }
+
+    label {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.4);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      padding: 7px 10px;
+      font-size: 13px;
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    textarea {
+      border-radius: 16px;
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(34, 197, 94, 0.8);
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.75);
+    }
+
+    .small-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.6);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 11px;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .pill.active {
+      background: rgba(22, 163, 74, 0.15);
+      border-color: rgba(34, 197, 94, 0.8);
+      color: var(--accent-strong);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 231, 0.7);
+    }
+
+    .pill.active .pill-dot {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.65);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      transition:
+        background 0.12s ease,
+        border-color 0.12s ease,
+        transform 0.08s ease,
+        box-shadow 0.12s ease;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.85);
+    }
+
+    .btn-small {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      color: #022c22;
+      border-color: rgba(34, 197, 94, 0.9);
+      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.85);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-soft);
+      border-color: rgba(148, 163, 231, 0.7);
+    }
+
+    .btn-secondary:hover {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.65);
+      border-color: rgba(148, 163, 231, 0.4);
+      color: var(--text-soft);
+      box-shadow: none;
+    }
+
+    .btn-ghost:hover {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-whatsapp {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      color: #022c22;
+      border-color: rgba(34, 197, 94, 0.9);
+      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.85);
+    }
+
+    .btn-whatsapp:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(2, 44, 34, 0.95);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbf7d0;
+      font-size: 14px;
+    }
+
+    /* ----- LAYOUT RESPONSIVE ----- */
+
+    /* En escritorio, los servicios van en 2 columnas */
+    @media (min-width: 840px) {
+      .services-list {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      }
+
+      .web-examples-grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      }
+    }
+
+    @media (max-width: 840px) {
+      .header-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-visual {
+        margin-top: 10px;
+      }
+
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-shell {
+        padding: 14px 10px 24px;
+      }
+
+      .header-card {
+        padding: 16px 14px 16px;
+      }
+
+      .services-section,
+      .examples-section,
+      .contact-card {
+        padding: 14px 12px 14px;
+      }
+    }
+
+    /* ----- CARRUSEL DE EJEMPLOS DE PÁGINAS WEB ----- */
+    .carousel {
+      position: relative;
+      margin-top: 8px;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      background: radial-gradient(circle at top left, #020617, #020617 65%, #020617);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 10px 12px 12px;
+    }
+
+    .carousel-content {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .carousel-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .carousel-title {
+      margin: 0;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .carousel-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(251, 191, 36, 0.8);
+      background: rgba(251, 191, 36, 0.12);
+      color: #fef3c7;
+      white-space: nowrap;
+    }
+
+    .carousel-text {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .carousel-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .carousel-link {
+      font-size: 12px;
+      color: var(--accent-strong);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      inset-block: 50%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 6px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .carousel-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      pointer-events: auto;
+      transition:
+        background 0.12s ease,
+        transform 0.08s ease,
+        border-color 0.12s ease;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    .carousel-btn:hover {
+      background: rgba(30, 64, 175, 0.95);
+      border-color: rgba(191, 219, 254, 1);
+      transform: translateY(-1px);
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      margin-top: 16px;
+      padding: 10px 0 0;
+      border-top: 1px solid rgba(148, 163, 231, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-left,
+    .footer-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .footer-left a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    .footer-left a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-right span {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-right {
+        justify-content: flex-start;
+      }
+    }
+
+    /* ----- Menú de servicios en el header ----- */
     .header-top-row {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       position: relative;
       z-index: 3;
       gap: 8px;
@@ -100,6 +1055,7 @@
       box-shadow: 0 10px 30px rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      text-decoration: none;
       transition:
         background 0.16s ease,
         border-color 0.16s ease,
@@ -161,10 +1117,6 @@
       display: block;
     }
 
-    .services-tab-wrapper.dropdown-open .services-dropdown-menu {
-      display: block;
-    }
-
     @media (max-width: 768px) {
       .header-top-row {
         justify-content: flex-start;
@@ -178,1182 +1130,42 @@
       }
     }
 
-
-    /* Título grande ZAMAHA */
-    .brand-title-display {
-      font-size: 30px;
-      line-height: 1.1;
-      font-weight: 800;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #f9fafb;
-      -webkit-text-stroke: 1px rgba(248, 113, 113, 0.95); /* contorno rojo suave */
-      text-shadow:
-        0 0 12px rgba(0, 0, 0, 0.85),
-        0 4px 18px rgba(0, 0, 0, 0.9);
-      margin: 2px 0 12px;
-      white-space: nowrap;
-    }
-
-    .hero-title {
-      font-size: 26px;
-      line-height: 1.15;
-      margin: 0 0 8px;
-      letter-spacing: 0.02em;
-    }
-
-    .hero-title span {
-      background: linear-gradient(120deg, #4ade80, #22c55e, #a5b4fc);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 14px;
-      color: var(--text-soft);
-      margin: 0 0 12px;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .hero-tag {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 231, 0.7);
-      background: radial-gradient(circle at top, rgba(30, 64, 175, 0.45), #020617);
-      color: var(--text-soft);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .hero-contact-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-top: 8px;
-    }
-
-    .hero-contact-main {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .hero-whatsapp {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
+    /* ----- Botón flotante de WhatsApp ----- */
+    .floating-whatsapp {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 58px;
+      height: 58px;
       border-radius: 999px;
       background: radial-gradient(circle at top left, #22c55e, #16a34a);
-      color: #022c22;
-      font-weight: 600;
-      font-size: 14px;
-      border: none;
-      text-decoration: none;
-      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.5);
-    }
-
-    .hero-whatsapp-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: #022c22;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #bbf7d0;
-      font-size: 15px;
-    }
-
-    .hero-secondary-link {
-      font-size: 13px;
-      color: var(--text-soft);
+      color: #022c22;
+      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.9);
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      opacity: 0.9;
-    }
-
-    .hero-secondary-link::after {
-      content: "↗";
-      font-size: 12px;
-      opacity: 0.8;
-    }
-
-    .hero-contact-note {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .hero-aside {
-      position: relative;
-    }
-
-    .hero-aside-card {
-      margin-top: 26px;
-      border-radius: 18px;
-      padding: 10px 11px 12px;
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.92), #020617);
-      border: 1px solid rgba(148, 163, 231, 0.5);
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
-    }
-
-    .hero-aside-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .hero-aside-text {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .hero-aside-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-
-    .hero-aside-tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(30, 64, 175, 0.35);
-      border: 1px solid rgba(129, 140, 248, 0.7);
-      color: #e5e7eb;
-    }
-
-    .hero-aside-note {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .hero-gradient-orbit {
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 0% 0%, rgba(74, 222, 128, 0.13), transparent 60%),
-        radial-gradient(circle at 100% 0%, rgba(96, 165, 250, 0.17), transparent 65%),
-        radial-gradient(circle at 50% 100%, rgba(244, 114, 182, 0.13), transparent 55%);
-      opacity: 0.9;
-      mix-blend-mode: screen;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    /* CONTENIDO PRINCIPAL */
-
-    main {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .section-label {
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .section-title {
-      font-size: 18px;
-      margin: 0 0 10px;
-    }
-
-    /* SERVICIOS */
-
-    .services-section {
-      padding: 16px 18px 18px;
-      border-radius: 22px;
-      background: linear-gradient(145deg, #020617, #020617 45%, #020617);
-      border: 1px solid rgba(148, 163, 231, 0.3);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
-    }
-
-    /* ahora intro arriba y lista abajo */
-    .services-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 16px;
-    }
-
-    .services-intro {
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
-    .services-intro p {
-      margin: 0 0 8px;
-    }
-
-    .services-intro strong {
-      color: #e5e7eb;
-    }
-
-    .services-list {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 10px;
-    }
-
-    .service-card {
-      position: relative;
-      padding: 10px 11px 10px;
-      border-radius: 18px;
-      background: radial-gradient(circle at top left, #020617, #020617);
-      border: 1px solid rgba(148, 163, 231, 0.42);
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-      cursor: default;
-    }
-
-    .service-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .service-title {
-      margin: 0;
-      font-size: 13px;
-    }
-
-    .service-tag {
-      font-size: 10px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 231, 0.8);
-      color: var(--text-soft);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.86), #020617);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .service-highlight {
-      font-size: 11px;
-      color: var(--accent-strong);
-      margin: 4px 0;
-    }
-
-    .service-bullets {
-      font-size: 11px;
-      color: var(--text-soft);
-      margin: 4px 0 8px;
-      padding-left: 16px;
-    }
-
-    .service-bullets li {
-      margin-bottom: 3px;
-    }
-
-    .service-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .service-price {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .service-actions {
-      display: flex;
-      gap: 6px;
-    }
-
-    .service-actions .btn-small {
-      font-size: 11px;
-      padding: 5px 9px;
-    }
-
-    .service-tooltip {
-      position: absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 10px;
-      padding: 9px 10px;
-      border-radius: 14px;
-      background: radial-gradient(circle at top left, #020617, #020617);
-      border: 1px solid rgba(148, 163, 231, 0.6);
-      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.95);
-      font-size: 11px;
-      color: var(--text-soft);
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition: opacity 0.18s ease, transform 0.18s ease;
-      z-index: 5;
-    }
-
-    .service-card:hover .service-tooltip {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .service-tooltip-title {
-      font-weight: 600;
-      margin-bottom: 3px;
-      color: #e5e7eb;
-    }
-
-    .service-tooltip .service-list {
-      margin: 4px 0 0;
-      padding-left: 16px;
-    }
-
-    .service-tooltip .service-list li {
-      margin-bottom: 3px;
-    }
-
-    @media (max-width: 768px) {
-      .service-tooltip {
-        left: 50%;
-        bottom: auto;
-        top: 100%;
-        transform: translate(-50%, 10px);
-      }
-
-      .service-card:hover .service-tooltip {
-        transform: translate(-50%, 10px);
-      }
-    }
-
-    /* PASTILLAS DE SERVICIOS (FORMULARIO) */
-
-    .service-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .service-pill-btn {
-      padding: 5px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 231, 0.75);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
-      color: var(--text-soft);
-      font-size: 11px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      z-index: 50;
       transition:
-        background 0.14s ease,
-        border-color 0.14s ease,
-        color 0.14s ease,
-        transform 0.1s ease;
+        transform 0.12s ease,
+        filter 0.12s ease,
+        box-shadow 0.12s ease;
     }
 
-    .service-pill-btn:hover:not(.active) {
-      background: rgba(16, 29, 71, 0.98);
-      border-color: rgba(158, 173, 225, 0.9);
-      transform: translateY(-1px);
-    }
-
-    .service-pill-btn.active {
-      background: rgba(0, 200, 83, 0.18);
-      border-color: rgba(34, 197, 94, 0.9);
-      color: #bbf7d0;
-      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.35);
-    }
-
-    .service-pill-badge {
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      padding: 2px 5px;
-      border-radius: 999px;
-      background: rgba(45, 212, 191, 0.18);
-      border: 1px solid rgba(34, 197, 94, 0.5);
-      color: #a7f3d0;
-    }
-
-    /* EJEMPLOS WEB */
-
-    .web-examples-section {
-      padding: 16px 18px 18px;
-      border-radius: 22px;
-      background: radial-gradient(circle at top left, #020617, #020617 40%, #020617);
-      border: 1px solid rgba(148, 163, 231, 0.3);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
-    }
-
-    .web-examples-header {
-      margin-bottom: 12px;
-    }
-
-    .web-examples-header p {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin: 4px 0 0;
-      max-width: 620px;
-    }
-
-    .web-examples-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 14px;
-    }
-
-    .example-card {
-      border-radius: 18px;
-      padding: 12px 12px 12px;
-      background: radial-gradient(circle at top left, #020617, #020617);
-      border: 1px solid rgba(148, 163, 231, 0.38);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .example-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .example-label {
-      align-self: flex-start;
-      padding: 4px 12px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(129, 140, 196, 0.8);
-      background: rgba(9, 20, 48, 0.95);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-    }
-
-    .example-title {
-      font-size: 15px;
-      margin: 0;
-    }
-
-    .example-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 4px 0 6px;
-    }
-
-    .example-chip {
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: var(--radius-pill);
-      background: rgba(30, 64, 175, 0.32);
-      border: 1px solid rgba(129, 140, 248, 0.75);
-      color: #e5e7eb;
-    }
-
-    .example-desc {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin: 4px 0 6px;
-    }
-
-    .example-list {
-      font-size: 11px;
-      color: var(--text-soft);
-      margin: 4px 0 8px;
-      padding-left: 18px;
-    }
-
-    .example-list li {
-      margin-bottom: 3px;
-    }
-
-    .example-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .example-tip {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
-
-    /* EQUIPOS EN VENTA */
-
-    .equipos-section {
-      margin-top: 10px;
-      padding: 20px 22px 22px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, #050816, #07132a);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .equipos-header h2 {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-
-    .equipos-header p {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 14px;
-      max-width: 620px;
-    }
-
-    .equipos-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .equipo-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
-      gap: 16px;
-      align-items: stretch;
-    }
-
-    .equipo-image {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: #000;
-      box-shadow: var(--shadow-soft);
-      max-height: 220px;
-    }
-
-    .equipo-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .equipo-body h3 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .equipo-state {
-      font-size: 12px;
-      padding: 3px 9px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(56, 189, 248, 0.8);
-      color: #7dd3fc;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-
-    .equipo-state span {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
-    }
-
-    .equipo-specs {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin: 4px 0 6px;
-      padding-left: 18px;
-    }
-
-    .equipo-specs li {
-      margin-bottom: 2px;
-    }
-
-    .equipo-price {
-      font-size: 13px;
-      margin: 6px 0;
-    }
-
-    .equipo-price strong {
-      font-size: 18px;
-      color: var(--accent-strong);
-    }
-
-    .equipo-tax {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-left: 4px;
-    }
-
-    .equipo-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-
-    .equipo-hint {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .camaras-section {
-      margin-top: 10px;
-      padding: 20px 22px 22px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, #050816, #07132a);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .camaras-header h2 {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-
-    .camaras-header p {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 14px;
-      max-width: 620px;
-    }
-
-    .camaras-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 16px;
-    }
-
-    .camara-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
-      gap: 16px;
-      align-items: stretch;
-    }
-
-    .camara-image {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: #020617;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-height: 260px;
-    }
-
-    .camara-image img {
-      width: 100%;
-      height: auto;
-      max-height: 260px;
-      object-fit: contain;
-      object-position: center;
-      display: block;
-    }
-
-    .camara-body h3 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .camara-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      padding: 3px 9px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(129, 140, 196, 0.7);
-      background: rgba(8, 23, 53, 0.9);
-      color: var(--text-soft);
-      margin-bottom: 6px;
-    }
-
-    .camara-specs {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin: 6px 0;
-      padding-left: 18px;
-    }
-
-    .camara-specs li {
-      margin-bottom: 2px;
-    }
-
-    .camara-price {
-      font-size: 13px;
-      margin: 6px 0;
-    }
-
-    .camara-price strong {
-      font-size: 18px;
-      color: var(--accent-strong);
-    }
-
-    .camara-note {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .camara-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    /* CARRUSEL */
-
-    .carousel-section {
-      margin-top: -10px;
-      padding: 18px 20px 22px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, #050816, #07132a);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .carousel-frame {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .carousel-window {
-      overflow: hidden;
-      border-radius: var(--radius-md);
-      flex: 1;
-      box-shadow: var(--shadow-inner);
-      border: 1px solid rgba(148, 163, 231, 0.45);
-      background: #020617;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.4s ease;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      max-height: 260px;
-      overflow: hidden;
-    }
-
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .carousel-arrow {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 231, 0.6);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.92), #020617);
-      color: #e5e7eb;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--shadow-sm);
-    }
-
-    /* CONTACTO */
-
-    .contact-section {
-      margin-top: 14px;
-      padding: 18px 18px 20px;
-      border-radius: 22px;
-      background: radial-gradient(circle at top left, #020617, #020617 50%, #020617);
-      border: 1px solid rgba(148, 163, 231, 0.3);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.3fr);
-      gap: 16px;
-      align-items: flex-start;
-    }
-
-    .contact-intro p {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin: 0 0 8px;
-    }
-
-    .contact-intro strong {
-      color: #e5e7eb;
-    }
-
-    form {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 9px;
-      font-size: 13px;
-    }
-
-    label {
-      display: block;
-      font-size: 12px;
-      margin-bottom: 3px;
-      color: var(--text-soft);
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    input[type="date"],
-    input[type="time"],
-    textarea,
-    select {
-      width: 100%;
-      padding: 7px 9px;
-      border-radius: 12px;
-      border: 1px solid rgba(148, 163, 231, 0.5);
-      background: radial-gradient(circle at top left, #020617, #020617);
-      background-color: #020617;
-      color: var(--text-main);
-      font-size: 13px;
-      outline: none;
-      box-shadow: inset 0 0 12px rgba(15, 23, 42, 0.9);
-    }
-
-    select option {
-      background-color: #020617;
-      color: var(--text-main);
-    }
-
-    textarea {
-      min-height: 88px;
-      resize: vertical;
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: var(--text-muted);
-      font-size: 12px;
-    }
-
-    .contact-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .contact-footer {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .contact-cta {
-      margin-top: 4px;
-    }
-
-    .contact-extra-info {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .contact-extra-info strong {
-      color: #e5e7eb;
-    }
-
-    /* Tarjeta de hora en Costa Rica (junto al formulario) */
-    .time-box {
-      margin-top: 12px;
-      display: inline-flex;
-      flex-direction: column;
-      gap: 3px;
-      padding: 8px 11px;
-      border-radius: 14px;
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), #020617);
-      border: 1px solid rgba(148, 163, 231, 0.75);
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.9);
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .time-box-label {
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    .time-box-value {
-      font-size: 16px;
-      font-weight: 600;
-      color: #e5e7eb;
-    }
-
-    /* BLOQUE EXTRA (PREF. CONTACTO Y CALENDLY) */
-
-    .preferences-box {
-      margin-top: 6px;
-      padding: 10px 11px 10px;
-      border-radius: 16px;
-      background: radial-gradient(circle at top, #020617, #020617);
-      border: 1px solid rgba(148, 163, 231, 0.45);
-      box-shadow: var(--shadow-inner);
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .preferences-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 8px;
-      align-items: flex-start;
-    }
-
-    .preferences-field label {
-      margin-bottom: 4px;
-    }
-
-    .preferences-note {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 3px;
-    }
-
-    .form-checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .form-checkbox-row input[type="checkbox"] {
-      width: 14px;
-      height: 14px;
-      accent-color: #22c55e;
-    }
-
-    .calendly-container {
-      margin-top: 10px;
-      border-radius: 14px;
-      border: 1px dashed rgba(148, 163, 231, 0.6);
-      padding: 8px 9px;
-      background: rgba(15, 23, 42, 0.65);
-      display: none;
-    }
-
-    .calendly-container.visible {
-      display: block;
-    }
-
-    .calendly-placeholder {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    /* FOOTER */
-
-    footer {
-      margin-top: 18px;
-      padding: 10px 4px 0;
-      font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      border-top: 1px solid rgba(15, 23, 42, 0.9);
-    }
-
-    footer a {
-      color: var(--text-soft);
-    }
-
-    .footer-contact {
-      text-align: left;
-    }
-
-    .footer-contact span {
-      display: block;
-    }
-
-    .footer-contact a {
-      text-decoration: none;
-    }
-
-    .footer-contact a:hover {
-      text-decoration: underline;
-    }
-
-    .footer-right {
-      text-align: right;
-      font-size: 13px;
-    }
-
-    /* BOTONES NUEVOS */
-
-    .btn {
-      position: relative;
-      padding: 11px 22px;
-      border-radius: var(--radius-pill);
-      border: 1px solid transparent;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: radial-gradient(circle at top left, #22c55e, #16a34a);
-      color: #022c22;
-      border-color: rgba(34, 197, 94, 0.8);
-      box-shadow: 0 14px 30px rgba(22, 163, 74, 0.7);
-    }
-
-    .btn-primary:hover {
+    .floating-whatsapp:hover {
+      transform: translateY(-2px) scale(1.03);
       filter: brightness(1.05);
-      transform: translateY(-1px);
+      box-shadow: 0 20px 40px rgba(22, 163, 74, 1);
     }
 
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-soft);
-      border-color: rgba(148, 163, 231, 0.7);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.8);
-    }
-
-    .btn-secondary:hover {
-      background: radial-gradient(circle at top, rgba(30, 64, 175, 0.6), #020617);
-    }
-
-    .btn-small {
-      font-size: 12px;
-      padding: 7px 14px;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.85);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-soft);
-      border-color: rgba(148, 163, 231, 0.4);
-      box-shadow: none;
-    }
-
-    .btn-ghost:hover {
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .btn-whatsapp {
-      background: radial-gradient(circle at top left, #22c55e, #16a34a);
-      color: #022c22;
-      border-color: rgba(34, 197, 94, 0.9);
-      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.85);
-    }
-
-    .btn-whatsapp:hover {
-      filter: brightness(1.06);
-      transform: translateY(-1px);
-    }
-
-    .btn-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: rgba(2, 44, 34, 0.95);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #bbf7d0;
-      font-size: 14px;
-    }
-
-    /* ----- LAYOUT RESPONSIVE ----- */
-
-    /* En escritorio, los servicios van en 2 columnas */
-    @media (min-width: 900px) {
-      .services-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 900px) {
-      .header-grid {
-        grid-template-columns: minmax(0, 1.4fr);
-      }
-
-      .hero-aside {
-        margin-top: 6px;
-      }
-
-      .brand-title-display {
-        font-size: 24px;
-        letter-spacing: 0.16em;
-        white-space: normal;
-      }
-
-      .contact-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .equipo-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .camara-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .header-card {
-        padding: 14px 12px;
-      }
-
-      .services-section,
-      .web-examples-section,
-      .equipos-section,
-      .camaras-section,
-      .carousel-section,
-      .contact-section {
-        padding-left: 14px;
-        padding-right: 14px;
-      }
-
-      .hero-title {
-        font-size: 22px;
-      }
-
-      .hero-contact-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    .floating-whatsapp-icon {
+      font-size: 26px;
+      line-height: 1;
     }
   </style>
 </head>
 <body>
-  <div class="page">
+  <div class="page-shell">
     <header>
       <div class="header-card">
         <div class="hero-gradient-orbit"></div>
@@ -1361,16 +1173,17 @@
         <div class="header-top-row">
           <div class="header-top-spacer"></div>
           <div class="header-top-actions">
-            <div class="services-tab-wrapper" id="servicesTabWrapper">
-              <button class="services-tab-button" type="button" id="servicesTabButton">
+            <div class="services-tab-wrapper">
+              <a class="services-tab-button" href="servicios.html">
                 Servicios
                 <span class="services-tab-chevron">▾</span>
-              </button>
-              <div class="services-dropdown-menu" id="servicesDropdown">
+              </a>
+              <div class="services-dropdown-menu">
+                <a href="servicios.html">Ver todos los servicios</a>
                 <a href="index.html?service=Cámaras CCTV#contacto">Cámaras y monitoreo</a>
                 <a href="index.html?service=Redes eléctricas#contacto">Redes eléctricas</a>
                 <a href="index.html?service=Equipos de cómputo#contacto">Equipos de cómputo</a>
-                <a href="index.html?service=Desarrollo web#contacto">Desarrollo</a>
+                <a href="index.html?service=Desarrollo web#contacto">Desarrollo web y sistemas</a>
               </div>
             </div>
           </div>
@@ -1383,20 +1196,23 @@
 
             <h1 class="hero-title">
               Servicios y Soluciones para tu
-              <span>negocio y tu casa</span> 
+              <span style="color: #a5b4fc;">casa</span> y tu
+              <span style="color: #22c55e;">negocio</span>
             </h1>
 
             <p class="hero-subtitle">
-              Instalación de cámaras, redes eléctricas básicas, equipos de cómputo
-              y páginas web ligeras para pequeños negocios, sodas, pizzerías,
-              cafeterías y comercios de barrio.
+              Instalación de cámaras, redes ligeras, computadoras y páginas web sencillas,
+              pensado para gente que quiere <strong>soluciones claras, sin humo</strong>.
             </p>
 
-            <div class="hero-tags">
-              <span class="hero-tag">Instalación de cámaras CCTV</span>
-              <span class="hero-tag">Redes y electricidad ligera</span>
-              <span class="hero-tag">Equipos de cómputo usados</span>
-              <span class="hero-tag">Sitios web para negocios</span>
+            <div class="hero-badges">
+              <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                <span>Atención en Siquirres y alrededores</span>
+              </div>
+              <div class="hero-badge">
+                <span>+10 años entre cocina, cables y proyectos locos</span>
+              </div>
             </div>
 
             <div class="hero-contact-row">
@@ -1404,483 +1220,514 @@
                 <a class="hero-whatsapp"
                    href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
                    target="_blank" rel="noopener noreferrer">
-                  <span class="hero-whatsapp-icon">✆</span>
+                  <span class="hero-whatsapp-icon">🟢</span>
                   <span>Escríbeme por WhatsApp</span>
                 </a>
-
-                <a class="hero-secondary-link" href="#contacto">
-                  O llena el formulario de contacto
+                <a href="#contacto" class="hero-secondary-link">
+                  <span>Formulario</span>
+                  <span>Déjame tus datos y te respondo</span>
                 </a>
               </div>
-              <div class="hero-contact-note">
-                Atención en Siquirres y alrededores, con enfoque en soluciones claras y sin enredos.
+              <div class="hero-contact-meta">
+                <div class="hero-contact-chip">
+                  Lunes a sábado • <strong>9:00 a.m. - 5:00 p.m.</strong>
+                </div>
+                <div class="hero-contact-chip">
+                  Hora actual en Costa Rica:
+                  <strong id="crTime">--:--:--</strong>
+                </div>
               </div>
             </div>
           </div>
 
-          <aside class="hero-aside">
-            <div class="hero-aside-card">
-              <div class="hero-aside-title">
-                Un solo contacto para varias soluciones
-              </div>
-              <div class="hero-aside-text">
-                Te ayudo a resolver desde la instalación de tus cámaras de seguridad
-                hasta la publicación de la página web de tu negocio, con comunicación directa
-                y en un lenguaje claro.
-              </div>
-              <div class="hero-aside-tags">
-                <span class="hero-aside-tag">Cámaras y monitoreo</span>
-                <span class="hero-aside-tag">Redes básicas</span>
-                <span class="hero-aside-tag">Computadoras</span>
-                <span class="hero-aside-tag">Sitios web</span>
-              </div>
-              <div class="hero-aside-note">
-                Ideal para pequeños negocios, sodas, locales en zonas industriales
-                y comercios que necesitan estar mejor organizados.
+          <div class="hero-visual">
+            <div class="hero-visual-card">
+              <div class="hero-visual-title">¿Qué puedo hacer por tu espacio?</div>
+              <div class="hero-visual-subtitle">Un vistazo rápido a cómo trabajo:</div>
+              <ul class="hero-visual-list">
+                <li>Cámaras CCTV básicas para ver tu casa o negocio desde el celular.</li>
+                <li>Orden en cables y puntos eléctricos para tus equipos.</li>
+                <li>Limpieza y puesta a punto de computadoras lentas.</li>
+                <li>Páginas web sencillas para que te encuentren y te escriban fácil.</li>
+              </ul>
+              <div class="hero-visual-footer">
+                <span class="hero-visual-badge">Proyectos pequeños, trato cercano</span>
+                <span class="hero-visual-quote">"Sin humo, sin promesas raras."</span>
               </div>
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </header>
 
     <main>
-      <!-- SERVICIOS PRINCIPALES -->
-      
-      <!-- Sección de servicios movida a servicios.html -->
-
-
-
-      <!-- EJEMPLOS DE PÁGINA WEB -->
-      <section class="web-examples-section" id="demos-web">
-        <div class="section-label">Demos web</div>
-        <div class="web-examples-header">
-          <h2 class="section-title">Ejemplos de páginas para tu negocio</h2>
-          <p>
-            Estos son ejemplos reales de páginas para una soda, una pizzería
-            y una cafetería. Puedes verlos para darte una idea de cómo se verían tus menús
-            y tu información básica en línea.
-          </p>
-        </div>
-
-        <div class="web-examples-grid">
-          <!-- Demo Soda -->
-          <article class="example-card">
-            <div class="example-header">
-              <h3 class="example-title">Soda "El Sabor Tico"</h3>
-              <span class="example-label">Demo web</span>
-            </div>
-            <p class="example-desc">
-              Página enfocada en mostrar el menú del día, precios y ubicación de una soda o comedor.
-            </p>
-            <div class="example-chip-row">
-              <span class="example-chip">Menú del día</span>
-              <span class="example-chip">Botón WhatsApp</span>
-              <span class="example-chip">Horario y mapa</span>
-            </div>
-            <p class="example-desc">
-              Pensada para sodas de barrio, comedores en zona industrial o estudiantil.
-              Muestra el menú del día, algunos platos fijos, el horario y una breve
-              descripción del lugar. Ideal para que los clientes revisen qué hay de
-              comer y pidan por WhatsApp.
-            </p>
-            <ul class="example-list">
-              <li>Sección de menú del día con precios claros.</li>
-              <li>Botón directo para hacer el pedido por WhatsApp.</li>
-              <li>Ubicación básica y horarios de atención.</li>
-            </ul>
-            <div class="example-actions">
-              <a href="soda.html" class="btn btn-primary btn-small">Ver demo de soda</a>
-              <a href="#contacto" class="btn btn-secondary btn-small">Quiero una web como esta</a>
-            </div>
-            <p class="example-tip">
-              Esta estructura también se adapta a comedores en fincas, zonas francas o
-              cercanos a colegios.
-            </p>
-          </article>
-
-          <!-- Demo Pizzería -->
-          <article class="example-card">
-            <div class="example-header">
-              <h3 class="example-title">Pizzería "La Esquina"</h3>
-              <span class="example-label">Demo web</span>
-            </div>
-            <p class="example-desc">
-              Página para una pizzería pequeña con su menú de pizzas, combos y datos de contacto.
-            </p>
-            <div class="example-chip-row">
-              <span class="example-chip">Menú de pizzas</span>
-              <span class="example-chip">Combos</span>
-              <span class="example-chip">Pedidos por WhatsApp</span>
-            </div>
-            <p class="example-desc">
-              Ideal para pizzerías de barrio que quieren mostrar sus especialidades,
-              tamaños, precios y promociones, con un botón claro para pedir por WhatsApp
-              o llamar directamente.
-            </p>
-            <ul class="example-list">
-              <li>Listado de pizzas con tamaños y precios.</li>
-              <li>Sección de combos y promociones.</li>
-              <li>Información básica de reparto y zona de cobertura.</li>
-            </ul>
-            <div class="example-actions">
-              <a href="pizzeria.html" class="btn btn-primary btn-small">Ver demo de pizzería</a>
-              <a href="#contacto" class="btn btn-secondary btn-small">Quiero una web como esta</a>
-            </div>
-            <p class="example-tip">
-              Puede adaptarse a ventas de hamburguesas, patys, hot dogs y otros
-              negocios de comida rápida.
-            </p>
-          </article>
-
-          <!-- Demo Cafetería -->
-          <article class="example-card">
-            <div class="example-header">
-              <h3 class="example-title">Cafetería "Café & Charla"</h3>
-            <span class="example-label">Demo web</span>
-            </div>
-            <p class="example-desc">
-              Página para una cafetería con fotos de las bebidas, repostería y combos.
-            </p>
-            <div class="example-chip-row">
-              <span class="example-chip">Bebidas calientes y frías</span>
-              <span class="example-chip">Repostería</span>
-              <span class="example-chip">Ambiente acogedor</span>
-            </div>
-            <p class="example-desc">
-              Pensada para cafeterías pequeñas, panaderías o heladerías que quieren
-              mostrar sus productos principales y animar a la gente a visitarlas o
-              hacer pedidos.
-            </p>
-            <ul class="example-list">
-              <li>Galería de bebidas y postres.</li>
-              <li>Sección de combos y promociones.</li>
-              <li>Ubicación, horarios y contacto rápido.</li>
-            </ul>
-            <div class="example-actions">
-              <a href="cafeteria.html" class="btn btn-primary btn-small">Ver demo de cafetería</a>
-              <a href="#contacto" class="btn btn-secondary btn-small">Quiero una web como esta</a>
-            </div>
-            <p class="example-tip">
-              Este estilo se puede adaptar a panaderías, heladerías o pequeñas pastelerías.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- EQUIPOS EN VENTA -->
-      <section id="equipos-venta" class="equipos-section">
-        <div class="equipos-header">
-          <h2>Equipos de cómputo en venta</h2>
-          <p>
-            Equipos usados reacondicionados, listos para trabajar, con configuración básica incluida
-            en Siquirres y alrededores.
-          </p>
-        </div>
-
-        <div class="equipos-layout">
-          <article class="equipo-card">
-            <div class="equipo-image">
-              <img src="dell-latitude-5480.jpg"
-                   alt="Laptop Dell Latitude 5480 i5 6300U 16GB DDR4 256GB SSD 14 pulgadas">
-            </div>
-            <div class="equipo-body">
-              <h3>Laptop Dell Latitude 5480</h3>
-              <div class="equipo-state">
-                <span></span>
-                Equipo usado reacondicionado
-              </div>
-              <ul class="equipo-specs">
-                <li>Procesador Intel Core i5 6300U.</li>
-                <li>16 GB DDR4 de memoria RAM.</li>
-                <li>Disco de estado sólido (SSD) de 256 GB.</li>
-                <li>Pantalla de 14 pulgadas.</li>
-                <li>Windows 10 Pro instalado.</li>
-              </ul>
-              <p class="equipo-price">
-                Precio: <strong>₡150,000</strong><span class="equipo-tax">i.v.i.</span>
-              </p>
-              <p class="equipo-note">
-                Ideal para trabajo de oficina, estudio, navegación web y tareas de productividad.
-              </p>
-              <div class="equipo-actions">
-                <a href="equipos.html" class="btn btn-secondary btn-small">
-                  Ver catálogo completo de equipos
-                </a>
-                <button type="button"
-                        class="btn btn-primary btn-small"
-                        id="btnCotizar5480">
-                  Quiero este equipo
-                </button>
-              </div>
-              <div class="equipo-hint">
-                * Al hacer clic en “Quiero este equipo”, la cotización se rellenará con los datos de este modelo.
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- CÁMARAS WIFI Y SEGURIDAD -->
-      <section id="camaras" class="camaras-section">
-        <div class="camaras-header">
-          <h2>Cámaras WiFi para hogar y negocio</h2>
-          <p>
-            Opciones rápidas y accesibles para empezar a proteger tu casa o local en Siquirres,
-            con instalación y configuración básica incluidas.
-          </p>
-        </div>
-
-        <div class="camaras-grid">
-          <article class="camara-card">
-            <div class="camara-image">
-              <img src="tapo-c210.jpg" alt="Cámara WiFi Tapo C210 instalada en una sala de estar">
-            </div>
-            <div class="camara-body">
-              <h3>Cámara WiFi Tapo C210 – 2K con giro 360°</h3>
-              <div class="camara-tag">
-                <span>Incluye instalación en Siquirres</span>
-              </div>
-              <ul class="camara-specs">
-                <li>Resolución 2K (3MP) para ver rostros y detalles con claridad.</li>
-                <li>Giro horizontal y vertical desde la app para cubrir toda la habitación.</li>
-                <li>Audio bidireccional: micrófono y parlante integrados.</li>
-                <li>Visión nocturna y detección de movimiento con alertas al celular.</li>
-                <li>Grabación en microSD (se vende por separado) y acceso remoto desde la app Tapo.</li>
-              </ul>
-              <p class="camara-price">
-                Precio: <strong>₡24,000</strong><span class="equipo-tax"> i.v.i.</span>
-              </p>
-              <p class="camara-note">
-                El precio incluye la cámara, la instalación en un solo punto dentro de Siquirres
-                y la configuración inicial en tu celular (si ya cuentas con red WiFi activa).
-              </p>
-              <div class="camara-actions">
-                <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
-                  Quiero esta cámara
-                </button>
-                <a href="#contacto" class="btn btn-secondary btn-small">
-                  Consultar más detalles
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="camara-card">
-            <div class="camara-image">
-              <img src="camara-bombillo-e27-split.png" alt="Cámara bombillo WiFi E27 instalada en portalámpara">
-            </div>
-            <div class="camara-body">
-              <h3>Cámara tipo bombillo E27 – 360° con audio</h3>
-              <div class="camara-tag">
-                <span>Instalación rápida en portalámpara</span>
-              </div>
-              <ul class="camara-specs">
-                <li>Se instala en un socket E27 como un bombillo normal.</li>
-                <li>Vista 360° para cubrir toda la zona sin puntos ciegos.</li>
-                <li>Audio bidireccional para escuchar y hablar desde la app.</li>
-                <li>Visión nocturna y detección de movimiento.</li>
-                <li>Grabación en microSD (no incluida) y monitoreo remoto desde el celular.</li>
-              </ul>
-              <p class="camara-price">
-                Precio: <strong>₡19,500</strong><span class="equipo-tax"> i.v.i.</span>
-              </p>
-              <p class="camara-note">
-                Incluye instalación en un portalámpara existente dentro de Siquirres y
-                configuración inicial de la app. Ideal para cocheras, pasillos y cuartos de entrada.
-              </p>
-              <div class="camara-actions">
-                <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
-                  Quiero esta cámara
-                </button>
-                <a href="#contacto" class="btn btn-secondary btn-small">
-                  Consultar disponibilidad
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- CARRUSEL (SIN TEXTO) -->
-      <section class="carousel-section">
-        <div class="carousel-frame">
-          <button class="carousel-arrow" id="carouselPrev" type="button" aria-label="Imagen anterior">‹</button>
-          <div class="carousel-window">
-            <div class="carousel-track" id="carouselTrack">
-              <div class="carousel-slide"><img src="zamaha-1.jpg" alt="Trabajo Zamaha 1"></div>
-              <div class="carousel-slide"><img src="zamaha-2.jpg" alt="Trabajo Zamaha 2"></div>
-              <div class="carousel-slide"><img src="zamaha-3.jpg" alt="Trabajo Zamaha 3"></div>
-              <div class="carousel-slide"><img src="zamaha-4.jpg" alt="Trabajo Zamaha 4"></div>
-              <div class="carousel-slide"><img src="zamaha-5.jpg" alt="Trabajo Zamaha 5"></div>
-              <div class="carousel-slide"><img src="zamaha-6.jpg" alt="Trabajo Zamaha 6"></div>
-              <div class="carousel-slide"><img src="zamaha-7.jpg" alt="Trabajo Zamaha 7"></div>
-              <div class="carousel-slide"><img src="zamaha-8.jpg" alt="Trabajo Zamaha 8"></div>
-              <div class="carousel-slide"><img src="zamaha-9.jpg" alt="Trabajo Zamaha 9"></div>
-              <div class="carousel-slide"><img src="zamaha-10.jpg" alt="Trabajo Zamaha 10"></div>
-              <div class="carousel-slide"><img src="zamaha-11.jpg" alt="Trabajo Zamaha 11"></div>
-              <div class="carousel-slide"><img src="zamaha-12.jpg" alt="Trabajo Zamaha 12"></div>
-              <div class="carousel-slide"><img src="zamaha-13.jpg" alt="Trabajo Zamaha 13"></div>
-              <div class="carousel-slide"><img src="zamaha-14.jpg" alt="Trabajo Zamaha 14"></div>
-              <div class="carousel-slide"><img src="zamaha-15.jpg" alt="Trabajo Zamaha 15"></div>
-              <div class="carousel-slide"><img src="zamaha-16.jpg" alt="Trabajo Zamaha 16"></div>
-            </div>
-          </div>
-          <button class="carousel-arrow" id="carouselNext" type="button" aria-label="Imagen siguiente">›</button>
-        </div>
-      </section>
-
-      <!-- CONTACTO -->
-      <section class="contact-section" id="contacto">
-        <div class="section-label">Contacto</div>
-        <div class="contact-grid">
-          <div class="contact-intro">
-            <h2 class="section-title">Hablemos de tu proyecto</h2>
-            <p>
-              Cuéntame qué necesitas y te respondo con una propuesta clara. Puedes describir
-              tu espacio, tu negocio o la idea que tienes en mente.
-            </p>
-            <p>
-              Trabajo con agenda y por orden de solicitud. Entre más claro dejes tu mensaje,
-              mejor podré orientarte desde la primera respuesta.
-            </p>
-            <div class="contact-extra-info">
+      <div class="main-column">
+        <!-- Sección de servicios -->
+        <section class="services-section" id="servicios">
+          <div class="section-label">Servicios</div>
+          <div class="services-grid">
+            <div class="services-intro">
+              <h2 class="section-title">¿En qué te puedo ayudar?</h2>
               <p>
-                <strong>Áreas de trabajo:</strong> Siquirres centro y alrededores. Otros lugares,
-                según coordinación.
+                Estos son los servicios que ofrezco actualmente en Siquirres y alrededores,
+                pensados para pequeños negocios, casas de habitación y comercios que necesitan
+                soluciones claras, sin letras pequeñas.
               </p>
               <p>
-                <strong>Horarios de atención:</strong> De lunes a sábado, de 9:00 a.m. a 5:00 p.m.
+                Puedes combinar varios servicios en una misma visita. Si tienes algo más
+                específico en mente, también lo podemos conversar por WhatsApp.
               </p>
             </div>
 
-            <!-- Reloj en Costa Rica, en el espacio vacío junto al formulario -->
-            <div class="time-box">
-              <div class="time-box-label">Hora en Costa Rica</div>
-              <div class="time-box-value" id="crTime">--:--:--</div>
-            </div>
-          </div>
-
-          <div>
-            <form id="contactForm" action="https://formspree.io/f/mjkbldze" method="POST">
-              <div>
-                <label for="nombre">Nombre completo</label>
-                <input type="text" id="nombre" name="Nombre" placeholder="Tu nombre" required />
-              </div>
-
-              <div class="contact-row">
-                <div>
-                  <label for="telefono">Teléfono / WhatsApp</label>
-                  <input type="tel" id="telefono" name="Teléfono" placeholder="8888-8888" required />
+            <div class="services-list">
+              <!-- Cámaras CCTV -->
+              <article class="service-card">
+                <div class="service-header">
+                  <h3 class="service-title">Instalación de cámaras CCTV</h3>
+                  <span class="service-tag">Seguridad</span>
                 </div>
-                <div>
+                <div class="service-highlight">Kits pequeños para casas y negocios de barrio.</div>
+                <ul class="service-bullets">
+                  <li>Instalación de 1 a 4 cámaras según el espacio.</li>
+                  <li>Equipos económicos pero confiables, según tu presupuesto.</li>
+                  <li>Configuración básica de visualización en el celular.</li>
+                </ul>
+                <div class="service-footer">
+                  <div class="service-price">
+                    Mano de obra desde <strong>₡22,500 por cámara</strong>.
+                  </div>
+                  <div class="service-actions">
+                    <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
+                      Cotizar cámaras
+                    </button>
+                    <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
+                      Añadir al formulario
+                    </button>
+                  </div>
+                </div>
+                <div class="service-tooltip">
+                  <div class="service-tooltip-title">Detalle del servicio de cámaras</div>
+                  <ul class="service-list">
+                    <li>Revisión del lugar para recomendar la mejor ubicación.</li>
+                    <li>Instalación de cámaras, cableado y conectores básicos.</li>
+                    <li>Conexión al grabador, configuración de red y app básica.</li>
+                    <li>Explicación sencilla de cómo revisar las grabaciones.</li>
+                  </ul>
+                  <div class="risk-zone-warning">
+                    <span class="risk-dot"></span>
+                    <strong>Importante:</strong> no hago instalaciones masivas de edificios grandes,
+                    solo proyectos pequeños que pueda atender personalmente.
+                  </div>
+                </div>
+              </article>
+
+              <!-- Redes eléctricas ligeras -->
+              <article class="service-card">
+                <div class="service-header">
+                  <h3 class="service-title">Redes eléctricas ligeras</h3>
+                  <span class="service-tag">Infraestructura</span>
+                </div>
+                <div class="service-highlight">Puntos eléctricos y orden básico para tus equipos.</div>
+                <ul class="service-bullets">
+                  <li>Instalación de tomacorrientes adicionales para equipos.</li>
+                  <li>Canaletas básicas para que los cables queden ordenados.</li>
+                  <li>Revisión visual de conexiones y recomendaciones.</li>
+                </ul>
+                <div class="service-footer">
+                  <div class="service-price">
+                    Mano de obra según alcance del trabajo.
+                  </div>
+                  <div class="service-actions">
+                    <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
+                      Cotizar redes eléctricas
+                    </button>
+                    <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
+                      Añadir al formulario
+                    </button>
+                  </div>
+                </div>
+                <div class="service-tooltip">
+                  <div class="service-tooltip-title">Detalle de redes eléctricas ligeras</div>
+                  <ul class="service-list">
+                    <li>Puntos para computadoras, cámaras, routers, etc.</li>
+                    <li>Canaletas plásticas para mejorar el orden.</li>
+                    <li>Enfoque en pequeñas ampliaciones, no en obras mayores.</li>
+                  </ul>
+                  <div class="risk-zone-warning">
+                    <span class="risk-dot"></span>
+                    <strong>Nota:</strong> no sustituyo a un ingeniero eléctrico para
+                    instalaciones grandes, pero sí puedo ayudarte con cosas sencillas y claras.
+                  </div>
+                </div>
+              </article>
+
+              <!-- Mantenimiento y limpieza de PCs -->
+              <article class="service-card">
+                <div class="service-header">
+                  <h3 class="service-title">Mantenimiento y limpieza de computadoras</h3>
+                  <span class="service-tag">Equipos de cómputo</span>
+                </div>
+                <div class="service-highlight">Para máquinas lentas o llenas de programas que no usas.</div>
+                <ul class="service-bullets">
+                  <li>Limpieza física básica (polvo, ventilación).</li>
+                  <li>Revisión de programas que se abren al encender.</li>
+                  <li>Pequeñas optimizaciones para uso de oficina o negocio.</li>
+                </ul>
+                <div class="service-footer">
+                  <div class="service-price">
+                    Servicio básico por <strong>equipo individual</strong>.
+                  </div>
+                  <div class="service-actions">
+                    <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
+                      Cotizar mantenimiento
+                    </button>
+                    <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
+                      Añadir al formulario
+                    </button>
+                  </div>
+                </div>
+                <div class="service-tooltip">
+                  <div class="service-tooltip-title">Detalle del mantenimiento</div>
+                  <ul class="service-list">
+                    <li>Revisión inicial y explicación de opciones.</li>
+                    <li>Respaldo de información (si lo solicitas).</li>
+                    <li>Instalación de software básico y probado.</li>
+                  </ul>
+                </div>
+              </article>
+
+              <!-- Desarrollo web -->
+              <article class="service-card">
+                <div class="service-header">
+                  <h3 class="service-title">Páginas web para tu negocio</h3>
+                  <span class="service-tag">Presencia digital</span>
+                </div>
+                <div class="service-highlight">Ideal para sodas, pizzerías, cafeterías y pequeños negocios.</div>
+                <ul class="service-bullets">
+                  <li>Landing page o sitio profesional para tu negocio, con información clara.</li>
+                  <li>Enlaces a WhatsApp, ubicación y redes sociales.</li>
+                  <li>Plantillas ligeras y fáciles de mantener.</li>
+                </ul>
+                <div class="service-footer">
+                  <div class="service-price">
+                    Propuestas según lo que necesites mostrar.
+                  </div>
+                  <div class="service-actions">
+                    <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
+                      Cotizar sitio web
+                    </button>
+                    <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
+                      Añadir al formulario
+                    </button>
+                  </div>
+                </div>
+                <div class="service-tooltip">
+                  <div class="service-tooltip-title">Detalle de páginas web</div>
+                  <ul class="service-list">
+                    <li>Páginas enfocadas en que la gente entienda qué ofreces y cómo contactarte.</li>
+                    <li>Nada de promesas raras de "te harás millonario en 30 días".</li>
+                    <li>Diseños simples, pensados para cargar rápido.</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Ejemplos de páginas web -->
+        <section class="examples-section">
+          <div class="section-label">Ejemplos de páginas</div>
+          <h2 class="section-title">Demos de páginas para tu negocio</h2>
+          <p class="section-subtitle">
+            Estas son demos de cómo podría verse tu página si tienes una
+            <strong>soda</strong>, una <strong>pizzería</strong> o una
+            <strong>cafetería</strong>.
+          </p>
+
+          <div class="carousel" id="webExamplesCarousel">
+            <div class="carousel-track">
+              <!-- Slide 1: Soda -->
+              <div class="carousel-slide">
+                <div class="carousel-content">
+                  <div class="carousel-title-row">
+                    <h3 class="carousel-title">Soda "El Sabor Tico"</h3>
+                    <span class="carousel-badge">Demo web</span>
+                  </div>
+                  <p class="carousel-text">
+                    Página pensada para mostrar el menú del día, las especialidades
+                    y la ubicación de la soda, con un botón claro para escribir al WhatsApp.
+                  </p>
+                  <div class="carousel-footer">
+                    <a href="soda.html" class="carousel-link" target="_blank">
+                      Ver demo de soda
+                    </a>
+                    <span class="example-note">Carga rápida y diseño sencillo.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2: Pizzería -->
+              <div class="carousel-slide">
+                <div class="carousel-content">
+                  <div class="carousel-title-row">
+                    <h3 class="carousel-title">Pizzería "La Esquina"</h3>
+                    <span class="carousel-badge">Demo web</span>
+                  </div>
+                  <p class="carousel-text">
+                    Página pensada para mostrar combos, fotos de pizzas y pedidos por WhatsApp
+                    o llamada, con horarios claros y mapa de ubicación.
+                  </p>
+                  <div class="carousel-footer">
+                    <a href="pizzeria.html" class="carousel-link" target="_blank">
+                      Ver demo de pizzería
+                    </a>
+                    <span class="example-note">Ideal para pedidos rápidos.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Cafetería -->
+              <div class="carousel-slide">
+                <div class="carousel-content">
+                  <div class="carousel-title-row">
+                    <h3 class="carousel-title">Cafetería "Café del Barrio"</h3>
+                    <span class="carousel-badge">Demo web</span>
+                  </div>
+                  <p class="carousel-text">
+                    Página para destacar bebidas calientes, repostería y ambiente,
+                    con fotos sencillas y un botón directo a WhatsApp para reservar o preguntar.
+                  </p>
+                  <div class="carousel-footer">
+                    <a href="cafeteria.html" class="carousel-link" target="_blank">
+                      Ver demo de cafetería
+                    </a>
+                    <span class="example-note">Pensada para mostrar el ambiente.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-controls">
+              <button class="carousel-btn" id="carouselPrev" type="button">&#8249;</button>
+              <button class="carousel-btn" id="carouselNext" type="button">&#8250;</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Columna derecha: formulario de contacto y cotización -->
+      <div class="main-column">
+        <section class="contact-card" id="contacto">
+          <div class="section-label">Contacto y cotización</div>
+          <h2 class="section-title">Cuéntame qué necesitas</h2>
+          <p class="section-subtitle">
+            Completa el formulario para cotizar cámaras, redes, mantenimiento de computadoras
+            o una página web para tu negocio.
+          </p>
+
+          <div class="contact-grid">
+            <div class="contact-meta">
+              <p>
+                <strong>Opciones de contacto:</strong>
+              </p>
+              <div class="contact-meta-row">
+                <span class="contact-chip">
+                  📍 Siquirres y alrededores
+                </span>
+                <span class="contact-chip">
+                  💬 WhatsApp directo:
+                  <a href="https://wa.me/50664305227" target="_blank" rel="noopener noreferrer"
+                     style="color: #22c55e; text-decoration: none;">
+                    +506 6430-5227
+                  </a>
+                </span>
+                <span class="contact-chip">
+                  ✉ Correo:
+                  <a href="mailto:zamaha-soluciones@outlook.es"
+                     style="color: #93c5fd; text-decoration: none;">
+                    zamaha-soluciones@outlook.es
+                  </a>
+                </span>
+              </div>
+              <p class="small-hint">
+                Si prefieres, puedes escribir primero por WhatsApp y luego llenar el formulario
+                cuando ya tengamos claro lo que necesitas.
+              </p>
+            </div>
+
+            <div>
+              <form action="https://formspree.io/f/mqazkrwr" method="POST">
+                <!-- Nombre completo -->
+                <div class="field-group">
+                  <label for="nombre">Nombre completo</label>
+                  <input type="text" id="nombre" name="nombre"
+                         placeholder="Tu nombre y apellidos" required />
+                </div>
+
+                <!-- Medio de contacto preferido -->
+                <div class="field-group">
+                  <label>¿Cómo prefieres que te contacte?</label>
+                  <div class="pill-row">
+                    <label class="pill">
+                      <input type="radio" name="medioContacto" value="WhatsApp" style="display:none;" checked />
+                      <span class="pill-dot"></span>
+                      WhatsApp
+                    </label>
+                    <label class="pill">
+                      <input type="radio" name="medioContacto" value="Llamada" style="display:none;" />
+                      <span class="pill-dot"></span>
+                      Llamada
+                    </label>
+                    <label class="pill">
+                      <input type="radio" name="medioContacto" value="Correo electrónico" style="display:none;" />
+                      <span class="pill-dot"></span>
+                      Correo
+                    </label>
+                  </div>
+                </div>
+
+                <!-- WhatsApp / Teléfono y correo -->
+                <div class="field-group">
+                  <label for="telefono">WhatsApp o teléfono</label>
+                  <input type="tel" id="telefono" name="telefono"
+                         placeholder="Ej: +506 6430-5227" required />
+                </div>
+
+                <div class="field-group">
                   <label for="correo">Correo electrónico (opcional)</label>
-                  <input type="email" id="correo" name="Correo" placeholder="tu-correo@ejemplo.com" />
+                  <input type="email" id="correo" name="correo"
+                         placeholder="Si quieres que también te escriba por correo" />
                 </div>
-              </div>
 
-              <div>
-                <label>¿Qué servicio te interesa? (puedes elegir varios)</label>
-                <div class="service-pills" id="servicePills">
-                  <button type="button" class="service-pill-btn" data-service="Cámaras CCTV">Cámaras CCTV</button>
-                  <button type="button" class="service-pill-btn" data-service="Redes eléctricas">Redes eléctricas</button>
-                  <button type="button" class="service-pill-btn" data-service="Equipos de cómputo">Equipos de cómputo</button>
-                  <button type="button" class="service-pill-btn" data-service="Desarrollo web">Desarrollo web</button>
-                  <button type="button" class="service-pill-btn" data-service="Mantenimiento integral">Mantenimiento integral</button>
-                </div>
-                <input type="hidden" id="servicesField" name="Servicios seleccionados" />
-              </div>
-
-              <div>
-                <label for="mensaje">Cuéntame un poco más</label>
-                <textarea id="mensaje" name="Mensaje" placeholder="Ejemplo: Tengo una soda pequeña y quiero instalar 3 cámaras y una página con el menú básico."></textarea>
-              </div>
-
-              <div class="preferences-box">
-                <div class="preferences-row">
-                  <div class="preferences-field">
-                    <label for="preferenciaContacto">¿Cómo prefieres que te contacte?</label>
-                    <select id="preferenciaContacto" name="Preferencia de contacto">
-                      <option value="">Selecciona una opción</option>
-                      <option value="WhatsApp">WhatsApp</option>
-                      <option value="Llamada">Llamada telefónica</option>
-                      <option value="Correo">Correo electrónico</option>
-                    </select>
-                    <div class="preferences-note">
-                      Si escoges WhatsApp, trataré de escribirte primero por ahí para coordinar.
-                    </div>
+                <!-- Servicios a cotizar -->
+                <div class="field-group">
+                  <label>¿Qué servicios quieres cotizar?</label>
+                  <div class="pill-row">
+                    <button type="button" class="pill service-pill-btn" data-service="Cámaras CCTV">
+                      <span class="pill-dot"></span>
+                      Cámaras y monitoreo
+                    </button>
+                    <button type="button" class="pill service-pill-btn" data-service="Redes eléctricas">
+                      <span class="pill-dot"></span>
+                      Redes eléctricas
+                    </button>
+                    <button type="button" class="pill service-pill-btn" data-service="Equipos de cómputo">
+                      <span class="pill-dot"></span>
+                      Equipos de cómputo
+                    </button>
+                    <button type="button" class="pill service-pill-btn" data-service="Desarrollo web">
+                      <span class="pill-dot"></span>
+                      Desarrollo / Página web
+                    </button>
                   </div>
-                  <div class="preferences-field">
-                    <label for="tieneFecha">¿Tienes una fecha estimada para el trabajo?</label>
-                    <select id="tieneFecha" name="¿Tiene fecha estimada?">
-                      <option value="">No estoy seguro</option>
-                      <option value="Si">Sí, tengo una fecha aproximada</option>
-                      <option value="No">No, solo quiero información por ahora</option>
-                    </select>
-                    <div id="fechaWrapper" style="margin-top: 6px; display: none;">
-                      <div class="contact-row">
-                        <div>
-                          <label for="fechaEstimada">Fecha estimada</label>
-                          <input type="date" id="fechaEstimada" name="Fecha estimada" />
-                        </div>
-                        <div>
-                          <label for="horaEstimada">Hora aproximada</label>
-                          <input type="time" id="horaEstimada" name="Hora estimada" />
-                        </div>
-                      </div>
-                      <div style="margin-top: 4px;">
-                        <label for="ubicacionTrabajo">Ubicación aproximada del trabajo</label>
-                        <input
-                          type="text"
-                          id="ubicacionTrabajo"
-                          name="Ubicación del trabajo"
-                          placeholder="Ejemplo: Siquirres centro, barrio X, cerca de..."
-                        />
-                      </div>
-                    </div>
+                  <input type="hidden" id="servicesField" name="serviciosSeleccionados" />
+                  <p class="small-hint">
+                    Puedes seleccionar uno o varios. También puedes escribir detalles extras
+                    en el mensaje final.
+                  </p>
+                </div>
+
+                <!-- Ubicación del trabajo -->
+                <div class="field-group">
+                  <label for="ubicacionTrabajo">¿Dónde sería el trabajo?</label>
+                  <input type="text" id="ubicacionTrabajo" name="ubicacionTrabajo"
+                         placeholder="Ej: Barrio X, Siquirres / Centro / Local comercial" />
+                  <p class="small-hint">
+                    Si aún no tienes la dirección exacta, puedes poner una referencia general.
+                  </p>
+                </div>
+
+                <!-- Preferencias de fecha -->
+                <div class="field-group">
+                  <label>¿Tienes alguna fecha en mente?</label>
+                  <select id="tieneFecha" name="tieneFecha">
+                    <option value="No">No, solo quiero cotizar primero</option>
+                    <option value="Sí">Sí, tengo una fecha aproximada</option>
+                  </select>
+                </div>
+
+                <div id="fechaWrapper" style="display:none; gap: 6px;">
+                  <div class="field-group">
+                    <label for="fechaEstimada">Fecha aproximada</label>
+                    <input type="date" id="fechaEstimada" name="fechaEstimada" />
+                  </div>
+                  <div class="field-group">
+                    <label for="horaEstimada">Hora aproximada</label>
+                    <input type="time" id="horaEstimada" name="horaEstimada" />
                   </div>
                 </div>
 
-                <div class="form-checkbox-row">
-                  <input type="checkbox" id="quiereLlamada" name="Quiere llamada exploratoria" />
-                  <label for="quiereLlamada">
-                    Me gustaría coordinar una llamada corta para explicar mejor mi proyecto.
+                <!-- Llamada rápida -->
+                <div class="field-group">
+                  <label>
+                    <input type="checkbox" id="quiereLlamada" name="quiereLlamada" />
+                    ¿Te gustaría agendar una llamada rápida para aclarar dudas?
                   </label>
+                  <p class="small-hint">
+                    Por ahora veré tu mensaje y si es necesario coordinamos la llamada por WhatsApp.
+                  </p>
                 </div>
 
-                <div id="calendlyContainer" class="calendly-container">
-                  <div class="calendly-placeholder">
-                    Si la agenda lo permite, te propondré por WhatsApp algunas horas para una llamada
-                    o videollamada corta y así aclarar dudas antes de enviarte una propuesta.
-                  </div>
+                <!-- Mensaje libre -->
+                <div class="field-group">
+                  <label for="mensaje">Cuéntame un poco más</label>
+                  <textarea id="mensaje" name="mensaje"
+                            placeholder="Ej: Tengo un local pequeño y quiero 3 cámaras, una apuntando a la caja, otra a la entrada y otra al pasillo."></textarea>
                 </div>
-              </div>
 
-              <div class="contact-cta">
-                <button type="submit" class="btn btn-primary btn-small">
-                  Enviar mensaje
-                </button>
-              </div>
+                <!-- URL opcional -->
+                <div class="field-group">
+                  <label for="urlReferencia">Sitio web o redes (opcional)</label>
+                  <input type="url" id="urlReferencia" name="urlReferencia"
+                         placeholder="Si ya tienes algo en Internet y quieres que lo vea" />
+                </div>
 
-              <div class="contact-footer">
-                * Tu mensaje llegará directamente a mi correo. No comparto tus datos con terceros.
-              </div>
-            </form>
+                <!-- Botones de envío -->
+                <div class="btn-row">
+                  <button type="submit" class="btn btn-primary btn-whatsapp">
+                    <span class="btn-icon">📨</span>
+                    Enviar solicitud de cotización
+                  </button>
+                  <button type="reset" class="btn btn-ghost">
+                    Limpiar formulario
+                  </button>
+                </div>
+
+                <p class="small-hint">
+                  Al enviar este formulario no se genera ningún compromiso de compra.
+                  Te responderé con un estimado y, si estás de acuerdo, coordinamos fecha y detalles.
+                </p>
+              </form>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
 
     <footer>
-      <div class="footer-contact">
+      <div class="footer-left">
         <span>Zamaha • Servicios y soluciones en Siquirres</span>
-        <span>WhatsApp: <a href="https://wa.me/50664305227" target="_blank" rel="noopener noreferrer">+506 6430-5227</a></span>
-        <span>Correo: <a href="mailto:zamaha-soluciones@outlook.es">zamaha-soluciones@outlook.es</a></span>
+        <span>WhatsApp:
+          <a href="https://wa.me/50664305227" target="_blank" rel="noopener noreferrer">
+            +506 6430-5227
+          </a>
+        </span>
+        <span>Correo:
+          <a href="mailto:zamaha-soluciones@outlook.es">
+            zamaha-soluciones@outlook.es
+          </a>
+        </span>
       </div>
       <div class="footer-right">
         <span>© <span id="year"></span> Zamaha. Hecho en Siquirres.</span>
       </div>
     </footer>
+
+    <a class="floating-whatsapp"
+       href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
+       target="_blank" rel="noopener noreferrer">
+      <span class="floating-whatsapp-icon">💬</span>
+    </a>
   </div>
 
   <script>
@@ -1900,31 +1747,31 @@
         hour12: true,
         timeZone: 'America/Costa_Rica'
       };
-      crTimeEl.textContent = new Intl.DateTimeFormat('es-CR', options).format(now);
+      crTimeEl.textContent = now.toLocaleTimeString('es-CR', options);
     }
 
     updateCRTime();
     setInterval(updateCRTime, 1000);
 
-    // Tooltip de servicios en móvil
-    const serviceCards = document.querySelectorAll('.service-card');
+    // Lógica de selección de medio de contacto
+    const contactPills = document.querySelectorAll('.field-group input[name="medioContacto"]');
+    const pillLabels = document.querySelectorAll('.field-group .pill');
 
-    serviceCards.forEach(card => {
-      card.addEventListener('click', (e) => {
-        if (e.target.closest('.service-actions')) return;
+    pillLabels.forEach(label => {
+      label.addEventListener('click', () => {
+        const input = label.querySelector('input[type="radio"]');
+        if (!input) return;
 
-        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
-        if (!isSmallScreen) return;
-
-        serviceCards.forEach(c => {
-          if (c !== card) c.classList.remove('show-info');
+        contactPills.forEach(radio => {
+          const parentLabel = radio.closest('.pill');
+          if (parentLabel) parentLabel.classList.remove('active');
         });
 
-        card.classList.toggle('show-info');
+        input.checked = true;
+        label.classList.add('active');
       });
     });
 
-    // Píldoras de servicios en el formulario
     const servicePillsBtns = document.querySelectorAll('.service-pill-btn');
     const servicesField = document.getElementById('servicesField');
 
@@ -1983,57 +1830,20 @@
     addButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
+        const current = mensajeField.value;
+        const addition = current ? `\n\nQuiero incluir también: ${service}` : `Quiero incluir también: ${service}`;
+        mensajeField.value = current + addition;
+
         servicePillsBtns.forEach(pill => {
           if (pill.dataset.service === service) {
             pill.classList.add('active');
           }
         });
         updateServicesField();
-      });
-    });
 
-    // Botón "Quiero este equipo"
-    const btnCotizar5480 = document.getElementById('btnCotizar5480');
-    if (btnCotizar5480 && mensajeField) {
-      btnCotizar5480.addEventListener('click', () => {
-        const texto = 'Me interesa la laptop Dell Latitude 5480 (i5, 16GB RAM, 256GB SSD). ';
-        if (!mensajeField.value.includes('Dell Latitude 5480')) {
-          mensajeField.value = texto + (mensajeField.value || '');
-        }
         const contactoSection = document.getElementById('contacto');
         if (contactoSection) {
           contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    }
-
-
-    // Pestaña de servicios en el header (dropdown)
-    const servicesTabWrapper = document.getElementById('servicesTabWrapper');
-    const servicesTabButton = document.getElementById('servicesTabButton');
-    const servicesDropdown = document.getElementById('servicesDropdown');
-
-    if (servicesTabWrapper && servicesTabButton && servicesDropdown) {
-      // En pantallas pequeñas, abrir/cerrar con click
-      servicesTabButton.addEventListener('click', (e) => {
-        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
-        if (!isSmallScreen) return; // en escritorio usamos solo hover
-        e.preventDefault();
-        e.stopPropagation();
-        const isOpen = servicesTabWrapper.classList.contains('dropdown-open');
-        if (isOpen) {
-          servicesTabWrapper.classList.remove('dropdown-open');
-        } else {
-          servicesTabWrapper.classList.add('dropdown-open');
-        }
-      });
-
-      // Cerrar al hacer click fuera (solo móvil)
-      document.addEventListener('click', (e) => {
-        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
-        if (!isSmallScreen) return;
-        if (!servicesTabWrapper.contains(e.target)) {
-          servicesTabWrapper.classList.remove('dropdown-open');
         }
       });
     }
@@ -2046,54 +1856,29 @@
     const ubicacionInput = document.getElementById('ubicacionTrabajo');
     const quiereLlamadaCheckbox = document.getElementById('quiereLlamada');
     const calendlyContainer = document.getElementById('calendlyContainer');
-    const preferencia = document.getElementById('preferenciaContacto');
-
-    function setMinDate3DaysAhead() {
-      const today = new Date();
-      today.setDate(today.getDate() + 3);
-      const year = today.getFullYear();
-      const month = String(today.getMonth() + 1).padStart(2, '0');
-      const day = String(today.getDate()).padStart(2, '0');
-      const minDate = `${year}-${month}-${day}`;
-      if (fechaInput) {
-        fechaInput.min = minDate;
-      }
-    }
-
-    function toggleFechaWrapper() {
-      const value = tieneFechaSelect ? tieneFechaSelect.value : '';
-      const show = value === 'Si';
-      if (fechaWrapper) {
-        fechaWrapper.style.display = show ? 'block' : 'none';
-      }
-      if (fechaInput && horaInput && ubicacionInput) {
-        fechaInput.required = show;
-        horaInput.required = show;
-        ubicacionInput.required = show;
-        if (show) {
-          setMinDate3DaysAhead();
-        }
-      }
-    }
 
     if (tieneFechaSelect) {
-      tieneFechaSelect.addEventListener('change', toggleFechaWrapper);
+      tieneFechaSelect.addEventListener('change', () => {
+        if (tieneFechaSelect.value === 'Sí') {
+          fechaWrapper.style.display = 'grid';
+        } else {
+          fechaWrapper.style.display = 'none';
+          fechaInput.value = '';
+          horaInput.value = '';
+        }
+      });
     }
 
-    function toggleCalendlyVisibility() {
-      const wantsCall = quiereLlamadaCheckbox && quiereLlamadaCheckbox.checked;
-      if (calendlyContainer) {
-        calendlyContainer.classList.toggle('visible', wantsCall);
-      }
+    if (quiereLlamadaCheckbox && calendlyContainer) {
+      quiereLlamadaCheckbox.addEventListener('change', () => {
+        calendlyContainer.style.display = quiereLlamadaCheckbox.checked ? 'block' : 'none';
+      });
     }
 
-    if (quiereLlamadaCheckbox) {
-      quiereLlamadaCheckbox.addEventListener('change', toggleCalendlyVisibility);
-    }
-
-    // Carrusel simple
-    const carouselTrack = document.getElementById('carouselTrack');
-    const carouselSlides = document.querySelectorAll('.carousel-slide');
+    // Carrusel de ejemplos
+    const carousel = document.getElementById('webExamplesCarousel');
+    const carouselTrack = carousel ? carousel.querySelector('.carousel-track') : null;
+    const carouselSlides = carousel ? carousel.querySelectorAll('.carousel-slide') : [];
     const prevBtn = document.getElementById('carouselPrev');
     const nextBtn = document.getElementById('carouselNext');
     let currentSlide = 0;
