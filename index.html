@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Zamaha - Servicios y soluciones </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Icono de la pestaña -->
+  <!-- Icono de la pestaña (ajusta el archivo si tu logo tiene otro nombre) -->
   <link rel="icon" href="zamaha-logo.png" type="image/png" />
   <style>
     :root {
@@ -51,7 +51,7 @@
     }
 
     header {
-      margin-bottom: 0;
+      margin-bottom: 20px;
     }
 
     .header-card {
@@ -77,16 +77,15 @@
       align-items: center;
       gap: 8px;
       font-size: 32px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       font-weight: 800;
       color: #ffffff;
       margin-bottom: 6px;
-      -webkit-text-stroke: 1px var(--brand-red);
+      -webkit-text-stroke: 1px #ff4b5c;
       text-shadow:
-        0 0 2px rgba(0, 0, 0, 0.7),
-        0 0 8px rgba(255, 75, 92, 0.9),
-        0 0 16px rgba(255, 75, 92, 0.9);
+        0 0 6px rgba(248, 113, 113, 0.9),
+        0 0 18px rgba(248, 113, 113, 0.75);
     }
 
     .brand-pill {
@@ -182,13 +181,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #bbf7d0;
-      font-size: 15px;
     }
 
-    .hero-whatsapp-img {
-      width: 18px;
-      height: 18px;
+    .hero-whatsapp-icon img {
+      width: 16px;
+      height: 16px;
       display: block;
     }
 
@@ -838,6 +835,7 @@
 
     /* ----- LAYOUT RESPONSIVE ----- */
 
+    /* En escritorio, los servicios van en 2 columnas */
     @media (min-width: 840px) {
       .services-list {
         grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
@@ -899,11 +897,26 @@
     }
 
     .carousel-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.1fr);
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-soft);
+      align-items: flex-start;
+    }
+
+    .carousel-main {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      font-size: 12px;
-      color: var(--text-soft);
+    }
+
+    .carousel-side {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+      text-align: right;
     }
 
     .carousel-title-row {
@@ -934,45 +947,43 @@
       font-size: 12px;
     }
 
-    .carousel-actions {
-      margin-top: 6px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .carousel-feature-list {
-      margin: 6px 0 4px;
+    .carousel-bullets {
+      margin: 0;
       padding-left: 18px;
       font-size: 12px;
       color: var(--text-soft);
     }
 
-    .carousel-feature-list li + li {
+    .carousel-bullets li + li {
       margin-top: 2px;
     }
 
-    .carousel-footer {
+    .carousel-image-placeholder {
+      width: 120px;
+      height: 80px;
+      border-radius: 12px;
+      border: 1px dashed rgba(148, 163, 231, 0.45);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), #020617);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      margin-top: 4px;
+      justify-content: center;
+      padding: 6px;
     }
 
-    .carousel-link {
-      font-size: 12px;
-      color: var(--accent-strong);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .carousel-image-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
     }
 
-    /* Controles centrados en altura */
+    .carousel-demo-link {
+      justify-content: center;
+      width: 100%;
+    }
+
     .carousel-controls {
       position: absolute;
-      top: 50%;
+      inset-block: 50%;
       left: 0;
       right: 0;
       display: flex;
@@ -1006,6 +1017,20 @@
       background: rgba(30, 64, 175, 0.95);
       border-color: rgba(191, 219, 254, 1);
       transform: translateY(-1px);
+    }
+
+    @media (max-width: 720px) {
+      .carousel-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .carousel-side {
+        align-items: flex-start;
+        text-align: left;
+      }
+      .carousel-demo-link {
+        width: auto;
+        align-self: flex-start;
+      }
     }
 
     /* ----- FOOTER ----- */
@@ -1187,14 +1212,9 @@
       box-shadow: 0 20px 40px rgba(22, 163, 74, 1);
     }
 
-    .floating-whatsapp-icon {
-      font-size: 26px;
-      line-height: 1;
-    }
-
     .floating-whatsapp-img {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       display: block;
     }
   </style>
@@ -1214,7 +1234,7 @@
                 <span class="services-tab-chevron">▾</span>
               </a>
               <div class="services-dropdown-menu">
-                <a href="servicios.html">Ver todos los servicios</a>
+                <!-- Quitado "Ver todos los servicios" como pediste -->
                 <a href="index.html?service=Cámaras CCTV#contacto">Cámaras y monitoreo</a>
                 <a href="index.html?service=Redes eléctricas#contacto">Redes eléctricas</a>
                 <a href="index.html?service=Equipos de cómputo#contacto">Equipos de cómputo</a>
@@ -1256,7 +1276,7 @@
                    href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
                    target="_blank" rel="noopener noreferrer">
                   <span class="hero-whatsapp-icon">
-                    <img src="icono-whatsapp.png" alt="WhatsApp Zamaha" class="hero-whatsapp-img" />
+                    <img src="icono-whatsapp.png" alt="WhatsApp" />
                   </span>
                   <span>Escríbeme por WhatsApp</span>
                 </a>
@@ -1297,14 +1317,16 @@
       </div>
     </header>
 
-    <!-- Ejemplos de páginas web: debajo del encabezado -->
+    <!-- Ejemplos de páginas web (debajo del encabezado) -->
     <section class="examples-section">
       <div class="section-label">Ejemplos de páginas</div>
       <h2 class="section-title">Demos de páginas para tu negocio</h2>
       <p class="section-subtitle">
         Estas son demos de cómo podría verse tu página si tienes una
         <strong>soda</strong>, una <strong>pizzería</strong> o una
-        <strong>cafetería</strong>.
+        <strong>cafetería</strong>, con precios de locura: mensualidades desde
+        <strong>¢5,000</strong> por un trabajo profesional en oferta.
+        ¿Cómo decir que no?
       </p>
 
       <div class="carousel" id="webExamplesCarousel">
@@ -1312,30 +1334,32 @@
           <!-- Slide 1: Soda -->
           <div class="carousel-slide">
             <div class="carousel-content">
-              <div class="carousel-title-row">
-                <h3 class="carousel-title">Soda "El Sabor Tico"</h3>
-                <span class="carousel-badge">Demo web</span>
+              <div class="carousel-main">
+                <div class="carousel-title-row">
+                  <h3 class="carousel-title">Soda "El Sabor Tico"</h3>
+                </div>
+                <p class="carousel-text">
+                  Pensada para una soda de barrio que quiere mostrar su comida del día
+                  y recibir pedidos simples.
+                </p>
+                <ul class="carousel-bullets">
+                  <li>Menú del día con platos y precios básicos.</li>
+                  <li>Sección de plato especial / recomendación de la casa.</li>
+                  <li>Información del local: dirección, horario y contacto.</li>
+                  <li>Botón de WhatsApp para pedidos o consultas rápidas.</li>
+                </ul>
+                <p class="example-note">
+                  Carga rápida y diseño sencillo pensado para pantallas de celular.
+                </p>
               </div>
-
-              <div class="carousel-actions">
-                <a href="soda.html" class="example-link" target="_blank">
+              <div class="carousel-side">
+                <span class="carousel-badge">Demo web</span>
+                <a href="soda.html" class="example-link carousel-demo-link" target="_blank">
                   <span>Ver demo soda</span>
                 </a>
-              </div>
-
-              <p class="carousel-text">
-                Pensada para una soda de barrio que quiere mostrar su comida del día y recibir pedidos simples.
-              </p>
-
-              <ul class="carousel-feature-list">
-                <li>Menú del día con platos y precios básicos.</li>
-                <li>Sección de plato especial / recomendación de la casa.</li>
-                <li>Información del local: dirección, horario y contacto.</li>
-                <li>Botón de WhatsApp para pedidos o consultas rápidas.</li>
-              </ul>
-
-              <div class="carousel-footer">
-                <span class="example-note">Carga rápida y diseño sencillo para pantallas de celular.</span>
+                <div class="carousel-image-placeholder">
+                  <span class="carousel-image-text">Imagen "El Sabor Tico"</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1343,30 +1367,32 @@
           <!-- Slide 2: Pizzería -->
           <div class="carousel-slide">
             <div class="carousel-content">
-              <div class="carousel-title-row">
-                <h3 class="carousel-title">Pizzería "La Esquina"</h3>
-                <span class="carousel-badge">Demo web</span>
+              <div class="carousel-main">
+                <div class="carousel-title-row">
+                  <h3 class="carousel-title">Pizzería "La Esquina"</h3>
+                </div>
+                <p class="carousel-text">
+                  Ideal para una pizzería de barrio que quiere mostrar sus combos
+                  y recibir pedidos por WhatsApp.
+                </p>
+                <ul class="carousel-bullets">
+                  <li>Carta de pizzas y combos con precios claros.</li>
+                  <li>Sección de promociones, 2x1 y ofertas por día.</li>
+                  <li>Fotos sencillas de tus pizzas más vendidas.</li>
+                  <li>Información de horarios, ubicación y forma de hacer pedidos.</li>
+                </ul>
+                <p class="example-note">
+                  Perfecta para que la gente vea tus promos rápido desde el teléfono.
+                </p>
               </div>
-
-              <div class="carousel-actions">
-                <a href="pizzeria.html" class="example-link" target="_blank">
+              <div class="carousel-side">
+                <span class="carousel-badge">Demo web</span>
+                <a href="pizzeria.html" class="example-link carousel-demo-link" target="_blank">
                   <span>Ver demo pizzería</span>
                 </a>
-              </div>
-
-              <p class="carousel-text">
-                Ideal para una pizzería pequeña que quiere mostrar combos claros y un canal de pedidos directo.
-              </p>
-
-              <ul class="carousel-feature-list">
-                <li>Lista de pizzas y combos con precios visibles.</li>
-                <li>Fotos sencillas de algunos productos.</li>
-                <li>Horarios y ubicación del local.</li>
-                <li>Botón para pedidos por WhatsApp o llamada.</li>
-              </ul>
-
-              <div class="carousel-footer">
-                <span class="example-note">Pensado para pedidos rápidos sin tanta vuelta.</span>
+                <div class="carousel-image-placeholder">
+                  <span class="carousel-image-text">Imagen "La Esquina"</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1374,30 +1400,32 @@
           <!-- Slide 3: Cafetería -->
           <div class="carousel-slide">
             <div class="carousel-content">
-              <div class="carousel-title-row">
-                <h3 class="carousel-title">Cafetería "Café del Barrio"</h3>
-                <span class="carousel-badge">Demo web</span>
+              <div class="carousel-main">
+                <div class="carousel-title-row">
+                  <h3 class="carousel-title">Cafetería "Café del Barrio"</h3>
+                </div>
+                <p class="carousel-text">
+                  Pensada para una cafetería pequeña que quiere mostrar su ambiente
+                  y sus bebidas especiales.
+                </p>
+                <ul class="carousel-bullets">
+                  <li>Galería sencilla de bebidas, postres y repostería.</li>
+                  <li>Sección de bebida del día o de temporada.</li>
+                  <li>Información de ubicación, horario y contacto.</li>
+                  <li>Botón de WhatsApp para reservas o encargos.</li>
+                </ul>
+                <p class="example-note">
+                  Ayuda a transmitir el ambiente del lugar sin complicarse.
+                </p>
               </div>
-
-              <div class="carousel-actions">
-                <a href="cafeteria.html" class="example-link" target="_blank">
+              <div class="carousel-side">
+                <span class="carousel-badge">Demo web</span>
+                <a href="cafeteria.html" class="example-link carousel-demo-link" target="_blank">
                   <span>Ver demo cafetería</span>
                 </a>
-              </div>
-
-              <p class="carousel-text">
-                Pensada para cafeterías que quieren mostrar su ambiente, bebidas y algo de repostería.
-              </p>
-
-              <ul class="carousel-feature-list">
-                <li>Cartas de bebidas calientes y frías.</li>
-                <li>Sección de repostería / postres destacados.</li>
-                <li>Información del local y referencia de mapa.</li>
-                <li>Botón de WhatsApp para reservar o hacer preguntas.</li>
-              </ul>
-
-              <div class="carousel-footer">
-                <span class="example-note">Muestra el ambiente sin complicarse con demasiadas secciones.</span>
+                <div class="carousel-image-placeholder">
+                  <span class="carousel-image-text">Imagen "Café del Barrio"</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1796,9 +1824,7 @@
     <a class="floating-whatsapp"
        href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
        target="_blank" rel="noopener noreferrer">
-      <span class="floating-whatsapp-icon">
-        <img src="icono-whatsapp.png" alt="WhatsApp Zamaha" class="floating-whatsapp-img" />
-      </span>
+      <img src="icono-whatsapp.png" alt="WhatsApp" class="floating-whatsapp-img" />
     </a>
   </div>
 
@@ -1927,6 +1953,7 @@
     const fechaWrapper = document.getElementById('fechaWrapper');
     const fechaInput = document.getElementById('fechaEstimada');
     const horaInput = document.getElementById('horaEstimada');
+    const ubicacionInput = document.getElementById('ubicacionTrabajo');
     const quiereLlamadaCheckbox = document.getElementById('quiereLlamada');
     const calendlyContainer = document.getElementById('calendlyContainer');
 
