@@ -76,12 +76,17 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 26px;
-      letter-spacing: 0.12em;
+      font-size: 32px;              /* más grande */
+      letter-spacing: 0.16em;        /* más separado, estilo logo */
       text-transform: uppercase;
-      font-weight: 700;
-      color: #e5e7eb;
-      margin-bottom: 4px;
+      font-weight: 800;
+      color: #ffffff;                /* blanco */
+      margin-bottom: 6px;
+      -webkit-text-stroke: 1px var(--brand-red); /* contorno rojo */
+      text-shadow:
+        0 0 2px rgba(0, 0, 0, 0.7),
+        0 0 8px rgba(255, 75, 92, 0.9),
+        0 0 16px rgba(255, 75, 92, 0.9);         /* brillo/sombra roja */
     }
 
     .brand-pill {
@@ -179,6 +184,12 @@
       justify-content: center;
       color: #bbf7d0;
       font-size: 15px;
+    }
+
+    .hero-whatsapp-img {
+      width: 18px;
+      height: 18px;
+      display: block;
     }
 
     .hero-secondary-link {
@@ -1162,6 +1173,12 @@
       font-size: 26px;
       line-height: 1;
     }
+
+    .floating-whatsapp-img {
+      width: 28px;
+      height: 28px;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -1192,7 +1209,7 @@
         <div class="header-grid">
           <div>
             <!-- Título grande de marca -->
-            <div class="brand-title-display">ZAMAHA </div>
+            <div class="brand-title-display">ZAMAHA</div>
 
             <h1 class="hero-title">
               Servicios y Soluciones para tu
@@ -1220,7 +1237,9 @@
                 <a class="hero-whatsapp"
                    href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
                    target="_blank" rel="noopener noreferrer">
-                  <span class="hero-whatsapp-icon">🟢</span>
+                  <span class="hero-whatsapp-icon">
+                    <img src="icono-whatsapp.png" alt="WhatsApp Zamaha" class="hero-whatsapp-img" />
+                  </span>
                   <span>Escríbeme por WhatsApp</span>
                 </a>
                 <a href="#contacto" class="hero-secondary-link">
@@ -1726,7 +1745,9 @@
     <a class="floating-whatsapp"
        href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
        target="_blank" rel="noopener noreferrer">
-      <span class="floating-whatsapp-icon">💬</span>
+      <span class="floating-whatsapp-icon">
+        <img src="icono-whatsapp.png" alt="WhatsApp Zamaha" class="floating-whatsapp-img" />
+      </span>
     </a>
   </div>
 
@@ -1831,7 +1852,9 @@
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
         const current = mensajeField.value;
-        const addition = current ? `\n\nQuiero incluir también: ${service}` : `Quiero incluir también: ${service}`;
+        const addition = current
+          ? `\n\nQuiero incluir también: ${service}`
+          : `Quiero incluir también: ${service}`;
         mensajeField.value = current + addition;
 
         servicePillsBtns.forEach(pill => {
@@ -1846,7 +1869,7 @@
           contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
-    }
+    });
 
     // Preferencias de fecha
     const tieneFechaSelect = document.getElementById('tieneFecha');
