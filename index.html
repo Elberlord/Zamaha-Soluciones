@@ -835,7 +835,6 @@
 
     /* ----- LAYOUT RESPONSIVE ----- */
 
-    /* En escritorio, los servicios van en 2 columnas */
     @media (min-width: 840px) {
       .services-list {
         grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
@@ -964,16 +963,21 @@
       border-radius: 12px;
       border: 1px dashed rgba(148, 163, 231, 0.45);
       background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), #020617);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px;
+      overflow: hidden;
+      position: relative;
+      cursor: zoom-in;
     }
 
-    .carousel-image-text {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: center;
+    .carousel-image-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.18s ease;
+    }
+
+    .carousel-image-placeholder:hover .carousel-image-preview {
+      transform: scale(1.08);
     }
 
     .carousel-demo-link {
@@ -1031,6 +1035,31 @@
         width: auto;
         align-self: flex-start;
       }
+    }
+
+    /* ----- LIGHTBOX DE IMÁGENES ----- */
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 70;
+    }
+
+    .image-lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+    }
+
+    .image-lightbox-img {
+      position: relative;
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: 18px;
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 231, 0.6);
     }
 
     /* ----- FOOTER ----- */
@@ -1234,7 +1263,6 @@
                 <span class="services-tab-chevron">▾</span>
               </a>
               <div class="services-dropdown-menu">
-                <!-- Quitado "Ver todos los servicios" como pediste -->
                 <a href="index.html?service=Cámaras CCTV#contacto">Cámaras y monitoreo</a>
                 <a href="index.html?service=Redes eléctricas#contacto">Redes eléctricas</a>
                 <a href="index.html?service=Equipos de cómputo#contacto">Equipos de cómputo</a>
@@ -1246,7 +1274,6 @@
 
         <div class="header-grid">
           <div>
-            <!-- Título grande de marca -->
             <div class="brand-title-display">ZAMAHA</div>
 
             <h1 class="hero-title">
@@ -1357,8 +1384,12 @@
                 <a href="soda.html" class="example-link carousel-demo-link" target="_blank">
                   <span>Ver demo soda</span>
                 </a>
-                <div class="carousel-image-placeholder">
-                  <span class="carousel-image-text">Imagen "El Sabor Tico"</span>
+                <div class="carousel-image-placeholder"
+                     data-full="soda-hero-plate.png"
+                     data-alt="Soda El Sabor Tico">
+                  <img src="soda-hero-plate.png"
+                       alt="Soda El Sabor Tico"
+                       class="carousel-image-preview" />
                 </div>
               </div>
             </div>
@@ -1390,8 +1421,12 @@
                 <a href="pizzeria.html" class="example-link carousel-demo-link" target="_blank">
                   <span>Ver demo pizzería</span>
                 </a>
-                <div class="carousel-image-placeholder">
-                  <span class="carousel-image-text">Imagen "La Esquina"</span>
+                <div class="carousel-image-placeholder"
+                     data-full="pizza-close-1.jpg"
+                     data-alt="Pizzería La Esquina">
+                  <img src="pizza-close-1.jpg"
+                       alt="Pizzería La Esquina"
+                       class="carousel-image-preview" />
                 </div>
               </div>
             </div>
@@ -1423,8 +1458,12 @@
                 <a href="cafeteria.html" class="example-link carousel-demo-link" target="_blank">
                   <span>Ver demo cafetería</span>
                 </a>
-                <div class="carousel-image-placeholder">
-                  <span class="carousel-image-text">Imagen "Café del Barrio"</span>
+                <div class="carousel-image-placeholder"
+                     data-full="cafe-table-1.jpg"
+                     data-alt="Cafetería Café del Barrio">
+                  <img src="cafe-table-1.jpg"
+                       alt="Cafetería Café del Barrio"
+                       class="carousel-image-preview" />
                 </div>
               </div>
             </div>
@@ -1821,6 +1860,12 @@
       </div>
     </footer>
 
+    <!-- Lightbox para ver las imágenes en grande -->
+    <div id="imageLightbox" class="image-lightbox">
+      <div class="image-lightbox-backdrop"></div>
+      <img id="lightboxImage" class="image-lightbox-img" src="" alt="" />
+    </div>
+
     <a class="floating-whatsapp"
        href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
        target="_blank" rel="noopener noreferrer">
@@ -1865,8 +1910,10 @@
           if (parentLabel) parentLabel.classList.remove('active');
         });
 
-        input.checked = true;
-        label.classList.add('active');
+        if (input) {
+          input.checked = true;
+          label.classList.add('active');
+        }
       });
     });
 
@@ -2002,6 +2049,30 @@
       });
 
       updateCarousel();
+    }
+
+    // Lightbox para las imágenes del carrusel
+    const imagePlaceholders = document.querySelectorAll('.carousel-image-placeholder');
+    const imageLightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+
+    if (imageLightbox && lightboxImage && imagePlaceholders.length > 0) {
+      imagePlaceholders.forEach(box => {
+        box.addEventListener('click', () => {
+          const src = box.dataset.full;
+          const alt = box.dataset.alt || '';
+          if (!src) return;
+          lightboxImage.src = src;
+          lightboxImage.alt = alt;
+          imageLightbox.style.display = 'flex';
+        });
+      });
+
+      imageLightbox.addEventListener('click', () => {
+        imageLightbox.style.display = 'none';
+        lightboxImage.src = '';
+        lightboxImage.alt = '';
+      });
     }
   </script>
 </body>
