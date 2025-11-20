@@ -511,7 +511,7 @@
       margin-right: 4px;
     }
 
-    /* ======== PC EN OFERTA ======== */
+    /* ======== PRODUCTOS (PC Y CÁMARAS) ======== */
     .product-layout {
       display: grid;
       grid-template-columns: 140px minmax(0, 1fr);
@@ -564,6 +564,7 @@
       gap: 8px;
       align-items: center;
       justify-content: space-between;
+      margin-top: 4px;
     }
 
     .product-price {
@@ -911,7 +912,6 @@
     }
 
     /* ----- LAYOUT RESPONSIVE ----- */
-
     @media (min-width: 840px) {
       .services-list {
         grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
@@ -1331,6 +1331,7 @@
 </head>
 <body>
   <div class="page-shell">
+    <!-- HEADER -->
     <header>
       <div class="header-card">
         <div class="hero-gradient-orbit"></div>
@@ -1425,7 +1426,7 @@
       </div>
     </header>
 
-    <!-- Ejemplos de páginas web (debajo del encabezado) -->
+    <!-- EJEMPLOS DE PÁGINAS -->
     <section class="examples-section">
       <div class="section-label">Ejemplos de páginas</div>
       <h2 class="section-title">Demos de páginas para tu negocio</h2>
@@ -1434,7 +1435,6 @@
         <strong>soda</strong>, una <strong>pizzería</strong> o una
         <strong>cafetería</strong>, con precios de locura: mensualidades desde
         <strong>¢5,000</strong> por un trabajo profesional en oferta.
-        ¿Cómo decir que no?
       </p>
 
       <div class="carousel" id="webExamplesCarousel">
@@ -1540,9 +1540,9 @@
                   <span>Ver demo cafetería</span>
                 </a>
                 <div class="carousel-image-placeholder"
-                     data-full="coffee-table-1.jpg"
+                     data-full="cafe-table-1.jpg"
                      data-alt="Cafetería Café del Barrio">
-                  <img src="coffee-table-1.jpg"
+                  <img src="cafe-table-1.jpg"
                        alt="Cafetería Café del Barrio"
                        class="carousel-image-preview" />
                 </div>
@@ -1558,67 +1558,105 @@
       </div>
     </section>
 
-    <!-- ======== COMPUTADORA EN OFERTA (A TODO LO ANCHO, DEBAJO DE EJEMPLOS) ======== -->
+    <!-- EQUIPOS DE CÓMPUTO Y CÁMARAS EN OFERTA (FULL WIDTH, JUSTO DEBAJO DE EJEMPLOS) -->
     <section class="services-section" id="pc-oferta">
-      <div class="section-label">Equipos de cómputo</div>
-      <h2 class="section-title">Computadora en oferta</h2>
+      <div class="section-label">Equipos de cómputo y cámaras</div>
+      <h2 class="section-title">Ofertas destacadas</h2>
       <p class="section-subtitle">
-        Equipo listo para trabajo y estudio, armado y probado, ideal para ofimática,
-        navegación, clases en línea y pequeños negocios.
+        Equipos listos para trabajar y cámaras fáciles de usar, pensados para oficinas pequeñas,
+        casas y negocios de barrio.
       </p>
 
-      <article class="service-card">
-        <div class="product-layout">
-          <div class="product-image-wrapper">
-            <img src="dell-latitude-5480.jpg"
-                 alt="PC de escritorio para trabajo y estudio"
-                 class="product-image" />
-          </div>
-          <div>
-            <h3 class="product-info-title">PC de escritorio para trabajo y estudio</h3>
-            <p class="product-info-sub">
-              Configuración balanceada para usar Office, WhatsApp Web, Zoom y navegar sin complicaciones.
-            </p>
-            <ul class="product-specs">
-              <li>Procesador Intel® Core™ i5.</li>
-              <li>8 GB de memoria RAM para trabajar con varias ventanas abiertas.</li>
-              <li>Disco SSD de 240 GB para que encienda y abra programas rápido.</li>
-              <li>Bluethoot y Wifi alta velocidad.</li>
-              <li>pantalla 17".</li>
-              <li>Windows y programas básicos instalados (lista para trabajar).</li>
-            </ul>
-            <div class="product-footer-row">
-              <div class="product-price">
-                <span>Precio de contado</span>
-                <strong>₡150,000</strong>
-                <span>Opciones de pago y reserva a conversar por WhatsApp.</span>
-              </div>
-              <div class="service-actions">
-                <a class="btn btn-secondary btn-small"
-                   href="equipos.html"
-                   target="_blank" rel="noopener noreferrer">
-                  Ver catálogo
-                </a>
-                <button type="button"
-                        class="btn btn-primary btn-small js-agregar-pc"
-                        data-service="Computadora en oferta">
-                  <span class="btn-icon">💻</span>
-                  Añadir a cotización
-                </button>
-              </div>
+      <div class="services-list">
+        <!-- PC EN OFERTA -->
+        <article class="service-card">
+          <div class="product-layout">
+            <div class="product-image-wrapper">
+              <img src="pc-oferta.jpg" alt="Computadora de escritorio en oferta" class="product-image" />
             </div>
-            <p class="product-note">
-              Si necesitas que la lleve instalada a tu negocio o casa en Siquirres y alrededores,
-              lo hablamos por mensaje y te doy el precio con instalación incluida.
-            </p>
+            <div>
+              <h3 class="product-info-title">Computadora de escritorio en oferta</h3>
+              <p class="product-info-sub">
+                Equipo armado listo para oficina, estudio o negocio pequeño.
+              </p>
+              <ul class="product-specs">
+                <li>Procesador Intel® Core™ i5, ideal para tareas de oficina y estudio.</li>
+                <li>8 GB de memoria RAM para trabajar con varias ventanas abiertas.</li>
+                <li>SSD de 240 GB para que encienda y abra programas rápido.</li>
+                <li>Monitor de 19", teclado y mouse incluidos.</li>
+              </ul>
+              <div class="product-footer-row">
+                <div class="product-price">
+                  <strong>Oferta: consultar precio</strong>
+                  <span>Ajusta aquí el monto exacto que quieras mostrar.</span>
+                </div>
+                <div class="service-actions">
+                  <a href="equipos.html" class="btn btn-secondary btn-small">Ver catálogo</a>
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-small js-add-product"
+                    data-service="Equipos de cómputo"
+                    data-label="Computadora de escritorio Intel® Core™ i5 en oferta">
+                    Añadir a cotización
+                  </button>
+                </div>
+              </div>
+              <p class="product-note">
+                Perfecta para ofimática, clases virtuales, navegar, redes sociales
+                y trabajos sencillos de negocio.
+              </p>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+
+        <!-- CÁMARA BOMBILLO E27 EN OFERTA -->
+        <article class="service-card">
+          <div class="product-layout">
+            <div class="product-image-wrapper">
+              <img src="camara-bombillo-e27-split.png"
+                   alt="Cámara bombillo Wi-Fi E27 360°"
+                   class="product-image" />
+            </div>
+            <div>
+              <h3 class="product-info-title">Cámara bombillo Wi-Fi E27 360°</h3>
+              <p class="product-info-sub">
+                Cámara tipo bombillo para rosca E27, ideal para pasillos, cocheras
+                o entradas donde quieres algo discreto.
+              </p>
+              <ul class="product-specs">
+                <li>Resolución Full HD 1080p para ver los detalles con claridad.</li>
+                <li>Vista panorámica 360° para cubrir toda la habitación.</li>
+                <li>Conexión Wi-Fi 2.4 GHz y visualización desde app en el celular.</li>
+                <li>Detección de movimiento, visión nocturna y audio bidireccional.</li>
+              </ul>
+              <div class="product-footer-row">
+                <div class="product-price">
+                  <strong>¢19.000</strong>
+                  <span>Precio de referencia para esta cámara bombillo.</span>
+                </div>
+                <div class="service-actions">
+                  <a href="camaras.html" class="btn btn-secondary btn-small">Ver catálogo</a>
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-small js-add-product"
+                    data-service="Cámaras CCTV"
+                    data-label="Cámara bombillo Wi-Fi E27 360° (modelo Split E27)">
+                    Añadir a cotización
+                  </button>
+                </div>
+              </div>
+              <p class="product-note">
+                Simple de instalar: se enrosca como un bombillo normal en un socket E27.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
 
     <main>
+      <!-- COLUMNA IZQUIERDA: SERVICIOS -->
       <div class="main-column">
-        <!-- Sección de servicios -->
         <section class="services-section" id="servicios">
           <div class="section-label">Servicios</div>
           <div class="services-grid">
@@ -1781,8 +1819,8 @@
                   <div class="service-tooltip-title">Detalle de páginas web</div>
                   <ul class="service-list">
                     <li>Páginas enfocadas en que la gente entienda qué ofreces y cómo contactarte.</li>
-                    <li>Nada de promesas raras de "te harás millonario en 30 días".</li>
-                    <li>Diseños simples, pensados para cargar rápido.</li>
+                    <li>Sin promesas raras de “la página que vende sola mientras duermes”.</li>
+                    <li>Te explico cómo actualizar textos básicos y fotos.</li>
                   </ul>
                 </div>
               </article>
@@ -1791,190 +1829,86 @@
         </section>
       </div>
 
-      <!-- Columna derecha: formulario de contacto y cotización -->
+      <!-- COLUMNA DERECHA: CONTACTO -->
       <div class="main-column">
         <section class="contact-card" id="contacto">
-          <div class="section-label">Contacto y cotización</div>
-          <h2 class="section-title">Cuéntame qué necesitas</h2>
+          <div class="section-label">Contacto</div>
+          <h2 class="section-title">Pide tu cotización</h2>
           <p class="section-subtitle">
-            Completa el formulario para cotizar cámaras, redes, mantenimiento de computadoras
-            o una página web para tu negocio.
+            Cuéntame qué tienes en mente y te doy una respuesta clara, sin letras pequeñas.
           </p>
 
           <div class="contact-grid">
             <div class="contact-meta">
               <p>
-                <strong>Opciones de contacto:</strong>
+                Trabajo personalmente cada proyecto, por eso tomo pocos al mes.
+                Si tu idea encaja con lo que hago, buscamos una solución realista.
               </p>
               <div class="contact-meta-row">
-                <span class="contact-chip">
-                  📍 Siquirres y alrededores
-                </span>
-                <span class="contact-chip">
-                  💬 WhatsApp directo:
-                  <a href="https://wa.me/50664305227" target="_blank" rel="noopener noreferrer"
-                     style="color: #22c55e; text-decoration: none;">
-                    +506 6430-5227
-                  </a>
-                </span>
-                <span class="contact-chip">
-                  ✉ Correo:
-                  <a href="mailto:zamaha-soluciones@outlook.es"
-                     style="color: #93c5fd; text-decoration: none;">
-                    zamaha-soluciones@outlook.es
-                  </a>
-                </span>
+                <div class="contact-chip">Zona Siquirres y alrededores</div>
+                <div class="contact-chip">Horario 9:00 a.m. - 5:00 p.m.</div>
               </div>
-              <p class="small-hint">
-                Si prefieres, puedes escribir primero por WhatsApp y luego llenar el formulario
-                cuando ya tengamos claro lo que necesitas.
-              </p>
             </div>
 
-            <div>
-              <form action="https://formspree.io/f/mqazkrwr" method="POST">
-                <!-- Nombre completo -->
-                <div class="field-group">
-                  <label for="nombre">Nombre completo</label>
-                  <input type="text" id="nombre" name="nombre"
-                         placeholder="Tu nombre y apellidos" required />
-                </div>
+            <form action="https://formspree.io/f/mnqealpg" method="POST">
+              <div class="field-group">
+                <label for="nombre">Nombre completo</label>
+                <input id="nombre" name="nombre" type="text" required placeholder="Tu nombre" />
+              </div>
 
-                <!-- Medio de contacto preferido -->
-                <div class="field-group">
-                  <label>¿Cómo prefieres que te contacte?</label>
-                  <div class="pill-row">
-                    <label class="pill">
-                      <input type="radio" name="medioContacto" value="WhatsApp" style="display:none;" checked />
-                      <span class="pill-dot"></span>
-                      WhatsApp
-                    </label>
-                    <label class="pill">
-                      <input type="radio" name="medioContacto" value="Llamada" style="display:none;" />
-                      <span class="pill-dot"></span>
-                      Llamada
-                    </label>
-                    <label class="pill">
-                      <input type="radio" name="medioContacto" value="Correo electrónico" style="display:none;" />
-                      <span class="pill-dot"></span>
-                      Correo
-                    </label>
-                  </div>
-                </div>
+              <div class="field-group">
+                <label for="telefono">Teléfono o WhatsApp</label>
+                <input id="telefono" name="telefono" type="tel" required placeholder="Ej: 6430-5227" />
+              </div>
 
-                <!-- WhatsApp / Teléfono y correo -->
-                <div class="field-group">
-                  <label for="telefono">WhatsApp o teléfono</label>
-                  <input type="tel" id="telefono" name="telefono"
-                         placeholder="Ej: +506 6430-5227" required />
-                </div>
+              <div class="field-group">
+                <label for="zona">Zona o distrito</label>
+                <input id="zona" name="zona" type="text" placeholder="Ej: Siquirres centro, Pacuarito..." />
+              </div>
 
-                <div class="field-group">
-                  <label for="correo">Correo electrónico (opcional)</label>
-                  <input type="email" id="correo" name="correo"
-                         placeholder="Si quieres que también te escriba por correo" />
-                </div>
-
-                <!-- Servicios a cotizar -->
-                <div class="field-group">
-                  <label>¿Qué servicios quieres cotizar?</label>
-                  <div class="pill-row">
-                    <button type="button" class="pill service-pill-btn" data-service="Cámaras CCTV">
-                      <span class="pill-dot"></span>
-                      Cámaras y monitoreo
-                    </button>
-                    <button type="button" class="pill service-pill-btn" data-service="Redes eléctricas">
-                      <span class="pill-dot"></span>
-                      Redes eléctricas
-                    </button>
-                    <button type="button" class="pill service-pill-btn" data-service="Equipos de cómputo">
-                      <span class="pill-dot"></span>
-                      Equipos de cómputo
-                    </button>
-                    <button type="button" class="pill service-pill-btn" data-service="Desarrollo web">
-                      <span class="pill-dot"></span>
-                      Desarrollo / Página web
-                    </button>
-                  </div>
-                  <input type="hidden" id="servicesField" name="serviciosSeleccionados" />
-                  <p class="small-hint">
-                    Puedes seleccionar uno o varios. También puedes escribir detalles extras
-                    en el mensaje final.
-                  </p>
-                </div>
-
-                <!-- Ubicación del trabajo -->
-                <div class="field-group">
-                  <label for="ubicacionTrabajo">¿Dónde sería el trabajo?</label>
-                  <input type="text" id="ubicacionTrabajo" name="ubicacionTrabajo"
-                         placeholder="Ej: Barrio X, Siquirres / Centro / Local comercial" />
-                  <p class="small-hint">
-                    Si aún no tienes la dirección exacta, puedes poner una referencia general.
-                  </p>
-                </div>
-
-                <!-- Preferencias de fecha -->
-                <div class="field-group">
-                  <label>¿Tienes alguna fecha en mente?</label>
-                  <select id="tieneFecha" name="tieneFecha">
-                    <option value="No">No, solo quiero cotizar primero</option>
-                    <option value="Sí">Sí, tengo una fecha aproximada</option>
-                  </select>
-                </div>
-
-                <div id="fechaWrapper" style="display:none; gap: 6px;">
-                  <div class="field-group">
-                    <label for="fechaEstimada">Fecha aproximada</label>
-                    <input type="date" id="fechaEstimada" name="fechaEstimada" />
-                  </div>
-                  <div class="field-group">
-                    <label for="horaEstimada">Hora aproximada</label>
-                    <input type="time" id="horaEstimada" name="horaEstimada" />
-                  </div>
-                </div>
-
-                <!-- Llamada rápida -->
-                <div class="field-group">
-                  <label>
-                    <input type="checkbox" id="quiereLlamada" name="quiereLlamada" />
-                    ¿Te gustaría agendar una llamada rápida para aclarar dudas?
-                  </label>
-                  <p class="small-hint">
-                    Por ahora veré tu mensaje y si es necesario coordinamos la llamada por WhatsApp.
-                  </p>
-                </div>
-
-                <!-- Mensaje libre -->
-                <div class="field-group">
-                  <label for="mensaje">Cuéntame un poco más</label>
-                  <textarea id="mensaje" name="mensaje"
-                            placeholder="Ej: Tengo un local pequeño y quiero 3 cámaras, una apuntando a la caja, otra a la entrada y otra al pasillo."></textarea>
-                </div>
-
-                <!-- URL opcional -->
-                <div class="field-group">
-                  <label for="urlReferencia">Sitio web o redes (opcional)</label>
-                  <input type="url" id="urlReferencia" name="urlReferencia"
-                         placeholder="Si ya tienes algo en Internet y quieres que lo vea" />
-                </div>
-
-                <!-- Botones de envío -->
-                <div class="btn-row">
-                  <button type="submit" class="btn btn-primary btn-whatsapp">
-                    <span class="btn-icon">📨</span>
-                    Enviar solicitud de cotización
+              <div class="field-group">
+                <label>Servicios que te interesan</label>
+                <div class="pill-row">
+                  <button type="button" class="pill" data-service-pill data-service="Cámaras CCTV">
+                    <span class="pill-dot"></span>Cámaras CCTV
                   </button>
-                  <button type="reset" class="btn btn-ghost">
-                    Limpiar formulario
+                  <button type="button" class="pill" data-service-pill data-service="Redes eléctricas">
+                    <span class="pill-dot"></span>Redes eléctricas
+                  </button>
+                  <button type="button" class="pill" data-service-pill data-service="Equipos de cómputo">
+                    <span class="pill-dot"></span>Equipos de cómputo
+                  </button>
+                  <button type="button" class="pill" data-service-pill data-service="Desarrollo web">
+                    <span class="pill-dot"></span>Desarrollo web
                   </button>
                 </div>
-
+                <input type="hidden" name="serviciosSeleccionados" id="servicesField" />
                 <p class="small-hint">
-                  Al enviar este formulario no se genera ningún compromiso de compra.
-                  Te responderé con un estimado y, si estás de acuerdo, coordinamos fecha y detalles.
+                  Los botones son solo para marcar lo que necesitas, puedes explicarlo mejor en el mensaje.
                 </p>
-              </form>
-            </div>
+              </div>
+
+              <div class="field-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje"
+                          placeholder="Ej: Necesito 2 cámaras para la cochera y verlas desde el celular, y cotizar también la PC en oferta."></textarea>
+              </div>
+
+              <div class="btn-row">
+                <button type="submit" class="btn btn-primary">
+                  Enviar formulario
+                </button>
+                <a class="btn btn-secondary"
+                   href="https://wa.me/50664305227?text=Hola%2C%20vengo%20desde%20la%20web%20de%20Zamaha%20y%20quiero%20una%20cotizaci%C3%B3n."
+                   target="_blank" rel="noopener noreferrer">
+                  Prefiero escribir por WhatsApp
+                </a>
+              </div>
+
+              <p class="small-hint">
+                Respondo normalmente el mismo día hábil. Si es algo muy urgente, mejor escríbeme directo al WhatsApp.
+              </p>
+            </form>
           </div>
         </section>
       </div>
@@ -1982,260 +1916,201 @@
 
     <footer>
       <div class="footer-left">
-        <span>Zamaha • Servicios y soluciones en Siquirres</span>
-        <span>WhatsApp:
-          <a href="https://wa.me/50664305227" target="_blank" rel="noopener noreferrer">
-            +506 6430-5227
-          </a>
-        </span>
-        <span>Correo:
-          <a href="mailto:zamaha-soluciones@outlook.es">
-            zamaha-soluciones@outlook.es
-          </a>
-        </span>
+        <span>© Zamaha Servicios</span>
+        <span>Hecho con calma, café y cables.</span>
       </div>
       <div class="footer-right">
-        <span>© <span id="year"></span> Zamaha. Hecho en Siquirres.</span>
+        <span>Siquirres, Limón · Costa Rica</span>
       </div>
     </footer>
+  </div>
 
-    <!-- Lightbox para ver las imágenes en grande -->
-    <div id="imageLightbox" class="image-lightbox">
-      <div class="image-lightbox-backdrop"></div>
-      <img id="lightboxImage" class="image-lightbox-img" src="" alt="" />
-    </div>
+  <!-- BOTÓN FLOTANTE WHATSAPP -->
+  <a class="floating-whatsapp"
+     href="https://wa.me/50664305227?text=Hola%2C%20vengo%20desde%20la%20Web%20de%20Zamaha"
+     target="_blank" rel="noopener noreferrer">
+    <img src="icono-whatsapp.png" alt="WhatsApp" class="floating-whatsapp-img" />
+  </a>
 
-    <a class="floating-whatsapp"
-       href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
-       target="_blank" rel="noopener noreferrer">
-      <img src="icono-whatsapp.png" alt="WhatsApp" class="floating-whatsapp-img" />
-    </a>
+  <!-- LIGHTBOX PARA IMÁGENES DEL CARRUSEL -->
+  <div class="image-lightbox" id="imageLightbox">
+    <div class="image-lightbox-backdrop"></div>
+    <img src="" alt="" class="image-lightbox-img" id="lightboxImg" />
   </div>
 
   <script>
-    // Año en el footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Reloj de hora en Costa Rica
-    const crTimeEl = document.getElementById('crTime');
-
-    function updateCRTime() {
-      if (!crTimeEl) return;
-      const now = new Date();
-      const options = {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true,
-        timeZone: 'America/Costa_Rica'
-      };
-      crTimeEl.textContent = now.toLocaleTimeString('es-CR', options);
-    }
-
-    updateCRTime();
-    setInterval(updateCRTime, 1000);
-
-    // Lógica de selección de medio de contacto
-    const contactPills = document.querySelectorAll('.field-group input[name="medioContacto"]');
-    const pillLabels = document.querySelectorAll('.field-group .pill');
-
-    pillLabels.forEach(label => {
-      label.addEventListener('click', () => {
-        const input = label.querySelector('input[type="radio"]');
-        if (!input) return;
-
-        contactPills.forEach(radio => {
-          const parentLabel = radio.closest('.pill');
-          if (parentLabel) parentLabel.classList.remove('active');
-        });
-
-        if (input) {
-          input.checked = true;
-          label.classList.add('active');
+    document.addEventListener('DOMContentLoaded', () => {
+      // Hora Costa Rica
+      const crTimeEl = document.getElementById('crTime');
+      function updateCRTime() {
+        const now = new Date();
+        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        const crOffset = -6; // Costa Rica UTC-6
+        const crDate = new Date(utc + crOffset * 3600000);
+        if (crTimeEl) {
+          crTimeEl.textContent = crDate.toLocaleTimeString('es-CR', { hour12: false });
         }
-      });
-    });
-
-    const servicePillsBtns = document.querySelectorAll('.service-pill-btn');
-    const servicesField = document.getElementById('servicesField');
-
-    function updateServicesField() {
-      if (!servicesField) return;
-      const active = [];
-      servicePillsBtns.forEach(btn => {
-        if (btn.classList.contains('active')) {
-          active.push(btn.dataset.service);
-        }
-      });
-      servicesField.value = active.join(', ');
-    }
-
-    // Preseleccionar servicio desde la URL (?service=...)
-    const urlParams = new URLSearchParams(window.location.search);
-    const servicioDesdeURL = urlParams.get('service');
-
-    if (servicioDesdeURL && servicePillsBtns.length > 0) {
-      servicePillsBtns.forEach(btn => {
-        if (btn.dataset.service === servicioDesdeURL) {
-          btn.classList.add('active');
-        }
-      });
-      updateServicesField();
-    }
-
-    servicePillsBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('active');
-        updateServicesField();
-      });
-    });
-
-    // Botones de "Cotizar" en servicios
-    const serviceButtons = document.querySelectorAll('.js-cotizar');
-    const addButtons = document.querySelectorAll('.js-agregar');
-    const mensajeField = document.getElementById('mensaje');
-
-    serviceButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const service = btn.dataset.service;
-        servicePillsBtns.forEach(pill => {
-          if (pill.dataset.service === service) {
-            pill.classList.add('active');
-          }
-        });
-        updateServicesField();
-        const contactoSection = document.getElementById('contacto');
-        if (contactoSection) {
-          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    addButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const service = btn.dataset.service;
-        const current = mensajeField.value;
-        const addition = current
-          ? `\n\nQuiero incluir también: ${service}`
-          : `Quiero incluir también: ${service}`;
-        mensajeField.value = current + addition;
-
-        servicePillsBtns.forEach(pill => {
-          if (pill.dataset.service === service) {
-            pill.classList.add('active');
-          }
-        });
-        updateServicesField();
-
-        const contactoSection = document.getElementById('contacto');
-        if (contactoSection) {
-          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // Botón "Añadir a cotización" de la PC en oferta
-    const pcAddButton = document.querySelector('.js-agregar-pc');
-    if (pcAddButton && mensajeField) {
-      pcAddButton.addEventListener('click', () => {
-        const textoPC = 'Quiero cotizar también la computadora en oferta que vi en la página.';
-        const current = mensajeField.value;
-        mensajeField.value = current ? current + '\n\n' + textoPC : textoPC;
-
-        // Marca "Equipos de cómputo" como servicio seleccionado
-        servicePillsBtns.forEach(pill => {
-          if (pill.dataset.service === 'Equipos de cómputo') {
-            pill.classList.add('active');
-          }
-        });
-        updateServicesField();
-
-        const contactoSection = document.getElementById('contacto');
-        if (contactoSection) {
-          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    }
-
-    // Preferencias de fecha
-    const tieneFechaSelect = document.getElementById('tieneFecha');
-    const fechaWrapper = document.getElementById('fechaWrapper');
-    const fechaInput = document.getElementById('fechaEstimada');
-    const horaInput = document.getElementById('horaEstimada');
-    const ubicacionInput = document.getElementById('ubicacionTrabajo');
-    const quiereLlamadaCheckbox = document.getElementById('quiereLlamada');
-    const calendlyContainer = document.getElementById('calendlyContainer');
-
-    if (tieneFechaSelect) {
-      tieneFechaSelect.addEventListener('change', () => {
-        if (tieneFechaSelect.value === 'Sí') {
-          fechaWrapper.style.display = 'grid';
-        } else {
-          fechaWrapper.style.display = 'none';
-          fechaInput.value = '';
-          horaInput.value = '';
-        }
-      });
-    }
-
-    if (quiereLlamadaCheckbox && calendlyContainer) {
-      quiereLlamadaCheckbox.addEventListener('change', () => {
-        calendlyContainer.style.display = quiereLlamadaCheckbox.checked ? 'block' : 'none';
-      });
-    }
-
-    // Carrusel de ejemplos
-    const carousel = document.getElementById('webExamplesCarousel');
-    const carouselTrack = carousel ? carousel.querySelector('.carousel-track') : null;
-    const carouselSlides = carousel ? carousel.querySelectorAll('.carousel-slide') : [];
-    const prevBtn = document.getElementById('carouselPrev');
-    const nextBtn = document.getElementById('carouselNext');
-    let currentSlide = 0;
-
-    function updateCarousel() {
-      const offset = -currentSlide * 100;
-      if (carouselTrack) {
-        carouselTrack.style.transform = `translateX(${offset}%)`;
       }
-    }
+      if (crTimeEl) {
+        updateCRTime();
+        setInterval(updateCRTime, 1000);
+      }
 
-    if (prevBtn && nextBtn && carouselSlides.length > 0) {
-      prevBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length;
-        updateCarousel();
-      });
+      const servicesField = document.getElementById('servicesField');
+      const mensajeField = document.getElementById('mensaje');
+      const servicePillsBtns = document.querySelectorAll('[data-service-pill]');
+      const contactoSection = document.getElementById('contacto');
 
-      nextBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide + 1) % carouselSlides.length;
-        updateCarousel();
-      });
+      function updateServicesField() {
+        const activos = [];
+        servicePillsBtns.forEach(pill => {
+          if (pill.classList.contains('active')) {
+            activos.push(pill.dataset.service);
+          }
+        });
+        if (servicesField) {
+          servicesField.value = activos.join(', ');
+        }
+      }
 
-      updateCarousel();
-    }
-
-    // Lightbox para las imágenes del carrusel
-    const imagePlaceholders = document.querySelectorAll('.carousel-image-placeholder');
-    const imageLightbox = document.getElementById('imageLightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-
-    if (imageLightbox && lightboxImage && imagePlaceholders.length > 0) {
-      imagePlaceholders.forEach(box => {
-        box.addEventListener('click', () => {
-          const src = box.dataset.full;
-          const alt = box.dataset.alt || '';
-          if (!src) return;
-          lightboxImage.src = src;
-          lightboxImage.alt = alt;
-          imageLightbox.style.display = 'flex';
+      // Click en pills de servicios
+      servicePillsBtns.forEach(pill => {
+        pill.addEventListener('click', () => {
+          pill.classList.toggle('active');
+          updateServicesField();
         });
       });
 
-      imageLightbox.addEventListener('click', () => {
-        imageLightbox.style.display = 'none';
-        lightboxImage.src = '';
-        lightboxImage.alt = '';
+      // Botones "Cotizar" desde servicios -> WhatsApp
+      const cotizarBtns = document.querySelectorAll('.js-cotizar');
+      cotizarBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const service = btn.dataset.service || 'servicio';
+          const url = `https://wa.me/50664305227?text=${encodeURIComponent(
+            'Hola, me gustaría cotizar el servicio de: ' + service
+          )}`;
+          window.open(url, '_blank');
+        });
       });
-    }
+
+      // Botones "Añadir al formulario" desde servicios
+      const addButtons = document.querySelectorAll('.js-agregar');
+      addButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (!mensajeField) return;
+          const service = btn.dataset.service || '';
+          const current = mensajeField.value;
+          const addition = current
+            ? `\n\nQuiero incluir también el servicio de: ${service}.`
+            : `Quiero incluir el servicio de: ${service}.`;
+          mensajeField.value = current + addition;
+
+          servicePillsBtns.forEach(pill => {
+            if (pill.dataset.service === service) {
+              pill.classList.add('active');
+            }
+          });
+          updateServicesField();
+          if (contactoSection) {
+            contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Botones de productos (PC, cámaras) que añaden línea específica
+      const addProductButtons = document.querySelectorAll('.js-add-product');
+      addProductButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (!mensajeField) return;
+          const label = btn.dataset.label || 'producto';
+          const service = btn.dataset.service || '';
+          const current = mensajeField.value;
+          const addition = current
+            ? `\n\nQuiero cotizar también: ${label}.`
+            : `Quiero cotizar: ${label}.`;
+          mensajeField.value = current + addition;
+
+          if (service) {
+            servicePillsBtns.forEach(pill => {
+              if (pill.dataset.service === service) {
+                pill.classList.add('active');
+              }
+            });
+            updateServicesField();
+          }
+          if (contactoSection) {
+            contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Carrusel de demos
+      const carousel = document.getElementById('webExamplesCarousel');
+      if (carousel) {
+        const track = carousel.querySelector('.carousel-track');
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        const prev = document.getElementById('carouselPrev');
+        const next = document.getElementById('carouselNext');
+        let index = 0;
+
+        function updateCarousel() {
+          if (!track) return;
+          const offset = -index * 100;
+          track.style.transform = `translateX(${offset}%)`;
+        }
+
+        function go(step) {
+          const total = slides.length;
+          if (!total) return;
+          index = (index + step + total) % total;
+          updateCarousel();
+        }
+
+        if (prev && next && slides.length > 0) {
+          prev.addEventListener('click', () => go(-1));
+          next.addEventListener('click', () => go(1));
+          updateCarousel();
+        }
+      }
+
+      // Lightbox para imágenes del carrusel
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      if (lightbox && lightboxImg) {
+        const placeholders = document.querySelectorAll('.carousel-image-placeholder');
+        placeholders.forEach(ph => {
+          ph.addEventListener('click', () => {
+            const full = ph.dataset.full || '';
+            const alt = ph.dataset.alt || '';
+            if (full) {
+              lightboxImg.src = full;
+              lightboxImg.alt = alt;
+              lightbox.style.display = 'flex';
+            }
+          });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox || e.target.classList.contains('image-lightbox-backdrop')) {
+            lightbox.style.display = 'none';
+            lightboxImg.src = '';
+            lightboxImg.alt = '';
+          }
+        });
+      }
+
+      // Si viene ?service= en la URL, activar pill correspondiente
+      const params = new URLSearchParams(window.location.search);
+      const serviceParam = params.get('service');
+      if (serviceParam) {
+        servicePillsBtns.forEach(pill => {
+          if (pill.dataset.service === serviceParam) {
+            pill.classList.add('active');
+          }
+        });
+        updateServicesField();
+      }
+    });
   </script>
 </body>
 </html>
