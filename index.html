@@ -71,7 +71,6 @@
       align-items: center;
     }
 
-    /* Título grande ZAMAHA */
     .brand-title-display {
       display: inline-flex;
       align-items: center;
@@ -319,17 +318,19 @@
       opacity: 0.5;
     }
 
+    /* ====== SECCIONES PRINCIPALES (UNA COLUMNA) ====== */
     main {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      display: flex;
+      flex-direction: column;
       gap: 16px;
-      align-items: flex-start;
+      align-items: stretch;
     }
 
     .main-column {
       display: flex;
       flex-direction: column;
       gap: 14px;
+      width: 100%;
     }
 
     .section-label {
@@ -919,7 +920,6 @@
     }
 
     /* ----- LAYOUT RESPONSIVE ----- */
-
     @media (min-width: 840px) {
       .services-list {
         grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
@@ -937,10 +937,6 @@
 
       .hero-visual {
         margin-top: 10px;
-      }
-
-      main {
-        grid-template-columns: minmax(0, 1fr);
       }
 
       .product-layout {
@@ -1339,6 +1335,7 @@
 </head>
 <body>
   <div class="page-shell">
+    <!-- SECCIÓN 1: ENCABEZADO -->
     <header>
       <div class="header-card">
         <div class="hero-gradient-orbit"></div>
@@ -1433,7 +1430,7 @@
       </div>
     </header>
 
-    <!-- Ejemplos de páginas web (debajo del encabezado) -->
+    <!-- SECCIÓN 2: DEMO PÁGINAS -->
     <section class="examples-section">
       <div class="section-label">Ejemplos de páginas</div>
       <h2 class="section-title">Demos de páginas para tu negocio</h2>
@@ -1567,14 +1564,14 @@
     </section>
 
     <main>
+      <!-- SECCIÓN 3: COMPUTADORAS -->
       <div class="main-column">
-        <!-- Ofertas de equipos de cómputo y cámaras -->
-        <section class="services-section" id="ofertas-equipos-camaras">
-          <div class="section-label">Equipos de cómputo y cámaras</div>
-          <h2 class="section-title">Ofertas destacadas</h2>
+        <section class="services-section" id="equipos-computo">
+          <div class="section-label">Equipos de cómputo</div>
+          <h2 class="section-title">Computadoras listas para trabajar</h2>
           <p class="section-subtitle">
-            Equipos listos para trabajar y cámaras fáciles de usar, pensados para oficinas pequeñas,
-            casas y negocios de barrio.
+            Equipos preparados para oficina, estudio o negocio pequeño, pensados para tareas
+            diarias sin complicarse con especificaciones raras.
           </p>
 
           <!-- PC en oferta -->
@@ -1625,6 +1622,16 @@
               </div>
             </div>
           </article>
+        </section>
+
+        <!-- SECCIÓN 4: CÁMARAS -->
+        <section class="services-section" id="camaras">
+          <div class="section-label">Cámaras</div>
+          <h2 class="section-title">Cámaras fáciles de usar</h2>
+          <p class="section-subtitle">
+            Opciones pensadas para casas y negocios pequeños que quieren ver lo que pasa
+            desde el celular sin enredos.
+          </p>
 
           <!-- Cámara bombillo E27 en oferta -->
           <article class="service-card">
@@ -1668,14 +1675,14 @@
                 </div>
                 <p class="product-note">
                   Simple de instalar: solo se enrosca donde iría un bombillo.
-                  Perfecta para pasillos, garajes o bodegas pequeñas.
+                  En el catálogo puedes ver también la Tapo C210 y otras opciones.
                 </p>
               </div>
             </div>
           </article>
         </section>
 
-        <!-- Sección de servicios generales -->
+        <!-- (Opcional) Sección de servicios generales se queda después de cámaras -->
         <section class="services-section" id="servicios">
           <div class="section-label">Servicios</div>
           <div class="services-grid">
@@ -1848,7 +1855,7 @@
         </section>
       </div>
 
-      <!-- Columna derecha: formulario de contacto y cotización -->
+      <!-- SECCIÓN 5: CONTACTO Y COTIZACIÓN -->
       <div class="main-column">
         <section class="contact-card" id="contacto">
           <div class="section-label">Contacto y cotización</div>
