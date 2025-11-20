@@ -1558,6 +1558,64 @@
       </div>
     </section>
 
+    <!-- ======== COMPUTADORA EN OFERTA (A TODO LO ANCHO, DEBAJO DE EJEMPLOS) ======== -->
+    <section class="services-section" id="pc-oferta">
+      <div class="section-label">Equipos de cómputo</div>
+      <h2 class="section-title">Computadora en oferta</h2>
+      <p class="section-subtitle">
+        Equipo listo para trabajo y estudio, armado y probado, ideal para ofimática,
+        navegación, clases en línea y pequeños negocios.
+      </p>
+
+      <article class="service-card">
+        <div class="product-layout">
+          <div class="product-image-wrapper">
+            <img src="dell-latitude-5480.jpg"
+                 alt="PC de escritorio para trabajo y estudio"
+                 class="product-image" />
+          </div>
+          <div>
+            <h3 class="product-info-title">PC de escritorio para trabajo y estudio</h3>
+            <p class="product-info-sub">
+              Configuración balanceada para usar Office, WhatsApp Web, Zoom y navegar sin complicaciones.
+            </p>
+            <ul class="product-specs">
+              <li>Procesador Intel® Core™ i5.</li>
+              <li>8 GB de memoria RAM para trabajar con varias ventanas abiertas.</li>
+              <li>Disco SSD de 240 GB para que encienda y abra programas rápido.</li>
+              <li>Bluethoot y Wifi alta velocidad.</li>
+              <li>pantalla 17".</li>
+              <li>Windows y programas básicos instalados (lista para trabajar).</li>
+            </ul>
+            <div class="product-footer-row">
+              <div class="product-price">
+                <span>Precio de contado</span>
+                <strong>₡150,000</strong>
+                <span>Opciones de pago y reserva a conversar por WhatsApp.</span>
+              </div>
+              <div class="service-actions">
+                <a class="btn btn-secondary btn-small"
+                   href="equipos.html"
+                   target="_blank" rel="noopener noreferrer">
+                  Ver catálogo
+                </a>
+                <button type="button"
+                        class="btn btn-primary btn-small js-agregar-pc"
+                        data-service="Computadora en oferta">
+                  <span class="btn-icon">💻</span>
+                  Añadir a cotización
+                </button>
+              </div>
+            </div>
+            <p class="product-note">
+              Si necesitas que la lleve instalada a tu negocio o casa en Siquirres y alrededores,
+              lo hablamos por mensaje y te doy el precio con instalación incluida.
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+
     <main>
       <div class="main-column">
         <!-- Sección de servicios -->
@@ -1730,58 +1788,6 @@
               </article>
             </div>
           </div>
-        </section>
-
-        <!-- ======== COMPUTADORA EN OFERTA ======== -->
-        <section class="services-section" id="pc-oferta">
-          <div class="section-label">Equipos de cómputo</div>
-          <h2 class="section-title">Computadora en oferta</h2>
-          <p class="section-subtitle">
-            Equipo listo para trabajo y estudio, armado y probado, ideal para ofimática,
-            navegación, clases en línea y pequeños negocios.
-          </p>
-
-          <article class="service-card">
-            <div class="product-layout">
-              <div class="product-image-wrapper">
-                <!-- Cambia pc-oferta-1.png por el nombre real de tu foto -->
-                <img src="dell-latitude-5480.jpg"
-                     alt="PC de escritorio para trabajo y estudio"
-                     class="product-image" />
-              </div>
-              <div>
-                <h3 class="product-info-title">PC de escritorio para trabajo y estudio</h3>
-                <p class="product-info-sub">
-                  Configuración balanceada para usar Office, WhatsApp Web, Zoom y navegar sin complicaciones.
-                </p>
-                <ul class="product-specs">
-                  <li>Procesador Intel® Core™ i5.</li>
-                  <li>8 GB de memoria RAM para trabajar con varias ventanas abiertas.</li>
-                  <li>Disco SSD de 240 GB para que encienda y abra programas rápido.</li>
-                  <li>Bluethoot y Wifi alta velocidad.</li>
-                  <li>pantalla 17".</li>
-                  <li>Windows y programas básicos instalados (lista para trabajar).</li>
-                </ul>
-                <div class="product-footer-row">
-                  <div class="product-price">
-                    <span>Precio de contado</span>
-                    <strong>₡150,000</strong>
-                    <span>Opciones de pago y reserva a conversar por WhatsApp.</span>
-                  </div>
-                  <a class="btn btn-primary btn-small btn-whatsapp"
-                     href="https://wa.me/50664305227?text=Hola%2C%20vi%20la%20computadora%20en%20oferta%20en%20la%20p%C3%A1gina%20de%20Zamaha%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n."
-                     target="_blank" rel="noopener noreferrer">
-                    <span class="btn-icon">💻</span>
-                    Preguntar por esta compu
-                  </a>
-                </div>
-                <p class="product-note">
-                  Si necesitas que la lleve instalada a tu negocio o casa en Siquirres y alrededores,
-                  lo hablamos por mensaje y te doy el precio con instalación incluida.
-                </p>
-              </div>
-            </div>
-          </article>
         </section>
       </div>
 
@@ -2127,6 +2133,29 @@
         }
       });
     });
+
+    // Botón "Añadir a cotización" de la PC en oferta
+    const pcAddButton = document.querySelector('.js-agregar-pc');
+    if (pcAddButton && mensajeField) {
+      pcAddButton.addEventListener('click', () => {
+        const textoPC = 'Quiero cotizar también la computadora en oferta que vi en la página.';
+        const current = mensajeField.value;
+        mensajeField.value = current ? current + '\n\n' + textoPC : textoPC;
+
+        // Marca "Equipos de cómputo" como servicio seleccionado
+        servicePillsBtns.forEach(pill => {
+          if (pill.dataset.service === 'Equipos de cómputo') {
+            pill.classList.add('active');
+          }
+        });
+        updateServicesField();
+
+        const contactoSection = document.getElementById('contacto');
+        if (contactoSection) {
+          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
 
     // Preferencias de fecha
     const tieneFechaSelect = document.getElementById('tieneFecha');
