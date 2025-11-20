@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zamaha - Redes eléctricas residenciales y comerciales</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Icono de la pestaña -->
+  <link rel="icon" href="zamaha-logo.png" type="image/png" />
+
+  <style>
+    :root {
+      --bg-main: #050816;
+      --bg-card: #0b1020;
+      --accent: #00c853;
+      --accent-soft: rgba(0, 200, 83, 0.15);
+      --accent-strong: #00e676;
+      --text-main: #f5f7ff;
+      --text-soft: #c4c9ff;
+      --text-muted: #9aa0c6;
+      --border-soft: rgba(148, 163, 231, 0.35);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.9);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      color-scheme: dark;
+    }
+
+    .page-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 14px 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Top bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .top-nav a {
+      text-decoration: none;
+      color: var(--accent-strong);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 231, 0.6);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 12px;
+      text-decoration: none;
+      color: var(--text-soft);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+      transition:
+        background 0.14s ease,
+        transform 0.08s ease,
+        border-color 0.14s ease;
+    }
+
+    .back-link:hover {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), #020617);
+      border-color: var(--accent-strong);
+      transform: translateY(-1px);
+    }
+
+    .back-arrow {
+      font-size: 13px;
+    }
+
+    /* Header card */
+    .header-card {
+      position: relative;
+      border-radius: 24px;
+      padding: 18px 18px 18px;
+      background: radial-gradient(circle at top left, #111827 0, #020617 45%, #000 100%);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 22px 60px rgba(15, 23, 42, 0.8);
+      overflow: hidden;
+    }
+
+    .header-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 14px;
+      align-items: center;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 231, 0.7);
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.9), rgba(15, 23, 42, 0.95));
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+
+    .brand-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .page-title {
+      font-size: 24px;
+      margin: 0 0 6px;
+      color: #f9fafb;
+    }
+
+    .page-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin: 0 0 10px;
+    }
+
+    .header-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .header-badge {
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 231, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 11px;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-badge-strong {
+      color: var(--accent-strong);
+      font-weight: 600;
+    }
+
+    .header-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Hero right side */
+    .header-right-card {
+      border-radius: 18px;
+      padding: 12px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), #020617);
+      border: 1px solid rgba(148, 163, 231, 0.55);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .header-right-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #e5e7eb;
+    }
+
+    .header-right-list {
+      margin: 0 0 6px;
+      padding-left: 16px;
+    }
+
+    .header-right-list li + li {
+      margin-top: 3px;
+    }
+
+    .header-right-footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Section cards */
+    .section {
+      border-radius: var(--radius-lg);
+      padding: 16px 18px 18px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 0 0 4px;
+      color: #e5e7eb;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      margin: 0 0 10px;
+      color: var(--text-soft);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0 0 4px;
+      color: #e5e7eb;
+    }
+
+    .text-soft {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin: 0 0 6px;
+    }
+
+    .text-list {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .text-list li + li {
+      margin-top: 2px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .tag-chip {
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 231, 0.55);
+      font-size: 11px;
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .tag-chip-strong {
+      border-color: rgba(34, 197, 94, 0.8);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+    }
+
+    /* Steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .step-card {
+      border-radius: 14px;
+      padding: 8px 9px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 231, 0.5);
+      font-size: 11px;
+      color: var(--text-soft);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.8);
+      font-size: 11px;
+      margin-bottom: 4px;
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .step-title {
+      font-size: 12px;
+      font-weight: 600;
+      margin: 0 0 3px;
+      color: #e5e7eb;
+    }
+
+    /* Alert */
+    .alert-box {
+      margin-top: 8px;
+      padding: 8px 9px;
+      border-radius: 12px;
+      border: 1px dashed rgba(248, 250, 252, 0.18);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .alert-strong {
+      color: #fecaca;
+      font-weight: 600;
+    }
+
+    .alert-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #f97316, #ea580c);
+      box-shadow: 0 0 10px rgba(248, 113, 22, 0.9);
+      margin-right: 4px;
+    }
+
+    /* CTA section */
+    .cta-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 14px;
+      align-items: center;
+    }
+
+    .cta-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .cta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(34, 197, 94, 0.8);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 231, 0.65);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      transition:
+        background 0.12s ease,
+        border-color 0.12s ease,
+        transform 0.08s ease,
+        box-shadow 0.12s ease;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.85);
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      color: #022c22;
+      border-color: rgba(34, 197, 94, 0.9);
+      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.85);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-soft);
+      border-color: rgba(148, 163, 231, 0.7);
+    }
+
+    .btn-secondary:hover {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+      transform: translateY(-1px);
+    }
+
+    .btn-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: rgba(2, 44, 34, 0.95);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #bbf7d0;
+    }
+
+    footer {
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(148, 163, 231, 0.4);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    footer a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 840px) {
+      .header-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .cta-section {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .steps-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-shell {
+        padding: 14px 10px 24px;
+      }
+      .header-card {
+        padding: 16px 14px;
+      }
+      .section {
+        padding: 14px 12px 14px;
+      }
+      .steps-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="top-nav">
+      <a class="back-link" href="index.html">
+        <span class="back-arrow">←</span>
+        <span>Volver al inicio de Zamaha</span>
+      </a>
+      <span>Redes eléctricas ligeras • Siquirres y alrededores</span>
+    </div>
+
+    <header class="header-card">
+      <div class="header-grid">
+        <div>
+          <div class="brand-pill">
+            <span class="brand-pill-dot"></span>
+            <span>Servicio profesional, cercano y claro</span>
+          </div>
+          <h1 class="page-title">Redes eléctricas residenciales y comerciales</h1>
+          <p class="page-subtitle">
+            Instalación y ampliación de puntos eléctricos, orden de cableado y adecuación básica
+            para casas, apartamentos, locales comerciales y pequeños negocios. Siempre con enfoque
+            en seguridad, claridad y cero humo.
+          </p>
+
+          <div class="header-badges">
+            <div class="header-badge">
+              🏠 <span>Viviendas, apartamentos y locales pequeños</span>
+            </div>
+            <div class="header-badge">
+              ⚡ <span class="header-badge-strong">Instalaciones ligeras y ampliaciones</span>
+            </div>
+            <div class="header-badge">
+              📍 <span>Siquirres y alrededores</span>
+            </div>
+          </div>
+
+          <p class="header-note">
+            No sustituyo a un ingeniero eléctrico para proyectos grandes, pero sí puedo ayudarte
+            con ampliaciones y soluciones claras para tu hogar o negocio, siguiendo las buenas
+            prácticas del <strong>Código Eléctrico de Costa Rica</strong>.
+          </p>
+        </div>
+
+        <div class="header-right-card">
+          <div class="header-right-title">¿En qué tipo de trabajos te puedo ayudar?</div>
+          <ul class="header-right-list">
+            <li>Agregar tomacorrientes donde hoy estás usando extensiones por todo lado.</li>
+            <li>Preparar puntos para computadoras, cámaras, routers y pantallas.</li>
+            <li>Reordenar cables visibles con canaletas y recorridos más limpios.</li>
+            <li>Pequeñas ampliaciones de circuitos interiores ya existentes.</li>
+          </ul>
+          <p class="header-right-footnote">
+            Todo se explica en lenguaje simple, sin tecnicismos innecesarios. La idea es que
+            sepas exactamente qué se va a hacer y por qué.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sección: Qué incluye el servicio -->
+    <section class="section">
+      <div class="section-label">Alcance del servicio</div>
+      <h2 class="section-title">¿Qué incluye el servicio de redes eléctricas?</h2>
+      <p class="section-subtitle">
+        El objetivo es que tengas una instalación <strong>ordenada, segura y funcional</strong>,
+        sin pagar por cosas que no necesitas. Trabajo con proyectos pequeños y medianos,
+        donde un trato directo hace la diferencia.
+      </p>
+
+      <div class="two-column">
+        <div>
+          <h3 class="card-subtitle">Instalaciones y ampliaciones residenciales</h3>
+          <p class="text-soft">
+            Ideal para casas, apartamentos y viviendas donde quieres dejar de depender de
+            extensiones, triples y “adaptadores locos” que terminan siendo un riesgo.
+          </p>
+          <ul class="text-list">
+            <li>Instalación de tomacorrientes adicionales para equipos específicos.</li>
+            <li>Puntos dedicados para computadoras, televisores, consolas o equipos de trabajo.</li>
+            <li>Preparación de enchufes y salidas para cámaras, routers o repetidores Wi-Fi.</li>
+            <li>Ordenamiento del cableado visible con canaletas y ajustes de recorrido.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="card-subtitle">Adecuaciones para negocios y locales</h3>
+          <p class="text-soft">
+            Pensado para pequeños comercios, oficinas y locales que necesitan acomodo eléctrico
+            para operar tranquilos y sin enredos de cables.
+          </p>
+          <ul class="text-list">
+            <li>Puntos eléctricos para cajas, equipos de punto de venta y pantallas.</li>
+            <li>Alimentación básica para cámaras, DVR/NVR, routers y equipos de red.</li>
+            <li>Revisión visual de tableros, breakers y distribución interna existente.</li>
+            <li>Propuestas simples para separar cargas sensibles (computadoras, cajas, etc.).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag-chip tag-chip-strong">Instalaciones ligeras y ampliaciones, no obras mayores</span>
+        <span class="tag-chip">Te explico todo antes de hacer cualquier cambio</span>
+        <span class="tag-chip">Sin precios ocultos ni “sorpresas” a medio trabajo</span>
+      </div>
+    </section>
+
+    <!-- Sección: Proceso de trabajo -->
+    <section class="section">
+      <div class="section-label">Cómo trabajamos</div>
+      <h2 class="section-title">Proceso de instalación paso a paso</h2>
+      <p class="section-subtitle">
+        La idea es que entiendas qué se va a hacer en tu casa o negocio antes de que empiece el
+        trabajo. Nada de “yo le conecto eso y luego vemos”.
+      </p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Visita y revisión del lugar</h3>
+          <p class="text-soft">
+            Conversamos sobre lo que necesitas, reviso el estado actual de la instalación
+            (puntos, cables visibles, tableros) y te explico qué se puede hacer sin poner en
+            riesgo tu instalación.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Propuesta clara y sin humo</h3>
+          <p class="text-soft">
+            Te explico en sencillo qué puntos se instalarían, por dónde pasarían los cables,
+            qué materiales hacen falta y cuál sería el alcance del trabajo. Todo por escrito
+            y sin presión.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Instalación y orden del cableado</h3>
+          <p class="text-soft">
+            Se realiza el trabajo acordado: tomacorrientes, canaletas, adecuaciones básicas
+            de recorrido y organización. La prioridad es seguridad, limpieza y que el resultado
+            tenga sentido a largo plazo.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Pruebas, explicación y recomendaciones</h3>
+          <p class="text-soft">
+            Probamos juntos todos los puntos, revisamos que los equipos enciendan bien y te
+            dejo recomendaciones de uso para evitar sobrecargas, extensiones peligrosas y otros
+            vicios comunes.
+          </p>
+        </div>
+      </div>
+
+      <div class="alert-box">
+        <span class="alert-dot"></span>
+        <span class="alert-strong">Importante:</span>
+        este servicio se enfoca en <strong>instalaciones ligeras y ampliaciones</strong>.
+        Si tu proyecto requiere rediseñar toda la instalación de un edificio, condominio
+        grande o nave industrial, lo más responsable es trabajar de la mano con un
+        profesional eléctrico colegiado y planos formales.
+      </div>
+    </section>
+
+    <!-- Sección: Seguridad y tranquilidad -->
+    <section class="section">
+      <div class="section-label">Seguridad y tranquilidad</div>
+      <h2 class="section-title">Menos extensiones, menos riesgos, más orden</h2>
+      <p class="section-subtitle">
+        Muchas veces el problema no es “me falta electricidad”, sino que la instalación se
+        fue parchando con extensiones, triples, regletas viejas y cables pasando por cualquier lado.
+      </p>
+
+      <div class="two-column">
+        <div>
+          <h3 class="card-subtitle">Lo que reviso y te explico</h3>
+          <ul class="text-list">
+            <li>Uso actual de extensiones, regletas y adaptadores poco seguros.</li>
+            <li>Puntos donde hay demasiados equipos colgando de un solo toma.</li>
+            <li>Cables cruzando puertas, pasillos o zonas de paso.</li>
+            <li>Necesidades futuras: más equipos, más pantallas, más computadoras, etc.</li>
+          </ul>
+          <p class="text-soft">
+            Con esto te puedo decir dónde conviene agregar puntos, qué se puede ordenar
+            con canaletas y qué cosas es mejor dejar de hacer para evitar calentamientos
+            y riesgos innecesarios.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="card-subtitle">En línea con buenas prácticas</h3>
+          <p class="text-soft">
+            El enfoque del trabajo sigue el espíritu del
+            <strong>Código Eléctrico de Costa Rica para la Seguridad de la Vida y la Propiedad</strong>:
+            proteger a las personas, a los equipos y a la infraestructura.
+          </p>
+          <ul class="text-list">
+            <li>Uso responsable de circuitos y tomacorrientes.</li>
+            <li>Evitar sobrecargas en múltiples adaptadores y extensiones.</li>
+            <li>Respeto por la capacidad de los breakers y tableros existentes.</li>
+            <li>Recomendaciones claras si se detecta algo que debe evaluar un profesional colegiado.</li>
+          </ul>
+          <p class="text-soft">
+            Si veo algo que se sale de mi alcance, te lo digo de frente. Prefiero perder un trabajo
+            antes que comprometer tu seguridad.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección: Casos típicos -->
+    <section class="section">
+      <div class="section-label">Casos frecuentes</div>
+      <h2 class="section-title">Situaciones en las que este servicio te ayuda mucho</h2>
+
+      <div class="two-column">
+        <div>
+          <h3 class="card-subtitle">En casa</h3>
+          <ul class="text-list">
+            <li>Tienes una mesa de trabajo con laptop, impresora y pantalla, pero solo un toma lejano.</li>
+            <li>Quisieras tener puntos listos para cámaras, TV y consola sin cables colgando.</li>
+            <li>Quieres preparar un espacio de estudio ordenado para los hijos.</li>
+            <li>Te preocupa que hayan extensiones viejas y regletas saturadas.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="card-subtitle">En tu negocio</h3>
+          <ul class="text-list">
+            <li>Vas a abrir una soda, tienda o mini oficina y necesitas puntos para caja y equipos.</li>
+            <li>Quieres preparar todo para cámaras de seguridad y equipos de red.</li>
+            <li>Tienes múltiples cargadores, pantallas y equipos conectados de forma improvisada.</li>
+            <li>Quieres que el cableado se vea ordenado, limpio y profesional.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag-chip tag-chip-strong">Menos improvisación, más tranquilidad</span>
+        <span class="tag-chip">Te ayudo a ver los riesgos que pasan desapercibidos</span>
+      </div>
+    </section>
+
+    <!-- Sección CTA: Cotizar -->
+    <section class="section">
+      <div class="cta-section">
+        <div>
+          <div class="cta-badge">
+            <span class="btn-icon">⚡</span>
+            <span>Cotización gratuita y sin compromiso</span>
+          </div>
+          <h2 class="section-title">Pide tu cotización de redes eléctricas</h2>
+          <p class="section-subtitle">
+            Si tienes dudas sobre cómo dejar tu instalación más ordenada, segura y lista
+            para tus equipos, podemos empezar con una conversación sencilla. Me cuentas qué
+            tienes, qué te preocupa y qué idea tenés para tu espacio.
+          </p>
+          <p class="cta-note">
+            Al hacer clic en el botón, irás al formulario del inicio con la opción
+            de <strong>“Redes eléctricas”</strong> preseleccionada. Ahí puedes contarme
+            los detalles de tu casa o negocio y coordinar la visita si te hace sentido.
+          </p>
+
+          <div class="btn-row">
+            <a
+              href="index.html?service=Redes%20el%C3%A9ctricas#contacto"
+              class="btn btn-primary"
+            >
+              <span class="btn-icon">📨</span>
+              <span>Cotizar instalación eléctrica</span>
+            </a>
+
+            <a
+              href="https://wa.me/50664305227?text=Hola%2C%20quiero%20hacer%20una%20consulta%20sobre%20redes%20el%C3%A9ctricas%20en%20mi%20casa%20o%20negocio"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary"
+            >
+              <span class="btn-icon">💬</span>
+              <span>Hablar primero por WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="card-subtitle">¿Qué te voy a pedir en la cotización?</h3>
+          <ul class="text-list">
+            <li>Si es casa, apartamento o local comercial.</li>
+            <li>En qué barrio o zona estás (dentro de Siquirres y alrededores).</li>
+            <li>Qué equipos quieres alimentar o reubicar (PC, TV, cajas, cámaras, etc.).</li>
+            <li>Si ya hay tableros y tomas cerca o todo está muy lejos.</li>
+          </ul>
+          <p class="text-soft">
+            Con eso ya podemos armar una idea clara del trabajo y, si estás de acuerdo,
+            coordinar una visita para ver los detalles en persona.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Zamaha • Redes eléctricas ligeras en Siquirres y alrededores</span>
+      <span>
+        WhatsApp:
+        <a href="https://wa.me/50664305227" target="_blank" rel="noopener noreferrer">
+          +506 6430-5227
+        </a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>
