@@ -511,7 +511,7 @@
       margin-right: 4px;
     }
 
-    /* ======== PC EN OFERTA ======== */
+    /* ======== PC Y CÁMARAS EN OFERTA ======== */
     .product-layout {
       display: grid;
       grid-template-columns: 140px minmax(0, 1fr);
@@ -564,6 +564,14 @@
       gap: 8px;
       align-items: center;
       justify-content: space-between;
+    }
+
+    .product-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+      align-items: center;
     }
 
     .product-price {
@@ -1558,67 +1566,116 @@
       </div>
     </section>
 
-    <!-- ======== COMPUTADORA EN OFERTA (A TODO LO ANCHO, DEBAJO DE EJEMPLOS) ======== -->
-    <section class="services-section" id="pc-oferta">
-      <div class="section-label">Equipos de cómputo</div>
-      <h2 class="section-title">Computadora en oferta</h2>
-      <p class="section-subtitle">
-        Equipo listo para trabajo y estudio, armado y probado, ideal para ofimática,
-        navegación, clases en línea y pequeños negocios.
-      </p>
-
-      <article class="service-card">
-        <div class="product-layout">
-          <div class="product-image-wrapper">
-            <img src="dell-latitude-5480.jpg"
-                 alt="PC de escritorio para trabajo y estudio"
-                 class="product-image" />
-          </div>
-          <div>
-            <h3 class="product-info-title">PC de escritorio para trabajo y estudio</h3>
-            <p class="product-info-sub">
-              Configuración balanceada para usar Office, WhatsApp Web, Zoom y navegar sin complicaciones.
-            </p>
-            <ul class="product-specs">
-              <li>Procesador Intel® Core™ i5.</li>
-              <li>8 GB de memoria RAM para trabajar con varias ventanas abiertas.</li>
-              <li>Disco SSD de 240 GB para que encienda y abra programas rápido.</li>
-              <li>Bluethoot y Wifi alta velocidad.</li>
-              <li>pantalla 17".</li>
-              <li>Windows y programas básicos instalados (lista para trabajar).</li>
-            </ul>
-            <div class="product-footer-row">
-              <div class="product-price">
-                <span>Precio de contado</span>
-                <strong>₡150,000</strong>
-                <span>Opciones de pago y reserva a conversar por WhatsApp.</span>
-              </div>
-              <div class="service-actions">
-                <a class="btn btn-secondary btn-small"
-                   href="equipos.html"
-                   target="_blank" rel="noopener noreferrer">
-                  Ver catálogo
-                </a>
-                <button type="button"
-                        class="btn btn-primary btn-small js-agregar-pc"
-                        data-service="Computadora en oferta">
-                  <span class="btn-icon">💻</span>
-                  Añadir a cotización
-                </button>
-              </div>
-            </div>
-            <p class="product-note">
-              Si necesitas que la lleve instalada a tu negocio o casa en Siquirres y alrededores,
-              lo hablamos por mensaje y te doy el precio con instalación incluida.
-            </p>
-          </div>
-        </div>
-      </article>
-    </section>
-
     <main>
       <div class="main-column">
-        <!-- Sección de servicios -->
+        <!-- Ofertas de equipos de cómputo y cámaras -->
+        <section class="services-section" id="ofertas-equipos-camaras">
+          <div class="section-label">Equipos de cómputo y cámaras</div>
+          <h2 class="section-title">Ofertas destacadas</h2>
+          <p class="section-subtitle">
+            Equipos listos para trabajar y cámaras fáciles de usar, pensados para oficinas pequeñas,
+            casas y negocios de barrio.
+          </p>
+
+          <!-- PC en oferta -->
+          <article class="service-card">
+            <div class="product-layout">
+              <div class="product-image-wrapper">
+                <img src="dell-latitude-5480.jpg"
+                     alt="Computadora de escritorio en oferta"
+                     class="product-image" />
+              </div>
+              <div>
+                <h3 class="product-info-title">Computadora de escritorio en oferta</h3>
+                <p class="product-info-sub">
+                  Equipo armado listo para oficina, estudio o negocio pequeño: ideal para Office,
+                  WhatsApp Web, Zoom y navegación diaria.
+                </p>
+                <ul class="product-specs">
+                  <li>Procesador Intel® Core™ i5.</li>
+                  <li>8 GB de memoria RAM para trabajar con varias ventanas abiertas.</li>
+                  <li>Disco SSD de 240 GB para que encienda y abra programas rápido.</li>
+                  <li>Bluetooth y Wi-Fi de alta velocidad.</li>
+                  <li>Pantalla de 17", teclado y mouse incluidos.</li>
+                  <li>Windows y programas básicos instalados (lista para trabajar).</li>
+                </ul>
+                <div class="product-footer-row">
+                  <div class="product-price">
+                    <span>Precio de contado</span>
+                    <strong>₡150,000</strong>
+                    <span>Opciones de pago y reserva a conversar por WhatsApp.</span>
+                  </div>
+                  <div class="product-actions-row">
+                    <a class="btn btn-secondary btn-small" href="equipos.html">
+                      Ver catálogo
+                    </a>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-small js-agregar"
+                      data-service="Equipos de cómputo"
+                      data-item="Computadora de escritorio en oferta – ₡150,000">
+                      Añadir a cotización
+                    </button>
+                  </div>
+                </div>
+                <p class="product-note">
+                  Si necesitas que la lleve instalada a tu negocio o casa en Siquirres y alrededores,
+                  lo hablamos por mensaje y te doy el precio con instalación incluida.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Cámara bombillo E27 en oferta -->
+          <article class="service-card">
+            <div class="product-layout">
+              <div class="product-image-wrapper">
+                <img src="camara-bombillo-e27-split.png"
+                     alt="Cámara bombillo Wi-Fi E27 360°"
+                     class="product-image" />
+              </div>
+              <div>
+                <h3 class="product-info-title">Cámara bombillo Wi-Fi E27 360°</h3>
+                <p class="product-info-sub">
+                  Ideal para pasillos, cocheras o entradas donde quieres algo discreto
+                  que se vea como un foco normal.
+                </p>
+                <ul class="product-specs">
+                  <li>Resolución Full HD 1080p para ver los detalles con claridad.</li>
+                  <li>Vista panorámica 360° para cubrir toda la habitación.</li>
+                  <li>Conexión Wi-Fi 2.4 GHz y visualización desde app en el celular.</li>
+                  <li>Detección de movimiento, visión nocturna y audio bidireccional.</li>
+                  <li>Se enrosca en un socket E27 como un bombillo normal.</li>
+                </ul>
+                <div class="product-footer-row">
+                  <div class="product-price">
+                    <span>Precio de referencia</span>
+                    <strong>₡19,000</strong>
+                    <span>Puede variar un poco según proveedor y stock, siempre te aviso antes de cerrar.</span>
+                  </div>
+                  <div class="product-actions-row">
+                    <a class="btn btn-secondary btn-small" href="camaras.html">
+                      Ver catálogo
+                    </a>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-small js-agregar"
+                      data-service="Cámaras CCTV"
+                      data-item="Cámara bombillo Wi-Fi E27 360° – ₡19,000">
+                      Añadir a cotización
+                    </button>
+                  </div>
+                </div>
+                <p class="product-note">
+                  Simple de instalar: solo se enrosca donde iría un bombillo.
+                  Perfecta para pasillos, garajes o bodegas pequeñas.
+                </p>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- Sección de servicios generales -->
         <section class="services-section" id="servicios">
           <div class="section-label">Servicios</div>
           <div class="services-grid">
@@ -1657,7 +1714,7 @@
                       Cotizar cámaras
                     </button>
                     <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
-                      Añadir al formulario
+                      Añadir a cotización
                     </button>
                   </div>
                 </div>
@@ -1698,7 +1755,7 @@
                       Cotizar redes eléctricas
                     </button>
                     <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
-                      Añadir al formulario
+                      Añadir a cotización
                     </button>
                   </div>
                 </div>
@@ -1738,7 +1795,7 @@
                       Cotizar mantenimiento
                     </button>
                     <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
-                      Añadir al formulario
+                      Añadir a cotización
                     </button>
                   </div>
                 </div>
@@ -1773,7 +1830,7 @@
                       Cotizar sitio web
                     </button>
                     <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
-                      Añadir al formulario
+                      Añadir a cotización
                     </button>
                   </div>
                 </div>
@@ -2049,10 +2106,8 @@
           if (parentLabel) parentLabel.classList.remove('active');
         });
 
-        if (input) {
-          input.checked = true;
-          label.classList.add('active');
-        }
+        input.checked = true;
+        label.classList.add('active');
       });
     });
 
@@ -2098,12 +2153,15 @@
     serviceButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
+
+        // Activar el servicio correspondiente
         servicePillsBtns.forEach(pill => {
           if (pill.dataset.service === service) {
             pill.classList.add('active');
           }
         });
         updateServicesField();
+
         const contactoSection = document.getElementById('contacto');
         if (contactoSection) {
           contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2111,21 +2169,32 @@
       });
     });
 
+    // Botones "Añadir a cotización" (servicios y ofertas)
     addButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
-        const current = mensajeField.value;
-        const addition = current
-          ? `\n\nQuiero incluir también: ${service}`
-          : `Quiero incluir también: ${service}`;
+        const item = btn.dataset.item;
+        const current = mensajeField.value || '';
+        let addition = '';
+
+        if (item) {
+          const line = `Quiero cotizar: ${item}`;
+          addition = current ? `\n\n${line}` : line;
+        } else if (service) {
+          const line = `Quiero incluir también: ${service}`;
+          addition = current ? `\n\n${line}` : line;
+        }
+
         mensajeField.value = current + addition;
 
-        servicePillsBtns.forEach(pill => {
-          if (pill.dataset.service === service) {
-            pill.classList.add('active');
-          }
-        });
-        updateServicesField();
+        if (service) {
+          servicePillsBtns.forEach(pill => {
+            if (pill.dataset.service === service) {
+              pill.classList.add('active');
+            }
+          });
+          updateServicesField();
+        }
 
         const contactoSection = document.getElementById('contacto');
         if (contactoSection) {
@@ -2133,36 +2202,12 @@
         }
       });
     });
-
-    // Botón "Añadir a cotización" de la PC en oferta
-    const pcAddButton = document.querySelector('.js-agregar-pc');
-    if (pcAddButton && mensajeField) {
-      pcAddButton.addEventListener('click', () => {
-        const textoPC = 'Quiero cotizar también la computadora en oferta que vi en la página.';
-        const current = mensajeField.value;
-        mensajeField.value = current ? current + '\n\n' + textoPC : textoPC;
-
-        // Marca "Equipos de cómputo" como servicio seleccionado
-        servicePillsBtns.forEach(pill => {
-          if (pill.dataset.service === 'Equipos de cómputo') {
-            pill.classList.add('active');
-          }
-        });
-        updateServicesField();
-
-        const contactoSection = document.getElementById('contacto');
-        if (contactoSection) {
-          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    }
 
     // Preferencias de fecha
     const tieneFechaSelect = document.getElementById('tieneFecha');
     const fechaWrapper = document.getElementById('fechaWrapper');
     const fechaInput = document.getElementById('fechaEstimada');
     const horaInput = document.getElementById('horaEstimada');
-    const ubicacionInput = document.getElementById('ubicacionTrabajo');
     const quiereLlamadaCheckbox = document.getElementById('quiereLlamada');
     const calendlyContainer = document.getElementById('calendlyContainer');
 
