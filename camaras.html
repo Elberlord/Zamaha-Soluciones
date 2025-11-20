@@ -150,6 +150,36 @@
       gap: 14px;
     }
 
+    /* NUEVA SECCIÓN DE SERVICIOS (EXPLICACIÓN) */
+    .services-info {
+      border-radius: 20px;
+      padding: 12px 14px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .services-info h2 {
+      font-size: 16px;
+      margin: 0 0 6px;
+      color: #e5e7eb;
+    }
+
+    .services-info p {
+      margin: 0 0 6px;
+    }
+
+    .services-info ul {
+      margin: 0 0 6px;
+      padding-left: 18px;
+    }
+
+    .services-info li + li {
+      margin-top: 2px;
+    }
+
     .camera-list {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -291,6 +321,38 @@
     </header>
 
     <main>
+      <!-- EXPLICACIÓN DE SERVICIOS DE CÁMARAS -->
+      <section class="services-info">
+        <h2>Servicios al comprar tus cámaras con Zamaha</h2>
+        <p>
+          Más que vender una cámara, la idea es que tengas <strong>tranquilidad en tu hogar o negocio</strong>.
+          Por eso, cuando compras tus equipos conmigo, el trato no se queda solo en la caja.
+        </p>
+        <ul>
+          <li>
+            <strong>Instalación y configuración básica gratis</strong> por la compra de
+            <strong>2 o más cámaras</strong> (en Siquirres y alrededores; fuera de la zona lo conversamos).
+          </li>
+          <li>
+            Asesoría para elegir los mejores puntos de instalación según entradas, pasillos,
+            caja, parqueo u otras áreas sensibles.
+          </li>
+          <li>
+            Configuración inicial de la app en tu celular para que puedas ver las cámaras
+            sin enredarte con opciones raras.
+          </li>
+          <li>
+            Explicación sencilla de cómo revisar grabaciones, ajustar notificaciones
+            y aprovechar mejor las funciones del equipo.
+          </li>
+        </ul>
+        <p>
+          Si es para tu casa, el objetivo es que <strong>tu familia se sienta más segura</strong>;
+          si es para tu negocio, que puedas revisar lo importante aun cuando no estás en el lugar.
+          Y si después te quedan dudas, podemos hablar por WhatsApp para aclararlas sin problema.
+        </p>
+      </section>
+
       <section class="camera-list">
         <!-- TAPO C210 -->
         <article class="camera-card">
