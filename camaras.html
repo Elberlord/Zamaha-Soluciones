@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zamaha - Catálogo de cámaras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="zamaha-logo.png" type="image/png" />
+  <style>
+    :root {
+      --bg-main: #050816;
+      --bg-card: #0c1224;
+      --accent: #00c853;
+      --accent-soft: rgba(0, 200, 83, 0.15);
+      --accent-strong: #00e676;
+      --text-main: #f5f7ff;
+      --text-soft: #c4c9ff;
+      --text-muted: #9aa0c6;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      color-scheme: dark;
+    }
+
+    .page-shell {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 20px 14px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    header {
+      border-radius: 24px;
+      padding: 16px 18px;
+      background: radial-gradient(circle at top left, #111827 0, #020617 45%, #000 100%);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 22px 60px rgba(15, 23, 42, 0.8);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      font-size: 22px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 800;
+      -webkit-text-stroke: 1px #ff4b5c;
+      text-shadow:
+        0 0 6px rgba(248, 113, 113, 0.9),
+        0 0 18px rgba(248, 113, 113, 0.75);
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.65);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      transition:
+        background 0.12s ease,
+        border-color 0.12s ease,
+        transform 0.08s ease,
+        box-shadow 0.12s ease;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.85);
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      color: #022c22;
+      border-color: rgba(34, 197, 94, 0.9);
+      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.85);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-soft);
+      border-color: rgba(148, 163, 231, 0.7);
+    }
+
+    .btn-secondary:hover {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+      transform: translateY(-1px);
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 4px 0;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin: 0;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .camera-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .camera-card {
+      border-radius: 20px;
+      padding: 12px 13px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+    }
+
+    .camera-layout {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+    }
+
+    .camera-image-wrapper {
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 231, 0.45);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), #020617);
+      overflow: hidden;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.9);
+    }
+
+    .camera-image {
+      width: 100%;
+      height: 100%;
+      max-height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .camera-name {
+      font-size: 15px;
+      margin: 0 0 4px;
+    }
+
+    .camera-model {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin: 0 0 6px;
+    }
+
+    .camera-specs {
+      margin: 0 0 6px;
+      padding-left: 18px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .camera-specs li + li {
+      margin-top: 2px;
+    }
+
+    .camera-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .camera-price {
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .camera-price span {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .camera-tags {
+      margin-top: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .camera-tag {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.45);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    footer {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(148, 163, 231, 0.35);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 720px) {
+      .camera-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header>
+      <div class="header-top">
+        <div class="brand">
+          <div class="brand-title">ZAMAHA</div>
+          <div class="brand-sub">Catálogo de cámaras para casa y negocio</div>
+        </div>
+        <div class="header-actions">
+          <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
+          <a href="index.html#contacto" class="btn btn-primary">Ir al formulario de cotización</a>
+        </div>
+      </div>
+      <h1 class="section-title">Cámaras disponibles</h1>
+      <p class="section-subtitle">
+        Modelos pensados para espacios pequeños, con instalación sencilla y acceso
+        desde el celular. Precios y disponibilidad pueden variar según proveedor.
+      </p>
+    </header>
+
+    <main>
+      <section class="camera-list">
+        <!-- TAPO C210 -->
+        <article class="camera-card">
+          <div class="camera-layout">
+            <div class="camera-image-wrapper">
+              <img src="tapo-c210.jpg" alt="Cámara Wi-Fi TP-Link Tapo C210"
+                   class="camera-image" />
+            </div>
+            <div>
+              <h2 class="camera-name">TP-Link Tapo C210</h2>
+              <p class="camera-model">Cámara Wi-Fi interior 2K (3MP) con giro e inclinación</p>
+              <ul class="camera-specs">
+                <li>Resolución 2K (3MP) para imagen nítida y detallada.</li>
+                <li>Movimiento horizontal 360° y vertical 114° para cubrir toda la habitación.</li>
+                <li>Visión nocturna avanzada, con alcance aproximado de hasta 10 m (30 ft).</li>
+                <li>Detección de movimiento y notificaciones en la app Tapo.</li>
+                <li>Alarma de luz y sonido para ahuyentar visitas no deseadas.</li>
+                <li>Audio bidireccional (micrófono y parlante integrados).</li>
+                <li>Grabación en tarjeta microSD (hasta 256 GB o más, según versión).</li>
+              </ul>
+              <div class="camera-footer">
+                <div class="camera-price">
+                  <strong>Precio: consultar</strong>
+                  <span>Depende de proveedor y disponibilidad en el momento.</span>
+                </div>
+                <a
+                  class="btn btn-secondary"
+                  href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20la%20c%C3%A1mara%20TP-Link%20Tapo%20C210."
+                  target="_blank" rel="noopener noreferrer">
+                  Cotizar Tapo C210 por WhatsApp
+                </a>
+              </div>
+              <div class="camera-tags">
+                <span class="camera-tag">Uso interior</span>
+                <span class="camera-tag">App Tapo</span>
+                <span class="camera-tag">2K / 3MP</span>
+              </div>
+              <p class="note">
+                Ideal para vigilar interiores: sala, cuarto de niños, bodeguita o pequeño local.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- CÁMARA BOMBILLO E27 360° -->
+        <article class="camera-card">
+          <div class="camera-layout">
+            <div class="camera-image-wrapper">
+              <img src="camara-bombillo-e27-split.png"
+                   alt="Cámara bombillo Wi-Fi E27 360°"
+                   class="camera-image" />
+            </div>
+            <div>
+              <h2 class="camera-name">Cámara bombillo Wi-Fi E27 360°</h2>
+              <p class="camera-model">Cámara tipo bombillo para rosca E27, vista panorámica 360°</p>
+              <ul class="camera-specs">
+                <li>Resolución Full HD 1080p (según modelo) para ver detalles importantes.</li>
+                <li>Vista panorámica 360° gracias a su lente ojo de pez.</li>
+                <li>Base estándar E27: se enrosca como un bombillo normal.</li>
+                <li>Conexión Wi-Fi 2.4 GHz y visualización desde app en el celular.</li>
+                <li>Visión nocturna con iluminación IR para ver en la oscuridad.</li>
+                <li>Detección de movimiento con avisos en el teléfono (según app).</li>
+                <li>Audio bidireccional para escuchar y hablar desde el celular.</li>
+              </ul>
+              <div class="camera-footer">
+                <div class="camera-price">
+                  <strong>Desde: ¢19.000</strong>
+                  <span>Precio de referencia del modelo mostrado.</span>
+                </div>
+                <a
+                  class="btn btn-secondary"
+                  href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20la%20c%C3%A1mara%20bombillo%20WiFi%20E27%20360%C2%B0."
+                  target="_blank" rel="noopener noreferrer">
+                  Cotizar cámara bombillo por WhatsApp
+                </a>
+              </div>
+              <div class="camera-tags">
+                <span class="camera-tag">Instalación sencilla</span>
+                <span class="camera-tag">Vista 360°</span>
+                <span class="camera-tag">Base E27</span>
+              </div>
+              <p class="note">
+                Muy útil para cocheras, pasillos o entradas donde quieres algo discreto
+                y de fácil instalación.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <span>© Zamaha Servicios · Cámaras y soluciones básicas para tu espacio.</span>
+      <span>Siquirres, Limón · Costa Rica</span>
+    </footer>
+  </div>
+</body>
+</html>
