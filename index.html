@@ -1331,6 +1331,58 @@
       height: 30px;
       display: block;
     }
+
+    /* ======== Ajustes extra para pantallas de celular pequeñas ======== */
+    @media (max-width: 480px) {
+      .page-shell {
+        padding: 10px 8px 22px;
+      }
+
+      .header-card {
+        padding: 14px 10px;
+      }
+
+      .hero-title {
+        font-size: 18px;
+        line-height: 1.3;
+      }
+
+      .hero-subtitle {
+        font-size: 12px;
+      }
+
+      .hero-contact-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .hero-contact-main {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .hero-whatsapp,
+      .hero-secondary-link {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .services-section,
+      .examples-section,
+      .contact-card {
+        padding: 12px 10px 14px;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 11px;
+        gap: 6px;
+      }
+    }
   </style>
 </head>
 <body>
