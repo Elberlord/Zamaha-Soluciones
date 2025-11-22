@@ -2344,6 +2344,18 @@
         lightboxImage.alt = '';
       });
     }
+        // --- Fix botón flotante de WhatsApp en WebView / app ---
+    (function () {
+      const floatBtn = document.querySelector('.floating-whatsapp');
+      if (!floatBtn) return;
+
+      floatBtn.addEventListener('click', function (e) {
+        // En muchos WebView, target="_blank" hace que el enlace no abra.
+        // Forzamos a que se abra en la misma ventana.
+        e.preventDefault();
+        window.location.href = this.href;
+      });
+    })();
   </script>
 </body>
 </html>
