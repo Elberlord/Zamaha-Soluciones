@@ -4,8 +4,18 @@
   <meta charset="UTF-8" />
   <title>Zamaha - Servicios y soluciones</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- PWA CONFIGURATION -->
+  <meta name="theme-color" content="#00c853">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Zamaha">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  
   <!-- Icono de la pestaña -->
   <link rel="icon" href="zamaha-logo.png" type="image/png" />
+  
   <style>
     :root {
       --bg-main: #050816;
@@ -1104,22 +1114,4 @@
 
     .carousel-btn:hover {
       background: rgba(30, 64, 175, 0.95);
-      border-color: rgba(191, 219, 254, 1);
-      transform: translateY(-1px);
-    }
-
-    @media (max-width: 720px) {
-      .carousel-content {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .carousel-side {
-        align-items: flex-start;
-        text-align: left;
-      }
-      .carousel-demo-link {
-        width: auto;
-        align-self: flex-start;
-      }
-    }
-
-    /*
+      border-color: rgba
