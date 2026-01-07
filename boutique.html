@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo tienda · Boutique de bolsos | Zamaha</title>
+  <meta name="description" content="Demo de tienda online para bolsos y carteras: catálogo, filtros, carrito y checkout simulado. Diseñado por Zamaha." />
+
+  <!-- Tipografías (opcional; si no carga, usa la del sistema) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="boutique.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-row">
+      <div class="brand">
+        <a class="brand__back" href="index.html" aria-label="Volver a Zamaha">← Volver a Zamaha</a>
+        <div class="brand__lockup">
+          <div class="brand__logo" aria-hidden="true">Z</div>
+          <div>
+            <div class="brand__name">Boutique Luna Atelier</div>
+            <div class="brand__tag">Bolsos y carteras · femenino, formal y elegante</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="chip" type="button" aria-pressed="false" title="Cambiar modo claro/oscuro">
+          <span aria-hidden="true">☾</span> <span class="chip__text">Modo</span>
+        </button>
+
+        <button id="cartBtn" class="cart-btn" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
+          <span aria-hidden="true">👜</span>
+          <span class="cart-btn__text">Carrito</span>
+          <span id="cartCount" class="cart-btn__badge" aria-label="0 productos en el carrito">0</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="container nav-row">
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#catalogo" class="nav__link">Catálogo</a>
+        <a href="#beneficios" class="nav__link">Por qué comprar</a>
+        <a href="#faq" class="nav__link">FAQ</a>
+        <a href="#contacto" class="nav__link">Contacto</a>
+      </nav>
+
+      <form class="search" role="search" aria-label="Buscar productos">
+        <label class="sr-only" for="q">Buscar</label>
+        <input id="q" name="q" type="search" placeholder="Buscar: cuero, tote, clutch..." autocomplete="off" />
+        <button type="submit" class="btn btn--soft">Buscar</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="pill">Demo de e-commerce · listo para personalizar</p>
+          <h1>Una tienda online que se siente <span class="accent">elegante</span>, no “improvisada”.</h1>
+          <p class="lead">
+            Catálogo con filtros, búsqueda, carrito y checkout simulado. En producción real se conecta a pasarela de pago (Stripe)
+            y control de inventario.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn" href="#catalogo">Ver colección</a>
+            <a class="btn btn--soft" href="https://wa.me/50664305227?text=Hola%2C%20quiero%20una%20tienda%20online%20para%20bolsos%20y%20carteras.%20%C2%BFPueden%20hacerme%20una%20demo%20como%20esta%3F" target="_blank" rel="noopener">
+              Hablar por WhatsApp
+            </a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="trust">
+              <div class="trust__k">Entrega rápida</div>
+              <div class="trust__v">Opciones con mensajería</div>
+            </div>
+            <div class="trust">
+              <div class="trust__k">Pago seguro</div>
+              <div class="trust__v">Stripe / SINPE (según negocio)</div>
+            </div>
+            <div class="trust">
+              <div class="trust__k">Garantía</div>
+              <div class="trust__v">Política clara de cambios</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Vista previa de producto destacado">
+          <div class="hero-card__top">
+            <div class="badge">Nuevo</div>
+            <div class="badge badge--outline">Edición limitada</div>
+          </div>
+          <div class="hero-card__media" id="featuredArt" aria-hidden="true"></div>
+          <div class="hero-card__body">
+            <div class="hero-card__title">Bolso “Nocturna”</div>
+            <div class="hero-card__sub">Cuero vegano · forro satinado</div>
+            <div class="hero-card__price">
+              <span>₡ 18,900</span>
+              <span class="old">₡ 22,500</span>
+              <span class="save">-16%</span>
+            </div>
+
+            <button class="btn btn--full" id="addFeatured" type="button">Añadir al carrito</button>
+            <div class="fineprint">Demo: precios e inventario son de ejemplo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-wave" aria-hidden="true"></div>
+    </section>
+
+    <!-- Catálogo -->
+    <section id="catalogo" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Catálogo</h2>
+            <p class="muted">Productos de ejemplo con estilos y precios. Puedes cambiar nombres, fotos y categorías en minutos.</p>
+          </div>
+
+          <div class="filters">
+            <div class="field">
+              <label for="cat">Categoría</label>
+              <select id="cat">
+                <option value="all">Todas</option>
+                <option value="bolsos">Bolsos</option>
+                <option value="carteras">Carteras</option>
+                <option value="mochilas">Mochilas</option>
+                <option value="accesorios">Accesorios</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="sort">Orden</label>
+              <select id="sort">
+                <option value="featured">Recomendados</option>
+                <option value="price-asc">Precio: menor a mayor</option>
+                <option value="price-desc">Precio: mayor a menor</option>
+                <option value="newest">Novedades</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="max">Precio máximo</label>
+              <input id="max" type="range" min="6000" max="30000" value="30000" step="500" />
+              <div class="range-note"><span id="maxLabel">₡ 30,000</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="productGrid" class="grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section id="beneficios" class="section section--soft">
+      <div class="container">
+        <div class="section-head">
+          <h2>Por qué esta demo sirve para vender</h2>
+          <p class="muted">No es “solo bonita”. Está pensada para que el cliente compre rápido sin perderse.</p>
+        </div>
+
+        <div class="benefits">
+          <article class="benefit">
+            <h3>Carrito real (sin humo)</h3>
+            <p>Agrega productos, cambia cantidades, guarda el carrito en el navegador y muestra totales claros.</p>
+          </article>
+          <article class="benefit">
+            <h3>Checkout guiado</h3>
+            <p>Formulario limpio, validación básica y confirmación. En producción se integra a pasarela de pago.</p>
+          </article>
+          <article class="benefit">
+            <h3>Diseño femenino y formal</h3>
+            <p>Paleta suave, tipografía elegante, y microdetalles sobrios. Se ve premium sin recargar.</p>
+          </article>
+          <article class="benefit">
+            <h3>Lista para crecer</h3>
+            <p>Se puede conectar a inventario, colecciones, variantes (color/talla) y cupones.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>FAQ</h2>
+          <p class="muted">Preguntas típicas de un e-commerce pequeño y cómo lo resolvemos.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>¿Esto ya cobra con tarjeta?</summary>
+            <p>
+              Esta página es demo. Para cobrar de verdad se conecta a una pasarela como Stripe, y se define la logística de envío y
+              políticas de cambios.
+            </p>
+          </details>
+          <details>
+            <summary>¿Puedo vender por WhatsApp y también por carrito?</summary>
+            <p>
+              Sí. Muchos negocios empiezan con “checkout por WhatsApp” y luego activan pago en línea. Aquí tienes las 2 rutas.
+            </p>
+          </details>
+          <details>
+            <summary>¿Cómo se actualizan los productos?</summary>
+            <p>
+              En demo están en un archivo JS. En producción se pasa a un panel (Excel/Google Sheets, Airtable o base de datos) y se
+              sincroniza.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section section--soft">
+      <div class="container contact">
+        <div>
+          <h2>Contacto</h2>
+          <p class="muted">
+            Si quieres adaptar esta demo a la tienda de tu cliente (logo, fotos reales, categorías, métodos de pago y envíos),
+            escríbeme y lo armamos.
+          </p>
+
+          <div class="contact-cards">
+            <a class="contact-card" href="https://wa.me/50664305227?text=Hola%2C%20quiero%20una%20web%20para%20una%20tienda%20de%20bolsos%20y%20carteras.%20%C2%BFMe%20das%20una%20cotizaci%C3%B3n%3F" target="_blank" rel="noopener">
+              <div class="contact-card__k">WhatsApp</div>
+              <div class="contact-card__v">+506 6430-5227</div>
+            </a>
+
+            <a class="contact-card" href="mailto:zamaha-soluciones@outlook.es">
+              <div class="contact-card__k">Email</div>
+              <div class="contact-card__v">zamaha-soluciones@outlook.es</div>
+            </a>
+
+            <div class="contact-card">
+              <div class="contact-card__k">Horario</div>
+              <div class="contact-card__v">Lunes a sábado · 9:00 a.m. – 5:00 p.m.</div>
+            </div>
+          </div>
+        </div>
+
+        <form id="leadForm" class="lead" autocomplete="on" novalidate>
+          <h3>Formulario (demo)</h3>
+          <p class="muted">Si tu cliente prefiere formulario, se conecta a correo o WhatsApp.</p>
+
+          <label>
+            Nombre
+            <input name="name" required placeholder="Nombre y apellido" />
+          </label>
+
+          <label>
+            WhatsApp o teléfono
+            <input name="phone" inputmode="tel" placeholder="Ej: 8888 8888" />
+          </label>
+
+          <label>
+            Mensaje
+            <textarea name="msg" rows="4" placeholder="Cuéntame qué tipo de bolsos vende y cuántos productos tiene."></textarea>
+          </label>
+
+          <button class="btn btn--full" type="submit">Enviar (demo)</button>
+          <div class="fineprint" id="leadNote" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-row">
+        <div>
+          <div class="footer__brand">Zamaha · Demo e-commerce</div>
+          <div class="muted">Ejemplo para tienda de bolsos y carteras. Personalizable para cada cliente.</div>
+        </div>
+        <div class="footer__mini muted">© <span id="year"></span> Zamaha. Hecho en Costa Rica.</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Quick View Modal -->
+  <dialog id="productModal" class="modal" aria-label="Detalle de producto">
+    <form method="dialog" class="modal__shell">
+      <button class="icon-btn modal__close" aria-label="Cerrar">✕</button>
+
+      <div class="modal__grid">
+        <div class="modal__media" id="modalMedia" aria-hidden="true"></div>
+        <div class="modal__info">
+          <div class="modal__title" id="modalTitle">Producto</div>
+          <div class="modal__sub" id="modalSub">Descripción</div>
+
+          <div class="modal__price">
+            <span id="modalPrice">₡ 0</span>
+            <span class="muted" id="modalStock">Stock: —</span>
+          </div>
+
+          <div class="modal__row">
+            <div class="colors" id="modalColors" aria-label="Colores disponibles"></div>
+            <div class="qty">
+              <button type="button" class="qty__btn" id="qtyMinus" aria-label="Disminuir cantidad">−</button>
+              <input id="qtyInput" class="qty__input" inputmode="numeric" value="1" aria-label="Cantidad" />
+              <button type="button" class="qty__btn" id="qtyPlus" aria-label="Aumentar cantidad">+</button>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn--full" id="modalAdd">Añadir al carrito</button>
+
+          <div class="modal__notes muted">
+            Demo: en producción se agrega selección de variantes (color/tamaño), reseñas y fotos reales.
+          </div>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Cart Drawer -->
+  <aside id="cartDrawer" class="drawer" aria-label="Carrito de compras" aria-hidden="true">
+    <div class="drawer__overlay" data-close="true" tabindex="-1"></div>
+
+    <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="drawer__head">
+        <div>
+          <div id="cartTitle" class="drawer__title">Tu carrito</div>
+          <div class="muted" id="cartSubtitle">Demo: guarda el carrito en este navegador.</div>
+        </div>
+        <button class="icon-btn" type="button" data-close="true" aria-label="Cerrar carrito">✕</button>
+      </div>
+
+      <div class="drawer__body">
+        <div id="cartItems" class="cart-items" aria-live="polite"></div>
+      </div>
+
+      <div class="drawer__foot">
+        <div class="totals">
+          <div class="totals__row">
+            <span>Subtotal</span>
+            <strong id="subTotal">₡ 0</strong>
+          </div>
+          <div class="totals__row muted">
+            <span>Envío (demo)</span>
+            <span id="ship">₡ 0</span>
+          </div>
+          <div class="totals__row totals__row--big">
+            <span>Total</span>
+            <strong id="grandTotal">₡ 0</strong>
+          </div>
+        </div>
+
+        <button id="checkoutBtn" class="btn btn--full" type="button">Checkout (demo)</button>
+
+        <a id="waCheckout" class="btn btn--soft btn--full" href="#" target="_blank" rel="noopener">
+          Checkout por WhatsApp
+        </a>
+
+        <button id="clearCart" class="link" type="button">Vaciar carrito</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Checkout Modal -->
+  <dialog id="checkoutModal" class="modal" aria-label="Checkout">
+    <form method="dialog" class="modal__shell checkout">
+      <button class="icon-btn modal__close" aria-label="Cerrar">✕</button>
+
+      <div class="checkout__grid">
+        <div>
+          <h3 class="checkout__title">Checkout (demo)</h3>
+          <p class="muted">En producción: métodos de pago reales, cálculo de envío y confirmación automática.</p>
+
+          <div class="two">
+            <label>
+              Nombre
+              <input id="ckName" required placeholder="Nombre completo" />
+            </label>
+            <label>
+              WhatsApp
+              <input id="ckPhone" inputmode="tel" placeholder="Ej: 8888 8888" />
+            </label>
+          </div>
+
+          <label>
+            Dirección de entrega
+            <input id="ckAddr" required placeholder="Provincia, cantón, distrito, señas..." />
+          </label>
+
+          <label>
+            Método de pago (demo)
+            <select id="ckPay">
+              <option value="stripe">Tarjeta (Stripe) · Próximamente</option>
+              <option value="sinpe">SINPE Móvil</option>
+              <option value="transfer">Transferencia</option>
+              <option value="contra">Contra entrega</option>
+            </select>
+          </label>
+
+          <button class="btn btn--full" id="confirmOrder" type="button">Confirmar pedido (demo)</button>
+          <div class="fineprint" id="ckNote" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="checkout__summary">
+          <div class="checkout__box">
+            <div class="checkout__boxTitle">Resumen</div>
+            <div id="ckItems" class="ck-items"></div>
+            <div class="hr"></div>
+            <div class="totals">
+              <div class="totals__row">
+                <span>Total</span>
+                <strong id="ckTotal">₡ 0</strong>
+              </div>
+            </div>
+            <a id="ckWa" class="btn btn--soft btn--full" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="boutique.js" defer></script>
+</body>
+</html>
