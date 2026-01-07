@@ -49,6 +49,18 @@ function escapeHtml(s) {
     .replaceAll("'", "&#039;");
 }
 
+
+function variantKey(baseId, colorHex){
+  return `${baseId}::${colorHex || "na"}`;
+}
+
+function colorNameForProduct(p, colorIndex){
+  const names = p.colorNames || [];
+  if (names[colorIndex]) return names[colorIndex];
+  const hex = (p.colors && p.colors[colorIndex]) ? p.colors[colorIndex] : "";
+  return hex ? hex.toUpperCase() : "—";
+}
+
 const products = [
   {
     id: "nocturna",
@@ -59,6 +71,7 @@ const products = [
     tag: "Nuevo",
     desc: "Estructura firme, herrajes dorados y forro satinado. Ideal para oficina y eventos.",
     colors: ["#6b2a52", "#1f1a22", "#c06b95"],
+    colorNames: ["Ciruela", "Negro", "Rosa"],
     stock: 7,
     createdAt: "2026-01-05",
     art: svgDataUri({ accent: "#6b2a52", accent2: "#c06b95", name: "Nocturna" }),
@@ -71,6 +84,7 @@ const products = [
     tag: "Best seller",
     desc: "Compacta, con separadores y cierre seguro. Cabe perfecto en bolso pequeño.",
     colors: ["#c06b95", "#f0d9e6", "#6b2a52"],
+    colorNames: ["Rosa", "Talco", "Ciruela"],
     stock: 18,
     createdAt: "2025-12-18",
     art: svgDataUri({ accent: "#c06b95", accent2: "#6b2a52", name: "Rosa Suave" }),
@@ -83,6 +97,7 @@ const products = [
     tag: "Formal",
     desc: "Espacio para laptop, agenda y cosmetiquera. Asas cómodas para uso diario.",
     colors: ["#efe6df", "#6b2a52"],
+    colorNames: ["Marfil", "Ciruela"],
     stock: 9,
     createdAt: "2025-12-28",
     art: svgDataUri({ accent: "#6b2a52", accent2: "#d7b4c8", name: "Marfil" }),
@@ -95,6 +110,7 @@ const products = [
     tag: "Evento",
     desc: "Pequeña, elegante y con brillo sobrio. Para lo esencial: llaves, tarjeta y labial.",
     colors: ["#1f1a22", "#c98cff"],
+    colorNames: ["Negro", "Lavanda"],
     stock: 6,
     createdAt: "2026-01-02",
     art: svgDataUri({ accent: "#1f1a22", accent2: "#c98cff", name: "Gala" }),
@@ -107,6 +123,7 @@ const products = [
     tag: "Urbano",
     desc: "Minimalista y cómoda. Bolsillo oculto, cierre reforzado y look profesional.",
     colors: ["#6b2a52", "#2d2a33", "#efe6df"],
+    colorNames: ["Ciruela", "Grafito", "Marfil"],
     stock: 10,
     createdAt: "2025-11-30",
     art: svgDataUri({ accent: "#6b2a52", accent2: "#2d2a33", name: "City Chic" }),
@@ -119,6 +136,7 @@ const products = [
     tag: "Ligero",
     desc: "Manos libres con estilo. Correa ajustable y bolsillo frontal con broche.",
     colors: ["#c06b95", "#6b2a52", "#efe6df"],
+    colorNames: ["Rosa", "Ciruela", "Marfil"],
     stock: 14,
     createdAt: "2025-12-22",
     art: svgDataUri({ accent: "#c06b95", accent2: "#6b2a52", name: "Aura" }),
@@ -131,6 +149,7 @@ const products = [
     tag: "Premium",
     desc: "Textura suave, cierre metálico y compartimentos para tarjetas + billetes.",
     colors: ["#6b2a52", "#c98cff"],
+    colorNames: ["Ciruela", "Lavanda"],
     stock: 12,
     createdAt: "2025-12-10",
     art: svgDataUri({ accent: "#6b2a52", accent2: "#c98cff", name: "Lux" }),
@@ -143,6 +162,7 @@ const products = [
     tag: "Extra",
     desc: "Cambia el look del bolso en segundos. Mosquetones reforzados.",
     colors: ["#efe6df", "#c06b95"],
+    colorNames: ["Marfil", "Rosa"],
     stock: 25,
     createdAt: "2025-12-02",
     art: svgDataUri({ accent: "#efe6df", accent2: "#c06b95", name: "Perla" }),
@@ -156,6 +176,7 @@ const state = {
   max: 30000,
   modalProduct: null,
   modalQty: 1,
+  modalColorIndex: 0,
   cart: loadCart(),
   theme: loadTheme(),
 };
@@ -264,14 +285,14 @@ function renderGrid() {
 
   // eventos
   $$("[data-view]").forEach(btn => btn.addEventListener("click", () => openProduct(btn.dataset.view)));
-  $$("[data-add]").forEach(btn => btn.addEventListener("click", () => addToCart(btn.dataset.add, 1)));
+  $$("[data-add]").forEach(btn => btn.addEventListener("click", () => addToCart(btn.dataset.add, 1, 0)));
 }
 
 function renderFeatured() {
   const p = products.find(x => x.id === "nocturna");
   const box = $("#featuredArt");
   box.innerHTML = `<img src="${p.art}" alt="Bolso destacado" />`;
-  $("#addFeatured").onclick = () => addToCart("nocturna", 1);
+  $("#addFeatured").onclick = () => addToCart("nocturna", 1, 0);
 }
 
 function openProduct(id) {
@@ -280,6 +301,7 @@ function openProduct(id) {
 
   state.modalProduct = p;
   state.modalQty = 1;
+  state.modalColorIndex = 0;
 
   $("#modalMedia").innerHTML = `<img src="${p.art}" alt="${escapeHtml(p.name)}" />`;
   $("#modalTitle").textContent = p.name;
@@ -287,8 +309,22 @@ function openProduct(id) {
   $("#modalPrice").textContent = fmtCRC(p.price);
   $("#modalStock").textContent = `Stock: ${p.stock}`;
 
-  $("#modalColors").innerHTML = p.colors.map(c => `<span class="swatch" style="background:${c}"></span>`).join("");
+  $("#modalColors").innerHTML = p.colors.map((c, idx) => {
+    const pressed = idx === state.modalColorIndex;
+    return `<button type="button" class="swatch-btn" data-swatch="${idx}" aria-pressed="${pressed}">
+      <span class="swatch-dot" style="background:${c}"></span>
+    </button>`;
+  }).join("");
   $("#qtyInput").value = "1";
+
+  // Swatches (selección de color)
+  $$("#modalColors [data-swatch]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.modalColorIndex = parseInt(btn.dataset.swatch, 10) || 0;
+      $$("#modalColors [data-swatch]").forEach((b) => b.setAttribute("aria-pressed", "false"));
+      btn.setAttribute("aria-pressed", "true");
+    });
+  });
 
   $("#productModal").showModal();
 }
@@ -297,14 +333,22 @@ function closeProduct() {
   $("#productModal").close();
 }
 
-function addToCart(id, qty) {
+function addToCart(id, qty, colorIndex = 0) {
   const p = products.find(x => x.id === id);
   if (!p) return;
 
-  const existing = state.cart[id];
+  const colorHex = (p.colors && p.colors[colorIndex]) ? p.colors[colorIndex] : null;
+  const colorName = colorNameForProduct(p, colorIndex);
+  const key = variantKey(p.id, colorHex);
+  const existing = state.cart[key];
   const nextQty = clamp((existing?.qty || 0) + qty, 1, 99);
 
-  state.cart[id] = {
+  state.cart[key] = {
+    key,
+    baseId: p.id,
+    colorHex,
+    colorName,
+
     id: p.id,
     name: p.name,
     cat: p.cat,
@@ -315,19 +359,19 @@ function addToCart(id, qty) {
   };
   saveCart();
   updateCartUI();
-  toast("Añadido al carrito");
+  toast(`Añadido al carrito · ${colorName}`);
 }
 
-function setCartQty(id, qty) {
-  if (!state.cart[id]) return;
+function setCartQty(key, qty) {
+  if (!state.cart[key]) return;
   const q = clamp(qty, 1, 99);
-  state.cart[id].qty = q;
+  state.cart[key].qty = q;
   saveCart();
   updateCartUI();
 }
 
-function removeFromCart(id) {
-  delete state.cart[id];
+function removeFromCart(key) {
+  delete state.cart[key];
   saveCart();
   updateCartUI();
 }
@@ -355,7 +399,10 @@ function closeCart() {
 
 function cartWhatsAppLink() {
   const items = Object.values(state.cart);
-  const lines = items.map(i => `• ${i.qty} x ${i.name} (${fmtCRC(i.price)})`);
+  const lines = items.map(i => {
+    const variant = i.colorName ? ` · ${i.colorName}` : "";
+    return `• ${i.qty} x ${i.name}${variant} (${fmtCRC(i.price)})`;
+  });
   const subtotal = cartSubtotal();
   const ship = shippingCost(subtotal);
   const total = subtotal + ship;
@@ -390,17 +437,18 @@ function renderCart() {
         <div>
           <div class="cart-item__title">${escapeHtml(i.name)}</div>
           <div class="cart-item__sub">${escapeHtml(i.tag)} · ${escapeHtml(i.cat)}</div>
+${i.colorHex ? `<div class="cart-color"><span class="cart-color__dot" style="background:${i.colorHex}"></span>Color: ${escapeHtml(i.colorName || i.colorHex)}</div>` : ""}
 
           <div class="cart-item__row">
             <div class="qty small-qty" aria-label="Cantidad">
-              <button type="button" class="qty__btn" data-qminus="${i.id}">−</button>
-              <input class="qty__input" data-qinput="${i.id}" value="${i.qty}" />
-              <button type="button" class="qty__btn" data-qplus="${i.id}">+</button>
+              <button type="button" class="qty__btn" data-qminus="${i.key}">−</button>
+              <input class="qty__input" data-qinput="${i.key}" value="${i.qty}" />
+              <button type="button" class="qty__btn" data-qplus="${i.key}">+</button>
             </div>
 
             <div style="display:flex; align-items:center; gap:10px;">
               <div class="cart-item__price">${fmtCRC(i.price * i.qty)}</div>
-              <button type="button" class="icon-btn" data-remove="${i.id}" aria-label="Quitar">🗑</button>
+              <button type="button" class="icon-btn" data-remove="${i.key}" aria-label="Quitar">🗑</button>
             </div>
           </div>
         </div>
@@ -438,6 +486,7 @@ function renderCart() {
     <div class="ck-item">
       <div>
         <div><strong>${escapeHtml(i.name)}</strong></div>
+${i.colorName ? `<div class="muted">Color: ${escapeHtml(i.colorName)}</div>` : ""}
         <div class="muted">${i.qty} x ${fmtCRC(i.price)}</div>
       </div>
       <div><strong>${fmtCRC(i.price * i.qty)}</strong></div>
@@ -447,7 +496,35 @@ function renderCart() {
   $("#ckWa").href = cartWhatsAppLink();
 }
 
+
+function migrateCartShape(){
+  // Compatibilidad con carritos viejos (sin key/variante)
+  const entries = Object.entries(state.cart || {});
+  let changed = false;
+  const next = {};
+  for (const [k, v] of entries){
+    if (!v) continue;
+    if (v.key && v.baseId) {
+      next[v.key] = v;
+      continue;
+    }
+    // intento de construir key (si hay baseId o id)
+    const baseId = v.baseId || v.id || k;
+    const colorHex = v.colorHex || null;
+    const key = v.key || variantKey(baseId, colorHex);
+    next[key] = { key, baseId, colorHex, colorName: v.colorName || (colorHex ? colorHex.toUpperCase() : ""), ...v };
+    changed = true;
+  }
+  if (changed){
+    state.cart = next;
+    saveCart();
+  } else {
+    state.cart = next;
+  }
+}
+
 function updateCartUI() {
+  migrateCartShape();
   renderCart();
 }
 
@@ -473,7 +550,10 @@ function confirmOrderDemo() {
   const ship = shippingCost(subtotal);
   const total = subtotal + ship;
 
-  const items = Object.values(state.cart).map(i => `• ${i.qty} x ${i.name} (${fmtCRC(i.price)})`).join("\n");
+  const items = Object.values(state.cart).map(i => {
+    const variant = i.colorName ? ` · ${i.colorName}` : "";
+    return `• ${i.qty} x ${i.name}${variant} (${fmtCRC(i.price)})`;
+  }).join("\n");
   const msg = [
     `Hola, soy ${name}. Quiero confirmar este pedido (demo):`,
     "",
@@ -537,7 +617,7 @@ function wireUI() {
 
   $("#modalAdd").addEventListener("click", () => {
     if (!state.modalProduct) return;
-    addToCart(state.modalProduct.id, state.modalQty);
+    addToCart(state.modalProduct.id, state.modalQty, state.modalColorIndex);
     closeProduct();
   });
 

@@ -1,433 +1,1097 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Demo tienda · Boutique de bolsos | Zamaha</title>
-  <meta name="description" content="Demo de tienda online para bolsos y carteras: catálogo, filtros, carrito y checkout simulado. Diseñado por Zamaha." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boutique | Demo eCommerce (Bolsos & Carteras)</title>
 
-  <!-- Tipografías (opcional; si no carga, usa la del sistema) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg: #0b0613;
+      --bg-2:#12081f;
+      --card:#140a22;
+      --card-2:#1a0c2d;
+      --text:#f7f3ff;
+      --soft:#d7cfee;
+      --muted:#a79fc3;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 20px 50px rgba(0,0,0,.55);
 
-  <link rel="stylesheet" href="boutique.css" />
+      --accent:#ff5ea8;      /* rosa elegante */
+      --accent-2:#a78bfa;    /* lila */
+      --accent-3:#f5d0fe;    /* blush */
+      --ok:#34d399;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 420px at 20% -10%, rgba(255,94,168,.35), transparent 60%),
+        radial-gradient(900px 420px at 90% 0%, rgba(167,139,250,.28), transparent 55%),
+        radial-gradient(1200px 700px at 50% 120%, rgba(245,208,254,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), #05020b);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:18px 14px 44px;display:flex;flex-direction:column;gap:14px}
+
+    /* Header */
+    header{
+      border:1px solid var(--border);
+      border-radius:22px;
+      background: linear-gradient(180deg, rgba(20,10,34,.92), rgba(8,2,16,.92));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    header:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 220px at 15% 0%, rgba(255,94,168,.25), transparent 60%),
+        radial-gradient(520px 220px at 85% 10%, rgba(167,139,250,.22), transparent 62%),
+        radial-gradient(700px 320px at 50% 120%, rgba(245,208,254,.12), transparent 60%);
+      pointer-events:none;
+      filter:saturate(1.15);
+    }
+    .head{
+      position:relative;
+      display:grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,.9fr);
+      gap:14px;
+      padding:18px;
+      align-items:center;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:14px;
+      background: radial-gradient(circle at 30% 20%, rgba(255,94,168,.95), rgba(167,139,250,.75) 55%, rgba(245,208,254,.28));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 14px 30px rgba(255,94,168,.12);
+    }
+    .brand h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.4px;
+    }
+    .brand p{margin:2px 0 0; color:var(--soft); font-size:12px}
+
+    .ctaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    .btn{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:12px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      cursor:pointer;
+      transition: transform .08s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .btn:hover{background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22); transform: translateY(-1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(255,94,168,.95), rgba(167,139,250,.85));
+      border-color: rgba(255,255,255,.22);
+    }
+    .pill{
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      color:var(--soft);
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      width:max-content;
+    }
+    .headRight{
+      display:flex; flex-direction:column; align-items:flex-end; gap:8px;
+      text-align:right;
+    }
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:14px;
+      align-items:start;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:22px;
+      background: linear-gradient(180deg, rgba(20,10,34,.92), rgba(8,2,16,.92));
+      box-shadow: var(--shadow);
+    }
+    .cardInner{padding:14px}
+
+    .sectionTitle{
+      margin:0 0 6px;
+      font-size:13px;
+      letter-spacing:.3px;
+    }
+    .sectionSub{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    /* Filters */
+    .filters{display:flex; flex-direction:column; gap:10px}
+    label{font-size:12px; color:var(--soft)}
+    select,input[type="search"]{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      padding:10px 10px;
+      outline:none;
+      font-size:12px;
+    }
+    select:focus,input:focus{border-color: rgba(255,94,168,.55)}
+    .rangeRow{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+    .hint{
+      font-size:11px;color:var(--muted);
+    }
+    .chipRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .chip{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:var(--soft);
+      font-size:11px;
+      padding:6px 9px;
+      border-radius:999px;
+      cursor:pointer;
+      user-select:none;
+      transition: background .12s ease, transform .08s ease, border-color .12s ease;
+    }
+    .chip:hover{background: rgba(255,255,255,.10); transform: translateY(-1px)}
+    .chip.active{
+      background: rgba(255,94,168,.22);
+      border-color: rgba(255,94,168,.45);
+      color: #ffe8f4;
+    }
+
+    /* Products */
+    .topBar{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 14px 0;
+    }
+    .count{
+      font-size:12px;
+      color:var(--soft);
+      display:flex; gap:8px; align-items:center;
+    }
+    .count b{color:var(--text)}
+    .sortRow{display:flex; gap:10px; align-items:center}
+    .sortRow select{width:auto}
+
+    .products{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+      padding:14px;
+    }
+    .product{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      position:relative;
+      transition: transform .10s ease, border-color .12s ease, background .12s ease;
+      cursor:pointer;
+    }
+    .product:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,94,168,.30);
+      background: rgba(255,255,255,.06);
+    }
+    .img{
+      height:160px;
+      background: #0b0613;
+      position:relative;
+      overflow:hidden;
+    }
+    .img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.06) contrast(1.02);
+      transform: scale(1.02);
+    }
+    .badge{
+      position:absolute;
+      top:10px; left:10px;
+      font-size:11px;
+      padding:6px 8px;
+      border-radius:999px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--soft);
+      backdrop-filter: blur(6px);
+    }
+    .badge.hot{border-color: rgba(255,94,168,.40); color:#ffe6f3}
+    .badge.new{border-color: rgba(167,139,250,.45); color:#efe7ff}
+
+    .pBody{padding:12px}
+    .pName{margin:0 0 4px;font-weight:800;font-size:13px}
+    .pDesc{margin:0 0 10px;color:var(--muted);font-size:12px;line-height:1.35;min-height:32px}
+    .pRow{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .price{
+      display:flex;flex-direction:column;gap:2px;
+      font-size:12px;color:var(--soft);
+    }
+    .price strong{font-size:14px;color:var(--text)}
+    .miniBtn{
+      border-radius:999px;
+      padding:9px 10px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.07);
+      color:var(--text);
+      font-size:12px;
+      font-weight:800;
+      cursor:pointer;
+      transition: transform .08s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .miniBtn:hover{background: rgba(255,255,255,.12); transform: translateY(-1px)}
+    .miniBtn.primary{
+      background: rgba(255,94,168,.22);
+      border-color: rgba(255,94,168,.40);
+      color:#ffe6f3;
+    }
+
+    /* Floating cart */
+    .cartFab{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      z-index:50;
+    }
+    .fabBtn{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(12,6,19,.75);
+      color:var(--text);
+      box-shadow: var(--shadow);
+      border-radius:999px;
+      padding:12px 14px;
+      cursor:pointer;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      backdrop-filter: blur(10px);
+      transition: transform .08s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .fabBtn:hover{transform: translateY(-1px); background: rgba(20,10,34,.85); border-color: rgba(255,94,168,.32)}
+    .bubble{
+      min-width:20px; height:20px;
+      border-radius:999px;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-size:11px;
+      font-weight:900;
+      background: linear-gradient(135deg, rgba(255,94,168,.95), rgba(167,139,250,.9));
+      color:#12081f;
+    }
+
+    /* Drawer */
+    .drawerBackdrop{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      display:none;
+      z-index:60;
+    }
+    .drawer{
+      position:fixed;
+      top:0; right:0;
+      height:100%;
+      width:min(420px, 92vw);
+      background: linear-gradient(180deg, rgba(20,10,34,.98), rgba(6,2,12,.98));
+      border-left:1px solid rgba(255,255,255,.12);
+      box-shadow: -20px 0 60px rgba(0,0,0,.55);
+      transform: translateX(105%);
+      transition: transform .18s ease;
+      z-index:61;
+      display:flex;
+      flex-direction:column;
+    }
+    .drawer.open{transform: translateX(0)}
+    .drawerHeader{
+      padding:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .drawerHeader h3{margin:0;font-size:14px}
+    .xBtn{
+      width:34px;height:34px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      cursor:pointer;
+      font-size:16px;
+    }
+    .drawerBody{
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      overflow:auto;
+      flex:1;
+    }
+    .empty{
+      color:var(--muted);
+      font-size:12px;
+      border:1px dashed rgba(255,255,255,.14);
+      border-radius:16px;
+      padding:14px;
+      background: rgba(255,255,255,.03);
+    }
+    .line{
+      display:grid;
+      grid-template-columns: 56px 1fr;
+      gap:10px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius:16px;
+      padding:10px;
+      align-items:center;
+    }
+    .line img{
+      width:56px;height:56px;border-radius:14px;object-fit:cover;display:block;
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .lineTop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .lineName{margin:0;font-weight:900;font-size:12px}
+    .lineMeta{margin:4px 0 0;color:var(--muted);font-size:11px}
+    .qtyRow{display:flex;align-items:center;gap:8px;margin-top:8px}
+    .qtyBtn{
+      width:28px;height:28px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:900;
+    }
+    .qty{min-width:22px;text-align:center;font-weight:900;font-size:12px}
+    .trash{
+      border:none;background:transparent;color:rgba(255,255,255,.7);cursor:pointer;
+      font-size:16px; padding:4px 6px;
+    }
+
+    .drawerFooter{
+      padding:14px;
+      border-top:1px solid rgba(255,255,255,.10);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .totals{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .totals strong{color:var(--text); font-size:14px}
+    .note{
+      font-size:11px;
+      color:var(--muted);
+      line-height:1.35;
+    }
+
+    /* Modal */
+    .modalBack{
+      position:fixed; inset:0;
+      display:none;
+      background: rgba(0,0,0,.58);
+      backdrop-filter: blur(6px);
+      z-index:70;
+      align-items:center; justify-content:center;
+      padding:18px;
+    }
+    .modal{
+      width:min(860px, 96vw);
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(20,10,34,.98), rgba(6,2,12,.98));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .modalGrid{
+      display:grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, .9fr);
+    }
+    .modalImg{height:100%; min-height:320px; background:#0b0613}
+    .modalImg img{width:100%;height:100%;object-fit:cover;display:block}
+    .modalBody{padding:16px}
+    .modalBody h3{margin:0 0 6px}
+    .modalBody p{margin:0 0 12px; color:var(--muted); font-size:12px; line-height:1.45}
+    .modalClose{
+      position:absolute;
+      top:12px; right:12px;
+      width:36px;height:36px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.35);
+      color:var(--text);
+      cursor:pointer;
+      font-size:16px;
+    }
+    .modalWrap{position:relative}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .products{grid-template-columns: repeat(2, minmax(0,1fr))}
+      .grid{grid-template-columns: 1fr}
+      .head{grid-template-columns: 1fr}
+      .headRight{align-items:flex-start;text-align:left}
+    }
+    @media (max-width: 520px){
+      .products{grid-template-columns: 1fr}
+      .img{height:170px}
+      .modalGrid{grid-template-columns: 1fr}
+      .modalImg{min-height:240px}
+    }
+  </style>
 </head>
 
 <body>
-  <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
-
-  <!-- Header -->
-  <header class="site-header" role="banner">
-    <div class="container header-row">
-      <div class="brand">
-        <a class="brand__back" href="index.html" aria-label="Volver a Zamaha">← Volver a Zamaha</a>
-        <div class="brand__lockup">
-          <div class="brand__logo" aria-hidden="true">Z</div>
-          <div>
-            <div class="brand__name">Boutique Luna Atelier</div>
-            <div class="brand__tag">Bolsos y carteras · femenino, formal y elegante</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="header-actions">
-        <button id="themeToggle" class="chip" type="button" aria-pressed="false" title="Cambiar modo claro/oscuro">
-          <span aria-hidden="true">☾</span> <span class="chip__text">Modo</span>
-        </button>
-
-        <button id="cartBtn" class="cart-btn" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
-          <span aria-hidden="true">👜</span>
-          <span class="cart-btn__text">Carrito</span>
-          <span id="cartCount" class="cart-btn__badge" aria-label="0 productos en el carrito">0</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="container nav-row">
-      <nav class="nav" aria-label="Navegación principal">
-        <a href="#catalogo" class="nav__link">Catálogo</a>
-        <a href="#beneficios" class="nav__link">Por qué comprar</a>
-        <a href="#faq" class="nav__link">FAQ</a>
-        <a href="#contacto" class="nav__link">Contacto</a>
-      </nav>
-
-      <form class="search" role="search" aria-label="Buscar productos">
-        <label class="sr-only" for="q">Buscar</label>
-        <input id="q" name="q" type="search" placeholder="Buscar: cuero, tote, clutch..." autocomplete="off" />
-        <button type="submit" class="btn btn--soft">Buscar</button>
-      </form>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="pill">Demo de e-commerce · listo para personalizar</p>
-          <h1>Una tienda online que se siente <span class="accent">elegante</span>, no “improvisada”.</h1>
-          <p class="lead">
-            Catálogo con filtros, búsqueda, carrito y checkout simulado. En producción real se conecta a pasarela de pago (Stripe)
-            y control de inventario.
-          </p>
-
-          <div class="hero-cta">
-            <a class="btn" href="#catalogo">Ver colección</a>
-            <a class="btn btn--soft" href="https://wa.me/50664305227?text=Hola%2C%20quiero%20una%20tienda%20online%20para%20bolsos%20y%20carteras.%20%C2%BFPueden%20hacerme%20una%20demo%20como%20esta%3F" target="_blank" rel="noopener">
-              Hablar por WhatsApp
-            </a>
+  <div class="wrap">
+    <header>
+      <div class="head">
+        <div>
+          <div class="brand">
+            <div class="logo" aria-hidden="true"></div>
+            <div>
+              <h1>Boutique Demo: Bolsos & Carteras</h1>
+              <p>Femenino, formal y con flujo de compra (carrito + pedido por WhatsApp).</p>
+            </div>
           </div>
 
-          <div class="hero-trust">
-            <div class="trust">
-              <div class="trust__k">Entrega rápida</div>
-              <div class="trust__v">Opciones con mensajería</div>
-            </div>
-            <div class="trust">
-              <div class="trust__k">Pago seguro</div>
-              <div class="trust__v">Stripe / SINPE (según negocio)</div>
-            </div>
-            <div class="trust">
-              <div class="trust__k">Garantía</div>
-              <div class="trust__v">Política clara de cambios</div>
-            </div>
+          <div class="ctaRow">
+            <button class="btn primary" id="openCartBtn" type="button">
+              🛍️ Ver carrito <span class="bubble" id="cartCount">0</span>
+            </button>
+            <a class="btn" href="#catalogo">🧾 Ver catálogo</a>
+            <button class="btn" id="clearCartBtn" type="button">🧹 Vaciar carrito</button>
           </div>
         </div>
 
-        <div class="hero-card" aria-label="Vista previa de producto destacado">
-          <div class="hero-card__top">
-            <div class="badge">Nuevo</div>
-            <div class="badge badge--outline">Edición limitada</div>
-          </div>
-          <div class="hero-card__media" id="featuredArt" aria-hidden="true"></div>
-          <div class="hero-card__body">
-            <div class="hero-card__title">Bolso “Nocturna”</div>
-            <div class="hero-card__sub">Cuero vegano · forro satinado</div>
-            <div class="hero-card__price">
-              <span>₡ 18,900</span>
-              <span class="old">₡ 22,500</span>
-              <span class="save">-16%</span>
-            </div>
-
-            <button class="btn btn--full" id="addFeatured" type="button">Añadir al carrito</button>
-            <div class="fineprint">Demo: precios e inventario son de ejemplo.</div>
-          </div>
+        <div class="headRight">
+          <div class="pill">✨ Estilo: elegante + minimal</div>
+          <div class="pill">📦 Envíos: simulación (demo)</div>
+          <div class="pill">💬 Pedido: WhatsApp con resumen</div>
         </div>
       </div>
+    </header>
 
-      <div class="hero-wave" aria-hidden="true"></div>
-    </section>
-
-    <!-- Catálogo -->
-    <section id="catalogo" class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Catálogo</h2>
-            <p class="muted">Productos de ejemplo con estilos y precios. Puedes cambiar nombres, fotos y categorías en minutos.</p>
-          </div>
+    <div class="grid">
+      <!-- Filters -->
+      <aside class="card">
+        <div class="cardInner">
+          <h2 class="sectionTitle">Filtros</h2>
+          <p class="sectionSub">Encuentra productos por categoría, precio y estilo. (Demo)</p>
 
           <div class="filters">
-            <div class="field">
-              <label for="cat">Categoría</label>
-              <select id="cat">
+            <div>
+              <label for="q">Buscar</label>
+              <input id="q" type="search" placeholder="Ej: cuero, tote, dorado…" />
+            </div>
+
+            <div>
+              <label for="category">Categoría</label>
+              <select id="category">
                 <option value="all">Todas</option>
                 <option value="bolsos">Bolsos</option>
                 <option value="carteras">Carteras</option>
+                <option value="clutch">Clutch</option>
                 <option value="mochilas">Mochilas</option>
                 <option value="accesorios">Accesorios</option>
               </select>
             </div>
 
-            <div class="field">
-              <label for="sort">Orden</label>
-              <select id="sort">
-                <option value="featured">Recomendados</option>
-                <option value="price-asc">Precio: menor a mayor</option>
-                <option value="price-desc">Precio: mayor a menor</option>
-                <option value="newest">Novedades</option>
-              </select>
+            <div class="rangeRow">
+              <div>
+                <label for="minPrice">Min ₡</label>
+                <input id="minPrice" type="search" inputmode="numeric" placeholder="0" />
+              </div>
+              <div>
+                <label for="maxPrice">Max ₡</label>
+                <input id="maxPrice" type="search" inputmode="numeric" placeholder="100000" />
+              </div>
             </div>
 
-            <div class="field">
-              <label for="max">Precio máximo</label>
-              <input id="max" type="range" min="6000" max="30000" value="30000" step="500" />
-              <div class="range-note"><span id="maxLabel">₡ 30,000</span></div>
+            <div>
+              <div class="hint">Estilos rápidos</div>
+              <div class="chipRow" id="styleChips">
+                <div class="chip active" data-style="all">Todo</div>
+                <div class="chip" data-style="elegante">Elegante</div>
+                <div class="chip" data-style="casual">Casual</div>
+                <div class="chip" data-style="fiesta">Fiesta</div>
+                <div class="chip" data-style="oficina">Oficina</div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div id="productGrid" class="grid" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <!-- Beneficios -->
-    <section id="beneficios" class="section section--soft">
-      <div class="container">
-        <div class="section-head">
-          <h2>Por qué esta demo sirve para vender</h2>
-          <p class="muted">No es “solo bonita”. Está pensada para que el cliente compre rápido sin perderse.</p>
-        </div>
-
-        <div class="benefits">
-          <article class="benefit">
-            <h3>Carrito real (sin humo)</h3>
-            <p>Agrega productos, cambia cantidades, guarda el carrito en el navegador y muestra totales claros.</p>
-          </article>
-          <article class="benefit">
-            <h3>Checkout guiado</h3>
-            <p>Formulario limpio, validación básica y confirmación. En producción se integra a pasarela de pago.</p>
-          </article>
-          <article class="benefit">
-            <h3>Diseño femenino y formal</h3>
-            <p>Paleta suave, tipografía elegante, y microdetalles sobrios. Se ve premium sin recargar.</p>
-          </article>
-          <article class="benefit">
-            <h3>Lista para crecer</h3>
-            <p>Se puede conectar a inventario, colecciones, variantes (color/talla) y cupones.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>FAQ</h2>
-          <p class="muted">Preguntas típicas de un e-commerce pequeño y cómo lo resolvemos.</p>
-        </div>
-
-        <div class="faq">
-          <details>
-            <summary>¿Esto ya cobra con tarjeta?</summary>
-            <p>
-              Esta página es demo. Para cobrar de verdad se conecta a una pasarela como Stripe, y se define la logística de envío y
-              políticas de cambios.
-            </p>
-          </details>
-          <details>
-            <summary>¿Puedo vender por WhatsApp y también por carrito?</summary>
-            <p>
-              Sí. Muchos negocios empiezan con “checkout por WhatsApp” y luego activan pago en línea. Aquí tienes las 2 rutas.
-            </p>
-          </details>
-          <details>
-            <summary>¿Cómo se actualizan los productos?</summary>
-            <p>
-              En demo están en un archivo JS. En producción se pasa a un panel (Excel/Google Sheets, Airtable o base de datos) y se
-              sincroniza.
-            </p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contacto -->
-    <section id="contacto" class="section section--soft">
-      <div class="container contact">
-        <div>
-          <h2>Contacto</h2>
-          <p class="muted">
-            Si quieres adaptar esta demo a la tienda de tu cliente (logo, fotos reales, categorías, métodos de pago y envíos),
-            escríbeme y lo armamos.
-          </p>
-
-          <div class="contact-cards">
-            <a class="contact-card" href="https://wa.me/50664305227?text=Hola%2C%20quiero%20una%20web%20para%20una%20tienda%20de%20bolsos%20y%20carteras.%20%C2%BFMe%20das%20una%20cotizaci%C3%B3n%3F" target="_blank" rel="noopener">
-              <div class="contact-card__k">WhatsApp</div>
-              <div class="contact-card__v">+506 6430-5227</div>
-            </a>
-
-            <a class="contact-card" href="mailto:zamaha-soluciones@outlook.es">
-              <div class="contact-card__k">Email</div>
-              <div class="contact-card__v">zamaha-soluciones@outlook.es</div>
-            </a>
-
-            <div class="contact-card">
-              <div class="contact-card__k">Horario</div>
-              <div class="contact-card__v">Lunes a sábado · 9:00 a.m. – 5:00 p.m.</div>
+            <div>
+              <button class="btn" id="resetFilters" type="button">🔄 Reset filtros</button>
+              <div class="hint" style="margin-top:8px">
+                Tip: toca una tarjeta para vista rápida y “Añadir”.
+              </div>
             </div>
           </div>
         </div>
+      </aside>
 
-        <form id="leadForm" class="lead" autocomplete="on" novalidate>
-          <h3>Formulario (demo)</h3>
-          <p class="muted">Si tu cliente prefiere formulario, se conecta a correo o WhatsApp.</p>
-
-          <label>
-            Nombre
-            <input name="name" required placeholder="Nombre y apellido" />
-          </label>
-
-          <label>
-            WhatsApp o teléfono
-            <input name="phone" inputmode="tel" placeholder="Ej: 8888 8888" />
-          </label>
-
-          <label>
-            Mensaje
-            <textarea name="msg" rows="4" placeholder="Cuéntame qué tipo de bolsos vende y cuántos productos tiene."></textarea>
-          </label>
-
-          <button class="btn btn--full" type="submit">Enviar (demo)</button>
-          <div class="fineprint" id="leadNote" role="status" aria-live="polite"></div>
-        </form>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="container footer-row">
-        <div>
-          <div class="footer__brand">Zamaha · Demo e-commerce</div>
-          <div class="muted">Ejemplo para tienda de bolsos y carteras. Personalizable para cada cliente.</div>
-        </div>
-        <div class="footer__mini muted">© <span id="year"></span> Zamaha. Hecho en Costa Rica.</div>
-      </div>
-    </footer>
-  </main>
-
-  <!-- Quick View Modal -->
-  <dialog id="productModal" class="modal" aria-label="Detalle de producto">
-    <form method="dialog" class="modal__shell">
-      <button class="icon-btn modal__close" aria-label="Cerrar">✕</button>
-
-      <div class="modal__grid">
-        <div class="modal__media" id="modalMedia" aria-hidden="true"></div>
-        <div class="modal__info">
-          <div class="modal__title" id="modalTitle">Producto</div>
-          <div class="modal__sub" id="modalSub">Descripción</div>
-
-          <div class="modal__price">
-            <span id="modalPrice">₡ 0</span>
-            <span class="muted" id="modalStock">Stock: —</span>
-          </div>
-
-          <div class="modal__row">
-            <div class="colors" id="modalColors" aria-label="Colores disponibles"></div>
-            <div class="qty">
-              <button type="button" class="qty__btn" id="qtyMinus" aria-label="Disminuir cantidad">−</button>
-              <input id="qtyInput" class="qty__input" inputmode="numeric" value="1" aria-label="Cantidad" />
-              <button type="button" class="qty__btn" id="qtyPlus" aria-label="Aumentar cantidad">+</button>
-            </div>
-          </div>
-
-          <button type="button" class="btn btn--full" id="modalAdd">Añadir al carrito</button>
-
-          <div class="modal__notes muted">
-            Demo: en producción se agrega selección de variantes (color/tamaño), reseñas y fotos reales.
-          </div>
-        </div>
-      </div>
-    </form>
-  </dialog>
-
-  <!-- Cart Drawer -->
-  <aside id="cartDrawer" class="drawer" aria-label="Carrito de compras" aria-hidden="true">
-    <div class="drawer__overlay" data-close="true" tabindex="-1"></div>
-
-    <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
-      <div class="drawer__head">
-        <div>
-          <div id="cartTitle" class="drawer__title">Tu carrito</div>
-          <div class="muted" id="cartSubtitle">Demo: guarda el carrito en este navegador.</div>
-        </div>
-        <button class="icon-btn" type="button" data-close="true" aria-label="Cerrar carrito">✕</button>
-      </div>
-
-      <div class="drawer__body">
-        <div id="cartItems" class="cart-items" aria-live="polite"></div>
-      </div>
-
-      <div class="drawer__foot">
-        <div class="totals">
-          <div class="totals__row">
-            <span>Subtotal</span>
-            <strong id="subTotal">₡ 0</strong>
-          </div>
-          <div class="totals__row muted">
-            <span>Envío (demo)</span>
-            <span id="ship">₡ 0</span>
-          </div>
-          <div class="totals__row totals__row--big">
-            <span>Total</span>
-            <strong id="grandTotal">₡ 0</strong>
+      <!-- Catalog -->
+      <section class="card" id="catalogo">
+        <div class="topBar">
+          <div class="count">Mostrando <b id="countNum">0</b> productos</div>
+          <div class="sortRow">
+            <label for="sort" style="font-size:12px;color:var(--soft)">Orden</label>
+            <select id="sort">
+              <option value="featured">Destacados</option>
+              <option value="priceAsc">Precio: menor a mayor</option>
+              <option value="priceDesc">Precio: mayor a menor</option>
+              <option value="nameAsc">Nombre: A-Z</option>
+            </select>
           </div>
         </div>
 
-        <button id="checkoutBtn" class="btn btn--full" type="button">Checkout (demo)</button>
+        <div class="products" id="products"></div>
+      </section>
+    </div>
+  </div>
 
-        <a id="waCheckout" class="btn btn--soft btn--full" href="#" target="_blank" rel="noopener">
-          Checkout por WhatsApp
-        </a>
+  <!-- Floating cart button -->
+  <div class="cartFab">
+    <button class="fabBtn" id="fabOpenCart" type="button">
+      👜 Carrito <span class="bubble" id="cartCount2">0</span>
+    </button>
+  </div>
 
-        <button id="clearCart" class="link" type="button">Vaciar carrito</button>
+  <!-- Drawer -->
+  <div class="drawerBackdrop" id="drawerBackdrop"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawerHeader">
+      <h3>Tu carrito</h3>
+      <button class="xBtn" id="closeDrawer" type="button">×</button>
+    </div>
+    <div class="drawerBody" id="drawerBody"></div>
+
+    <div class="drawerFooter">
+      <div class="totals">
+        <div>Total</div>
+        <div><strong id="total">₡0</strong></div>
+      </div>
+
+      <button class="btn primary" id="checkoutBtn" type="button">✅ Finalizar pedido</button>
+      <div class="note">
+        Esto es una demo: al finalizar, se arma un mensaje con tu lista de productos
+        y se abre WhatsApp para enviarlo.
       </div>
     </div>
   </aside>
 
-  <!-- Checkout Modal -->
-  <dialog id="checkoutModal" class="modal" aria-label="Checkout">
-    <form method="dialog" class="modal__shell checkout">
-      <button class="icon-btn modal__close" aria-label="Cerrar">✕</button>
-
-      <div class="checkout__grid">
-        <div>
-          <h3 class="checkout__title">Checkout (demo)</h3>
-          <p class="muted">En producción: métodos de pago reales, cálculo de envío y confirmación automática.</p>
-
-          <div class="two">
-            <label>
-              Nombre
-              <input id="ckName" required placeholder="Nombre completo" />
-            </label>
-            <label>
-              WhatsApp
-              <input id="ckPhone" inputmode="tel" placeholder="Ej: 8888 8888" />
-            </label>
+  <!-- Quick view modal -->
+  <div class="modalBack" id="modalBack">
+    <div class="modalWrap modal">
+      <button class="modalClose" id="modalClose" type="button">×</button>
+      <div class="modalGrid">
+        <div class="modalImg"><img id="modalImg" alt="" /></div>
+        <div class="modalBody">
+          <h3 id="modalName">Producto</h3>
+          <p id="modalDesc"></p>
+          <div class="pRow" style="margin-bottom:12px">
+            <div class="price"><span>Precio</span><strong id="modalPrice">₡0</strong></div>
+            <button class="miniBtn primary" id="modalAddBtn" type="button">Añadir al carrito</button>
           </div>
-
-          <label>
-            Dirección de entrega
-            <input id="ckAddr" required placeholder="Provincia, cantón, distrito, señas..." />
-          </label>
-
-          <label>
-            Método de pago (demo)
-            <select id="ckPay">
-              <option value="stripe">Tarjeta (Stripe) · Próximamente</option>
-              <option value="sinpe">SINPE Móvil</option>
-              <option value="transfer">Transferencia</option>
-              <option value="contra">Contra entrega</option>
-            </select>
-          </label>
-
-          <button class="btn btn--full" id="confirmOrder" type="button">Confirmar pedido (demo)</button>
-          <div class="fineprint" id="ckNote" role="status" aria-live="polite"></div>
-        </div>
-
-        <div class="checkout__summary">
-          <div class="checkout__box">
-            <div class="checkout__boxTitle">Resumen</div>
-            <div id="ckItems" class="ck-items"></div>
-            <div class="hr"></div>
-            <div class="totals">
-              <div class="totals__row">
-                <span>Total</span>
-                <strong id="ckTotal">₡ 0</strong>
-              </div>
-            </div>
-            <a id="ckWa" class="btn btn--soft btn--full" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
-          </div>
+          <div class="hint">Incluye: estilo, materiales y nota de cuidado (demo).</div>
+          <ul class="sectionSub" id="modalBullets" style="margin-top:10px"></ul>
         </div>
       </div>
-    </form>
-  </dialog>
+    </div>
+  </div>
 
-  <!-- Toast -->
-  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <script>
+    // ===== Datos demo =====
+    const WHATSAPP_PHONE = "50664305227"; // mismo número usado en la web de Zamaha (ajústalo si hace falta)
 
-  <script src="boutique.js" defer></script>
+    const PRODUCTS = [
+      {
+        id:"p1",
+        name:"Bolso 'Aurora' (Cuero vegano)",
+        category:"bolsos",
+        style:"elegante",
+        price: 28500,
+        badge:"hot",
+        img:"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=900&q=70",
+        desc:"Estructura firme, acabado satinado y herrajes discretos. Para oficina o salida formal.",
+        bullets:["Correa ajustable", "Bolsillo interno con cierre", "Herrajes dorado suave"]
+      },
+      {
+        id:"p2",
+        name:"Cartera 'Luna' (Compacta)",
+        category:"carteras",
+        style:"oficina",
+        price: 12500,
+        badge:"new",
+        img:"https://images.unsplash.com/photo-1585386959984-a41552231693?auto=format&fit=crop&w=900&q=70",
+        desc:"Compacta pero rendidora. Guarda tarjetas, efectivo y lo esencial sin abultar.",
+        bullets:["12 slots tarjetas", "Cierre metálico", "Forro anti-raspado"]
+      },
+      {
+        id:"p3",
+        name:"Clutch 'Violeta' (Noche)",
+        category:"clutch",
+        style:"fiesta",
+        price: 19800,
+        badge:"hot",
+        img:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=70",
+        desc:"Minimal y brillante. Perfecto para eventos, cenas y outfits de noche.",
+        bullets:["Cadena removible", "Acabado shimmer", "Interior de terciopelo"]
+      },
+      {
+        id:"p4",
+        name:"Mochila 'Seda' (Urbana)",
+        category:"mochilas",
+        style:"casual",
+        price: 26500,
+        badge:"new",
+        img:"https://images.unsplash.com/photo-1523292555889-991f3d3487f5?auto=format&fit=crop&w=900&q=70",
+        desc:"Urbana y ligera. Compartimento principal amplio para día a día.",
+        bullets:["Laptop 13”", "Tela repelente", "Espalda acolchonada"]
+      },
+      {
+        id:"p5",
+        name:"Bolso 'Marfil' (Tote)",
+        category:"bolsos",
+        style:"oficina",
+        price: 31200,
+        badge:"",
+        img:"https://images.unsplash.com/photo-1520975958225-8a5e430a3f09?auto=format&fit=crop&w=900&q=70",
+        desc:"Tote limpio, con espacio para agenda, cosméticos y extras. Se ve premium sin gritar.",
+        bullets:["Compartimentos dobles", "Base reforzada", "Diseño elegante"]
+      },
+      {
+        id:"p6",
+        name:"Cartera 'Blush' (Zip)",
+        category:"carteras",
+        style:"casual",
+        price: 14700,
+        badge:"",
+        img:"https://images.unsplash.com/photo-1526171335541-2b6a8a7d28b6?auto=format&fit=crop&w=900&q=70",
+        desc:"Cierre completo y organización interna. Color blush sobrio para combinar fácil.",
+        bullets:["Cierre perimetral", "Monedero interno", "Textura suave"]
+      },
+      {
+        id:"p7",
+        name:"Accesorio: Strap 'Doble Tono'",
+        category:"accesorios",
+        style:"elegante",
+        price: 6900,
+        badge:"",
+        img:"https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=70",
+        desc:"Correa extra para personalizar tu bolso. Subtil, pero cambia el look completo.",
+        bullets:["Ganchos metálicos", "Ajustable", "Combinación rosa/lila"]
+      },
+      {
+        id:"p8",
+        name:"Clutch 'Perla' (Clásico)",
+        category:"clutch",
+        style:"elegante",
+        price: 22400,
+        badge:"new",
+        img:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=70",
+        desc:"Clásico y limpio. Ideal para vestido, blazer o salida elegante.",
+        bullets:["Cierre magnético", "Interior suave", "Acabado perla"]
+      },
+      {
+        id:"p9",
+        name:"Bolso 'Nacar' (Crossbody)",
+        category:"bolsos",
+        style:"casual",
+        price: 23800,
+        badge:"",
+        img:"https://images.unsplash.com/photo-1520975693417-35a43b2c6b76?auto=format&fit=crop&w=900&q=70",
+        desc:"Crossbody cómodo para andar ligera. Estilo sutil con detalles finos.",
+        bullets:["Correa cómoda", "Cierre seguro", "Tamaño diario"]
+      }
+    ];
+
+    // ===== Estado =====
+    const els = {
+      products: document.getElementById("products"),
+      countNum: document.getElementById("countNum"),
+      q: document.getElementById("q"),
+      category: document.getElementById("category"),
+      minPrice: document.getElementById("minPrice"),
+      maxPrice: document.getElementById("maxPrice"),
+      sort: document.getElementById("sort"),
+      styleChips: document.getElementById("styleChips"),
+      resetFilters: document.getElementById("resetFilters"),
+
+      cartCount: document.getElementById("cartCount"),
+      cartCount2: document.getElementById("cartCount2"),
+
+      drawerBackdrop: document.getElementById("drawerBackdrop"),
+      drawer: document.getElementById("drawer"),
+      drawerBody: document.getElementById("drawerBody"),
+      total: document.getElementById("total"),
+
+      openCartBtn: document.getElementById("openCartBtn"),
+      fabOpenCart: document.getElementById("fabOpenCart"),
+      closeDrawer: document.getElementById("closeDrawer"),
+      clearCartBtn: document.getElementById("clearCartBtn"),
+      checkoutBtn: document.getElementById("checkoutBtn"),
+
+      modalBack: document.getElementById("modalBack"),
+      modalClose: document.getElementById("modalClose"),
+      modalImg: document.getElementById("modalImg"),
+      modalName: document.getElementById("modalName"),
+      modalDesc: document.getElementById("modalDesc"),
+      modalPrice: document.getElementById("modalPrice"),
+      modalBullets: document.getElementById("modalBullets"),
+      modalAddBtn: document.getElementById("modalAddBtn"),
+    };
+
+    let activeStyle = "all";
+    let cart = loadCart(); // {id: qty}
+
+    function formatCRC(n){
+      try{
+        return new Intl.NumberFormat("es-CR", { style:"currency", currency:"CRC", maximumFractionDigits:0 }).format(n);
+      }catch(e){
+        return "₡" + Math.round(n).toString();
+      }
+    }
+
+    function saveCart(){
+      localStorage.setItem("boutique_cart_v1", JSON.stringify(cart));
+    }
+    function loadCart(){
+      try{
+        return JSON.parse(localStorage.getItem("boutique_cart_v1")) || {};
+      }catch(e){ return {}; }
+    }
+
+    function qtyTotal(){
+      return Object.values(cart).reduce((a,b)=>a+b,0);
+    }
+    function cartTotal(){
+      let sum = 0;
+      for(const [id,qty] of Object.entries(cart)){
+        const p = PRODUCTS.find(x=>x.id===id);
+        if(p) sum += p.price * qty;
+      }
+      return sum;
+    }
+
+    function openDrawer(){
+      els.drawerBackdrop.style.display = "block";
+      els.drawer.classList.add("open");
+      renderDrawer();
+    }
+    function closeDrawer(){
+      els.drawer.classList.remove("open");
+      els.drawerBackdrop.style.display = "none";
+    }
+
+    function addToCart(id, qty=1){
+      cart[id] = (cart[id]||0) + qty;
+      if(cart[id] <= 0) delete cart[id];
+      saveCart();
+      syncCartUI();
+      renderDrawer();
+    }
+    function removeFromCart(id){
+      delete cart[id];
+      saveCart();
+      syncCartUI();
+      renderDrawer();
+    }
+
+    function syncCartUI(){
+      const n = qtyTotal();
+      els.cartCount.textContent = n;
+      els.cartCount2.textContent = n;
+      els.total.textContent = formatCRC(cartTotal());
+    }
+
+    function getFilters(){
+      const q = (els.q.value||"").trim().toLowerCase();
+      const category = els.category.value;
+      const minP = parseInt((els.minPrice.value||"").replace(/[^\d]/g,"")||"0",10);
+      const maxP = parseInt((els.maxPrice.value||"").replace(/[^\d]/g,"")||"999999999",10);
+      const sort = els.sort.value;
+
+      return { q, category, minP, maxP, style: activeStyle, sort };
+    }
+
+    function applyFilters(){
+      const f = getFilters();
+      let list = PRODUCTS.slice();
+
+      if(f.category !== "all"){
+        list = list.filter(p=>p.category===f.category);
+      }
+      if(f.style !== "all"){
+        list = list.filter(p=>p.style===f.style);
+      }
+      list = list.filter(p=>p.price >= f.minP && p.price <= f.maxP);
+
+      if(f.q){
+        list = list.filter(p=>{
+          return (p.name + " " + p.desc + " " + p.category + " " + p.style)
+            .toLowerCase().includes(f.q);
+        });
+      }
+
+      // Orden
+      if(f.sort === "priceAsc") list.sort((a,b)=>a.price-b.price);
+      if(f.sort === "priceDesc") list.sort((a,b)=>b.price-a.price);
+      if(f.sort === "nameAsc") list.sort((a,b)=>a.name.localeCompare(b.name, "es"));
+      if(f.sort === "featured"){
+        list.sort((a,b)=>{
+          const aw = (a.badge==="hot"?2:(a.badge==="new"?1:0));
+          const bw = (b.badge==="hot"?2:(b.badge==="new"?1:0));
+          if(bw!==aw) return bw-aw;
+          return a.price-b.price;
+        });
+      }
+
+      renderProducts(list);
+    }
+
+    function badgeLabel(p){
+      if(p.badge==="hot") return {text:"Más vendido", cls:"hot"};
+      if(p.badge==="new") return {text:"Nuevo", cls:"new"};
+      return null;
+    }
+
+    function renderProducts(list){
+      els.countNum.textContent = list.length;
+      els.products.innerHTML = "";
+
+      list.forEach(p=>{
+        const b = badgeLabel(p);
+        const el = document.createElement("article");
+        el.className = "product";
+        el.innerHTML = `
+          <div class="img">
+            <img src="${p.img}" alt="${escapeHtml(p.name)}" loading="lazy" />
+            ${b ? `<div class="badge ${b.cls}">${b.text}</div>` : ``}
+          </div>
+          <div class="pBody">
+            <h3 class="pName">${escapeHtml(p.name)}</h3>
+            <p class="pDesc">${escapeHtml(p.desc)}</p>
+            <div class="pRow">
+              <div class="price"><span>Precio</span><strong>${formatCRC(p.price)}</strong></div>
+              <button class="miniBtn primary" type="button" data-add="${p.id}">Añadir</button>
+            </div>
+          </div>
+        `;
+
+        // click card: quick view
+        el.addEventListener("click", (e)=>{
+          const addBtn = e.target.closest("[data-add]");
+          if(addBtn){
+            e.preventDefault();
+            e.stopPropagation();
+            addToCart(addBtn.dataset.add, 1);
+            return;
+          }
+          openModal(p.id);
+        });
+
+        els.products.appendChild(el);
+      });
+    }
+
+    function openModal(id){
+      const p = PRODUCTS.find(x=>x.id===id);
+      if(!p) return;
+      els.modalImg.src = p.img;
+      els.modalImg.alt = p.name;
+      els.modalName.textContent = p.name;
+      els.modalDesc.textContent = p.desc;
+      els.modalPrice.textContent = formatCRC(p.price);
+      els.modalBullets.innerHTML = (p.bullets||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join("");
+      els.modalAddBtn.onclick = () => { addToCart(p.id, 1); closeModal(); openDrawer(); };
+      els.modalBack.style.display = "flex";
+    }
+    function closeModal(){
+      els.modalBack.style.display = "none";
+      els.modalImg.src = "";
+    }
+
+    function renderDrawer(){
+      const ids = Object.keys(cart);
+      els.drawerBody.innerHTML = "";
+
+      if(ids.length === 0){
+        els.drawerBody.innerHTML = `<div class="empty">Tu carrito está vacío. Añade un bolso o una cartera y aquí aparece ✨</div>`;
+        syncCartUI();
+        return;
+      }
+
+      ids.forEach(id=>{
+        const p = PRODUCTS.find(x=>x.id===id);
+        if(!p) return;
+        const qty = cart[id] || 0;
+
+        const row = document.createElement("div");
+        row.className = "line";
+        row.innerHTML = `
+          <img src="${p.img}" alt="${escapeHtml(p.name)}" />
+          <div>
+            <div class="lineTop">
+              <div>
+                <p class="lineName">${escapeHtml(p.name)}</p>
+                <div class="lineMeta">${formatCRC(p.price)} • ${escapeHtml(p.style)} • ${escapeHtml(p.category)}</div>
+              </div>
+              <button class="trash" type="button" title="Quitar">🗑️</button>
+            </div>
+            <div class="qtyRow">
+              <button class="qtyBtn" type="button" data-dec>-</button>
+              <div class="qty">${qty}</div>
+              <button class="qtyBtn" type="button" data-inc>+</button>
+              <div style="margin-left:auto;color:var(--soft);font-size:12px"><b>${formatCRC(p.price * qty)}</b></div>
+            </div>
+          </div>
+        `;
+
+        row.querySelector(".trash").addEventListener("click", ()=>removeFromCart(id));
+        row.querySelector("[data-dec]").addEventListener("click", ()=>addToCart(id, -1));
+        row.querySelector("[data-inc]").addEventListener("click", ()=>addToCart(id, +1));
+
+        els.drawerBody.appendChild(row);
+      });
+
+      syncCartUI();
+    }
+
+    function buildWhatsAppMessage(){
+      const ids = Object.keys(cart);
+      const lines = [];
+      lines.push("Hola, quiero hacer un pedido (demo boutique):");
+      lines.push("");
+
+      ids.forEach(id=>{
+        const p = PRODUCTS.find(x=>x.id===id);
+        const qty = cart[id]||0;
+        if(!p || qty<=0) return;
+        lines.push(`• ${qty} × ${p.name} (${formatCRC(p.price)} c/u) = ${formatCRC(p.price*qty)}`);
+      });
+
+      lines.push("");
+      lines.push(`Total: ${formatCRC(cartTotal())}`);
+      lines.push("");
+      lines.push("Mi nombre: ");
+      lines.push("Entrega: (Siquirres / Envío / Retiro)");
+      lines.push("Notas: ");
+
+      return lines.join("\n");
+    }
+
+    function checkout(){
+      if(qtyTotal() === 0){
+        openDrawer();
+        return;
+      }
+      const msg = encodeURIComponent(buildWhatsAppMessage());
+      const url = `https://wa.me/${WHATSAPP_PHONE}?text=${msg}`;
+      window.open(url, "_blank");
+    }
+
+    function setChipActive(style){
+      activeStyle = style;
+      [...els.styleChips.querySelectorAll(".chip")].forEach(ch=>{
+        ch.classList.toggle("active", ch.dataset.style === style);
+      });
+      applyFilters();
+    }
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    // ===== Events =====
+    els.openCartBtn.addEventListener("click", openDrawer);
+    els.fabOpenCart.addEventListener("click", openDrawer);
+    els.closeDrawer.addEventListener("click", closeDrawer);
+    els.drawerBackdrop.addEventListener("click", closeDrawer);
+
+    els.clearCartBtn.addEventListener("click", ()=>{
+      cart = {};
+      saveCart();
+      syncCartUI();
+      renderDrawer();
+    });
+
+    els.checkoutBtn.addEventListener("click", checkout);
+
+    els.modalClose.addEventListener("click", closeModal);
+    els.modalBack.addEventListener("click", (e)=>{
+      if(e.target === els.modalBack) closeModal();
+    });
+
+    els.q.addEventListener("input", applyFilters);
+    els.category.addEventListener("change", applyFilters);
+    els.minPrice.addEventListener("input", applyFilters);
+    els.maxPrice.addEventListener("input", applyFilters);
+    els.sort.addEventListener("change", applyFilters);
+
+    els.styleChips.addEventListener("click", (e)=>{
+      const chip = e.target.closest(".chip");
+      if(!chip) return;
+      setChipActive(chip.dataset.style);
+    });
+
+    els.resetFilters.addEventListener("click", ()=>{
+      els.q.value = "";
+      els.category.value = "all";
+      els.minPrice.value = "";
+      els.maxPrice.value = "";
+      els.sort.value = "featured";
+      setChipActive("all");
+      applyFilters();
+    });
+
+    // init
+    syncCartUI();
+    applyFilters();
+  </script>
 </body>
 </html>

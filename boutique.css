@@ -688,6 +688,35 @@ details p{ color: var(--muted); line-height: 1.6; margin: 10px 0 0; }
   border: 1px solid var(--line);
 }
 
+.swatch-btn{
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  display:grid;
+  place-items:center;
+  padding: 0;
+  cursor: pointer;
+}
+
+.swatch-btn:focus{
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.swatch-btn[aria-pressed="true"]{
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.swatch-dot{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+}
+
 .qty{
   display:flex;
   align-items:center;
@@ -899,4 +928,22 @@ details p{ color: var(--muted); line-height: 1.6; margin: 10px 0 0; }
     border-top-right-radius: 0;
     border-bottom-left-radius: var(--radius);
   }
+}
+
+/* Variante (color) en carrito */
+.cart-color{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+.cart-color__dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  display:inline-block;
 }
