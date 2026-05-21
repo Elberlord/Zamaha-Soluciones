@@ -1,1599 +1,2425 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HallValla Online 0.5B - GitHub ligero</title>
-<style>
-:root {
-  --text:#f8f1e6;
-  --muted:#d9c8ac;
-  --panel:rgba(34,22,14,.84);
-  --panel2:rgba(14,15,18,.86);
-  --gold:#ffd166;
-  --valid:rgba(106,220,128,.62);
-  --attack:rgba(239,71,111,.82);
-  --p1:#67cfff;
-  --p2:#ff79b7;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  min-height:100vh;
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-  background:radial-gradient(circle at 50% -10%,rgba(255,228,157,.14),transparent 28%),linear-gradient(180deg,#2a1b10,#090b0d 76%);
-}
-button{font-family:inherit}
-.lobby{
-  position:fixed; inset:0; z-index:3000;
-  display:flex; align-items:center; justify-content:center;
-  padding:18px; background:radial-gradient(circle at center,rgba(78,50,26,.97),rgba(4,5,7,.98));
-}
-.lobby.hidden{display:none}
-.lobby-card{
-  width:min(720px,96vw);
-  border-radius:26px;
-  padding:24px;
-  background:linear-gradient(180deg,rgba(34,22,14,.96),rgba(14,15,18,.97));
-  border:1px solid rgba(236,201,114,.36);
-  box-shadow:0 30px 100px rgba(0,0,0,.62);
-}
-.lobby h1{margin:0 0 8px;font-family:Georgia,"Times New Roman",serif;font-size:34px;color:#fff4cf}
-.lobby p{color:var(--muted);line-height:1.4}
-.lobby-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
-.lobby-box{padding:14px;border-radius:18px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08)}
-.input{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#111;color:white;font-size:16px}
-.btn{border:0;border-radius:12px;padding:12px 14px;font-weight:900;cursor:pointer;background:#343a46;color:white}
-.btn.primary{background:var(--gold);color:#111}
-.btn.full{width:100%;margin-top:10px}
-.status{margin-top:12px;color:#ffe2a3;font-size:13px;min-height:18px}
-.game-shell{width:100%;padding:14px}
-.battlefield{
-  position:relative; min-height:calc(100vh - 28px);
-  border-radius:28px; overflow:hidden;
-  border:2px solid rgba(232,200,123,.38);
-  background:radial-gradient(ellipse at 50% 100%,rgba(189,137,61,.75) 0%,rgba(166,117,46,.50) 34%,transparent 62%),linear-gradient(180deg,#f1c87b 0%,#e0b15e 24%,#c8863f 60%,#7a4921 100%);
-  box-shadow:inset 0 0 110px rgba(0,0,0,.34),0 24px 64px rgba(0,0,0,.38);
-}
-.scenery{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
-.sun{position:absolute;width:250px;height:250px;top:-60px;left:80px;border-radius:50%;background:radial-gradient(circle,rgba(255,241,179,.45),rgba(255,215,115,.18) 36%,transparent 72%);filter:blur(6px)}
-.path{position:absolute;left:22%;right:22%;bottom:36px;height:240px;background:radial-gradient(ellipse at center,rgba(239,210,145,.42) 0 24%,rgba(170,118,65,.28) 43%,transparent 72%);filter:blur(2px);transform:perspective(220px) rotateX(70deg);opacity:.88}
-.pyramid{position:absolute;bottom:190px;width:0;height:0;border-left:80px solid transparent;border-right:80px solid transparent;border-bottom:118px solid rgba(189,142,75,.92)}
-.pyramid:after{content:"";position:absolute;left:-78px;top:8px;width:0;height:0;border-left:78px solid transparent;border-right:78px solid transparent;border-bottom:106px solid rgba(224,181,104,.42)}
-.py1{left:70px;transform:scale(.92)}.py2{right:110px;transform:scale(.82)}
-.palm{position:absolute;bottom:154px;width:16px;height:82px;background:linear-gradient(180deg,#764728,#482b15);border-radius:8px}
-.palm:before{content:"";position:absolute;left:-34px;top:-20px;width:84px;height:46px;border-radius:50%;background:radial-gradient(circle,rgba(69,116,56,.95) 0 45%,rgba(43,82,35,.92) 58%,transparent 70%)}
-.p1a{left:5%}.p1b{left:29%;bottom:144px}.p2a{right:25%}.p2b{right:7%;bottom:146px}
-.hud{
-  position:absolute;z-index:22;width:270px;padding:10px;border-radius:14px;
-  background:linear-gradient(180deg,var(--panel),rgba(25,17,12,.80));
-  border:1px solid rgba(236,201,114,.24);
-  box-shadow:0 10px 24px rgba(0,0,0,.24);
-  backdrop-filter:blur(4px);
-}
-.top-left{left:16px;top:16px}.top-right{right:16px;top:16px}
-.hud-name{display:flex;justify-content:space-between;font-weight:900;margin-bottom:8px;font-size:14px}
-.hud-name span{color:#ffe2a3;font-size:12px}
-.p1{color:var(--p1)}.p2{color:var(--p2)}
-.hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.hud-mini{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:6px;text-align:center;color:var(--muted);font-size:10px}
-.hud-mini strong{display:block;color:#fff;font-size:16px;margin-top:2px}
-.phase-banner{
-  position:absolute;top:26px;left:50%;transform:translateX(-50%);z-index:23;
-  min-width:240px;padding:10px 18px;border-radius:999px;text-align:center;
-  font-family:Georgia,"Times New Roman",serif;font-size:20px;font-weight:900;letter-spacing:.6px;
-  color:#fff4cf;background:linear-gradient(180deg,rgba(34,22,14,.84),rgba(22,16,12,.74));
-  border:1px solid rgba(236,201,114,.32);box-shadow:0 10px 24px rgba(0,0,0,.22);
-}
-.grid-wrap{position:absolute;left:18px;top:100px;right:250px;bottom:18px;display:flex;align-items:center;justify-content:center;z-index:6}
-.grid{
-  display:grid;grid-template-columns:repeat(14,54px);grid-template-rows:repeat(6,58px);
-  gap:4px;padding:9px;border-radius:24px;
-  background:radial-gradient(ellipse at center,rgba(0,0,0,.10),rgba(0,0,0,.18));
-  box-shadow:0 20px 42px rgba(0,0,0,.22), inset 0 0 60px rgba(255,236,170,.045);
-}
-.cell{position:relative;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,231,171,.18);background:rgba(70,54,28,.10);cursor:pointer}
-.cell:after{content:attr(data-coord);position:absolute;right:4px;bottom:3px;color:rgba(255,245,210,.22);font-size:9px}
-.cell.valid{box-shadow:inset 0 0 0 3px var(--valid),0 0 14px rgba(123,216,143,.28)}
-.cell.attackable{box-shadow:inset 0 0 0 3px var(--attack),0 0 14px rgba(239,71,111,.32)}
-.cell.selected{outline:3px solid var(--gold);outline-offset:-3px}
-.cell.manual-drop-ready{box-shadow:inset 0 0 0 3px rgba(255,209,102,.95),0 0 22px rgba(255,209,102,.48)!important}
-.field-shadow{position:absolute;left:8px;right:8px;bottom:4px;height:7px;border-radius:50%;background:rgba(0,0,0,.32);filter:blur(4px);z-index:1}
-.field-card{position:relative;z-index:2;width:44px;height:56px;border-radius:9px}
-.field-frame{position:absolute;inset:0;overflow:hidden;border-radius:9px;background:linear-gradient(180deg,#3a2616,#18120d);border:2px solid rgba(244,228,196,.92);box-shadow:0 10px 16px rgba(0,0,0,.42)}
-.field-card.p1card .field-frame{border-color:rgba(96,212,255,.96)}.field-card.p2card .field-frame{border-color:rgba(255,113,180,.96)}
-.field-card.leader .field-frame{border-color:#ffe66d;box-shadow:0 0 0 2px rgba(255,230,109,.18),0 10px 18px rgba(0,0,0,.46)}
-.field-card.moved .field-frame{filter:grayscale(.35) brightness(.78)}
-.portrait{height:31px;position:relative;background-size:cover;background-position:center top}
-.name-strip{position:absolute;top:2px;left:2px;right:2px;padding:1px;border-radius:5px;background:rgba(9,10,12,.62);text-align:center;font-weight:800;font-size:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.board-unit-mark{position:absolute;top:2px;left:2px;right:2px;display:flex;justify-content:center;align-items:center;height:28px;font-size:20px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
-.divider{height:5px;background:linear-gradient(180deg,rgba(125,90,45,.98),rgba(67,44,20,.98))}
-.field-stats{height:20px;padding:2px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:linear-gradient(180deg,rgba(60,41,22,.98),rgba(22,18,16,.99))}
-.field-stat{border-radius:4px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.08);text-align:center;color:#efe6d4;font-size:5px;line-height:1.05}
-.field-stat strong{display:block;color:#fff;font-size:6px}
-.summon-display{position:absolute;width:42px;height:42px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,193,.95) 0 18%,rgba(255,209,102,.58) 19% 38%,rgba(255,209,102,0) 39%),radial-gradient(circle,rgba(255,209,102,.22),rgba(255,209,102,0) 70%);box-shadow:0 0 16px rgba(255,209,102,.65),inset 0 0 0 2px rgba(255,245,193,.75);animation:summonPulse .8s ease-in-out infinite;z-index:4}
-.summon-display:before{content:"✦";position:absolute;inset:0;display:grid;place-items:center;color:#fff6c4;font-size:18px;text-shadow:0 0 10px rgba(255,209,102,.9)}
-@keyframes summonPulse{0%,100%{transform:scale(.92);opacity:.78}50%{transform:scale(1.08);opacity:1}}
-.side{position:absolute;top:108px;right:16px;bottom:92px;width:218px;z-index:18;display:grid;grid-template-rows:auto minmax(170px,1fr) auto;gap:10px}
-.panel{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid rgba(236,201,114,.24);border-radius:16px;box-shadow:0 10px 24px rgba(0,0,0,.24);backdrop-filter:blur(4px);padding:10px}
-.icon-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.icon-btn{width:100%;aspect-ratio:1/1;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:#343a46;color:#fff;font-size:22px;display:grid;place-items:center;cursor:pointer}
-.icon-btn.primary{background:var(--gold);color:#111}
-.hint{margin-top:8px;min-height:30px;border-radius:10px;background:rgba(0,0,0,.20);border:1px solid rgba(255,255,255,.06);color:#ffe2a3;font-size:11px;line-height:1.25;padding:7px 8px}
-.side-title{margin:0 0 8px;font-family:Georgia,"Times New Roman",serif;font-size:15px}
-.hand-card{position:relative;min-height:72px;border-radius:12px;background:linear-gradient(180deg,rgba(82,58,31,.98),rgba(27,21,20,.98));border:1px solid rgba(218,177,94,.28);padding:6px;cursor:pointer;display:grid;gap:4px;align-content:center;text-align:center;user-select:none}
-.hand-card.selected{border:2px solid var(--gold);box-shadow:0 0 0 3px rgba(255,230,109,.14)}
-.cost{position:absolute;right:5px;top:5px;width:18px;height:18px;border-radius:50%;background:#0d111b;color:var(--gold);display:grid;place-items:center;font-size:10px;font-weight:900}
-.hand-icon{margin:2px auto 0;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(0,0,0,.22);border:1px solid rgba(255,231,171,.25);font-size:17px}
-.hand-name{font-size:10px;font-weight:800;line-height:1.05}.hand-stats{font-size:8px;color:var(--muted)}
-.detail p{margin:0 0 8px;color:var(--muted);font-size:12px;line-height:1.3}
-.hand-drawer{position:absolute;left:312px;right:250px;bottom:16px;z-index:40;display:none;padding:10px;border-radius:18px;background:linear-gradient(180deg,rgba(34,22,14,.92),rgba(22,16,12,.88));border:1px solid rgba(236,201,114,.30);box-shadow:0 14px 38px rgba(0,0,0,.36);backdrop-filter:blur(5px)}
-.hand-drawer.show{display:block}
-.hand-drawer-head{display:flex;justify-content:space-between;gap:8px;margin-bottom:8px}
-.hand-drawer-title{font-family:Georgia,"Times New Roman",serif;font-size:15px;font-weight:900;color:#fff}
-.hand-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
-.hand-row .hand-card{min-width:118px;max-width:130px;min-height:82px}
-.hand-drop-hint{font-size:11px;color:#ffe2a3;margin-top:6px}
-.drag-ghost{position:fixed;z-index:2000;width:124px;min-height:86px;pointer-events:none;opacity:.92;transform:translate(-50%,-50%) scale(.96);box-shadow:0 18px 44px rgba(0,0,0,.48)}
-.log{position:absolute;left:16px;bottom:16px;width:280px;max-height:112px;z-index:18;padding:10px;overflow-y:auto;color:#d8deea;font-size:12px;background:linear-gradient(180deg,rgba(34,22,14,.84),rgba(22,16,12,.82));border:1px solid rgba(236,201,114,.20);border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.24);backdrop-filter:blur(4px)}
-.log div{padding-bottom:4px;margin-bottom:4px;border-bottom:1px solid rgba(255,255,255,.04)}
-.inspect{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(5,6,8,.72);backdrop-filter:blur(3px)}
-.inspect.show{display:flex}
-.inspect-card{width:min(920px,96vw);max-height:92vh;overflow:auto;display:grid;grid-template-columns:minmax(260px,380px) 1fr;gap:16px;padding:16px;border-radius:24px;background:linear-gradient(180deg,rgba(34,22,14,.96),rgba(14,15,18,.97));border:1px solid rgba(236,201,114,.34);box-shadow:0 28px 90px rgba(0,0,0,.62)}
-.inspect-art{min-height:430px;border-radius:18px;background-size:cover;background-position:center top;border:2px solid rgba(244,228,196,.72);box-shadow:inset 0 -80px 90px rgba(0,0,0,.30),0 18px 42px rgba(0,0,0,.42);display:grid;place-items:center;font-size:72px}
-.inspect-title{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:28px;color:#fff4cf}
-.inspect-sub{color:#ffe2a3;font-size:13px;font-weight:800}
-.inspect-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
-.inspect-stat{padding:10px;border-radius:12px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.08);color:var(--muted);font-size:12px}
-.inspect-stat strong{display:block;color:#fff;font-size:20px}
-.inspect-desc{padding:12px;border-radius:14px;background:rgba(0,0,0,.20);border:1px solid rgba(255,255,255,.07);color:#e9dcc4;line-height:1.35;font-size:13px;margin-bottom:12px}
-.inspect-actions{display:flex;gap:8px;flex-wrap:wrap}
-.combat{position:fixed;inset:0;display:none;z-index:1000;align-items:center;justify-content:center;background:rgba(5,6,8,.78);backdrop-filter:blur(4px);padding:20px}
-.combat.show{display:flex}
-.combat-card{width:min(860px,96vw);border-radius:24px;padding:18px;background:linear-gradient(180deg,rgba(74,46,25,.98),rgba(14,15,18,.97));border:1px solid rgba(236,201,114,.34);box-shadow:0 28px 90px rgba(0,0,0,.62)}
-.combat-title{font-family:Georgia,"Times New Roman",serif;text-align:center;font-size:26px;color:#fff4cf;margin-bottom:12px}
-.combat-row{display:grid;grid-template-columns:1fr 70px 1fr;gap:12px;align-items:center}
-.combat-unit{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;background:rgba(0,0,0,.24);border-radius:18px;padding:12px;min-height:220px}
-.combat-unit.right{grid-template-columns:1fr 150px;text-align:right}
-.combat-portrait{height:200px;border-radius:16px;background-size:cover;background-position:center top;border:2px solid rgba(244,228,196,.72)}
-.vs{font-family:Georgia,"Times New Roman",serif;color:#ffe66d;font-size:32px;text-align:center;font-weight:900}
-@media(max-width:980px){
-  .battlefield{min-height:1200px}.hud{width:calc(50% - 12px);padding:8px}.top-left{left:10px;top:10px}.top-right{right:10px;top:10px}.hud-grid{grid-template-columns:repeat(2,1fr)}.phase-banner{top:88px;font-size:15px;min-width:190px}
-  .grid-wrap{left:10px;right:10px;top:170px;height:360px;bottom:auto}.grid{grid-template-columns:repeat(14,32px);grid-template-rows:repeat(6,42px);gap:3px;padding:6px}.field-card{width:28px;height:38px}.portrait{height:21px}.divider{height:4px}.field-stats{height:13px;padding:1px}.field-stat{font-size:4px}.field-stat strong{font-size:5px}.name-strip{font-size:4px}
-  .side{left:10px;right:10px;width:auto;top:548px;bottom:96px}.hand-drawer{left:10px;right:10px;bottom:96px}.hand-row .hand-card{min-width:104px}.log{left:10px;right:10px;width:auto;bottom:10px;max-height:80px}.inspect-card{grid-template-columns:1fr}.inspect-art{min-height:320px}.lobby-actions{grid-template-columns:1fr}
-}
+  <meta charset="UTF-8" />
+  <title>Zamaha - Servicios y soluciones</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- PWA CONFIGURATION -->
+  <meta name="theme-color" content="#00c853">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Zamaha">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Icono de la pestaña -->
+  <link rel="icon" href="zamaha-logo.png" type="image/png" />
+  
+  <style>
+    :root {
+      --bg-main: #050816;
+      --bg-card: #0c1224;
+      --accent: #00c853;
+      --accent-soft: rgba(0, 200, 83, 0.15);
+      --accent-strong: #00e676;
+      --text-main: #f5f7ff;
+      --text-soft: #c4c9ff;
+      --text-muted: #9aa0c6;
+      --brand-red: #ff4b5c;
+      --brand-blue: #1976d2;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.9);
+      --shadow-sm: 0 10px 24px rgba(15, 23, 42, 0.65);
+    }
 
-/* 0.3B mobile hand fix */
-.hand-row{
-  flex-wrap:nowrap!important;
-  overflow-x:auto!important;
-  overflow-y:hidden!important;
-  scrollbar-width:auto;
-  -webkit-overflow-scrolling:touch;
-  scroll-snap-type:x proximity;
-}
-.hand-row .hand-card{
-  flex:0 0 122px!important;
-  width:122px!important;
-  min-width:122px!important;
-  max-width:122px!important;
-  scroll-snap-align:start;
-}
-.hand-row::-webkit-scrollbar{height:10px}
-.hand-row::-webkit-scrollbar-track{background:rgba(0,0,0,.22);border-radius:999px}
-.hand-row::-webkit-scrollbar-thumb{background:rgba(255,209,102,.72);border-radius:999px}
-@media(max-width:980px){
-  .hand-drawer{
-    position:absolute!important;
-    left:10px!important;
-    right:10px!important;
-    bottom:90px!important;
-    z-index:80!important;
-    max-height:190px!important;
-    overflow:hidden!important;
-  }
-  .hand-row{
-    display:flex!important;
-    flex-direction:row!important;
-    gap:8px!important;
-    padding:4px 4px 12px!important;
-  }
-  .hand-row .hand-card{
-    flex:0 0 116px!important;
-    width:116px!important;
-    min-width:116px!important;
-    max-width:116px!important;
-    min-height:76px!important;
-  }
-  .hand-card .hand-name{font-size:9px!important}
-  .hand-card .hand-stats{font-size:7px!important}
-  .hand-drop-hint{font-size:10px!important}
-}
+    * {
+      box-sizing: border-box;
+    }
 
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      color-scheme: dark;
+    }
 
-/* HallValla Online 0.4 - Campo perspectivo egipcio */
-.battlefield{
-  background-image:
-    linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.20)),
-    url("assets/asset_01_1702b321bb.png")!important;
-  background-size:cover!important;
-  background-position:center center!important;
-  background-repeat:no-repeat!important;
-  border-color:rgba(255,220,135,.58)!important;
-}
-.scenery{
-  display:none!important;
-}
-.grid-wrap{
-  left:20.2%!important;
-  right:20.2%!important;
-  top:28.8%!important;
-  bottom:22.2%!important;
-  align-items:center!important;
-  justify-content:center!important;
-  perspective:980px!important;
-  pointer-events:none;
-}
-.grid{
-  width:min(760px,56vw)!important;
-  height:min(366px,34vh)!important;
-  grid-template-columns:repeat(14,1fr)!important;
-  grid-template-rows:repeat(6,1fr)!important;
-  gap:4px!important;
-  padding:6px!important;
-  transform:rotateX(42deg) scaleY(.92)!important;
-  transform-origin:center bottom!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  border-radius:0!important;
-  pointer-events:auto;
-}
-.cell{
-  border-radius:9px!important;
-  background:rgba(255,220,140,.045)!important;
-  border:1px solid rgba(255,232,170,.16)!important;
-  box-shadow:inset 0 0 8px rgba(255,230,160,.035)!important;
-}
-.cell:after{
-  display:none!important;
-}
-.cell:hover{
-  background:rgba(255,220,140,.12)!important;
-  border-color:rgba(255,232,170,.38)!important;
-}
-.cell.valid{
-  background:rgba(95,230,128,.17)!important;
-  box-shadow:inset 0 0 0 3px rgba(95,230,128,.76),0 0 16px rgba(95,230,128,.35)!important;
-}
-.cell.attackable{
-  background:rgba(239,71,111,.16)!important;
-  box-shadow:inset 0 0 0 3px rgba(239,71,111,.86),0 0 16px rgba(239,71,111,.40)!important;
-}
-.cell.manual-drop-ready{
-  background:rgba(255,209,102,.22)!important;
-  box-shadow:inset 0 0 0 3px rgba(255,209,102,.96),0 0 22px rgba(255,209,102,.52)!important;
-}
-.field-card{
-  width:48px!important;
-  height:62px!important;
-  transform:rotateX(-42deg) scale(1.02)!important;
-  transform-origin:center bottom!important;
-}
-.field-shadow{
-  bottom:1px!important;
-  left:8px!important;
-  right:8px!important;
-  height:9px!important;
-  opacity:.55!important;
-}
-.summon-display{
-  transform:rotateX(-42deg)!important;
-}
-.phase-banner{
-  top:18px!important;
-  background:linear-gradient(180deg,rgba(22,14,8,.90),rgba(12,10,8,.78))!important;
-}
-.hud{
-  background:linear-gradient(180deg,rgba(24,15,9,.88),rgba(10,8,6,.78))!important;
-  border-color:rgba(255,220,135,.28)!important;
-}
-.side .panel,.panel{
-  background:linear-gradient(180deg,rgba(24,15,9,.88),rgba(10,8,6,.78))!important;
-}
-.log{
-  background:linear-gradient(180deg,rgba(24,15,9,.86),rgba(10,8,6,.78))!important;
-}
-@media(max-width:980px){
-  .battlefield{
-    min-height:1180px!important;
-    background-size:auto 100%!important;
-    background-position:center top!important;
-  }
-  .grid-wrap{
-    left:3.8%!important;
-    right:3.8%!important;
-    top:218px!important;
-    bottom:auto!important;
-    height:340px!important;
-    perspective:850px!important;
-  }
-  .grid{
-    width:92vw!important;
-    height:300px!important;
-    gap:3px!important;
-    padding:5px!important;
-    transform:rotateX(40deg) scaleY(.94)!important;
-  }
-  .field-card{
-    width:30px!important;
-    height:42px!important;
-    transform:rotateX(-40deg) scale(1.04)!important;
-  }
-  .portrait{height:22px!important}
-  .field-stats{height:15px!important}
-  .phase-banner{top:88px!important}
-}
+    .page-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 14px 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
 
+    header {
+      margin-bottom: 20px;
+    }
 
-/* HallValla Online 0.4B - Campo dominante y UI compacta */
-.game-shell{
-  padding:6px!important;
-}
-.battlefield{
-  min-height:calc(100vh - 12px)!important;
-  border-radius:18px!important;
-}
-.hud{
-  width:210px!important;
-  padding:7px!important;
-  border-radius:12px!important;
-}
-.top-left{left:10px!important;top:10px!important}
-.top-right{right:10px!important;top:10px!important}
-.hud-name{
-  font-size:12px!important;
-  margin-bottom:5px!important;
-}
-.hud-name span{
-  font-size:10px!important;
-}
-.hud-grid{
-  gap:4px!important;
-}
-.hud-mini{
-  padding:4px!important;
-  border-radius:8px!important;
-  font-size:9px!important;
-}
-.hud-mini strong{
-  font-size:13px!important;
-}
-.phase-banner{
-  top:12px!important;
-  min-width:190px!important;
-  padding:7px 13px!important;
-  font-size:15px!important;
-}
-.side{
-  top:96px!important;
-  right:10px!important;
-  bottom:auto!important;
-  width:170px!important;
-  display:block!important;
-}
-.side .panel{
-  padding:7px!important;
-  border-radius:12px!important;
-  margin-bottom:7px!important;
-}
-.icon-bar{
-  grid-template-columns:repeat(5,30px)!important;
-  justify-content:end!important;
-  gap:5px!important;
-}
-.icon-btn{
-  width:30px!important;
-  height:30px!important;
-  aspect-ratio:auto!important;
-  border-radius:8px!important;
-  font-size:15px!important;
-}
-#cancelBtn.btn.full{
-  margin-top:6px!important;
-  padding:6px 8px!important;
-  border-radius:8px!important;
-  font-size:10px!important;
-}
-.hint{
-  margin-top:6px!important;
-  min-height:24px!important;
-  padding:5px 6px!important;
-  font-size:10px!important;
-}
-.side-title{
-  font-size:12px!important;
-  margin-bottom:5px!important;
-}
-#sideBox.hand-card{
-  min-height:46px!important;
-  padding:5px!important;
-}
-#sideBox .hand-icon{
-  width:22px!important;
-  height:22px!important;
-  font-size:13px!important;
-}
-#sideBox .hand-name{
-  font-size:9px!important;
-}
-#sideBox .hand-stats{
-  font-size:7px!important;
-}
-#detailBox{
-  max-height:110px!important;
-  overflow:auto!important;
-}
-#detailBox p{
-  font-size:10px!important;
-  line-height:1.2!important;
-}
-.log{
-  left:10px!important;
-  bottom:10px!important;
-  width:260px!important;
-  max-height:82px!important;
-  padding:7px!important;
-  font-size:10px!important;
-  border-radius:12px!important;
-}
-.hand-drawer{
-  left:300px!important;
-  right:195px!important;
-  bottom:10px!important;
-  padding:8px!important;
-  border-radius:14px!important;
-}
-.hand-drawer-head{
-  margin-bottom:5px!important;
-}
-.hand-drawer-title{
-  font-size:12px!important;
-}
-.hand-drawer .btn{
-  padding:5px 8px!important;
-  font-size:10px!important;
-  border-radius:8px!important;
-}
-.hand-row .hand-card{
-  flex:0 0 104px!important;
-  width:104px!important;
-  min-width:104px!important;
-  max-width:104px!important;
-  min-height:68px!important;
-  padding:5px!important;
-}
-.hand-icon{
-  width:24px!important;
-  height:24px!important;
-  font-size:14px!important;
-}
-.hand-name{
-  font-size:8px!important;
-}
-.hand-stats{
-  font-size:7px!important;
-}
-.cost{
-  width:16px!important;
-  height:16px!important;
-  font-size:9px!important;
-}
-.hand-drop-hint{
-  font-size:9px!important;
-  margin-top:4px!important;
-}
+    .header-card {
+      position: relative;
+      border-radius: 24px;
+      padding: 18px 18px 18px 18px;
+      background: radial-gradient(circle at top left, #111827 0, #020617 45%, #000 100%);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 22px 60px rgba(15, 23, 42, 0.8);
+      overflow: hidden;
+    }
 
-/* Campo más grande */
-.grid-wrap{
-  left:8.5%!important;
-  right:8.5%!important;
-  top:18.4%!important;
-  bottom:7.5%!important;
-  perspective:1120px!important;
-}
-.grid{
-  width:min(1120px,78vw)!important;
-  height:min(540px,54vh)!important;
-  gap:5px!important;
-  padding:7px!important;
-  transform:rotateX(42deg) scaleY(.94)!important;
-}
-.cell{
-  border-radius:10px!important;
-}
-.field-card{
-  width:56px!important;
-  height:72px!important;
-}
-.portrait{
-  height:37px!important;
-}
-.field-stats{
-  height:26px!important;
-}
-.field-stat{
-  font-size:6px!important;
-}
-.field-stat strong{
-  font-size:7px!important;
-}
-.name-strip{
-  font-size:7px!important;
-}
+    .header-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr);
+      gap: 14px;
+      align-items: center;
+    }
 
-@media(max-width:980px){
-  .game-shell{
-    padding:4px!important;
-  }
-  .battlefield{
-    min-height:100vh!important;
-    border-radius:14px!important;
-    background-size:cover!important;
-    background-position:center center!important;
-  }
-  .hud{
-    width:calc(50% - 10px)!important;
-    padding:6px!important;
-  }
-  .top-left{left:6px!important;top:6px!important}
-  .top-right{right:6px!important;top:6px!important}
-  .hud-grid{
-    grid-template-columns:repeat(4,1fr)!important;
-  }
-  .hud-mini{
-    font-size:7px!important;
-    padding:3px!important;
-  }
-  .hud-mini strong{
-    font-size:11px!important;
-  }
-  .phase-banner{
-    top:64px!important;
-    font-size:12px!important;
-    min-width:150px!important;
-    padding:5px 9px!important;
-  }
-  .grid-wrap{
-    left:1.5%!important;
-    right:1.5%!important;
-    top:102px!important;
-    height:58vh!important;
-    bottom:auto!important;
-    perspective:940px!important;
-  }
-  .grid{
-    width:97vw!important;
-    height:54vh!important;
-    gap:3px!important;
-    padding:4px!important;
-    transform:rotateX(39deg) scaleY(.95)!important;
-  }
-  .field-card{
-    width:32px!important;
-    height:44px!important;
-  }
-  .portrait{
-    height:24px!important;
-  }
-  .field-stats{
-    height:15px!important;
-  }
-  .side{
-    top:auto!important;
-    left:6px!important;
-    right:6px!important;
-    bottom:6px!important;
-    width:auto!important;
-    display:grid!important;
-    grid-template-columns:1fr!important;
-    gap:5px!important;
-  }
-  .side .panel{
-    margin-bottom:0!important;
-    padding:6px!important;
-  }
-  .icon-bar{
-    grid-template-columns:repeat(5,34px)!important;
-    justify-content:center!important;
-    gap:8px!important;
-  }
-  .icon-btn{
-    width:34px!important;
-    height:34px!important;
-    font-size:16px!important;
-  }
-  #cancelBtn.btn.full{
-    padding:6px!important;
-  }
-  .hint{
-    text-align:center!important;
-    font-size:10px!important;
-  }
-  .side .panel:nth-child(2){
-    display:none!important;
-  }
-  #detailBox{
-    max-height:74px!important;
-  }
-  .log{
-    left:6px!important;
-    right:6px!important;
-    bottom:188px!important;
-    width:auto!important;
-    max-height:54px!important;
-    font-size:9px!important;
-    padding:5px!important;
-  }
-  .hand-drawer{
-    left:6px!important;
-    right:6px!important;
-    bottom:104px!important;
-    max-height:150px!important;
-    padding:6px!important;
-  }
-  .hand-row .hand-card{
-    flex:0 0 96px!important;
-    width:96px!important;
-    min-width:96px!important;
-    max-width:96px!important;
-    min-height:64px!important;
-  }
-}
+    .brand-title-display {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 32px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      -webkit-text-stroke: 1px #ff4b5c;
+      text-shadow:
+        0 0 6px rgba(248, 113, 113, 0.9),
+        0 0 18px rgba(248, 113, 113, 0.75);
+    }
 
+    .brand-pill {
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(148, 163, 231, 0.6);
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.9), rgba(15, 23, 42, 0.9));
+      color: #e5e7eb;
+    }
 
-/* HallValla Online 0.4C - tablero vertical y calibrado */
-.grid-wrap{
-  /* Estos porcentajes calzan la grilla lógica sobre el tablero dibujado en la imagen */
-  left:17.2%!important;
-  right:23.0%!important;
-  top:19.0%!important;
-  bottom:8.8%!important;
-  perspective:none!important;
-  align-items:center!important;
-  justify-content:center!important;
-}
-.grid{
-  width:100%!important;
-  height:100%!important;
-  max-width:none!important;
-  max-height:none!important;
-  grid-template-columns:repeat(14,1fr)!important;
-  grid-template-rows:repeat(6,1fr)!important;
-  gap:4px!important;
-  padding:0!important;
-  transform:none!important;
-  transform-origin:center center!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-.cell{
-  border-radius:7px!important;
-  background:rgba(255,220,140,.015)!important;
-  border:1px solid rgba(255,232,170,.075)!important;
-  box-shadow:none!important;
-}
-.cell:hover{
-  background:rgba(255,220,140,.10)!important;
-  border-color:rgba(255,232,170,.32)!important;
-}
-.cell.valid{
-  background:rgba(95,230,128,.16)!important;
-  border-color:rgba(95,230,128,.55)!important;
-  box-shadow:inset 0 0 0 3px rgba(95,230,128,.72),0 0 15px rgba(95,230,128,.30)!important;
-}
-.cell.attackable{
-  background:rgba(239,71,111,.16)!important;
-  border-color:rgba(239,71,111,.62)!important;
-  box-shadow:inset 0 0 0 3px rgba(239,71,111,.82),0 0 15px rgba(239,71,111,.36)!important;
-}
-.cell.manual-drop-ready{
-  background:rgba(255,209,102,.22)!important;
-  box-shadow:inset 0 0 0 3px rgba(255,209,102,.96),0 0 22px rgba(255,209,102,.52)!important;
-}
-.field-card{
-  width:48px!important;
-  height:64px!important;
-  transform:none!important;
-  transform-origin:center bottom!important;
-  margin-top:-16px!important;
-  filter:drop-shadow(0 10px 10px rgba(0,0,0,.42));
-}
-.field-card.leader{
-  width:54px!important;
-  height:72px!important;
-  margin-top:-24px!important;
-}
-.portrait{
-  height:34px!important;
-}
-.field-card.leader .portrait{
-  height:42px!important;
-}
-.field-stats{
-  height:23px!important;
-}
-.field-card.leader .field-stats{
-  height:24px!important;
-}
-.name-strip{
-  font-size:6px!important;
-}
-.field-stat{
-  font-size:5px!important;
-}
-.field-stat strong{
-  font-size:7px!important;
-}
-.field-shadow{
-  bottom:4px!important;
-  height:8px!important;
-  opacity:.62!important;
-}
-.summon-display{
-  transform:none!important;
-  margin-top:-18px!important;
-}
+    .hero-title {
+      font-size: 22px;
+      line-height: 1.25;
+      margin: 0 0 6px;
+      color: #f9fafb;
+    }
 
-/* En esta cámara, el panel derecho debe flotar pero no tapar el tablero */
-.side{
-  width:165px!important;
-}
-@media(max-width:980px){
-  .grid-wrap{
-    left:4.5%!important;
-    right:4.5%!important;
-    top:112px!important;
-    height:58vh!important;
-    bottom:auto!important;
-    perspective:none!important;
-  }
-  .grid{
-    width:100%!important;
-    height:100%!important;
-    transform:none!important;
-    gap:2px!important;
-  }
-  .field-card{
-    width:30px!important;
-    height:42px!important;
-    margin-top:-10px!important;
-    transform:none!important;
-  }
-  .field-card.leader{
-    width:34px!important;
-    height:48px!important;
-    margin-top:-14px!important;
-  }
-  .portrait{
-    height:24px!important;
-  }
-  .field-card.leader .portrait{
-    height:29px!important;
-  }
-}
+    .hero-subtitle {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
 
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
 
-/* HallValla Online 0.5 - Campo exacto 13x6 */
-.battlefield {
-  background-image:
-    linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.14)),
-    url("assets/asset_01_1702b321bb.png") !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-}
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.6);
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.85), rgba(15, 23, 42, 0.9));
+      font-size: 11px;
+      color: #e5e7eb;
+    }
 
-.grid-wrap {
-  /* calibrado para el tablero 13x6 del nuevo arte */
-  left: 16.9% !important;
-  right: 16.9% !important;
-  top: 29.1% !important;
-  bottom: 18.2% !important;
-  perspective: none !important;
-}
+    .hero-badge span {
+      font-size: 12px;
+    }
 
-.grid {
-  width: 100% !important;
-  height: 100% !important;
-  padding: 0 !important;
-  gap: 0 !important;
-  transform: none !important;
-  background: transparent !important;
-}
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
 
-.cell {
-  border-radius: 4px !important;
-  background: rgba(255,255,255,.01) !important;
-  border: 1px solid rgba(255,235,180,.04) !important;
-  box-shadow: none !important;
-}
+    .hero-contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
 
-.cell:hover {
-  background: rgba(255,233,170,.08) !important;
-  border-color: rgba(255,235,180,.18) !important;
-}
+    .hero-contact-main {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
 
-.cell.valid {
-  background: rgba(80,224,120,.18) !important;
-  border-color: rgba(110,240,150,.56) !important;
-  box-shadow: inset 0 0 0 2px rgba(110,240,150,.82), 0 0 12px rgba(110,240,150,.28) !important;
-}
+    .hero-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      color: #022c22;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.5);
+    }
 
-.cell.attackable {
-  background: rgba(239,71,111,.16) !important;
-  border-color: rgba(255,110,140,.58) !important;
-  box-shadow: inset 0 0 0 2px rgba(255,110,140,.82), 0 0 12px rgba(239,71,111,.28) !important;
-}
+    .hero-whatsapp-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: #022c22;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.cell.manual-drop-ready {
-  background: rgba(255,210,95,.20) !important;
-  border-color: rgba(255,220,110,.70) !important;
-  box-shadow: inset 0 0 0 2px rgba(255,220,110,.95), 0 0 16px rgba(255,220,110,.36) !important;
-}
+    .hero-whatsapp-icon img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
 
-.field-card {
-  width: 52px !important;
-  height: 72px !important;
-  transform: none !important;
-  margin-top: -8px !important;
-  filter: drop-shadow(0 8px 8px rgba(0,0,0,.40));
-}
+    .hero-secondary-link {
+      font-size: 13px;
+      color: var(--text-soft);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px dashed rgba(148, 163, 231, 0.5);
+    }
 
-.field-card.leader {
-  width: 58px !important;
-  height: 82px !important;
-  margin-top: -14px !important;
-}
+    .hero-secondary-link span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-strong);
+    }
 
-.portrait {
-  height: 40px !important;
-}
+    .hero-contact-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-.field-card.leader .portrait {
-  height: 46px !important;
-}
+    .hero-contact-meta strong {
+      color: #e5e7eb;
+    }
 
-.field-stats {
-  height: 24px !important;
-}
+    .hero-contact-chip {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.45);
+      background: rgba(15, 23, 42, 0.75);
+    }
 
-.name-strip {
-  font-size: 6px !important;
-}
+    .hero-visual {
+      position: relative;
+      padding-left: 4px;
+    }
 
-.summon-display {
-  transform: none !important;
-  margin-top: -10px !important;
-}
+    .hero-visual-card {
+      position: relative;
+      border-radius: 20px;
+      padding: 12px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), #020617);
+      border: 1px solid rgba(148, 163, 231, 0.5);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+      overflow: hidden;
+    }
 
-@media (max-width: 980px) {
-  .grid-wrap {
-    left: 4.0% !important;
-    right: 4.0% !important;
-    top: 17.5% !important;
-    bottom: 26.5% !important;
-    height: auto !important;
-  }
+    .hero-visual-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
 
-  .grid {
-    width: 100% !important;
-    height: 100% !important;
-    gap: 0 !important;
-  }
+    .hero-visual-subtitle {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
 
-  .field-card {
-    width: 28px !important;
-    height: 40px !important;
-    margin-top: -4px !important;
-  }
+    .hero-visual-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+      display: grid;
+      gap: 4px;
+    }
 
-  .field-card.leader {
-    width: 33px !important;
-    height: 46px !important;
-    margin-top: -8px !important;
-  }
+    .hero-visual-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-  .portrait {
-    height: 23px !important;
-  }
+    .hero-visual-list li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
 
-  .field-card.leader .portrait {
-    height: 27px !important;
-  }
-}
+    .hero-visual-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 6px;
+    }
 
+    .hero-visual-badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.5);
+      background: rgba(15, 23, 42, 0.85);
+    }
 
-/* HallValla Online 0.5B
-   Corrección real: la imagen ya NO define los cuadros.
-   El HTML dibuja un tablero exacto 13x6 con bloques iguales.
-*/
-.battlefield {
-  background-image:
-    radial-gradient(circle at center, rgba(255,210,120,.08), rgba(0,0,0,.12) 58%, rgba(0,0,0,.28) 100%),
-    url("assets/asset_01_1702b321bb.png") !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-}
+    .hero-visual-quote {
+      font-style: italic;
+      opacity: 0.9;
+    }
 
-.grid-wrap {
-  left: 14.5% !important;
-  right: 14.5% !important;
-  top: 22.0% !important;
-  bottom: 12.0% !important;
-  perspective: 900px !important;
-  align-items: center !important;
-  justify-content: center !important;
-  pointer-events: none !important;
-}
+    .hero-gradient-orbit {
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top center, rgba(59, 130, 246, 0.35), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
 
-.grid {
-  width: 100% !important;
-  height: 100% !important;
-  display: grid !important;
-  grid-template-columns: repeat(13, 1fr) !important;
-  grid-template-rows: repeat(6, 1fr) !important;
-  gap: 5px !important;
-  padding: 12px !important;
-  transform: rotateX(28deg) scaleY(.96) !important;
-  transform-origin: center bottom !important;
-  border-radius: 18px !important;
-  background:
-    linear-gradient(180deg, rgba(100,63,28,.74), rgba(56,34,18,.70)) !important;
-  border: 2px solid rgba(255,209,102,.50) !important;
-  box-shadow:
-    0 34px 52px rgba(0,0,0,.36),
-    inset 0 0 42px rgba(255,215,120,.12) !important;
-  pointer-events: auto !important;
-}
+    .hero-gradient-orbit::after {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 231, 0.4);
+      opacity: 0.5;
+    }
 
-.cell {
-  position: relative !important;
-  border-radius: 10px !important;
-  background:
-    linear-gradient(180deg, rgba(220,168,88,.72), rgba(169,108,47,.72)) !important;
-  border: 1px solid rgba(72,42,20,.72) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,235,170,.18),
-    inset 0 -10px 18px rgba(58,34,14,.16) !important;
-}
+    /* ====== SECCIONES PRINCIPALES (UNA COLUMNA) ====== */
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
 
-.cell:before {
-  content:"" !important;
-  position:absolute !important;
-  inset:3px !important;
-  border-radius:7px !important;
-  background:
-    radial-gradient(circle at 25% 20%, rgba(255,236,174,.12), transparent 34%),
-    linear-gradient(135deg, rgba(255,255,255,.035), rgba(0,0,0,.035)) !important;
-  pointer-events:none !important;
-}
+    .main-column {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
 
-.cell:after {
-  display: none !important;
-}
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
 
-.cell:hover {
-  background:
-    linear-gradient(180deg, rgba(235,184,98,.84), rgba(179,118,52,.78)) !important;
-  border-color: rgba(255,226,150,.62) !important;
-}
+    .section-title {
+      font-size: 17px;
+      margin: 0 0 2px;
+      color: #e5e7eb;
+    }
 
-.cell.valid {
-  background:
-    linear-gradient(180deg, rgba(92,214,119,.52), rgba(49,122,65,.54)) !important;
-  box-shadow:
-    inset 0 0 0 3px rgba(116,240,148,.88),
-    0 0 18px rgba(116,240,148,.42) !important;
-}
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin: 0 0 8px;
+    }
 
-.cell.attackable {
-  background:
-    linear-gradient(180deg, rgba(239,71,111,.52), rgba(116,36,59,.56)) !important;
-  box-shadow:
-    inset 0 0 0 3px rgba(255,105,137,.88),
-    0 0 18px rgba(239,71,111,.42) !important;
-}
+    .services-section {
+      padding: 16px 18px 18px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #020617, #020617 45%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.3);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+    }
 
-.cell.manual-drop-ready {
-  background:
-    linear-gradient(180deg, rgba(255,210,95,.62), rgba(174,112,40,.60)) !important;
-  box-shadow:
-    inset 0 0 0 3px rgba(255,224,120,.98),
-    0 0 24px rgba(255,224,120,.48) !important;
-}
+    .services-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
 
-.field-card {
-  width: 52px !important;
-  height: 72px !important;
-  transform: rotateX(-28deg) !important;
-  transform-origin: center bottom !important;
-  margin-top: -16px !important;
-  filter: drop-shadow(0 10px 10px rgba(0,0,0,.45)) !important;
-}
+    .services-intro {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
 
-.field-card.leader {
-  width: 58px !important;
-  height: 82px !important;
-  margin-top: -22px !important;
-}
+    .services-intro p {
+      margin: 0 0 6px;
+    }
 
-.portrait {
-  height: 40px !important;
-}
+    .services-intro strong {
+      color: #e5e7eb;
+    }
 
-.field-card.leader .portrait {
-  height: 46px !important;
-}
+    .services-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
 
-.field-stats {
-  height: 24px !important;
-}
+    .service-card {
+      position: relative;
+      padding: 10px 11px 10px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+      overflow: hidden;
+    }
 
-.name-strip {
-  font-size: 6px !important;
-}
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
 
-.summon-display {
-  transform: rotateX(-28deg) !important;
-  margin-top: -14px !important;
-}
+    .service-title {
+      margin: 0;
+      font-size: 14px;
+      color: #e5e7eb;
+    }
 
-.phase-banner {
-  top: 13px !important;
-}
+    .service-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      color: #e0f2fe;
+      white-space: nowrap;
+    }
 
-.side {
-  width: 165px !important;
-}
+    .service-highlight {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
 
-@media(max-width:980px) {
-  .battlefield {
-    min-height: 100vh !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
+    .service-bullets {
+      margin: 0 0 6px;
+      padding-left: 18px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
 
-  .grid-wrap {
-    left: 2.5% !important;
-    right: 2.5% !important;
-    top: 96px !important;
-    bottom: 210px !important;
-    perspective: 760px !important;
-  }
+    .service-bullets li + li {
+      margin-top: 2px;
+    }
 
-  .grid {
-    width: 100% !important;
-    height: 100% !important;
-    gap: 3px !important;
-    padding: 7px !important;
-    transform: rotateX(24deg) scaleY(.98) !important;
-    border-radius: 12px !important;
-  }
+    .service-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
 
-  .cell {
-    border-radius: 6px !important;
-  }
+    .service-price {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
 
-  .field-card {
-    width: 29px !important;
-    height: 42px !important;
-    margin-top: -8px !important;
-    transform: rotateX(-24deg) !important;
-  }
+    .service-price strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
 
-  .field-card.leader {
-    width: 34px !important;
-    height: 48px !important;
-    margin-top: -12px !important;
-  }
+    .service-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
 
-  .portrait {
-    height: 24px !important;
-  }
+    .service-tooltip {
+      margin-top: 8px;
+      padding: 8px 9px;
+      border-radius: 12px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), #020617);
+      border: 1px dashed rgba(148, 163, 231, 0.4);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
 
-  .field-card.leader .portrait {
-    height: 28px !important;
-  }
-}
+    .service-tooltip-title {
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 4px;
+      font-size: 11px;
+    }
 
-</style>
+    .service-list {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .service-list li + li {
+      margin-top: 2px;
+    }
+
+    .risk-zone-warning {
+      margin-top: 8px;
+      padding: 7px 9px;
+      border-radius: 10px;
+      border: 1px dashed rgba(248, 250, 252, 0.18);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .risk-zone-warning strong {
+      color: #fecaca;
+    }
+
+    .risk-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #f97316, #ea580c);
+      box-shadow: 0 0 10px rgba(248, 113, 22, 0.9);
+      margin-right: 4px;
+    }
+
+    /* ======== PC Y CÁMARAS EN OFERTA ======== */
+    .product-layout {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+    }
+
+    .product-image-wrapper {
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 231, 0.45);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), #020617);
+      overflow: hidden;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.9);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      max-height: 130px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-info-title {
+      font-size: 14px;
+      color: #e5e7eb;
+      margin: 0 0 4px;
+    }
+
+    .product-info-sub {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin: 0 0 6px;
+    }
+
+    .product-specs {
+      margin: 0 0 6px;
+      padding-left: 18px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .product-specs li + li {
+      margin-top: 2px;
+    }
+
+    .product-footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .product-price {
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .product-price span {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .product-price strong {
+      font-size: 16px;
+      color: #22c55e;
+    }
+
+    .product-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .examples-section {
+      padding: 16px 18px 18px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+    }
+
+    .examples-grid {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .examples-card,
+    .example-card {
+      border-radius: 18px;
+      padding: 10px 12px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .example-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .example-title {
+      margin: 0;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .example-label {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      background: rgba(56, 189, 248, 0.12);
+      color: #e0f2fe;
+      white-space: nowrap;
+    }
+
+    .example-desc {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .example-actions {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .example-link {
+      font-size: 12px;
+      color: var(--accent-strong);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.6);
+    }
+
+    .example-link span {
+      font-size: 12px;
+    }
+
+    .example-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .web-examples-grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .contact-card {
+      padding: 16px 18px 18px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, #020617, #020617 60%, #020617);
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .contact-meta {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .contact-meta strong {
+      color: #e5e7eb;
+    }
+
+    .contact-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .contact-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 231, 0.45);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    form {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+    }
+
+    label {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.4);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      padding: 7px 10px;
+      font-size: 13px;
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    textarea {
+      border-radius: 16px;
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(34, 197, 94, 0.8);
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.75);
+    }
+
+    .small-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.6);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 11px;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .pill.active {
+      background: rgba(22, 163, 74, 0.15);
+      border-color: rgba(34, 197, 94, 0.8);
+      color: var(--accent-strong);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 231, 0.7);
+    }
+
+    .pill.active .pill-dot {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.65);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      transition:
+        background 0.12s ease,
+        border-color 0.12s ease,
+        transform 0.08s ease,
+        box-shadow 0.12s ease;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.85);
+    }
+
+    .btn-small {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      color: #022c22;
+      border-color: rgba(34, 197, 94, 0.9);
+      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.85);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-soft);
+      border-color: rgba(148, 163, 231, 0.7);
+    }
+
+    .btn-secondary:hover {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.65);
+      border-color: rgba(148, 163, 231, 0.4);
+      color: var(--text-soft);
+      box-shadow: none;
+    }
+
+    .btn-ghost:hover {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-whatsapp {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      color: #022c22;
+      border-color: rgba(34, 197, 94, 0.9);
+      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.85);
+    }
+
+    .btn-whatsapp:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(2, 44, 34, 0.95);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbf7d0;
+      font-size: 14px;
+    }
+
+    /* ----- LAYOUT RESPONSIVE ----- */
+    @media (min-width: 840px) {
+      .services-list {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      }
+
+      .web-examples-grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      }
+    }
+
+    @media (max-width: 840px) {
+      .header-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-visual {
+        margin-top: 10px;
+      }
+
+      .product-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-shell {
+        padding: 14px 10px 24px;
+      }
+
+      .header-card {
+        padding: 16px 14px 16px;
+      }
+
+      .services-section,
+      .examples-section,
+      .contact-card {
+        padding: 14px 12px 14px;
+      }
+    }
+
+    /* ----- CARRUSEL DE EJEMPLOS DE PÁGINAS WEB ----- */
+    .carousel {
+      position: relative;
+      margin-top: 8px;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 231, 0.35);
+      background: radial-gradient(circle at top left, #020617, #020617 65%, #020617);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 10px 12px 12px;
+    }
+
+    .carousel-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.1fr);
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-soft);
+      align-items: flex-start;
+    }
+
+    .carousel-main {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .carousel-side {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .carousel-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .carousel-title {
+      margin: 0;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .carousel-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(251, 191, 36, 0.8);
+      background: rgba(251, 191, 36, 0.12);
+      color: #fef3c7;
+      white-space: nowrap;
+    }
+
+    .carousel-text {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .carousel-bullets {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .carousel-bullets li + li {
+      margin-top: 2px;
+    }
+
+    .carousel-image-placeholder {
+      width: 120px;
+      height: 80px;
+      border-radius: 12px;
+      border: 1px dashed rgba(148, 163, 231, 0.45);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), #020617);
+      overflow: hidden;
+      position: relative;
+      cursor: zoom-in;
+    }
+
+    .carousel-image-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.18s ease;
+    }
+
+    .carousel-image-placeholder:hover .carousel-image-preview {
+      transform: scale(1.08);
+    }
+
+    .carousel-demo-link {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      inset-block: 50%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 6px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .carousel-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      pointer-events: auto;
+      transition:
+        background 0.12s ease,
+        transform 0.08s ease,
+        border-color 0.12s ease;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    .carousel-btn:hover {
+      background: rgba(30, 64, 175, 0.95);
+      border-color: rgba(191, 219, 254, 1);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 720px) {
+      .carousel-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .carousel-side {
+        align-items: flex-start;
+        text-align: left;
+      }
+      .carousel-demo-link {
+        width: auto;
+        align-self: flex-start;
+      }
+    }
+
+    /* ----- LIGHTBOX DE IMÁGENES ----- */
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 70;
+    }
+
+    .image-lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+    }
+
+    .image-lightbox-img {
+      position: relative;
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: 18px;
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 231, 0.6);
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      margin-top: 16px;
+      padding: 10px 0 0;
+      border-top: 1px solid rgba(148, 163, 231, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-left,
+    .footer-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .footer-left a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    .footer-left a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-right span {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-right {
+        justify-content: flex-start;
+      }
+    }
+
+    /* ----- Menú de servicios en el header ----- */
+    .header-top-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 3;
+      gap: 8px;
+    }
+
+    .services-tab-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .services-tab-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 231, 0.55);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+      color: var(--text-soft);
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-decoration: none;
+      transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease,
+        transform 0.08s ease;
+    }
+
+    .services-tab-button:hover {
+      border-color: var(--accent-strong);
+      color: var(--accent-strong);
+      transform: translateY(-1px);
+    }
+
+    .services-tab-chevron {
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    .services-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 0;
+      min-width: 220px;
+      padding: 8px;
+      border-radius: 14px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 1), #020617);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.85);
+      display: none;
+      z-index: 22;
+    }
+
+    .services-dropdown-menu a {
+      display: block;
+      padding: 7px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--text-soft);
+      text-decoration: none;
+      line-height: 1.3;
+      transition:
+        background 0.14s ease,
+        color 0.14s ease,
+        transform 0.08s ease;
+    }
+
+    .services-dropdown-menu a + a {
+      margin-top: 4px;
+    }
+
+    .services-dropdown-menu a:hover {
+      background: rgba(22, 163, 74, 0.12);
+      color: var(--accent-strong);
+      transform: translateX(2px);
+    }
+
+    .services-tab-wrapper:hover .services-dropdown-menu {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .header-top-row {
+        justify-content: flex-start;
+        margin-bottom: 10px;
+      }
+
+      .services-dropdown-menu {
+        right: auto;
+        left: 0;
+        width: min(260px, 80vw);
+      }
+    }
+
+    /* ----- Botón flotante de WhatsApp ----- */
+    .floating-whatsapp {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #22c55e, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #022c22;
+      box-shadow: 0 18px 36px rgba(22, 163, 74, 0.9);
+      text-decoration: none;
+      z-index: 50;
+      transition:
+        transform 0.12s ease,
+        filter 0.12s ease,
+        box-shadow 0.12s ease;
+    }
+
+    .floating-whatsapp:hover {
+      transform: translateY(-2px) scale(1.03);
+      filter: brightness(1.05);
+      box-shadow: 0 20px 40px rgba(22, 163, 74, 1);
+    }
+
+    .floating-whatsapp-img {
+      width: 30px;
+      height: 30px;
+      display: block;
+    }
+
+    /* ======== Ajustes extra para pantallas de celular pequeñas ======== */
+    @media (max-width: 480px) {
+      .page-shell {
+        padding: 10px 8px 22px;
+      }
+
+      .header-card {
+        padding: 14px 10px;
+      }
+
+      .hero-title {
+        font-size: 18px;
+        line-height: 1.3;
+      }
+
+      .hero-subtitle {
+        font-size: 12px;
+      }
+
+      .hero-contact-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .hero-contact-main {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .hero-whatsapp,
+      .hero-secondary-link {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .services-section,
+      .examples-section,
+      .contact-card {
+        padding: 12px 10px 14px;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 11px;
+        gap: 6px;
+      }
+
+      /* Mejorar elementos táctiles */
+      .btn, 
+      .hero-whatsapp,
+      .hero-secondary-link,
+      .service-pill-btn {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px 16px;
+      }
+      
+      .carousel-btn {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    /* Optimización móvil extra pequeña */
+    @media (max-width: 380px) {
+      .header-grid {
+        gap: 8px;
+      }
+      
+      .brand-title-display {
+        font-size: 24px;
+        letter-spacing: 0.12em;
+      }
+      
+      .hero-title {
+        font-size: 16px;
+        line-height: 1.3;
+      }
+      
+      .hero-subtitle {
+        font-size: 11px;
+      }
+      
+      .hero-badges {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="lobby" id="lobby">
-  <div class="lobby-card">
-    <h1>HallValla Online 0.5B</h1>
-    <p>Mesa conectada con tablero HTML exacto 13x6, líderes centrados, sonido ON/OFF y autoavance ON/OFF.</p>
-    <div class="lobby-actions">
-      <div class="lobby-box">
-        <h3>Crear partida</h3>
-        <p>Serás Jugador 1: Faraón.</p>
-        <button class="btn primary full" id="createGameBtn">Crear partida</button>
+  <div class="page-shell">
+    <!-- SECCIÓN 1: ENCABEZADO -->
+    <header>
+      <div class="header-card">
+        <div class="hero-gradient-orbit"></div>
+
+        <div class="header-top-row">
+          <div class="header-top-spacer"></div>
+          <div class="header-top-actions">
+            <div class="services-tab-wrapper">
+              <a class="services-tab-button" href="servicios.html">
+                Servicios
+                <span class="services-tab-chevron">▾</span>
+              </a>
+              <div class="services-dropdown-menu">
+                <a href="camaras.html">Cámaras y monitoreo</a>
+                <a href="redes-electricas.html">Redes eléctricas</a>
+                <a href="equipos.html">Equipos de cómputo</a>
+                <a href="ejemplos-web.html">Desarrollo web y sistemas</a>
+              </div>
+            </div>
+
+            <!-- BOTÓN DESCARGAR APP -->
+            <a class="services-tab-button" href="zamaha.apk" download>
+              App de Android
+            </a>
+          </div>
+        </div>
+
+        <div class="header-grid">
+          <div>
+            <div class="brand-title-display">ZAMAHA</div>
+
+            <h1 class="hero-title">
+              Servicios y Soluciones para tu
+              <span style="color: #a5b4fc;">casa</span> y tu
+              <span style="color: #22c55e;">negocio</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              Instalación de cámaras, redes ligeras, computadoras y páginas web sencillas,
+              pensado para gente que quiere <strong>soluciones claras, sin humo</strong>.
+            </p>
+
+            <div class="hero-badges">
+              <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                <span>Atención en Siquirres y alrededores</span>
+              </div>
+              <div class="hero-badge">
+                <span>+10 años Aportando Servicios y Responsabilidad en mi área</span>
+              </div>
+            </div>
+
+            <div class="hero-contact-row">
+              <div class="hero-contact-main">
+                <a class="hero-whatsapp"
+                   href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
+                   target="_blank" rel="noopener noreferrer">
+                  <span class="hero-whatsapp-icon">
+                    <img src="icono-whatsapp.png" alt="WhatsApp" />
+                  </span>
+                  <span>Escríbeme por WhatsApp</span>
+                </a>
+                <a href="#contacto" class="hero-secondary-link">
+                  <span>Formulario</span>
+                  <span>Déjame tus datos y te respondo</span>
+                </a>
+              </div>
+              <div class="hero-contact-meta">
+                <div class="hero-contact-chip">
+                  Lunes a sábado • <strong>9:00 a.m. - 5:00 p.m.</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-visual-card">
+              <div class="hero-visual-title">¿Qué puedo hacer por tu espacio?</div>
+              <div class="hero-visual-subtitle">Un vistazo rápido a cómo trabajo:</div>
+              <ul class="hero-visual-list">
+                <li>Cámaras CCTV básicas para ver tu casa o negocio desde el celular.</li>
+                <li>Orden en cables y puntos eléctricos para tus equipos.</li>
+                <li>Limpieza y puesta a punto de computadoras lentas.</li>
+                <li>Páginas web sencillas para que te encuentren y te escriban fácil.</li>
+              </ul>
+              <div class="hero-visual-footer">
+                <span class="hero-visual-badge">Proyectos pequeños, trato cercano</span>
+                <span class="hero-visual-quote">"Sin humo, sin promesas raras."</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="lobby-box">
-        <h3>Unirse a partida</h3>
-        <input class="input" id="joinCodeInput" placeholder="Código de partida" />
-        <button class="btn primary full" id="joinGameBtn">Unirse como J2</button>
+    </header>
+
+    <!-- SECCIÓN 2: DEMO PÁGINAS -->
+    <section class="examples-section">
+      <div class="section-label">Ejemplos de páginas</div>
+      <h2 class="section-title">Demos de páginas para tu negocio</h2>
+      <p class="section-subtitle">
+        Estas son demos de cómo podría verse tu página si tienes una
+        <strong>soda</strong>, una <strong>pizzería</strong> o una
+        <strong>cafetería</strong>, con precios de locura: mensualidades desde
+        <strong>¢5,000</strong> por un trabajo profesional en oferta.
+        ¿Cómo decir que no?
+      </p>
+
+      <div class="carousel" id="webExamplesCarousel">
+        <div class="carousel-track">
+          <!-- Slide 1: Soda -->
+          <div class="carousel-slide">
+            <div class="carousel-content">
+              <div class="carousel-main">
+                <div class="carousel-title-row">
+                  <h3 class="carousel-title">Soda "El Sabor Tico"</h3>
+                </div>
+                <p class="carousel-text">
+                  Pensada para una soda de barrio que quiere mostrar su comida del día
+                  y recibir pedidos simples.
+                </p>
+                <ul class="carousel-bullets">
+                  <li>Menú del día con platos y precios básicos.</li>
+                  <li>Sección de plato especial / recomendación de la casa.</li>
+                  <li>Información del local: dirección, horario y contacto.</li>
+                  <li>Botón de WhatsApp para pedidos o consultas rápidas.</li>
+                </ul>
+                <p class="example-note">
+                  Carga rápida y diseño sencillo pensado para pantallas de celular.
+                </p>
+              </div>
+              <div class="carousel-side">
+                <span class="carousel-badge">Demo web</span>
+                <a href="soda.html" class="example-link carousel-demo-link" target="_blank">
+                  <span>Ver demo soda</span>
+                </a>
+                <div class="carousel-image-placeholder"
+                     data-full="soda-hero-plate.png"
+                     data-alt="Soda El Sabor Tico">
+                  <img src="soda-hero-plate.png"
+                       alt="Soda El Sabor Tico"
+                       class="carousel-image-preview" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Pizzería -->
+          <div class="carousel-slide">
+            <div class="carousel-content">
+              <div class="carousel-main">
+                <div class="carousel-title-row">
+                  <h3 class="carousel-title">Pizzería "La Esquina"</h3>
+                </div>
+                <p class="carousel-text">
+                  Ideal para una pizzería de barrio que quiere mostrar sus combos
+                  y recibir pedidos por WhatsApp.
+                </p>
+                <ul class="carousel-bullets">
+                  <li>Carta de pizzas y combos con precios claros.</li>
+                  <li>Sección de promociones, 2x1 y ofertas por día.</li>
+                  <li>Fotos sencillas de tus pizzas más vendidas.</li>
+                  <li>Información de horarios, ubicación y forma de hacer pedidos.</li>
+                </ul>
+                <p class="example-note">
+                  Perfecta para que la gente vea tus promos rápido desde el teléfono.
+                </p>
+              </div>
+              <div class="carousel-side">
+                <span class="carousel-badge">Demo web</span>
+                <a href="pizzeria.html" class="example-link carousel-demo-link" target="_blank">
+                  <span>Ver demo pizzería</span>
+                </a>
+                <div class="carousel-image-placeholder"
+                     data-full="pizza-close-1.jpg"
+                     data-alt="Pizzería La Esquina">
+                  <img src="pizza-close-1.jpg"
+                       alt="Pizzería La Esquina"
+                       class="carousel-image-preview" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Cafetería -->
+          <div class="carousel-slide">
+            <div class="carousel-content">
+              <div class="carousel-main">
+                <div class="carousel-title-row">
+                  <h3 class="carousel-title">Cafetería "Café del Barrio"</h3>
+                </div>
+                <p class="carousel-text">
+                  Pensada para una cafetería pequeña que quiere mostrar su ambiente
+                  y sus bebidas especiales.
+                </p>
+                <ul class="carousel-bullets">
+                  <li>Galería sencilla de bebidas, postres y repostería.</li>
+                  <li>Sección de bebida del día o de temporada.</li>
+                  <li>Información de ubicación, horario y contacto.</li>
+                  <li>Botón de WhatsApp para reservas o encargos.</li>
+                </ul>
+                <p class="example-note">
+                  Ayuda a transmitir el ambiente del lugar sin complicarse.
+                </p>
+              </div>
+              <div class="carousel-side">
+                <span class="carousel-badge">Demo web</span>
+                <a href="cafeteria.html" class="example-link carousel-demo-link" target="_blank">
+                  <span>Ver demo cafetería</span>
+                </a>
+                <div class="carousel-image-placeholder"
+                     data-full="coffee-table-1.jpg"
+                     data-alt="Cafetería Café del Barrio">
+                  <img src="coffee-table-1.jpg"
+                       alt="Cafetería Café del Barrio"
+                       class="carousel-image-preview" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="carouselPrev" type="button">&#8249;</button>
+          <button class="carousel-btn" id="carouselNext" type="button">&#8250;</button>
+        </div>
       </div>
+    </section>
+
+    <main>
+      <!-- SECCIÓN 3: COMPUTADORAS -->
+      <div class="main-column">
+        <section class="services-section" id="equipos-computo">
+          <div class="section-label">Equipos de cómputo</div>
+          <h2 class="section-title">Computadoras listas para trabajar</h2>
+          <p class="section-subtitle">
+            Equipos preparados para oficina, estudio o negocio pequeño, pensados para tareas
+            diarias sin complicarse con especificaciones raras.
+          </p>
+
+          <!-- PC en oferta -->
+          <article class="service-card">
+            <div class="product-layout">
+              <div class="product-image-wrapper">
+                <img src="dell-latitude-5480.jpg"
+                     alt="Computadora de escritorio en oferta"
+                     class="product-image" />
+              </div>
+              <div>
+                <h3 class="product-info-title">Computadora de escritorio en oferta</h3>
+                <p class="product-info-sub">
+                  Equipo armado listo para oficina, estudio o negocio pequeño: ideal para Office,
+                  WhatsApp Web, Zoom y navegación diaria.
+                </p>
+                <ul class="product-specs">
+                  <li>Procesador Intel® Core™ i5.</li>
+                  <li>8 GB de memoria RAM para trabajar con varias ventanas abiertas.</li>
+                  <li>Disco SSD de 240 GB para que encienda y abra programas rápido.</li>
+                  <li>Bluetooth y Wi-Fi de alta velocidad.</li>
+                  <li>Pantalla de 17", teclado y mouse incluidos.</li>
+                  <li>Windows y programas básicos instalados (lista para trabajar).</li>
+                </ul>
+                <div class="product-footer-row">
+                  <div class="product-price">
+                    <span>Precio de contado</span>
+                    <strong>₡150,000</strong>
+                    <span>Opciones de pago y reserva a conversar por WhatsApp.</span>
+                  </div>
+                  <div class="product-actions-row">
+                    <a class="btn btn-secondary btn-small" href="equipos.html">
+                      Ver catálogo
+                    </a>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-small js-agregar"
+                      data-service="Equipos de cómputo"
+                      data-item="Computadora de escritorio en oferta – ₡150,000">
+                      Añadir a cotización
+                    </button>
+                  </div>
+                </div>
+                <p class="product-note">
+                  Si necesitas que la lleve instalada a tu negocio o casa en Siquirres y alrededores,
+                  lo hablamos por mensaje y te doy el precio con instalación incluida.
+                </p>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECCIÓN 4: CÁMARAS -->
+        <section class="services-section" id="camaras">
+          <div class="section-label">Cámaras</div>
+          <h2 class="section-title">Cámaras fáciles de usar</h2>
+          <p class="section-subtitle">
+            Opciones pensadas para casas y negocios pequeños que quieren ver lo que pasa
+            desde el celular sin enredos.
+          </p>
+
+          <!-- Cámara bombillo E27 en oferta -->
+          <article class="service-card">
+            <div class="product-layout">
+              <div class="product-image-wrapper">
+                <img src="camara-bombillo-e27-split.png"
+                     alt="Cámara bombillo Wi-Fi E27 360°"
+                     class="product-image" />
+              </div>
+              <div>
+                <h3 class="product-info-title">Cámara bombillo Wi-Fi E27 360°</h3>
+                <p class="product-info-sub">
+                  Ideal para pasillos, cocheras o entradas donde quieres algo discreto
+                  que se vea como un foco normal.
+                </p>
+                <ul class="product-specs">
+                  <li>Resolución Full HD 1080p para ver los detalles con claridad.</li>
+                  <li>Vista panorámica 360° para cubrir toda la habitación.</li>
+                  <li>Conexión Wi-Fi 2.4 GHz y visualización desde app en el celular.</li>
+                  <li>Detección de movimiento, visión nocturna y audio bidireccional.</li>
+                  <li>Se enrosca en un socket E27 como un bombillo normal.</li>
+                </ul>
+                <div class="product-footer-row">
+                  <div class="product-price">
+                    <span>Precio de referencia</span>
+                    <strong>₡19,000</strong>
+                    <span>Puede variar un poco según proveedor y stock, siempre te aviso antes de cerrar.</span>
+                  </div>
+                  <div class="product-actions-row">
+                    <a class="btn btn-secondary btn-small" href="camaras.html">
+                      Ver catálogo
+                    </a>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-small js-agregar"
+                      data-service="Cámaras CCTV"
+                      data-item="Cámara bombillo Wi-Fi E27 360° – ₡19,000">
+                      Añadir a cotización
+                    </button>
+                  </div>
+                </div>
+                <p class="product-note">
+                  Simple de instalar: solo se enrosca donde iría un bombillo.
+                  En el catálogo puedes ver también la Tapo C210 y otras opciones.
+                </p>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- (Opcional) Sección de servicios generales se queda después de cámaras -->
+        <section class="services-section" id="servicios">
+          <div class="section-label">Servicios</div>
+          <div class="services-grid">
+            <div class="services-intro">
+              <h2 class="section-title">¿En qué te puedo ayudar?</h2>
+              <p>
+                Estos son los servicios que ofrezco actualmente en Siquirres y alrededores,
+                pensados para pequeños negocios, casas de habitación y comercios que necesitan
+                soluciones claras, sin letras pequeñas.
+              </p>
+              <p>
+                Puedes combinar varios servicios en una misma visita. Si tienes algo más
+                específico en mente, también lo podemos conversar por WhatsApp.
+              </p>
+            </div>
+
+            <div class="services-list">
+              <!-- Cámaras CCTV -->
+              <article class="service-card">
+                <div class="service-header">
+                  <h3 class="service-title">Instalación de cámaras CCTV</h3>
+                  <span class="service-tag">Seguridad</span>
+                </div>
+                <div class="service-highlight">Kits pequeños para casas y negocios de barrio.</div>
+                <ul class="service-bullets">
+                  <li>Instalación de 1 a 4 cámaras según el espacio.</li>
+                  <li>Equipos económicos pero confiables, según tu presupuesto.</li>
+                  <li>Configuración básica de visualización en el celular.</li>
+                </ul>
+                <div class="service-footer">
+                  <div class="service-price">
+                    Mano de obra desde <strong>₡22,500 por cámara</strong>.
+                  </div>
+                  <div class="service-actions">
+                    <button class="btn btn-primary btn-small js-cotizar" data-service="Cámaras CCTV">
+                      Cotizar cámaras
+                    </button>
+                    <button class="btn btn-secondary btn-small js-agregar" data-service="Cámaras CCTV">
+                      Añadir a cotización
+                    </button>
+                  </div>
+                </div>
+                <div class="service-tooltip">
+                  <div class="service-tooltip-title">Detalle del servicio de cámaras</div>
+                  <ul class="service-list">
+                    <li>Revisión del lugar para recomendar la mejor ubicación.</li>
+                    <li>Instalación de cámaras, cableado y conectores básicos.</li>
+                    <li>Conexión al grabador, configuración de red y app básica.</li>
+                    <li>Explicación sencilla de cómo revisar las grabaciones.</li>
+                  </ul>
+                  <div class="risk-zone-warning">
+                    <span class="risk-dot"></span>
+                    <strong>Importante:</strong> Asesorias Gratuitas para su tranquilidad.
+                  </div>
+                </div>
+              </article>
+
+              <!-- Redes eléctricas ligeras -->
+              <article class="service-card">
+                <div class="service-header">
+                  <h3 class="service-title">Redes eléctricas ligeras</h3>
+                  <span class="service-tag">Infraestructura</span>
+                </div>
+                <div class="service-highlight">Puntos eléctricos y orden básico para tus equipos.</div>
+                <ul class="service-bullets">
+                  <li>Instalación de tomacorrientes adicionales para equipos.</li>
+                  <li>Canaletas básicas para que los cables queden ordenados.</li>
+                  <li>Revisión visual de conexiones y recomendaciones.</li>
+                </ul>
+                <div class="service-footer">
+                  <div class="service-price">
+                    Mano de obra según alcance del trabajo.
+                  </div>
+                  <div class="service-actions">
+                    <button class="btn btn-primary btn-small js-cotizar" data-service="Redes eléctricas">
+                      Cotizar redes eléctricas
+                    </button>
+                    <button class="btn btn-secondary btn-small js-agregar" data-service="Redes eléctricas">
+                      Añadir a cotización
+                    </button>
+                  </div>
+                </div>
+                <div class="service-tooltip">
+                  <div class="service-tooltip-title">Detalle de redes eléctricas ligeras</div>
+                  <ul class="service-list">
+                    <li>Puntos para computadoras, cámaras, routers, etc.</li>
+                    <li>Canaletas plásticas para mejorar el orden.</li>
+                    <li>Enfoque en pequeñas ampliaciones, no en obras mayores.</li>
+                  </ul>
+                  <div class="risk-zone-warning">
+                    <span class="risk-dot"></span>
+                    <strong>Nota:</strong> Asesoria gratuita saque su cita.
+                  </div>
+                </div>
+              </article>
+
+              <!-- Mantenimiento y limpieza de PCs -->
+              <article class="service-card">
+                <div class="service-header">
+                  <h3 class="service-title">Mantenimiento y limpieza de computadoras</h3>
+                  <span class="service-tag">Equipos de cómputo</span>
+                </div>
+                <div class="service-highlight">Para máquinas lentas o llenas de programas que no usas.</div>
+                <ul class="service-bullets">
+                  <li>Limpieza física básica (polvo, ventilación).</li>
+                  <li>Revisión de programas que se abren al encender.</li>
+                  <li>Pequeñas optimizaciones para uso de oficina o negocio.</li>
+                </ul>
+                <div class="service-footer">
+                  <div class="service-price">
+                    Servicio básico por <strong>equipo individual</strong>.
+                  </div>
+                  <div class="service-actions">
+                    <button class="btn btn-primary btn-small js-cotizar" data-service="Equipos de cómputo">
+                      Cotizar mantenimiento
+                    </button>
+                    <button class="btn btn-secondary btn-small js-agregar" data-service="Equipos de cómputo">
+                      Añadir a cotización
+                    </button>
+                  </div>
+                </div>
+                <div class="service-tooltip">
+                  <div class="service-tooltip-title">Detalle del mantenimiento</div>
+                  <ul class="service-list">
+                    <li>Revisión inicial y explicación de opciones.</li>
+                    <li>Respaldo de información (si lo solicitas).</li>
+                    <li>Instalación de software básico y probado.</li>
+                  </ul>
+                </div>
+              </article>
+
+              <!-- Desarrollo web -->
+              <article class="service-card">
+                <div class="service-header">
+                  <h3 class="service-title">Páginas web para tu negocio</h3>
+                  <span class="service-tag">Presencia digital</span>
+                </div>
+                <div class="service-highlight">Ideal para sodas, pizzerías, cafeterías y pequeños negocios.</div>
+                <ul class="service-bullets">
+                  <li>Landing page o sitio profesional para tu negocio, con información clara.</li>
+                  <li>Enlaces a WhatsApp, ubicación y redes sociales.</li>
+                  <li>Plantillas ligeras y fáciles de mantener.</li>
+                </ul>
+                <div class="service-footer">
+                  <div class="service-price">
+                    Propuestas según lo que necesites mostrar.
+                  </div>
+                  <div class="service-actions">
+                    <button class="btn btn-primary btn-small js-cotizar" data-service="Desarrollo web">
+                      Cotizar sitio web
+                    </button>
+                    <button class="btn btn-secondary btn-small js-agregar" data-service="Desarrollo web">
+                      Añadir a cotización
+                    </button>
+                  </div>
+                </div>
+                <div class="service-tooltip">
+                  <div class="service-tooltip-title">Detalle de páginas web</div>
+                  <ul class="service-list">
+                    <li>Páginas enfocadas en que la gente entienda qué ofreces y cómo contactarte.</li>
+                    <li>Nada de promesas raras de "te harás millonario en 30 días".</li>
+                    <li>Diseños simples, pensados para cargar rápido.</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- SECCIÓN 5: CONTACTO Y COTIZACIÓN -->
+      <div class="main-column">
+        <section class="contact-card" id="contacto">
+          <div class="section-label">Contacto y cotización</div>
+          <h2 class="section-title">Cuéntame qué necesitas</h2>
+          <p class="section-subtitle">
+            Completa el formulario para cotizar cámaras, redes, mantenimiento de computadoras
+            o una página web para tu negocio.
+          </p>
+
+          <div class="contact-grid">
+            <div class="contact-meta">
+              <p>
+                <strong>Opciones de contacto:</strong>
+              </p>
+              <div class="contact-meta-row">
+                <span class="contact-chip">
+                  📍 Siquirres y alrededores
+                </span>
+                <span class="contact-chip">
+                  💬 WhatsApp directo:
+                  <a href="https://wa.me/50664305227" target="_blank" rel="noopener noreferrer"
+                     style="color: #22c55e; text-decoration: none;">
+                    +506 6430-5227
+                  </a>
+                </span>
+                <span class="contact-chip">
+                  ✉ Correo:
+                  <a href="mailto:zamaha-soluciones@outlook.es"
+                     style="color: #93c5fd; text-decoration: none;">
+                    zamaha-soluciones@outlook.es
+                  </a>
+                </span>
+                <span class="contact-chip">
+                  🕒 Hora actual en Costa Rica:
+                  <strong id="crTime">--:--:--</strong>
+                </span>
+              </div>
+              <p class="small-hint">
+                Si prefieres, puedes escribir primero por WhatsApp y luego llenar el formulario
+                cuando ya tengamos claro lo que necesitas.
+              </p>
+            </div>
+
+            <div>
+              <form action="https://formspree.io/f/mqazkrwr" method="POST">
+                <!-- Nombre completo -->
+                <div class="field-group">
+                  <label for="nombre">Nombre completo</label>
+                  <input type="text" id="nombre" name="nombre"
+                         placeholder="Tu nombre y apellidos" required />
+                </div>
+
+                <!-- Medio de contacto preferido -->
+                <div class="field-group">
+                  <label>¿Cómo prefieres que te contacte?</label>
+                  <div class="pill-row">
+                    <label class="pill">
+                      <input type="radio" name="medioContacto" value="WhatsApp" style="display:none;" checked />
+                      <span class="pill-dot"></span>
+                      WhatsApp
+                    </label>
+                    <label class="pill">
+                      <input type="radio" name="medioContacto" value="Llamada" style="display:none;" />
+                      <span class="pill-dot"></span>
+                      Llamada
+                    </label>
+                    <label class="pill">
+                      <input type="radio" name="medioContacto" value="Correo electrónico" style="display:none;" />
+                      <span class="pill-dot"></span>
+                      Correo
+                    </label>
+                  </div>
+                </div>
+
+                <!-- WhatsApp / Teléfono y correo -->
+                <div class="field-group">
+                  <label for="telefono">WhatsApp o teléfono</label>
+                  <input type="tel" id="telefono" name="telefono"
+                         placeholder="Ej: +506 6430-5227" required />
+                </div>
+
+                <div class="field-group">
+                  <label for="correo">Correo electrónico (opcional)</label>
+                  <input type="email" id="correo" name="correo"
+                         placeholder="Si quieres que también te escriba por correo" />
+                </div>
+
+                <!-- Servicios a cotizar -->
+                <div class="field-group">
+                  <label>¿Qué servicios quieres cotizar?</label>
+                  <div class="pill-row">
+                    <button type="button" class="pill service-pill-btn" data-service="Cámaras CCTV">
+                      <span class="pill-dot"></span>
+                      Cámaras y monitoreo
+                    </button>
+                    <button type="button" class="pill service-pill-btn" data-service="Redes eléctricas">
+                      <span class="pill-dot"></span>
+                      Redes eléctricas
+                    </button>
+                    <button type="button" class="pill service-pill-btn" data-service="Equipos de cómputo">
+                      <span class="pill-dot"></span>
+                      Equipos de cómputo
+                    </button>
+                    <button type="button" class="pill service-pill-btn" data-service="Desarrollo web">
+                      <span class="pill-dot"></span>
+                      Desarrollo / Página web
+                    </button>
+                  </div>
+                  <input type="hidden" id="servicesField" name="serviciosSeleccionados" />
+                  <p class="small-hint">
+                    Puedes seleccionar uno o varios. También puedes escribir detalles extras
+                    en el mensaje final.
+                  </p>
+                </div>
+
+                <!-- Ubicación del trabajo -->
+                <div class="field-group">
+                  <label for="ubicacionTrabajo">¿Dónde sería el trabajo?</label>
+                  <input type="text" id="ubicacionTrabajo" name="ubicacionTrabajo"
+                         placeholder="Ej: Barrio X, Siquirres / Centro / Local comercial" />
+                  <p class="small-hint">
+                    Si aún no tienes la dirección exacta, puedes poner una referencia general.
+                  </p>
+                </div>
+
+                <!-- Preferencias de fecha -->
+                <div class="field-group">
+                  <label>¿Tienes alguna fecha en mente?</label>
+                  <select id="tieneFecha" name="tieneFecha">
+                    <option value="No">No, solo quiero cotizar primero</option>
+                    <option value="Sí">Sí, tengo una fecha aproximada</option>
+                  </select>
+                </div>
+
+                <div id="fechaWrapper" style="display:none; gap: 6px;">
+                  <div class="field-group">
+                    <label for="fechaEstimada">Fecha aproximada</label>
+                    <input type="date" id="fechaEstimada" name="fechaEstimada" />
+                  </div>
+                  <div class="field-group">
+                    <label for="horaEstimada">Hora aproximada</label>
+                    <input type="time" id="horaEstimada" name="horaEstimada" />
+                  </div>
+                </div>
+
+                <!-- Llamada rápida -->
+                <div class="field-group">
+                  <label>
+                    <input type="checkbox" id="quiereLlamada" name="quiereLlamada" />
+                    ¿Te gustaría agendar una llamada rápida para aclarar dudas?
+                  </label>
+                  <p class="small-hint">
+                    Por ahora veré tu mensaje y si es necesario coordinamos la llamada por WhatsApp.
+                  </p>
+                </div>
+
+                <!-- Mensaje libre -->
+                <div class="field-group">
+                  <label for="mensaje">Cuéntame un poco más</label>
+                  <textarea id="mensaje" name="mensaje"
+                            placeholder="Ej: Tengo un local pequeño y quiero 3 cámaras, una apuntando a la caja, otra a la entrada y otra al pasillo."></textarea>
+                </div>
+
+                <!-- URL opcional -->
+                <div class="field-group">
+                  <label for="urlReferencia">Sitio web o redes (opcional)</label>
+                  <input type="url" id="urlReferencia" name="urlReferencia"
+                         placeholder="Si ya tienes algo en Internet y quieres que lo vea" />
+                </div>
+
+                <!-- Botones de envío -->
+                <div class="btn-row">
+                  <button type="submit" class="btn btn-primary btn-whatsapp">
+                    <span class="btn-icon">📨</span>
+                    Enviar solicitud de cotización
+                  </button>
+                  <button type="reset" class="btn btn-ghost">
+                    Limpiar formulario
+                  </button>
+                </div>
+
+                <p class="small-hint">
+                  Al enviar este formulario no se genera ningún compromiso de compra.
+                  Te responderé con un estimado y, si estás de acuerdo, coordinamos fecha y detalles.
+                </p>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-left">
+        <span>Zamaha • Servicios y soluciones en Siquirres</span>
+        <span>WhatsApp:
+          <a href="https://wa.me/50664305227" target="_blank" rel="noopener noreferrer">
+            +506 6430-5227
+          </a>
+        </span>
+        <span>Correo:
+          <a href="mailto:zamaha-soluciones@outlook.es">
+            zamaha-soluciones@outlook.es
+          </a>
+        </span>
+      </div>
+      <div class="footer-right">
+        <span>© <span id="year"></span> Zamaha. Hecho en Siquirres.</span>
+      </div>
+    </footer>
+
+    <!-- Lightbox para ver las imágenes en grande -->
+    <div id="imageLightbox" class="image-lightbox">
+      <div class="image-lightbox-backdrop"></div>
+      <img id="lightboxImage" class="image-lightbox-img" src="" alt="" />
     </div>
-    <div class="status" id="lobbyStatus">Conectando con Firebase...</div>
+
+    <a class="floating-whatsapp"
+       href="https://wa.me/50664305227?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20servicio%20con%20Zamaha"
+       target="_blank" rel="noopener noreferrer">
+      <img src="icono-whatsapp.png" alt="WhatsApp" class="floating-whatsapp-img" />
+    </a>
   </div>
-</div>
 
-<div class="inspect" id="inspectOverlay">
-  <div class="inspect-card">
-    <div class="inspect-art" id="inspectArt"></div>
-    <div>
-      <h2 class="inspect-title" id="inspectTitle">Detalle</h2>
-      <div class="inspect-sub" id="inspectSub">Información</div>
-      <div class="inspect-grid" id="inspectStats"></div>
-      <div class="inspect-desc" id="inspectDesc"></div>
-      <div class="inspect-actions" id="inspectActions"></div>
-    </div>
-  </div>
-</div>
-
-<div class="combat" id="combatOverlay">
-  <div class="combat-card">
-    <div class="combat-title">Combate</div>
-    <div class="combat-row">
-      <div class="combat-unit"><div class="combat-portrait" id="combatLeftArt"></div><div><h3 id="combatLeftName"></h3><p id="combatLeftStats"></p></div></div>
-      <div class="vs">VS</div>
-      <div class="combat-unit right"><div><h3 id="combatRightName"></h3><p id="combatRightStats"></p></div><div class="combat-portrait" id="combatRightArt"></div></div>
-    </div>
-  </div>
-</div>
-
-<div class="game-shell">
-<section class="battlefield">
-  <div class="scenery"><div class="sun"></div><div class="path"></div><div class="pyramid py1"></div><div class="pyramid py2"></div><div class="palm p1a"></div><div class="palm p1b"></div><div class="palm p2a"></div><div class="palm p2b"></div></div>
-  <div class="hud top-left"><div class="hud-name p1">Jugador 1 <span id="p1Badge">Espera</span></div><div class="hud-grid"><div class="hud-mini">Vida<strong id="p1Life">20</strong></div><div class="hud-mini">Recurso<strong id="p1Res">0</strong></div><div class="hud-mini">Mazo<strong id="p1Deck">0</strong></div><div class="hud-mini">Mano<strong id="p1Hand">0</strong></div></div></div>
-  <div class="hud top-right"><div class="hud-name p2">Jugador 2 <span id="p2Badge">Espera</span></div><div class="hud-grid"><div class="hud-mini">Vida<strong id="p2Life">20</strong></div><div class="hud-mini">Recurso<strong id="p2Res">0</strong></div><div class="hud-mini">Mazo<strong id="p2Deck">0</strong></div><div class="hud-mini">Mano<strong id="p2Hand">0</strong></div></div></div>
-  <div class="phase-banner" id="phaseBanner">ONLINE</div><div class="auto-advance-toast" id="autoAdvanceToast"></div>
-  <div class="grid-wrap"><div class="grid" id="grid"></div></div>
-  <aside class="side">
-    <div class="panel"><div class="icon-bar"><button class="icon-btn" id="copyCodeBtn" title="Copiar código">🔗</button><button class="icon-btn" id="soundBtn" title="Sonido ON/OFF">🔇</button><button class="icon-btn" id="autoBtn" title="Autoavance ON/OFF">⚙️</button><button class="icon-btn" id="openHandBtn" title="Abrir mano">🃏</button><button class="icon-btn primary" id="phaseBtn" title="Pasar fase">▶</button></div><div class="hint" id="hint">Esperando partida...</div><button class="btn full" id="cancelBtn" style="margin-top:8px">Cancelar selección</button></div>
-    <div class="panel"><h3 class="side-title" id="sideTitle">Jugador</h3><div id="sideBox" class="hand-card"><div class="hand-icon">⚔️</div><div class="hand-name">Estado</div><div class="hand-stats">Online</div></div></div>
-    <div class="panel detail" id="detailBox"><h3 class="side-title">Sin selección</h3><p>Selecciona carta o unidad.</p></div>
-  </aside>
-  <div class="hand-drawer" id="handDrawer"><div class="hand-drawer-head"><div class="hand-drawer-title" id="drawerTitle">Mano</div><button class="btn" id="closeHandBtn">Ocultar</button></div><div class="hand-row" id="handRow"></div><div class="hand-drop-hint">Desliza la barra para ver cartas. Click: detalles. Doble click o arrastra: jugar rápido.</div></div>
-  <div class="log" id="logPanel"></div>
-</section>
-</div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-import { getDatabase, ref, set, update, onValue, get } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyA6C6f3gSVDvgxcQuyD8PsyQiHNDPD_ZOQ",
-  authDomain: "hallvalla-online.firebaseapp.com",
-  databaseURL: "https://hallvalla-online-default-rtdb.firebaseio.com",
-  projectId: "hallvalla-online",
-  storageBucket: "hallvalla-online.firebasestorage.app",
-  messagingSenderId: "496903032464",
-  appId: "1:496903032464:web:d1e63bfead7109fc905215"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getDatabase(app);
-
-const ROWS=6, COLS=13;
-const ART={
-  pharaohIdle:"assets/asset_02_c8daaaaa78.png",
-  pharaohAttack:"assets/asset_03_b014dc5914.png",
-  pharaohSummon:"assets/asset_04_eab238a991.png",
-  mageIdle:"assets/asset_05_afe19ba5c5.png",
-  mageAttack:"assets/asset_06_7f8cf40b74.png",
-  mageCast:"assets/asset_07_f7e78af1b1.png"
-};
-
-const cardPool=[
- {name:"Lancero del Nilo",key:"spearman",icon:"🗡️",cost:1,hp:2,atk:1,mov:4,range:1,copies:4,tipo:"Unidad",rol:"Infantería rápida",text:"Unidad cuerpo a cuerpo para formar línea.",effect:"Sin efecto especial por ahora."},
- {name:"Arquero del Oasis",key:"archer",icon:"🏹",cost:2,hp:1,atk:1,mov:3,range:4,copies:3,tipo:"Unidad",rol:"Ataque a distancia",text:"Ataca desde atrás, pero es frágil.",effect:"No sufre desgaste melee al atacar a distancia."},
- {name:"Guardia de Arena Negra",key:"guardian",icon:"🛡️",cost:2,hp:4,atk:1,mov:3,range:1,copies:3,tipo:"Unidad",rol:"Defensa",text:"Protector ideal para el líder.",effect:"Alta resistencia inicial."},
- {name:"Explorador del Desierto",key:"scout",icon:"🐫",cost:2,hp:2,atk:1,mov:6,range:1,copies:3,tipo:"Unidad",rol:"Movilidad",text:"Cruza terreno rápido para flanquear.",effect:"Movimiento alto."},
- {name:"Bendición Solar",key:"spell",icon:"✨",cost:1,spell:"buffAtk",copies:2,tipo:"Técnica",rol:"Mejora",text:"+1 ataque a una unidad aliada este turno.",effect:"Selecciona una unidad aliada."},
- {name:"Maldición de Arena",key:"spell",icon:"🔥",cost:1,spell:"damage1",copies:2,tipo:"Técnica",rol:"Daño directo",text:"Causa 1 daño a una unidad enemiga.",effect:"Selecciona una unidad enemiga."}
-];
-
-let uid=null, gameId=null, myPlayer=null;
-let soundOn = localStorage.getItem('hallvalla_sound') === '1';
-let autoAdvanceOn = localStorage.getItem('hallvalla_auto') !== '0';
-let audioCtx = null;
-let publicState=null, privateState=null;
-let handOpen=false, selectedCard=null, selectedUnitId=null, highlights=[], highlightType="summon", summonDisplay=null, manualDrag=null;
-let autoAdvanceTimer=null;
-let autoAdvanceLock=false;
-let publicUnsub=null, privateUnsub=null;
-
-const $=id=>document.getElementById(id);
-function uid8(){return Math.random().toString(36).slice(2,10)}
-function gameCode(){return Math.random().toString(36).slice(2,8).toUpperCase()}
-function shuffle(a){const c=[...a];for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]]}return c}
-function makeDeck(owner){const d=[];cardPool.forEach(c=>{for(let i=0;i<c.copies;i++)d.push({...c,id:uid8(),owner})});return shuffle(d)}
-function drawFrom(deck,hand,n){const d=[...deck], h=[...hand];for(let i=0;i<n;i++){if(d.length)h.push(d.shift())}return {deck:d,hand:h}}
-function makeLeader(owner,x,y){return {id:`L${owner}`,owner,leader:true,name:owner===1?"Faraón de la Lanza Solar":"Hierofante del Sol Negro",key:owner===1?"leader_pharaoh":"leader_mage",icon:owner===1?"👑":"🔮",x,y,hp:20,maxHp:20,atk:1,mov:3,range:1,pose:"idle",moved:false,acted:false,buffAtk:0}}
-function makeUnit(card,x,y){return {id:uid8(),owner:card.owner,leader:false,name:card.name,key:card.key,icon:card.icon,x,y,hp:card.hp,maxHp:card.hp,atk:card.atk,mov:card.mov,range:card.range,moved:false,acted:false,buffAtk:0}}
-function logLocal(t){const d=document.createElement("div");d.textContent=t;$("logPanel").prepend(d)}
-async function pushLog(t){if(!gameId||!publicState)return;const logs=[t,...(publicState.log||[])].slice(0,16);await update(ref(db,`games/${gameId}/public`),{log:logs})}
-function setHint(t){$("hint").textContent=t}
-function setLobby(t){$("lobbyStatus").textContent=t}
-function normalizeCode(v){return (v||"").trim().toUpperCase()}
-
-onAuthStateChanged(auth, user=>{ if(user){uid=user.uid;setLobby("Conectado. Puedes crear o unirte a una partida.");} });
-signInAnonymously(auth).catch(e=>setLobby("Error de auth: "+e.message));
-setTimeout(updateSettingsButtons,100);
-
-$("createGameBtn").addEventListener("click",createGame);
-$("joinGameBtn").addEventListener("click",()=>joinGame(normalizeCode($("joinCodeInput").value)));
-$("copyCodeBtn").addEventListener("click",()=>{if(gameId) navigator.clipboard?.writeText(gameId); setHint("Código copiado: "+gameId)});
-$("soundBtn").addEventListener("click",()=>{soundOn=!soundOn;localStorage.setItem("hallvalla_sound",soundOn?"1":"0");if(soundOn){ensureAudio();setTimeout(()=>playSound("toggle"),20)}updateSettingsButtons();setHint(soundOn?"Sonido activado.":"Sonido apagado.");});
-$("autoBtn").addEventListener("click",()=>{autoAdvanceOn=!autoAdvanceOn;localStorage.setItem("hallvalla_auto",autoAdvanceOn?"1":"0");if(!autoAdvanceOn)cancelAutoAdvance();updateSettingsButtons();setHint(autoAdvanceOn?"Autoavance activado.":"Autoavance apagado.");if(autoAdvanceOn)setTimeout(checkAutoAdvance,200);});
-$("openHandBtn").addEventListener("click",()=>{cancelAutoAdvance();if(!isMyTurn())playSound("error");return setHint("No es tu turno."); if(publicState?.phase!=="prep")return setHint("La mano solo se abre en fase de casteo."); handOpen=!handOpen;render()});
-$("closeHandBtn").addEventListener("click",()=>{handOpen=false;render()});
-$("cancelBtn").addEventListener("click",clearSelection);
-$("phaseBtn").addEventListener("click",phaseButton);
-$("inspectOverlay").addEventListener("click",e=>{if(e.target.id==="inspectOverlay")closeInspector()});
-
-async function createGame(){
- if(!uid) return setLobby("Aún conectando auth...");
- const code=gameCode();
- const deck=makeDeck(1); const initial=drawFrom(deck,[],4);
- const pub={
-   code, createdAt:Date.now(), currentPlayer:1, phase:"prep", turn:1, turnKey:"1-1",
-   playerSlots:{player1Uid:uid,player2Uid:null},
-   playerStats:{1:{res:1,deck:initial.deck.length,hand:initial.hand.length},2:{res:0,deck:0,hand:0}},
-   units:[makeLeader(1,6,5),makeLeader(2,6,0)],
-   summonDisplay:null, log:["Partida creada. Esperando Jugador 2."]
- };
- const priv={ownerUid:uid,deck:initial.deck,hand:initial.hand,res:1,summoned:false,lastTurnStarted:"1-1"};
- await set(ref(db,`games/${code}/public`),pub);
- await set(ref(db,`games/${code}/private/player1`),priv);
- await enterGame(code,1);
-}
-
-async function joinGame(code){
- if(!uid) return setLobby("Aún conectando auth...");
- if(!code) return setLobby("Escribe el código.");
- const pubSnap=await get(ref(db,`games/${code}/public`));
- if(!pubSnap.exists()) return setLobby("No existe esa partida.");
- const pub=pubSnap.val();
- if(pub.playerSlots?.player2Uid && pub.playerSlots.player2Uid!==uid) return setLobby("La partida ya tiene Jugador 2.");
- const deck=makeDeck(2); const initial=drawFrom(deck,[],4);
- await update(ref(db,`games/${code}/public`),{
-   "playerSlots/player2Uid":uid,
-   "playerStats/2":{res:0,deck:initial.deck.length,hand:initial.hand.length},
-   log:["Jugador 2 se unió.",...(pub.log||[])]
- });
- await set(ref(db,`games/${code}/private/player2`),{ownerUid:uid,deck:initial.deck,hand:initial.hand,res:0,summoned:false,lastTurnStarted:""});
- await enterGame(code,2);
-}
-
-async function enterGame(code,player){
- gameId=code; myPlayer=player;
- $("lobby").classList.add("hidden");
- $("sideTitle").textContent=`Jugador ${myPlayer} · ${myPlayer===1?"Faraón":"Hechicero"}`;
- if(publicUnsub) publicUnsub(); if(privateUnsub) privateUnsub();
- publicUnsub=onValue(ref(db,`games/${gameId}/public`),snap=>{publicState=snap.val(); if(publicState){maybeStartMyTurn(); render();}});
- privateUnsub=onValue(ref(db,`games/${gameId}/private/player${myPlayer}`),snap=>{privateState=snap.val(); render();});
- setHint(`Entraste como J${myPlayer}. Código: ${gameId}`);
-}
-
-function isMyTurn(){return publicState && publicState.currentPlayer===myPlayer}
-function getUnitAt(x,y){return (publicState?.units||[]).find(u=>u.x===x&&u.y===y)}
-function getUnit(id){return (publicState?.units||[]).find(u=>u.id===id)}
-function getLeader(p){return (publicState?.units||[]).find(u=>u.owner===p&&u.leader)}
-function dist(a,b){return Math.max(Math.abs(a.x-b.x),Math.abs(a.y-b.y))}
-function hasCommandBuff(u){return false}
-function effectiveAtk(u){return (u?.atk||0)+(u?.buffAtk||0)+(hasCommandBuff(u)?1:0)}
-function effectiveMov(u){return (u?.mov||0)+(hasCommandBuff(u)?1:0)}
-function leaderPortrait(u){if(!u)return""; if(u.owner===1){if(u.pose==="attack")return ART.pharaohAttack;if(u.pose==="summon")return ART.pharaohSummon;return ART.pharaohIdle} if(u.pose==="attack")return ART.mageAttack;if(u.pose==="summon")return ART.mageCast;return ART.mageIdle}
-function genericPortrait(u){const g={spearman:"linear-gradient(180deg,#d6a85d,#6a4120)",archer:"linear-gradient(180deg,#c6a15a,#5a3918)",guardian:"linear-gradient(180deg,#c9a55f,#604126)",scout:"linear-gradient(180deg,#c99c4c,#573617)",spell:"linear-gradient(180deg,#d7b97c,#7a5530)"};return g[u?.key]||"linear-gradient(180deg,#d6a85d,#6a4120)"}
-function summonZones(player){const l=getLeader(player); const cells=[]; if(!l)return cells; for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(dx===0&&dy===0)continue;const x=l.x+dx,y=l.y+dy;if(x>=0&&x<COLS&&y>=0&&y<ROWS&&!getUnitAt(x,y))cells.push(`${x},${y}`)} return cells}
-function moveZones(u){if(!u||u.moved)return[];const c=[];for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){if(x===u.x&&y===u.y)continue;if(!getUnitAt(x,y)&&dist(u,{x,y})<=effectiveMov(u))c.push(`${x},${y}`)}return c}
-function attackZones(u){if(!u||u.acted)return[];return (publicState?.units||[]).filter(t=>t.owner!==u.owner&&dist(u,t)<=u.range).map(t=>`${t.x},${t.y}`)}
-
-async function maybeStartMyTurn(){
- if(!publicState||!privateState||!isMyTurn()) return;
- if(privateState.lastTurnStarted===publicState.turnKey) return;
- const drawn=drawFrom(privateState.deck||[],privateState.hand||[],2);
- const res=(privateState.res||0)+1;
- const units=(publicState.units||[]).map(u=>u.owner===myPlayer?{...u,moved:false,acted:false,buffAtk:0,pose:"idle"}:u);
- await update(ref(db,`games/${gameId}/private/player${myPlayer}`),{deck:drawn.deck,hand:drawn.hand,res,summoned:false,lastTurnStarted:publicState.turnKey});
- await update(ref(db,`games/${gameId}/public`),{units,[`playerStats/${myPlayer}`]:{res,deck:drawn.deck.length,hand:drawn.hand.length}});
- await pushLog(`Jugador ${myPlayer} inicia turno: +1 recurso y roba 2.`);
-}
-
-
-function showAutoToast(text){
-  const el=$("autoAdvanceToast");
-  if(!el) return;
-  el.textContent=text;
-  el.classList.add("show");
-  setTimeout(()=>el.classList.remove("show"),1600);
-}
-
-function updateSettingsButtons(){
-  const sound=$("soundBtn");
-  const auto=$("autoBtn");
-  if(sound){
-    sound.textContent=soundOn?"🔊":"🔇";
-    sound.classList.toggle("active",soundOn);
-  }
-  if(auto){
-    auto.textContent=autoAdvanceOn?"⚙️":"⏸️";
-    auto.classList.toggle("active",autoAdvanceOn);
-    auto.title=autoAdvanceOn?"Autoavance ON":"Autoavance OFF";
-  }
-}
-function ensureAudio(){
-  try{
-    const AC=window.AudioContext||window.webkitAudioContext;
-    if(!AC) return false;
-    if(!audioCtx) audioCtx=new AC();
-    if(audioCtx.state==="suspended") audioCtx.resume();
-    return true;
-  }catch(e){return false}
-}
-function tone(freq,duration,type="sine",gain=.06,delay=0){
-  if(!soundOn||!audioCtx) return;
-  const now=audioCtx.currentTime+delay;
-  const osc=audioCtx.createOscillator();
-  const amp=audioCtx.createGain();
-  osc.type=type;
-  osc.frequency.setValueAtTime(freq,now);
-  amp.gain.setValueAtTime(.0001,now);
-  amp.gain.exponentialRampToValueAtTime(gain,now+.01);
-  amp.gain.exponentialRampToValueAtTime(.0001,now+duration);
-  osc.connect(amp); amp.connect(audioCtx.destination);
-  osc.start(now); osc.stop(now+duration+.04);
-}
-function playSound(kind){
-  if(!soundOn) return;
-  ensureAudio();
-  if(kind==="toggle"){tone(660,.08,"sine",.08);tone(880,.08,"triangle",.06,.07)}
-  if(kind==="summon"){tone(330,.12,"sine",.06);tone(660,.14,"triangle",.055,.07)}
-  if(kind==="move"){tone(260,.07,"triangle",.035)}
-  if(kind==="hit"){tone(130,.1,"square",.06);tone(90,.08,"sawtooth",.035,.04)}
-  if(kind==="phase"){tone(520,.08,"sine",.05);tone(390,.10,"triangle",.04,.07)}
-  if(kind==="error"){tone(160,.12,"sawtooth",.045)}
-}
-
-function getPlayableCards(){
-  if(!privateState || !publicState) return [];
-  const hand=privateState.hand||[];
-  const res=privateState.res||0;
-  return hand.filter(card=>{
-    if(card.cost>res) return false;
-    if(card.spell==="buffAtk"){
-      return (publicState.units||[]).some(u=>u.owner===myPlayer);
+  <script>
+    // Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+          .then(function(registration) {
+            console.log('Service Worker registrado con éxito:', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('Error al registrar Service Worker:', error);
+          });
+      });
     }
-    if(card.spell==="damage1"){
-      return (publicState.units||[]).some(u=>u.owner!==myPlayer);
+
+    // Año en el footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reloj de hora en Costa Rica
+    const crTimeEl = document.getElementById('crTime');
+
+    function updateCRTime() {
+      if (!crTimeEl) return;
+      const now = new Date();
+      const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZone: 'America/Costa_Rica'
+      };
+      crTimeEl.textContent = now.toLocaleTimeString('es-CR', options);
     }
-    if(!card.spell){
-      if(privateState.summoned) return false;
-      return summonZones(myPlayer).length>0;
+
+    updateCRTime();
+    setInterval(updateCRTime, 1000);
+
+    // Lógica de selección de medio de contacto
+    const contactPills = document.querySelectorAll('.field-group input[name="medioContacto"]');
+    const pillLabels = document.querySelectorAll('.field-group .pill');
+
+    pillLabels.forEach(label => {
+      label.addEventListener('click', () => {
+        const input = label.querySelector('input[type="radio"]');
+        if (!input) return;
+
+        contactPills.forEach(radio => {
+          const parentLabel = radio.closest('.pill');
+          if (parentLabel) parentLabel.classList.remove('active');
+        });
+
+        input.checked = true;
+        label.classList.add('active');
+      });
+    });
+
+    const servicePillsBtns = document.querySelectorAll('.service-pill-btn');
+    const servicesField = document.getElementById('servicesField');
+
+    function updateServicesField() {
+      if (!servicesField) return;
+      const active = [];
+      servicePillsBtns.forEach(btn => {
+        if (btn.classList.contains('active')) {
+          active.push(btn.dataset.service);
+        }
+      });
+      servicesField.value = active.join(', ');
     }
-    return false;
-  });
-}
-function playerUnits(player){
-  return (publicState?.units||[]).filter(u=>u.owner===player);
-}
-function unitHasMove(u){
-  return moveZones(u).length>0;
-}
-function unitHasAttack(u){
-  return attackZones(u).length>0;
-}
-function hasBattleActions(){
-  return playerUnits(myPlayer).some(u=>{
-    const canMove=!u.moved && unitHasMove(u);
-    const canAttack=!u.acted && unitHasAttack(u);
-    return canMove || canAttack;
-  });
-}
-function hasCasteoActions(){
-  return getPlayableCards().length>0;
-}
-function canUseBattleTechniqueBeforeEnd(){
-  // Por ahora las técnicas solo se juegan en fase de casteo.
-  // Esta función queda separada para cuando permitamos magias rápidas en batalla.
-  return false;
-}
-function scheduleAutoAdvance(reason, action){
-  if(autoAdvanceTimer || autoAdvanceLock) return;
-  autoAdvanceLock=true;
-  showAutoToast(reason);
-  setHint(reason);
-  autoAdvanceTimer=setTimeout(async()=>{
-    autoAdvanceTimer=null;
-    try{
-      await action();
-    }finally{
-      setTimeout(()=>{autoAdvanceLock=false},350);
+
+    // Preseleccionar servicio desde la URL (?service=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const servicioDesdeURL = urlParams.get('service');
+
+    if (servicioDesdeURL && servicePillsBtns.length > 0) {
+      servicePillsBtns.forEach(btn => {
+        if (btn.dataset.service === servicioDesdeURL) {
+          btn.classList.add('active');
+        }
+      });
+      updateServicesField();
     }
-  },1200);
-}
-function cancelAutoAdvance(){
-  if(autoAdvanceTimer){
-    clearTimeout(autoAdvanceTimer);
-    autoAdvanceTimer=null;
-  }
-  autoAdvanceLock=false;
-}
-async function checkAutoAdvance(){
-  if(!autoAdvanceOn) return;
-  if(!publicState || !privateState || !isMyTurn() || autoAdvanceLock) return;
-  if(publicState.phase==="prep"){
-    // Espera a que el jugador haya visto su turno y no haya selección activa.
-    if(selectedCard || selectedUnitId || handOpen) return;
-    if(!hasCasteoActions()){
-      scheduleAutoAdvance("Sin cartas, maná u objetivos jugables. Pasando a fase de batalla...", async()=>{
-        if(isMyTurn() && publicState?.phase==="prep" && !hasCasteoActions()){
-          await update(ref(db,`games/${gameId}/public`),{phase:"action"});
-          playSound('phase');await pushLog(`J${myPlayer} no tiene jugadas de casteo. Pasa automáticamente a batalla.`);
+
+    servicePillsBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        updateServicesField();
+      });
+    });
+
+    // Botones de "Cotizar" en servicios
+    const serviceButtons = document.querySelectorAll('.js-cotizar');
+    const addButtons = document.querySelectorAll('.js-agregar');
+    const mensajeField = document.getElementById('mensaje');
+
+    serviceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const service = btn.dataset.service;
+
+        // Activar el servicio correspondiente
+        servicePillsBtns.forEach(pill => {
+          if (pill.dataset.service === service) {
+            pill.classList.add('active');
+          }
+        });
+        updateServicesField();
+
+        const contactoSection = document.getElementById('contacto');
+        if (contactoSection) {
+          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Botones "Añadir a cotización" (servicios y ofertas)
+    addButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const service = btn.dataset.service;
+        const item = btn.dataset.item;
+        const current = mensajeField.value || '';
+        let addition = '';
+
+        if (item) {
+          const line = `Quiero cotizar: ${item}`;
+          addition = current ? `\n\n${line}` : line;
+        } else if (service) {
+          const line = `Quiero incluir también: ${service}`;
+          addition = current ? `\n\n${line}` : line;
+        }
+
+        mensajeField.value = current + addition;
+
+        if (service) {
+          servicePillsBtns.forEach(pill => {
+            if (pill.dataset.service === service) {
+              pill.classList.add('active');
+            }
+          });
+          updateServicesField();
+        }
+
+        const contactoSection = document.getElementById('contacto');
+        if (contactoSection) {
+          contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Preferencias de fecha
+    const tieneFechaSelect = document.getElementById('tieneFecha');
+    const fechaWrapper = document.getElementById('fechaWrapper');
+    const fechaInput = document.getElementById('fechaEstimada');
+    const horaInput = document.getElementById('horaEstimada');
+    const quiereLlamadaCheckbox = document.getElementById('quiereLlamada');
+    const calendlyContainer = document.getElementById('calendlyContainer');
+
+    if (tieneFechaSelect) {
+      tieneFechaSelect.addEventListener('change', () => {
+        if (tieneFechaSelect.value === 'Sí') {
+          fechaWrapper.style.display = 'grid';
+        } else {
+          fechaWrapper.style.display = 'none';
+          fechaInput.value = '';
+          horaInput.value = '';
         }
       });
     }
-  }else if(publicState.phase==="action"){
-    if(selectedCard || selectedUnitId) return;
-    if(!hasBattleActions() && !canUseBattleTechniqueBeforeEnd()){
-      scheduleAutoAdvance("Sin movimientos ni ataques disponibles. Terminando turno...", async()=>{
-        if(isMyTurn() && publicState?.phase==="action" && !hasBattleActions()){
-          await endMyTurnAuto();
-        }
+
+    if (quiereLlamadaCheckbox && calendlyContainer) {
+      quiereLlamadaCheckbox.addEventListener('change', () => {
+        calendlyContainer.style.display = quiereLlamadaCheckbox.checked ? 'block' : 'none';
       });
     }
-  }
-}
-async function endMyTurnAuto(){
-  const next=myPlayer===1?2:1;
-  const turn=next===1?(publicState.turn||1)+1:(publicState.turn||1);
-  await update(ref(db,`games/${gameId}/public`),{currentPlayer:next,phase:"prep",turn,turnKey:`${turn}-${next}`});
-  clearSelection();
-  playSound('phase');await pushLog(`Turno de J${myPlayer} termina automáticamente. Ahora juega J${next}.`);
-}
 
-function render(){
- if(!publicState)return;
- renderHud(); renderBoard(); renderSide(); renderHand(); renderLog(); updateSettingsButtons();
- setTimeout(checkAutoAdvance,120);
-}
-function renderHud(){
- [1,2].forEach(p=>{
-  const l=getLeader(p), st=publicState.playerStats?.[p]||{res:0,deck:0,hand:0};
-  $(`p${p}Life`).textContent=l?Math.max(0,l.hp):0;
-  $(`p${p}Res`).textContent=st.res??0; $(`p${p}Deck`).textContent=st.deck??0; $(`p${p}Hand`).textContent=st.hand??0;
-  const b=$(`p${p}Badge`); b.textContent=publicState.currentPlayer===p?"Turno":"Espera"; b.style.color=publicState.currentPlayer===p?"#ffd166":"#c7c7c7";
- });
- $("phaseBanner").textContent=publicState.phase==="prep"?"FASE DE CASTEO":publicState.phase==="action"?"FASE DE BATALLA":"ONLINE";
- $("phaseBtn").textContent=publicState.phase==="prep"?"▶":"⏭";
-}
-function renderBoard(){
- const grid=$("grid"); grid.innerHTML="";
- for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){const cell=document.createElement("div");cell.className="cell";cell.dataset.coord=`${x+1},${y+1}`;cell.dataset.x=x;cell.dataset.y=y;const key=`${x},${y}`; if(highlights.includes(key))cell.classList.add(highlightType==="attack"?"attackable":"valid"); if(publicState.summonDisplay&&publicState.summonDisplay.x===x&&publicState.summonDisplay.y===y){const d=document.createElement("div");d.className="summon-display";cell.appendChild(d)} const u=getUnitAt(x,y); if(u){if(selectedUnitId===u.id)cell.classList.add("selected");const sh=document.createElement("div");sh.className="field-shadow";cell.appendChild(sh);const card=document.createElement("div");card.className=`field-card ${u.owner===1?"p1card":"p2card"} ${u.leader?"leader":""} ${u.moved?"moved":""}`;const ps=u.leader?`background-image:url('${leaderPortrait(u)}');background-size:cover;background-position:center top;`:`background:${genericPortrait(u)};`;const mark=u.leader?"":`<div class="board-unit-mark">${u.icon||"⚔️"}</div>`;card.innerHTML=`<div class="field-frame"><div class="portrait" style="${ps}"><div class="name-strip">${u.name}</div>${mark}</div><div class="divider"></div><div class="field-stats"><div class="field-stat">HP<strong>${u.hp}</strong></div><div class="field-stat">AT<strong>${effectiveAtk(u)}</strong></div><div class="field-stat">MV<strong>${effectiveMov(u)}</strong></div><div class="field-stat">RG<strong>${u.range}</strong></div></div></div>`;cell.appendChild(card)} cell.addEventListener("click",()=>cellClick(x,y)); cell.appendChild(document.createTextNode("")); grid.appendChild(cell)}
-}
-function renderSide(){
- $("sideBox").innerHTML=`<div class="hand-icon">${myPlayer===1?"👑":"🔮"}</div><div class="hand-name">J${myPlayer} · ${isMyTurn()?"Tu turno":"Espera"}</div><div class="hand-stats">Código: ${gameId||"..."}</div>`;
- if(selectedCard){$("detailBox").innerHTML=`<h3 class="side-title">${selectedCard.icon} ${selectedCard.name}</h3><p><strong>Costo:</strong> ${selectedCard.cost}</p><p>${selectedCard.text||""}</p><p><strong>Efecto:</strong> ${selectedCard.effect||"Sin efecto."}</p>`;return}
- if(selectedUnitId){const u=getUnit(selectedUnitId);$("detailBox").innerHTML=`<h3 class="side-title">${u.icon} ${u.name}</h3><p>HP ${u.hp}/${u.maxHp||u.hp} · AT ${effectiveAtk(u)} · MV ${effectiveMov(u)} · RG ${u.range}</p><p>Posición: ${u.x+1},${u.y+1}</p>`;return}
- $("detailBox").innerHTML=`<h3 class="side-title">Sin selección</h3><p>${isMyTurn()?"Abre la mano o selecciona una unidad.":"Espera al rival."}</p>`;
-}
-function renderHand(){
- const drawer=$("handDrawer"), row=$("handRow"); row.innerHTML="";
- drawer.classList.toggle("show",handOpen&&isMyTurn()&&publicState.phase==="prep");
- $("drawerTitle").textContent=`Mano del Jugador ${myPlayer}`;
- if(!privateState)return;
- (privateState.hand||[]).forEach(card=>{const div=document.createElement("div");div.className="hand-card"+(selectedCard?.id===card.id?" selected":"");const stat=card.spell?card.rol:`V${card.hp} A${card.atk} M${card.mov} R${card.range}`;div.innerHTML=`<div class="cost">${card.cost}</div><div class="hand-icon">${card.icon}</div><div class="hand-name">${card.name}</div><div class="hand-stats">${stat}</div>`;div.addEventListener("click",()=>showCardInspector(card));div.addEventListener("dblclick",()=>selectCard(card.id));div.addEventListener("pointerdown",e=>setupManualDrag(card,div,e));row.appendChild(div)})
-}
-function renderLog(){$("logPanel").innerHTML=(publicState.log||[]).map(t=>`<div>${t}</div>`).join("")}
+    // Carrusel de ejemplos
+    const carousel = document.getElementById('webExamplesCarousel');
+    const carouselTrack = carousel ? carousel.querySelector('.carousel-track') : null;
+    const carouselSlides = carousel ? carousel.querySelectorAll('.carousel-slide') : [];
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    let currentSlide = 0;
 
-function showCardInspector(card){
- const stats=card.spell?[{label:"Costo",value:card.cost},{label:"Tipo",value:"Técnica"},{label:"Rol",value:card.rol}]:[{label:"Costo",value:card.cost},{label:"Vida",value:card.hp},{label:"Ataque",value:card.atk},{label:"Movimiento",value:card.mov},{label:"Alcance",value:card.range},{label:"Rol",value:card.rol}];
- showInspector(card.name,`Carta en mano · J${myPlayer}`,stats,`<strong>${card.tipo}</strong><br>${card.text}<br><br><strong>Efecto:</strong> ${card.effect}`,null,card.icon,`<button class="btn primary" id="inspectSelect">Seleccionar para jugar</button><button class="btn" id="inspectClose">Cerrar</button>`,()=>{$("inspectSelect").addEventListener("click",()=>{selectCard(card.id);closeInspector()});$("inspectClose").addEventListener("click",closeInspector)})
-}
-function showUnitInspector(u){const stats=[{label:"Vida",value:`${u.hp}/${u.maxHp||u.hp}`},{label:"Ataque",value:effectiveAtk(u)},{label:"Movimiento",value:effectiveMov(u)},{label:"Alcance",value:u.range},{label:"Posición",value:`${u.x+1},${u.y+1}`},{label:"Dueño",value:`J${u.owner}`}];const art=u.leader?leaderPortrait(u):null;showInspector(u.name,u.leader?`Líder · J${u.owner}`:`Unidad · J${u.owner}`,stats,`${u.moved?"Ya se movió.":"No se ha movido."} ${u.acted?"Ya atacó.":"No ha atacado."}`,art,u.icon,`<button class="btn" id="inspectClose">Cerrar</button>`,()=>{$("inspectClose").addEventListener("click",closeInspector)})}
-function showInspector(title,sub,stats,desc,art,icon,actions,bind){$("inspectTitle").textContent=title;$("inspectSub").textContent=sub;$("inspectStats").innerHTML=stats.map(s=>`<div class="inspect-stat">${s.label}<strong>${s.value}</strong></div>`).join("");$("inspectDesc").innerHTML=desc;$("inspectActions").innerHTML=actions;const a=$("inspectArt");if(art){a.textContent="";a.style.background="none";a.style.backgroundImage=`url('${art}')`;a.style.backgroundSize="cover";a.style.backgroundPosition="center top"}else{a.style.backgroundImage="";a.style.background="linear-gradient(180deg,rgba(214,168,93,.96),rgba(90,57,24,.96))";a.textContent=icon||"⚔️"}$("inspectOverlay").classList.add("show");bind?.()}
-function closeInspector(){$("inspectOverlay").classList.remove("show")}
+    function updateCarousel() {
+      const offset = -currentSlide * 100;
+      if (carouselTrack) {
+        carouselTrack.style.transform = `translateX(${offset}%)`;
+      }
+    }
 
-function selectCard(id){cancelAutoAdvance();if(!isMyTurn()||publicState.phase!=="prep")playSound("error");return setHint("No puedes jugar carta ahora.");const card=(privateState.hand||[]).find(c=>c.id===id);if(!card)return;if(card.cost>(privateState.res||0)){setHint("No tienes recurso suficiente.");return}selectedCard=card;selectedUnitId=null;if(card.spell==="buffAtk"){highlights=(publicState.units||[]).filter(u=>u.owner===myPlayer).map(u=>`${u.x},${u.y}`);highlightType="move";setHint("Elige una unidad aliada.")}else if(card.spell==="damage1"){highlights=(publicState.units||[]).filter(u=>u.owner!==myPlayer).map(u=>`${u.x},${u.y}`);highlightType="attack";setHint("Elige una unidad enemiga.")}else{if(privateState.summoned)return setHint("Ya convocaste este turno.");highlights=summonZones(myPlayer);highlightType="summon";setHint("Elige una casilla verde junto a tu líder.")}render()}
-function selectUnit(u){cancelAutoAdvance();if(!isMyTurn()||publicState.phase!=="action"){showUnitInspector(u);return}if(u.owner!==myPlayer)return setHint("Solo tus unidades.");selectedUnitId=u.id;selectedCard=null;highlights=[...moveZones(u),...attackZones(u)];highlightType="move";setHint("Verde: mover. Rojo: atacar.");render()}
-function clearSelection(){selectedCard=null;selectedUnitId=null;highlights=[];summonDisplay=null;setHint("Selección cancelada.");render()}
-async function cellClick(x,y){
- if(!publicState||!isMyTurn()){const u=getUnitAt(x,y); if(u)showUnitInspector(u); return}
- const u=getUnitAt(x,y);
- if(publicState.phase==="prep"&&selectedCard) return playCard(x,y,u);
- if(publicState.phase==="action"&&selectedUnitId){const s=getUnit(selectedUnitId); if(u&&u.owner!==myPlayer&&dist(s,u)<=s.range&&!s.acted)return combat(s,u); if(!u&&moveZones(s).includes(`${x},${y}`))return moveUnit(s,x,y)}
- if(u) selectUnit(u);
-}
-async function playCard(x,y,u){
- const card=selectedCard;
- if(!card) return;
- if(!isMyTurn() || publicState.phase!=="prep"){
-   playSound("error");
-   return setHint("No puedes jugar carta ahora.");
- }
- const resNow=privateState.res||0;
- if(card.cost>resNow){
-   playSound("error");
-   return setHint("No tienes recurso suficiente.");
- }
+    if (prevBtn && nextBtn && carouselSlides.length > 0) {
+      prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length;
+        updateCarousel();
+      });
 
- // IMPORTANTE 0.3B:
- // Primero validamos y aplicamos el efecto en una copia del tablero.
- // Solo si todo sale bien se descuenta recurso y se elimina la carta.
- let units=[...(publicState.units||[])].map(unit=>({...unit}));
- const targetIndex = u ? units.findIndex(unit=>unit.id===u.id) : -1;
+      nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % carouselSlides.length;
+        updateCarousel();
+      });
 
- if(card.spell==="buffAtk"){
-   if(targetIndex<0 || units[targetIndex].owner!==myPlayer){
-     playSound("error");
-     return setHint("Objetivo inválido para Bendición Solar.");
-   }
-   units[targetIndex].buffAtk=(units[targetIndex].buffAtk||0)+1;
-   await updatePublicUnits(units);
-   await commitPrivateCard(card,{res:resNow-card.cost});
-   await pushLog(`${units[targetIndex].name} recibe Bendición Solar.`);
-   clearSelection();
-   return;
- }
+      updateCarousel();
+    }
 
- if(card.spell==="damage1"){
-   if(targetIndex<0 || units[targetIndex].owner===myPlayer){
-     playSound("error");
-     return setHint("Objetivo inválido para Maldición de Arena.");
-   }
-   units[targetIndex].hp=(units[targetIndex].hp||0)-1;
-   await cleanupAndUpdate(units);
-   await commitPrivateCard(card,{res:resNow-card.cost});
-   playSound("hit");
-   await pushLog(`${units[targetIndex].name} recibe Maldición de Arena y pierde 1 vida.`);
-   clearSelection();
-   return;
- }
+    // Lightbox para las imágenes del carrusel
+    const imagePlaceholders = document.querySelectorAll('.carousel-image-placeholder');
+    const imageLightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
 
- if(!card.spell){
-   if(privateState.summoned){
-     playSound("error");
-     return setHint("Ya convocaste este turno.");
-   }
-   if(!summonZones(myPlayer).includes(`${x},${y}`)){
-     playSound("error");
-     return setHint("Casilla inválida.");
-   }
-   await summon(card,x,y);
- }
-}
-async function commitPrivateCard(card,extra={}){const hand=(privateState.hand||[]).filter(c=>c.id!==card.id);const data={hand,res:extra.res??privateState.res,deck:privateState.deck||[],summoned:extra.summoned??privateState.summoned,lastTurnStarted:privateState.lastTurnStarted||""};await update(ref(db,`games/${gameId}/private/player${myPlayer}`),data);await update(ref(db,`games/${gameId}/public/playerStats/${myPlayer}`),{res:data.res,deck:data.deck.length,hand:data.hand.length})}
-async function summon(card,x,y){const leader=getLeader(myPlayer); const units=(publicState.units||[]).map(u=>u.id===leader.id?{...u,pose:"summon"}:u); await update(ref(db,`games/${gameId}/public`),{units,summonDisplay:{x,y}}); setHint("Invocando..."); setTimeout(async()=>{const latest=await get(ref(db,`games/${gameId}/public/units`));const curr=latest.val()||[];const clean=curr.map(u=>u.id===leader.id?{...u,pose:"idle"}:u);clean.push(makeUnit(card,x,y));await update(ref(db,`games/${gameId}/public`),{units:clean,summonDisplay:null});await commitPrivateCard(card,{res:(privateState.res||0)-card.cost,summoned:true});playSound('summon');await pushLog(`J${myPlayer} convoca ${card.name}.`);selectedCard=null;highlights=[];handOpen=false;render()},900)}
-async function moveUnit(u,x,y){const units=(publicState.units||[]).map(it=>it.id===u.id?{...it,x,y,moved:true}:it);await updatePublicUnits(units);playSound('move');await pushLog(`${u.name} se mueve a ${x+1},${y+1}.`);clearSelection()}
-async function combat(a,d){const units=(publicState.units||[]).map(u=>u.id===a.id?{...u,pose:"attack"}:u);await updatePublicUnits(units);showCombat(a,d);setTimeout(async()=>{const fresh=(await get(ref(db,`games/${gameId}/public/units`))).val()||[];let newUnits=fresh.map(u=>{if(u.id===a.id)return{...u,pose:"idle",acted:true};if(u.id===d.id)return{...u,hp:u.hp-effectiveAtk(a)};return u});await cleanupAndUpdate(newUnits);playSound('hit');await pushLog(`${a.name} ataca a ${d.name}.`);selectedUnitId=null;highlights=[];$("combatOverlay").classList.remove("show")},1300)}
-function showCombat(a,d){$("combatLeftName").textContent=a.name;$("combatRightName").textContent=d.name;$("combatLeftStats").textContent=`HP ${a.hp} · AT ${effectiveAtk(a)}`;$("combatRightStats").textContent=`HP ${d.hp} · AT ${effectiveAtk(d)}`; $("combatLeftArt").style.backgroundImage=a.leader?`url('${leaderPortrait({...a,pose:"attack"})}')`:"";$("combatLeftArt").style.background=a.leader?"":genericPortrait(a);$("combatRightArt").style.backgroundImage=d.leader?`url('${leaderPortrait(d)}')`:"";$("combatRightArt").style.background=d.leader?"":genericPortrait(d);$("combatOverlay").classList.add("show")}
-async function updatePublicUnits(units){await update(ref(db,`games/${gameId}/public`),{units})}
-async function cleanupAndUpdate(units){const live=[];for(const u of units){if(u.hp<=0){await pushLog(`${u.name} cae.`)}else live.push(u)}await updatePublicUnits(live)}
-async function phaseButton(){cancelAutoAdvance();if(!isMyTurn())playSound("error");return setHint("No es tu turno.");if(publicState.phase==="prep"){await update(ref(db,`games/${gameId}/public`),{phase:"action"});clearSelection();playSound('phase');await pushLog(`J${myPlayer} entra en fase de batalla.`)}else{const next=myPlayer===1?2:1;const turn=next===1?(publicState.turn||1)+1:(publicState.turn||1);await update(ref(db,`games/${gameId}/public`),{currentPlayer:next,phase:"prep",turn,turnKey:`${turn}-${next}`});clearSelection();playSound('phase');await pushLog(`Fin de turno. Ahora juega J${next}.`)}}
+    if (imageLightbox && lightboxImage && imagePlaceholders.length > 0) {
+      imagePlaceholders.forEach(box => {
+        box.addEventListener('click', () => {
+          const src = box.dataset.full;
+          const alt = box.dataset.alt || '';
+          if (!src) return;
+          lightboxImage.src = src;
+          lightboxImage.alt = alt;
+          imageLightbox.style.display = 'flex';
+        });
+      });
 
-function setupManualDrag(card,el,e){if(!isMyTurn()||publicState.phase!=="prep")return;let started=false,sx=e.clientX,sy=e.clientY;const move=ev=>{if(!started&&(Math.abs(ev.clientX-sx)>6||Math.abs(ev.clientY-sy)>6)){started=true;startManualDrag(card,el,ev)}};const up=()=>{el.removeEventListener("pointermove",move);el.removeEventListener("pointerup",up)};el.addEventListener("pointermove",move);el.addEventListener("pointerup",up,{once:true})}
-function startManualDrag(card,el,e){selectCard(card.id);const ghost=el.cloneNode(true);ghost.classList.add("drag-ghost");ghost.style.left=e.clientX+"px";ghost.style.top=e.clientY+"px";document.body.appendChild(ghost);manualDrag={ghost,over:null,moved:false};window.addEventListener("pointermove",manualMove);window.addEventListener("pointerup",manualEnd,{once:true})}
-function manualMove(e){if(!manualDrag)return;manualDrag.moved=true;manualDrag.ghost.style.left=e.clientX+"px";manualDrag.ghost.style.top=e.clientY+"px";const el=document.elementFromPoint(e.clientX,e.clientY);const cell=el?.closest(".cell");if(manualDrag.over&&manualDrag.over!==cell)manualDrag.over.classList.remove("manual-drop-ready");manualDrag.over=cell;if(cell){const x=+cell.dataset.x,y=+cell.dataset.y;if(selectedCard&&highlights.includes(`${x},${y}`))cell.classList.add("manual-drop-ready")}}
-function manualEnd(e){window.removeEventListener("pointermove",manualMove);if(!manualDrag)return;const cell=manualDrag.over;if(cell)cell.classList.remove("manual-drop-ready");manualDrag.ghost.remove();const moved=manualDrag.moved;manualDrag=null;if(!moved)return;if(cell){const x=+cell.dataset.x,y=+cell.dataset.y;if(selectedCard&&highlights.includes(`${x},${y}`))return cellClick(x,y)}setHint("Soltaste la carta en una casilla inválida.")}
+      imageLightbox.addEventListener('click', () => {
+        imageLightbox.style.display = 'none';
+        lightboxImage.src = '';
+        lightboxImage.alt = '';
+      });
+    }
 
-</script>
+    // Fix botón flotante de WhatsApp en WebView / app
+    (function () {
+      const floatBtn = document.querySelector('.floating-whatsapp');
+      if (!floatBtn) return;
+
+      floatBtn.addEventListener('click', function (e) {
+        // En muchos WebView, target="_blank" hace que el enlace no abra.
+        // Forzamos a que se abra en la misma ventana.
+        e.preventDefault();
+        window.location.href = this.href;
+      });
+    })();
+  </script>
 </body>
 </html>
